@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Online Shop</string>
+
+
+    <string name="logged_in_number_file">logged_in_number_file</string>
+    <string name="logged_in_number_KEY">logged_in_number_KEY</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
