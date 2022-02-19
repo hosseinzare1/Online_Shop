@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
@@ -27,7 +28,6 @@ public class Repository {
 
     public Repository() {
 
-
     }
 
     public static final Repository getInstance() {
@@ -36,6 +36,63 @@ public class Repository {
         }
 
         return repository;
+
+    }
+
+    public LiveData<Account> updateAccount(Account account){
+        MutableLiveData<Account> liveData = new MutableLiveData<>();
+
+
+
+        RetrofitInstance.getAPI().updateAccount(account.getNumber(), account.getName(), account.getNumber(), account.getAddress(), account.getEmail(), account.getPassword())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new SingleObserver<Account>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull Account account) {
+                liveData.setValue(account);
+                Log.i(TAG, "onSuccess: "+account.getName());
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.i(TAG, "onError: "+e.getMessage()+"*****"+e.toString());
+            }
+        });
+
+
+        return liveData;
+    }
+
+    public LiveData<Account> getAccountDetails(String number, CompositeDisposable disposable) {
+        MutableLiveData<Account> liveData = new MutableLiveData<>();
+
+        RetrofitInstance.getAPI().getAccountDetails(number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Account>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Account account) {
+                        Log.i(TAG, "onSuccess: " + account.getName());
+                        liveData.setValue(account);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError: "+e.getMessage());
+                    }
+                });
+        return liveData;
 
     }
 
@@ -83,13 +140,13 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull Product product) {
-                        Log.i(TAG, "onSuccess: "+product.getName());
+                        Log.i(TAG, "onSuccess: " + product.getName());
                         liveData.setValue(product);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: "+e.getMessage());
+                        Log.i(TAG, "onError: " + e.getMessage());
                     }
                 });
 

@@ -23,11 +23,34 @@
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.onlineshop.view.AccountFragment"
-        android:label="AccountFragment" />
+        android:label="AccountFragment" >
+        <action
+            android:id="@+id/action_accountFragment_to_editAccountFragment"
+            app:destination="@id/editAccountFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.example.onlineshop.view.ProductDetailsFragment"
         android:label="ProductDetailsFragment" >
         <argument android:name="id" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAccountFragment"
+        android:name="com.example.onlineshop.view.EditAccountFragment"
+        android:label="EditAccountFragment" >
+        <argument
+            android:name="account"
+            app:argType="com.example.onlineshop.model.Account" />
+        <action
+            android:id="@+id/action_editAccountFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 </navigation>

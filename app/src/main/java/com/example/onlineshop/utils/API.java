@@ -1,5 +1,6 @@
 package com.example.onlineshop.utils;
 
+import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
@@ -38,4 +39,17 @@ public interface API {
 
     @GET("get_images/{id}")
     Single<List<Image>> getImages(@Path("id") int ProductId);
+
+    @GET("get_account_details/{number}")
+    Single<Account> getAccountDetails(@Path("number") String number);
+
+    @FormUrlEncoded
+    @POST("update_account/{number}")
+    Single<Account> updateAccount(@Path("number") String number
+            , @Field("name") String name
+            , @Field("number") String newNumber
+            , @Field("address") String address
+            , @Field("email") String email
+            , @Field("password") String password);
+
 }
