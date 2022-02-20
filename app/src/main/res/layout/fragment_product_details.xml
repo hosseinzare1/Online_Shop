@@ -4,11 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-
         <variable
             name="model"
             type="com.example.onlineshop.model.Product" />
+        <variable
+            name="viewModel"
+            type="com.example.onlineshop.viewmodel.MainActivityViewModel" />
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="eventListener"
+            type="com.example.onlineshop.view.ProductDetailsFragment.ProductDetailsEventListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,7 +78,9 @@
             android:text="افزودن به سبد خرید"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{(view)->eventListener.onAddToCart(view,model,viewModel,imageUrl)}"
+           />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

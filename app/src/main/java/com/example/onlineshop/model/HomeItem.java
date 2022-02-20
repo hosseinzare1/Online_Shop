@@ -4,6 +4,8 @@ public class HomeItem {
     private String id;
     private String name;
     private String imageUrl;
+    private String price;
+
 
 
     public String getId() {
@@ -32,4 +34,11 @@ public class HomeItem {
     }
 
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 }

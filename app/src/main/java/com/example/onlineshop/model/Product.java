@@ -4,6 +4,9 @@ public class Product {
     private String name;
     private String description;
     private String imageUrl;
+    private String price;
+
+
 
 
     public String getName() {
@@ -32,4 +35,11 @@ public class Product {
     }
 
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 }
