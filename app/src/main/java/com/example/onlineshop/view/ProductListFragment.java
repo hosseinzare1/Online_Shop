@@ -7,67 +7,58 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.FragmentHomeBinding;
-import com.example.onlineshop.model.Image;
-import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
+
+import com.example.onlineshop.databinding.FragmentProductListBinding;
+import com.example.onlineshop.model.HomeItem;
+import com.example.onlineshop.utils.adapters.HomeAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class ProductListFragment extends Fragment {
 
-    ImageSliderAdapter adapter = new ImageSliderAdapter();
+    FragmentProductListBinding binding;
     MainActivityViewModel viewModel;
-    FragmentHomeBinding binding;
+    HomeAdapter homeAdapter;
 
-    public HomeFragment() {
+    public ProductListFragment() {
         // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_list, container, false);
+        homeAdapter = new HomeAdapter();
 
+        binding.HomeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.HomeRecyclerView.setAdapter(homeAdapter);
 
         return binding.getRoot();
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-
-        //TODO change images resource
-        viewModel.getImages(1).observe(this, new Observer<List<Image>>() {
+        viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
+        viewModel.getAllItems().observe(getActivity(), new Observer<List<HomeItem>>() {
             @Override
-            public void onChanged(List<Image> images) {
-
-                adapter.setImages(images);
+            public void onChanged(List<HomeItem> homeItems) {
+                homeAdapter.setProducts(homeItems);
             }
         });
 
 
-        binding.newsViewPager.setAdapter(adapter);
-
     }
-
-
 }

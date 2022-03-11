@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_home:
-                        navController.navigate(R.id.homeFragment);
+                        navController.navigate(R.id.productListFragment);
                         break;
                     case R.id.item_cart:
                         navController.navigate(R.id.cartFragment);
