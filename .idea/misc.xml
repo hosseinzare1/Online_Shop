@@ -10,14 +10,17 @@
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_account.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_cart.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_edit_account.xml" value="0.264" />
-        <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_home.xml" value="0.536" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_login.xml" value="0.35311143270622286" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_product_details.xml" value="0.25416666666666665" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_signup.xml" value="0.25052083333333336" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/horizental_item_card.xml" value="0.6" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/horizontal_item_card.xml" value="0.21688888888888888" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/item_card.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/login.xml" value="0.264" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/signup.xml" value="0.25416666666666665" />
         <entry key="..\:/OnlineShop/app/src/main/res/menu/main_navigation_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/OnlineShop/app/src/main/res/menu/toolbar_searchview.xml" value="0.21981981981981982" />
       </map>
     </option>
   </component>

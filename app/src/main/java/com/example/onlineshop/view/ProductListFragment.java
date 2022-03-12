@@ -18,7 +18,7 @@ import com.example.onlineshop.R;
 
 import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.model.HomeItem;
-import com.example.onlineshop.utils.adapters.HomeAdapter;
+import com.example.onlineshop.utils.adapters.ProductsListAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class ProductListFragment extends Fragment {
 
     FragmentProductListBinding binding;
     MainActivityViewModel viewModel;
-    HomeAdapter homeAdapter;
+    ProductsListAdapter productsListAdapter;
 
     public ProductListFragment() {
         // Required empty public constructor
@@ -39,10 +39,10 @@ public class ProductListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_list, container, false);
-        homeAdapter = new HomeAdapter();
+        productsListAdapter = new ProductsListAdapter();
 
         binding.HomeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.HomeRecyclerView.setAdapter(homeAdapter);
+        binding.HomeRecyclerView.setAdapter(productsListAdapter);
 
         return binding.getRoot();
     }
@@ -55,7 +55,7 @@ public class ProductListFragment extends Fragment {
         viewModel.getAllItems().observe(getActivity(), new Observer<List<HomeItem>>() {
             @Override
             public void onChanged(List<HomeItem> homeItems) {
-                homeAdapter.setProducts(homeItems);
+                productsListAdapter.setProducts(homeItems);
             }
         });
 

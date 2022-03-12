@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ItemCardBinding;
 import com.example.onlineshop.model.HomeItem;
-import com.example.onlineshop.view.ProductListFragment;
 import com.example.onlineshop.view.ProductListFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.Holder> {
+public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.Holder> {
 
     ItemCardBinding binding;
     List<HomeItem> homeItems = new ArrayList<>();
