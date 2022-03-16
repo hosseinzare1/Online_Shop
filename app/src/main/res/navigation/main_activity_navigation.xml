@@ -57,4 +57,8 @@
             android:id="@+id/action_homeFragment_to_productListFragment"
             app:destination="@id/productListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/productsCategoryFragment"
+        android:name="com.example.onlineshop.view.ProductsCategoryFragment"
+        android:label="ProductsCategoryFragment" />
 </navigation>

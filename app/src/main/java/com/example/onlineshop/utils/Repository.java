@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.onlineshop.model.Account;
+import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
@@ -39,31 +41,77 @@ public class Repository {
 
     }
 
-    public LiveData<Account> updateAccount(Account account){
+    public LiveData<List<Group>> getGroups() {
+        MutableLiveData<List<Group>> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().getGroups().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Group>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Group> groups) {
+                        liveData.setValue(groups);
+                        Log.i(TAG, "onSuccess: g1 " + groups.get(1).getName());
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+        return liveData;
+    }
+    public LiveData<List<Category>> getCategories(int groupID) {
+        MutableLiveData<List<Category>> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().getCategorys(groupID).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Category>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Category> categories) {
+                        liveData.setValue(categories);
+                        Log.i(TAG, "onSuccess: g1 " + categories.get(1).getName());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+        return liveData;
+    }
+
+
+    public LiveData<Account> updateAccount(Account account) {
         MutableLiveData<Account> liveData = new MutableLiveData<>();
-
-
-
         RetrofitInstance.getAPI().updateAccount(account.getNumber(), account.getName(), account.getNumber(), account.getAddress(), account.getEmail(), account.getPassword())
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new SingleObserver<Account>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Account>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
-            }
+                    }
 
-            @Override
-            public void onSuccess(@NonNull Account account) {
-                liveData.setValue(account);
-                Log.i(TAG, "onSuccess: "+account.getName());
-            }
+                    @Override
+                    public void onSuccess(@NonNull Account account) {
+                        liveData.setValue(account);
+                        Log.i(TAG, "onSuccess: " + account.getName());
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                Log.i(TAG, "onError: "+e.getMessage()+"*****"+e.toString());
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError: " + e.getMessage() + "*****" + e.toString());
+                    }
+                });
 
 
         return liveData;
@@ -89,7 +137,7 @@ public class Repository {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: "+e.getMessage());
+                        Log.i(TAG, "onError: " + e.getMessage());
                     }
                 });
         return liveData;

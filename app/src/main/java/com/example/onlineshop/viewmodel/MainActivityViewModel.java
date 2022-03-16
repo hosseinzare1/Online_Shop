@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
@@ -28,32 +30,43 @@ public class MainActivityViewModel extends ViewModel {
 
     MutableLiveData<String> totalPriceLiveData = new MutableLiveData<>();
 
+
+public LiveData<List<Category>> getCategories(int groupID){
+    return Repository.getInstance().getCategories(groupID);
+}
+
+    public LiveData<List<Group>> getGroups() {
+        return Repository.getInstance().getGroups();
+    }
+
+
     public MutableLiveData<String> getTotalPrice() {
         return totalPriceLiveData;
     }
 
     public void setTotalPriceLiveData() {
-        int totalPrice=0;
-        for (CartItemModel model: cartItemsList
-             ) {
-            totalPrice+=Integer.parseInt(model.getPrice())*Integer.parseInt(model.getCount());
+        int totalPrice = 0;
+        for (CartItemModel model : cartItemsList
+        ) {
+            totalPrice += Integer.parseInt(model.getPrice()) * Integer.parseInt(model.getCount());
         }
         totalPriceLiveData.setValue(String.valueOf(totalPrice));
     }
 
-    public void addItemCount(int position){
+    public void addItemCount(int position) {
         cartItemsList.get(position).setCount(String.valueOf(
-                Integer.parseInt(cartItemsList.get(position).getCount())+1)
-                );
+                Integer.parseInt(cartItemsList.get(position).getCount()) + 1)
+        );
         cartItemsLiveData.setValue(cartItemsList);
 
         setTotalPriceLiveData();
     }
-    public void reduceItemCount(int position){
-        if(Integer.parseInt(cartItemsList.get(position).getCount())>1){
+
+    public void reduceItemCount(int position) {
+        if (Integer.parseInt(cartItemsList.get(position).getCount()) > 1) {
 
             cartItemsList.get(position).setCount(String.valueOf(
-                    Integer.parseInt(cartItemsList.get(position).getCount())-1)
+                    Integer.parseInt(cartItemsList.get(position).getCount()) - 1)
             );
             cartItemsLiveData.setValue(cartItemsList);
         }
@@ -61,7 +74,8 @@ public class MainActivityViewModel extends ViewModel {
         setTotalPriceLiveData();
 
     }
-    public void deleteFromCart(int position){
+
+    public void deleteFromCart(int position) {
         cartItemsList.remove(position);
         cartItemsLiveData.setValue(cartItemsList);
 

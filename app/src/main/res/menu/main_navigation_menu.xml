@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home" />
     <item
+        android:id="@+id/item_categories"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:title="Categories"/>
+    <item
         android:id="@+id/item_cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Cart" />
@@ -12,4 +16,5 @@
         android:id="@+id/item_account"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="Account" />
+
 </menu>

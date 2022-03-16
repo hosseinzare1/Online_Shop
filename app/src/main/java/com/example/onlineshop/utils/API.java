@@ -1,6 +1,8 @@
 package com.example.onlineshop.utils;
 
 import com.example.onlineshop.model.Account;
+import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
@@ -52,4 +54,10 @@ public interface API {
             , @Field("email") String email
             , @Field("password") String password);
 
+
+    @GET("get_groups/")
+    Single<List<Group>> getGroups();
+
+    @GET("get_categorys/{id}")
+    Single<List<Category>> getCategorys(@Path("id") int groupID);
 }

@@ -52,12 +52,8 @@ public class ProductListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
-        viewModel.getAllItems().observe(getActivity(), new Observer<List<HomeItem>>() {
-            @Override
-            public void onChanged(List<HomeItem> homeItems) {
-                productsListAdapter.setProducts(homeItems);
-            }
-        });
+
+        viewModel.getAllItems().observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
 
 
     }
