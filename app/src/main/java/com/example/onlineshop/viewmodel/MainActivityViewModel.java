@@ -1,17 +1,13 @@
 package com.example.onlineshop.viewmodel;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Group;
-import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.Repository;
@@ -30,6 +26,10 @@ public class MainActivityViewModel extends ViewModel {
 
     MutableLiveData<String> totalPriceLiveData = new MutableLiveData<>();
 
+    public LiveData<List<Product>> searchProducts(String search_text){
+        return Repository.getInstance().searchProducts(search_text);
+
+    }
 
 public LiveData<List<Category>> getCategories(int groupID){
     return Repository.getInstance().getCategories(groupID);
@@ -132,15 +132,20 @@ public LiveData<List<Category>> getCategories(int groupID){
 
     }
 
-    public LiveData<List<HomeItem>> getAllItems() {
-        LiveData<List<HomeItem>> liveData = new MutableLiveData<>();
+    public LiveData<List<Product>> getAllItems() {
+        LiveData<List<Product>> liveData = new MutableLiveData<>();
         return Repository.getInstance().getAll(disposable);
     }
+    public LiveData<List<Product>> getProductsByCategory(int id) {
+        LiveData<List<Product>> liveData = new MutableLiveData<>();
+        return Repository.getInstance().getProductsByCategory(id,disposable);
+    }
+
 
 
     public LiveData<Product> getDetails(int id) {
         LiveData<Product> liveData = new MutableLiveData<>();
-        return Repository.getInstance().getDetails(id, disposable);
+        return Repository.getInstance().getProduct(id, disposable);
     }
 
 

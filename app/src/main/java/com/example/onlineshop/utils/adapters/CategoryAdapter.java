@@ -1,18 +1,18 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.CategoryItemBinding;
 import com.example.onlineshop.model.Category;
-import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.view.ProductsGroupCategoryFragmentDirections;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         public CategoryViewHolder(CategoryItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener((view -> {
+                Navigation.findNavController(view).navigate(
+                        ProductsGroupCategoryFragmentDirections
+                                .actionProductsGroupCategoryFragmentToProductListFragment(
+                                        Integer.parseInt(categoriesList.get(getAdapterPosition()).getId())));
 
+            }));
         }
     }
 }

@@ -14,7 +14,7 @@
             type="com.example.onlineshop.viewmodel.MainActivityViewModel" />
         <variable
             name="eventListener"
-            type="com.example.onlineshop.view.EditAccountFragment.EditAccountEventListener" />
+            type="com.example.onlineshop.view.account.EditAccountFragment.EditAccountEventListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

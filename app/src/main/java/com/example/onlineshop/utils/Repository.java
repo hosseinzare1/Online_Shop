@@ -1,16 +1,21 @@
 package com.example.onlineshop.utils;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
+import com.example.onlineshop.model.Attribute;
 import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
-import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.model.User;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -32,12 +37,60 @@ public class Repository {
 
     }
 
+    //Context context;
     public static final Repository getInstance() {
         if (repository == null) {
             repository = new Repository();
         }
 
+
         return repository;
+
+    }
+//
+//    public static final Repository getInstance(Context context) {
+//        if (repository == null) {
+//            repository = new Repository();
+//        }
+//
+//
+//        return repository;
+//
+//    }
+
+    public String getUserNumber(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_number_file), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "0");
+    }
+
+    public String getUserName(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_number_file), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), "0");
+    }
+
+
+    public LiveData<List<Product>> searchProducts(String search_text) {
+        MutableLiveData<List<Product>> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().searchProducts(search_text).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Product>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Product> products) {
+                        liveData.setValue(products);
+//                        Log.i(TAG, "onSuccess: "+products.get(0).getName());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError: " + e.getMessage());
+                    }
+                });
+        return liveData;
 
     }
 
@@ -54,7 +107,7 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Group> groups) {
                         liveData.setValue(groups);
-                        Log.i(TAG, "onSuccess: g1 " + groups.get(1).getName());
+//                        Log.i(TAG, "onSuccess: g1 " + groups.get(1).getName());
 
                     }
 
@@ -65,6 +118,7 @@ public class Repository {
                 });
         return liveData;
     }
+
     public LiveData<List<Category>> getCategories(int groupID) {
         MutableLiveData<List<Category>> liveData = new MutableLiveData<>();
         RetrofitInstance.getAPI().getCategorys(groupID).subscribeOn(Schedulers.io())
@@ -78,7 +132,7 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Category> categories) {
                         liveData.setValue(categories);
-                        Log.i(TAG, "onSuccess: g1 " + categories.get(1).getName());
+//                        Log.i(TAG, "onSuccess: g1 " + categories.get(1).getName());
                     }
 
                     @Override
@@ -88,7 +142,6 @@ public class Repository {
                 });
         return liveData;
     }
-
 
     public LiveData<Account> updateAccount(Account account) {
         MutableLiveData<Account> liveData = new MutableLiveData<>();
@@ -104,12 +157,12 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Account account) {
                         liveData.setValue(account);
-                        Log.i(TAG, "onSuccess: " + account.getName());
+//                        Log.i(TAG, "onSuccess: " + account.getName());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage() + "*****" + e.toString());
+//                        Log.i(TAG, "onError: " + e.getMessage() + "*****" + e.toString());
                     }
                 });
 
@@ -131,7 +184,7 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull Account account) {
-                        Log.i(TAG, "onSuccess: " + account.getName());
+//                        Log.i(TAG, "onSuccess: " + account.getName());
                         liveData.setValue(account);
                     }
 
@@ -142,6 +195,52 @@ public class Repository {
                 });
         return liveData;
 
+    }
+
+    public LiveData<List<Comment>> getComments(int id, CompositeDisposable disposable) {
+        MutableLiveData<List<Comment>> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().getComments(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Comment>>() {
+                               @Override
+                               public void onSubscribe(@NonNull Disposable d) {
+
+                               }
+
+                               @Override
+                               public void onSuccess(@NonNull List<Comment> comments) {
+                                   liveData.setValue(comments);
+                               }
+
+                               @Override
+                               public void onError(@NonNull Throwable e) {
+
+                               }
+                           }
+                );
+        return liveData;
+    }
+
+    public LiveData<String> submitComment(Comment comment, CompositeDisposable disposable) {
+        MutableLiveData<String> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().submitComment(comment).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull String string) {
+                        liveData.setValue(string);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+        return liveData;
     }
 
     public LiveData<List<Image>> getImages(int id, CompositeDisposable disposable) {
@@ -171,12 +270,12 @@ public class Repository {
 
     }
 
-    public LiveData<Product> getDetails(int id, CompositeDisposable disposable) {
+    public LiveData<Product> getProduct(int id, CompositeDisposable disposable) {
         MutableLiveData<Product> liveData = new MutableLiveData<>();
 
         Log.i(TAG, "getDetails: log ok");
 
-        RetrofitInstance.getAPI().getDetails(id)
+        RetrofitInstance.getAPI().getProduct(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Product>() {
@@ -188,7 +287,7 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull Product product) {
-                        Log.i(TAG, "onSuccess: " + product.getName());
+//                        Log.i(TAG, "onSuccess: " + product.getName());
                         liveData.setValue(product);
                     }
 
@@ -202,20 +301,72 @@ public class Repository {
 
     }
 
-    public LiveData<List<HomeItem>> getAll(CompositeDisposable disposable) {
-        MutableLiveData<List<HomeItem>> productsList = new MutableLiveData<>();
+    public LiveData<List<Attribute>> getProductAttributes(int id, CompositeDisposable disposable) {
+        MutableLiveData<List<Attribute>> liveData = new MutableLiveData<>();
+
+        RetrofitInstance.getAPI().getProductAttributes(id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Attribute>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Attribute> attributes) {
+                        liveData.setValue(attributes);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+        return liveData;
+
+    }
+
+    public LiveData<List<Product>> getAll(CompositeDisposable disposable) {
+        MutableLiveData<List<Product>> productsList = new MutableLiveData<>();
 
         RetrofitInstance.getAPI().getAllItems()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<HomeItem>>() {
+                .subscribe(new SingleObserver<List<Product>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull List<HomeItem> homeItems) {
+                    public void onSuccess(@NonNull List<Product> homeItems) {
+                        productsList.setValue(homeItems);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError: " + e.getMessage());
+                    }
+                });
+        return productsList;
+
+    }
+
+    public LiveData<List<Product>> getProductsByCategory(int id, CompositeDisposable disposable) {
+        MutableLiveData<List<Product>> productsList = new MutableLiveData<>();
+
+        RetrofitInstance.getAPI().getProductsByCategory(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Product>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Product> homeItems) {
                         productsList.setValue(homeItems);
                     }
 
@@ -274,7 +425,7 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         signupLiveData.setValue(jsonObjectResponse.code());
-                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.code());
+//                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.code());
                     }
 
                     @Override

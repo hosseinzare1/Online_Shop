@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/commodity_activity_navigation"
+    app:startDestination="@id/commodityDetailsFragment">
+
+    <fragment
+        android:id="@+id/commodityDetailsFragment"
+        android:name="com.example.onlineshop.view.commodity.CommodityMainFragment"
+        android:label="CommodityDetailsFragment" >
+        <action
+            android:id="@+id/action_commodityDetailsFragment_to_descriptionsFragment"
+            app:destination="@id/descriptionsFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_commodityDetailsFragment_to_attributesFragment"
+            app:destination="@id/attributesFragment" />
+        <action
+            android:id="@+id/action_commodityDetailsFragment_to_writeCommentFragment"
+            app:destination="@id/writeCommentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionsFragment"
+        android:name="com.example.onlineshop.view.commodity.DescriptionsFragment"
+        android:label="DescriptionsFragment" >
+        <argument
+            android:name="descripton"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/attributesFragment"
+        android:name="com.example.onlineshop.view.commodity.AttributesFragment"
+        android:label="AttributesFragment" >
+        <argument
+            android:name="product_id"
+            app:argType="integer" />
+    </fragment>
+    <dialog
+        android:id="@+id/writeCommentFragment"
+        android:name="com.example.onlineshop.view.commodity.WriteCommentFragment"
+        android:label="WriteCommentFragment" >
+        <argument
+            android:name="productID"
+            app:argType="integer" />
+    </dialog>
+</navigation>

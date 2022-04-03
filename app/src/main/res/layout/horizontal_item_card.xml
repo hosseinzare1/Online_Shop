@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.example.onlineshop.model.HomeItem" />
+            type="com.example.onlineshop.model.Product" />
     </data>
 
 

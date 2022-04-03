@@ -51,8 +51,7 @@ public class ProductDetailsFragment extends Fragment {
 
         binding.setEventListener(eventListener);
         binding.setViewModel(viewModel);
-        ViewPager viewPager = binding.detailsViewPager;
-        viewPager.setAdapter(adapter);
+        binding.detailsViewPager.setAdapter(adapter);
         //TODO convert int to string
         viewModel.getDetails(Integer.parseInt(args.getId())).observe(getViewLifecycleOwner(), new Observer<Product>() {
             @Override

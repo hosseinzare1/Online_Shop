@@ -11,7 +11,7 @@
 
         <variable
             name="eventListener"
-            type="com.example.onlineshop.view.AccountFragment.AccountFragmentEventListener" />
+            type="com.example.onlineshop.view.account.AccountFragment.AccountFragmentEventListener" />
 
     </data>
 

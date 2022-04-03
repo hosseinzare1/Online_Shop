@@ -1,4 +1,4 @@
-package com.example.onlineshop.view;
+package com.example.onlineshop.view.account;
 
 import android.os.Bundle;
 import android.util.Log;

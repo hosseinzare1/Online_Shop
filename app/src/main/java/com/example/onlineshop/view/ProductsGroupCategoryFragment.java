@@ -25,14 +25,14 @@ import com.example.onlineshop.viewmodel.MainActivityViewModel;
 
 import java.util.List;
 
-public class ProductsCategoryFragment extends Fragment {
+public class ProductsGroupCategoryFragment extends Fragment {
 
     private static final String TAG = "ProductListFragment";
     FragmentProductsCategoryBinding binding;
     MainActivityViewModel viewModel;
     GroupsAdapter adapter;
 
-    public ProductsCategoryFragment() {
+    public ProductsGroupCategoryFragment() {
         // Required empty public constructor
     }
 
@@ -55,7 +55,7 @@ public class ProductsCategoryFragment extends Fragment {
         binding.groupsRecyclerView.setAdapter(adapter);
         adapter.getItemCount();
 
-        viewModel.getGroups().observe(this, new Observer<List<Group>>() {
+        viewModel.getGroups().observe(getViewLifecycleOwner(), new Observer<List<Group>>() {
             @Override
             public void onChanged(List<Group> groups) {
                 adapter.setGroups(groups);
@@ -63,12 +63,6 @@ public class ProductsCategoryFragment extends Fragment {
             }
         });
 
-        viewModel.getCategories(1).observe(this, new Observer<List<Category>>() {
-            @Override
-            public void onChanged(List<Category> categories) {
-                Log.i(TAG, "onChanged: cat : " + categories.get(1).getName());
-            }
-        });
 
         return binding.getRoot();
 

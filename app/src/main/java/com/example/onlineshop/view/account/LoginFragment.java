@@ -1,4 +1,4 @@
-package com.example.onlineshop.view;
+package com.example.onlineshop.view.account;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,8 +21,8 @@ import androidx.navigation.Navigation;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentLoginBinding;
 import com.example.onlineshop.model.User;
-import com.example.onlineshop.view.Login_Signup_Activity;
 import com.example.onlineshop.view.MainActivity;
+import com.example.onlineshop.view.account.Login_Signup_Activity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
 
 
@@ -52,13 +52,13 @@ public class LoginFragment extends Fragment {
 //        binding.setModel(model);
         binding.setViewModel(viewModel);
 
-        viewModel.signInUserMutableLiveData.observe((LifecycleOwner) context, new Observer<User>() {
+        viewModel.signInUserMutableLiveData.observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
             public void onChanged(User user) {
                 viewModel.login(user.getNumber(), user.getPassword()).observe((LifecycleOwner) context, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
-                        showMessage(String.valueOf(integer), user.getNumber());
+                        showMessage(String.valueOf(integer), user);
                     }
                 });
             }
@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void showMessage(String code, String number) {
+    public void showMessage(String code, User user) {
 
         String message;
 
@@ -78,7 +78,8 @@ public class LoginFragment extends Fragment {
                 SharedPreferences sharedPreferences =
                         context.getSharedPreferences(context.getString(R.string.logged_in_number_file), Context.MODE_PRIVATE);
 
-                sharedPreferences.edit().putString(context.getString(R.string.logged_in_number_KEY), number).apply();
+                sharedPreferences.edit().putString(context.getString(R.string.logged_in_number_KEY), user.getNumber()).apply();
+                sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), user.getName()).apply();
 
 
                 context.startActivity(new Intent(context, MainActivity.class));

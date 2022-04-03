@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+
         <variable
             name="model"
             type="com.example.onlineshop.model.Product" />
+
         <variable
             name="viewModel"
             type="com.example.onlineshop.viewmodel.MainActivityViewModel" />
+
         <variable
             name="imageUrl"
             type="String" />
@@ -17,6 +21,7 @@
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.ProductDetailsFragment.ProductDetailsEventListener" />
+
 
     </data>
 
@@ -75,12 +80,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:onClick="@{(view)->eventListener.onAddToCart(view,model,viewModel,imageUrl)}"
             android:text="افزودن به سبد خرید"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{(view)->eventListener.onAddToCart(view,model,viewModel,imageUrl)}"
-           />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

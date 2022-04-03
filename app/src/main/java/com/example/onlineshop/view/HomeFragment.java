@@ -1,12 +1,12 @@
 package com.example.onlineshop.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,21 +19,18 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentHomeBinding;
-import com.example.onlineshop.model.HomeItem;
-import com.example.onlineshop.model.Image;
 import com.example.onlineshop.utils.adapters.HorizontalProductsAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
+import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
-import java.util.List;
 
-
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HorizontalProductsAdapter.OnClickListener {
 
     public static final String TAG = "HomeFragment";
 
-    WormDotsIndicator indicator ;
+    WormDotsIndicator indicator;
 
     ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter();
     HorizontalProductsAdapter discountsListAdapter = new HorizontalProductsAdapter();
@@ -73,38 +70,72 @@ public class HomeFragment extends Fragment {
         binding.newsViewPagerIndicator.setViewPager(binding.newsViewPager);
 
         binding.discountsRecyclerView.setAdapter(discountsListAdapter);
-        binding.discountsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
+        binding.discountsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        discountsListAdapter.setOnClickListener(id -> {
+            Intent intent = new Intent(getContext(), CommodityActivity.class);
+
+            intent.putExtra("id", id);
+
+            startActivity(intent);
+
+        });
 
         binding.bestsellingRecyclerView.setAdapter(bestsellingListAdapter);
         binding.bestsellingRecyclerView
-                .setLayoutManager(new GridLayoutManager(getContext(),1,RecyclerView.HORIZONTAL,false));
+                .setLayoutManager(new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false));
+        bestsellingListAdapter.setOnClickListener(id -> {
+//    Intent intent = new Intent(getContext(), CommodityActivity.class);
+//
+//    intent.putExtra("id", id);
+//
+//    startActivity(intent);
+//
+//
+            onProductClickListener(id);
 
+        });
 
         binding.historyRecyclerView.setAdapter(historyListAdapter);
-        binding.historyRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),1,RecyclerView.HORIZONTAL,false));
+        binding.historyRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false));
+        historyListAdapter.setOnClickListener(id -> {
+//            Intent intent = new Intent(getContext(), CommodityActivity.class);
+//
+//            intent.putExtra("id", id);
+//
+//            startActivity(intent);
+            onProductClickListener(id);
 
+        });
         //TODO change images resource
-        viewModel.getImages(1).observe(this, images -> imageSliderAdapter.setImages(images));
+        viewModel.getImages(1).observe(getViewLifecycleOwner(), images -> imageSliderAdapter.setImages(images));
 
-        viewModel.getAllItems().observe(this, homeItems -> {
+        viewModel.getAllItems().observe(getViewLifecycleOwner(), homeItems -> {
             discountsListAdapter.setItems(homeItems);
             Log.i(TAG, "onChanged 1 :" + homeItems.get(2).getName());
 
         });
-        viewModel.getAllItems().observe(this, homeItems -> {
+        viewModel.getAllItems().observe(getViewLifecycleOwner(), homeItems -> {
             bestsellingListAdapter.setItems(homeItems);
             Log.i(TAG, "onChanged 2 :" + homeItems.get(2).getName());
 
         });
-        viewModel.getAllItems().observe(this, homeItems -> {
+        viewModel.getAllItems().observe(getViewLifecycleOwner(), homeItems -> {
             historyListAdapter.setItems(homeItems);
             Log.i(TAG, "onChanged 3 :" + homeItems.get(2).getName());
 
         });
 
 
-
     }
 
 
+    @Override
+    public void onProductClickListener(int id) {
+        Intent intent = new Intent(getContext(), CommodityActivity.class);
+
+        intent.putExtra("id", id);
+
+        startActivity(intent);
+
+    }
 }

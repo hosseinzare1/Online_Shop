@@ -11,7 +11,7 @@
 
         <variable
             name="eventListener"
-            type="com.example.onlineshop.view.SignupFragment.SignupFragmentEventListener" />
+            type="com.example.onlineshop.view.account.SignupFragment.SignupFragmentEventListener" />
 
         <variable
             name="viewModel"

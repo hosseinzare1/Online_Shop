@@ -1,5 +1,6 @@
 package com.example.onlineshop.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,9 @@ import android.view.ViewGroup;
 import com.example.onlineshop.R;
 
 import com.example.onlineshop.databinding.FragmentProductListBinding;
-import com.example.onlineshop.model.HomeItem;
+import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.ProductsListAdapter;
+import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 
 import java.util.List;
@@ -29,6 +32,8 @@ public class ProductListFragment extends Fragment {
     FragmentProductListBinding binding;
     MainActivityViewModel viewModel;
     ProductsListAdapter productsListAdapter;
+    ProductListFragmentArgs args;
+    private final String TAG = "ProductListFragment";
 
     public ProductListFragment() {
         // Required empty public constructor
@@ -36,13 +41,26 @@ public class ProductListFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_list, container, false);
         productsListAdapter = new ProductsListAdapter();
+        productsListAdapter.setOnClickListener(new ProductsListAdapter.OnClickListener() {
+            @Override
+            public void OnItemClickListener(int id) {
 
+                Intent intent = new Intent(getContext(), CommodityActivity.class);
+
+                intent.putExtra("id", id);
+
+                startActivity(intent);
+
+            }
+        });
         binding.HomeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.HomeRecyclerView.setAdapter(productsListAdapter);
+
+        args = ProductListFragmentArgs.fromBundle(getArguments());
 
         return binding.getRoot();
     }
@@ -53,8 +71,39 @@ public class ProductListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
 
-        viewModel.getAllItems().observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
+
+        //if id==0 , -> search
+
+        Log.i(TAG, "onViewCreated: id:"+args.getCategoryID());
+        Log.i(TAG, "onViewCreated: text:"+getArguments().getString("searchText"));
+
+        if (args.getCategoryID() == 0) {
+            String text =getArguments().getString("searchText");
+
+            viewModel.searchProducts(text).observe(getActivity(), new Observer<List<Product>>() {
+                @Override
+                public void onChanged(List<Product> products) {
+                    productsListAdapter.setProducts(
+                            products
+
+                    );
+                    for (Product p:products
+                         ) {
+                        Log.i(TAG, "for: "+p.getName());
+                    }
+                }
+            });
+
+            viewModel.getAllItems().observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
+        } else {
+            viewModel.getProductsByCategory(args.getCategoryID()).observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
+        }
 
 
     }
+//
+//    @Override
+//    public void OnItemClickListener(int id) {
+//
+//    }
 }

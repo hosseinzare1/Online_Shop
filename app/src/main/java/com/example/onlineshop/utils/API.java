@@ -1,9 +1,10 @@
 package com.example.onlineshop.utils;
 
 import com.example.onlineshop.model.Account;
+import com.example.onlineshop.model.Attribute;
 import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
-import com.example.onlineshop.model.HomeItem;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
 import com.google.gson.JsonObject;
@@ -12,12 +13,12 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface API {
 
@@ -33,14 +34,29 @@ public interface API {
 
 
     @GET("getall/")
-    Single<List<HomeItem>> getAllItems();
+    Single<List<Product>> getAllItems();
+
+    @GET("get_products_by_category/{id}")
+    Single<List<Product>> getProductsByCategory(@Path("id") int categoryID);
 
 
-    @GET("get_details/{id}")
-    Single<Product> getDetails(@Path("id") int ProductID);
+    @GET("get_product/{id}")
+    Single<Product> getProduct(@Path("id") int ProductID);
+
+    @GET("get_product_attributes/{id}")
+    Single<List<Attribute>> getProductAttributes(@Path("id") int ProductID);
+
+
 
     @GET("get_images/{id}")
     Single<List<Image>> getImages(@Path("id") int ProductId);
+
+    @GET("get_comments/{id}")
+    Single<List<Comment>> getComments(@Path("id") int ProductID);
+
+
+    @POST("submit_comment/")
+    Single<String> submitComment(@Body Comment comment);
 
     @GET("get_account_details/{number}")
     Single<Account> getAccountDetails(@Path("number") String number);
@@ -60,4 +76,7 @@ public interface API {
 
     @GET("get_categorys/{id}")
     Single<List<Category>> getCategorys(@Path("id") int groupID);
+
+    @GET("search_product/{search_text}")
+    Single<List<Product>> searchProducts(@Path("search_text") String searchText);
 }
