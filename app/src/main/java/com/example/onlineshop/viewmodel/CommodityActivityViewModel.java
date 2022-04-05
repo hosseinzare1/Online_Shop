@@ -28,12 +28,7 @@ public class CommodityActivityViewModel extends ViewModel {
         repository = new Repository(context);
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        compositeDisposable.clear();
 
-    }
 
     public LiveData<Product> getProduct(int id) {
 
@@ -59,6 +54,13 @@ public class CommodityActivityViewModel extends ViewModel {
     public LiveData<List<Attribute>> getAttributes(int id) {
 
         return repository.getProductAttributes(id, compositeDisposable);
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        compositeDisposable.clear();
+
     }
 
 }

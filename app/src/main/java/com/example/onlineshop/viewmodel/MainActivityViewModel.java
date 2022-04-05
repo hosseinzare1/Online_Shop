@@ -3,8 +3,11 @@ package com.example.onlineshop.viewmodel;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.example.onlineshop.model.Account;
@@ -23,11 +26,12 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 public class MainActivityViewModel extends ViewModel {
     private static final String TAG = "viewmodel";
     CompositeDisposable disposable = new CompositeDisposable();
+//
+//    List<CartItemModel> cartItemsList = new ArrayList<>();
+//    MutableLiveData<List<CartItemModel>> cartItemsLiveData = new MutableLiveData<>();
+//
+//    MutableLiveData<String> totalPriceLiveData = new MutableLiveData<>();
 
-    List<CartItemModel> cartItemsList = new ArrayList<>();
-    MutableLiveData<List<CartItemModel>> cartItemsLiveData = new MutableLiveData<>();
-
-    MutableLiveData<String> totalPriceLiveData = new MutableLiveData<>();
     Context context;
 
     Repository repository;
@@ -53,83 +57,59 @@ public class MainActivityViewModel extends ViewModel {
     }
 
 
-    public MutableLiveData<String> getTotalPrice() {
-        return totalPriceLiveData;
-    }
-
-    public void setTotalPriceLiveData() {
-        int totalPrice = 0;
-        for (CartItemModel model : cartItemsList
-        ) {
-            totalPrice += Integer.parseInt(model.getPrice()) * Integer.parseInt(model.getCount());
-        }
-        totalPriceLiveData.setValue(String.valueOf(totalPrice));
-    }
-
-    public void addItemCount(int position) {
-        cartItemsList.get(position).setCount(String.valueOf(
-                Integer.parseInt(cartItemsList.get(position).getCount()) + 1)
-        );
-        cartItemsLiveData.setValue(cartItemsList);
-
-        setTotalPriceLiveData();
-    }
-
-    public void reduceItemCount(int position) {
-        if (Integer.parseInt(cartItemsList.get(position).getCount()) > 1) {
-
-            cartItemsList.get(position).setCount(String.valueOf(
-                    Integer.parseInt(cartItemsList.get(position).getCount()) - 1)
-            );
-            cartItemsLiveData.setValue(cartItemsList);
-        }
-
-        setTotalPriceLiveData();
-
-    }
-
-    public void deleteFromCart(int position) {
-        cartItemsList.remove(position);
-        cartItemsLiveData.setValue(cartItemsList);
-
-        setTotalPriceLiveData();
-    }
-
-
-    public LiveData<List<CartItemModel>> getCartItems() {
-        return cartItemsLiveData;
-    }
-
     public void addCartItem(CartItemModel item) {
 
-        //TODO disable add button if exist
-        if (isProductExist(item)) {
+        repository.addCartItem(item);
 
-        } else {
-            cartItemsList.add(item);
-            cartItemsLiveData.setValue(cartItemsList);
-        }
-
-        setTotalPriceLiveData();
+//        //TODO disable add button if exist
 
         Log.i(TAG, "addCartItem: " + item.getName());
 
     }
 
-    public boolean isProductExist(CartItemModel itemModel) {
-        boolean isExist = false;
-
-        for (CartItemModel model : cartItemsList
-        ) {
-            if (model.getName().equals(itemModel.getName())) {
-                isExist = true;
-                break;
-
-            }
-        }
-
-        return isExist;
+    public void increaseItemCount(CartItemModel cartItemModel) {
+        repository.increaseItemCount(cartItemModel);
     }
+
+    public void decreaseItemCount(CartItemModel cartItemModel) {
+        repository.decreaseItemCount(cartItemModel);
+    }
+
+    public void deleteFromCart(CartItemModel cartItemModel) {
+        repository.deleteCartItem(cartItemModel);
+    }
+
+    public LiveData<List<CartItemModel>> getCartItems() {
+        Log.i(TAG, "getCartItems: called ");
+
+        return repository.getCartItems();
+
+
+    }
+
+    public LiveData<Double> getTotalPrice() {
+
+        MutableLiveData<Double> totalPriceLiveData = new MutableLiveData<>();
+
+        repository.getCartItems().observe((LifecycleOwner) context, new Observer<List<CartItemModel>>() {
+            @Override
+            public void onChanged(List<CartItemModel> cartItemModels) {
+
+                Double totalPrice = 0.0;
+                for (CartItemModel item : cartItemModels
+                ) {
+                    totalPrice += item.getCount() * item.getPrice();
+
+                }
+
+                totalPriceLiveData.setValue(totalPrice);
+            }
+        });
+
+
+        return totalPriceLiveData;
+    }
+
 
     public LiveData<Account> updateAccount(Account account) {
 

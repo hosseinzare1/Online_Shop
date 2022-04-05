@@ -93,7 +93,7 @@ public class CommodityMainFragment extends Fragment {
     public class CommodityMainEventListener {
 
         public void onAddToCart(View view, Product product, MainActivityViewModel viewModel) {
-            viewModel.addCartItem(new CartItemModel(0,product.getName(), product.getImageUrl(), product.getPrice(),"1"));
+            viewModel.addCartItem(new CartItemModel(0,product.getName(), product.getImageUrl(), product.getPrice(),1));
         }
 
         public void onSeeSpecifications(View view, Product product) {

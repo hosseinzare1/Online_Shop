@@ -50,7 +50,7 @@
                     app:layout_constraintStart_toEndOf="@+id/textView6"
                     app:layout_constraintTop_toTopOf="@+id/textView6"
                     app:layout_constraintVertical_bias="0.558"
-                    android:text="@{model.price}"/>
+                    android:text="@{String.valueOf(model.price)}"/>
 
                 <TextView
                     android:id="@+id/textView6"
@@ -116,7 +116,7 @@
                     android:layout_width="64dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:text="@{model.count}"
+                    android:text="@{String.valueOf(model.count)}"
                     app:layout_constraintBottom_toBottomOf="@+id/minesButton"
                     app:layout_constraintEnd_toStartOf="@+id/addButton"
                     app:layout_constraintHorizontal_bias="0.5"

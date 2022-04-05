@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
@@ -19,6 +21,7 @@ import com.example.onlineshop.model.Product;
 import com.example.onlineshop.model.User;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -40,11 +43,13 @@ public class Repository {
     public Repository(Context context) {
         this.context = context;
         databaseInstance = AppDatabase.getInstance(context);
+        ArrayList<CartItemModel> cartItems = new ArrayList<>();
+
 
     }
 
     //Context context;
-    public static final Repository getInstance(Context context) {
+    public static Repository getInstance(Context context) {
         if (repository == null) {
             repository = new Repository(context);
         }
@@ -53,29 +58,50 @@ public class Repository {
     }
 
     public LiveData<List<CartItemModel>> getCartItems() {
-
-
         return databaseInstance.itemCartDao().getItems();
+    }
+
+    public boolean isItemExist(CartItemModel model) {
+        List<String> items = databaseInstance.itemCartDao().isItemExist(model.getName());
+        Log.i(TAG, "isItemExist: " + items.size());
+        return items.size() > 0;
+    }
+
+//    public LiveData<Double> getTotalPrice() {
+//        MutableLiveData<Double> totalPriceLiveData = new MutableLiveData<>();
+//
+//
+//
+//        return totalPriceLiveData;
+//    }
+
+    public boolean addCartItem(CartItemModel itemModel) {
+
+        if (isItemExist(itemModel)) {
+
+            return false;
+        } else {
+            databaseInstance.itemCartDao().insertItem(itemModel);
+
+            return true;
+        }
 
 
     }
 
-    public void addCartItems(CartItemModel itemModel) {
-
-        databaseInstance.itemCartDao().insertItem(itemModel);
-
-
-    }
-
-    public void updateCartItems(CartItemModel itemModel) {
-
-        databaseInstance.itemCartDao().updateItem(itemModel);
-
-    }
 
     public void deleteCartItem(CartItemModel itemModel) {
+        databaseInstance.itemCartDao().deleteItem(itemModel.getName());
+    }
 
-        databaseInstance.itemCartDao().deleteItem(itemModel);
+
+    public void increaseItemCount(CartItemModel model) {
+        databaseInstance.itemCartDao().increaseItemCount(model.getName());
+
+    }
+
+    public void decreaseItemCount(CartItemModel model) {
+        databaseInstance.itemCartDao().decreaseItemCount(model.getName());
 
     }
 

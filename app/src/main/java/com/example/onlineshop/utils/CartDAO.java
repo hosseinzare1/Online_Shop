@@ -15,16 +15,25 @@ import java.util.List;
 @Dao
 public interface CartDAO {
 
+
     @Insert()
     void insertItem(CartItemModel cartItemModel);
 
-    @Delete()
-    void deleteItem(CartItemModel cartItemModel);
+    @Query("UPDATE cartitemmodel SET count = count+1 WHERE name = :itemName")
+    void increaseItemCount(String itemName);
 
-    @Update()
-    void updateItem(CartItemModel cartItemModel);
+    @Query("UPDATE cartitemmodel SET count = count-1 WHERE name = :itemName AND count >1")
+    void decreaseItemCount(String itemName);
+
+    @Query("DELETE FROM CartItemModel WHERE name = :itemName")
+    void deleteItem(String itemName);
 
     @Query("SELECT * FROM CartItemModel")
     LiveData<List<CartItemModel>> getItems();
+
+    @Query("SELECT name FROM CartItemModel WHERE name = :pName")
+    List<String> isItemExist(String pName);
+
+
 
 }

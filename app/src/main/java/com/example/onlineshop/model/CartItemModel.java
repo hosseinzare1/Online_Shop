@@ -11,18 +11,33 @@ public class CartItemModel {
     int id;
 
 
+    String name;
+    String imageUrl;
+    double price = 1;
+    double count = 1;
 
-   String name;
-     String imageUrl;
-     String price = "1";
-    String count="1";
-
-    public CartItemModel(int id, String name, String imageUrl, String price, String count) {
+    public CartItemModel(int id, String name, String imageUrl, double price, double count) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.price = price;
         this.count = count;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setCount(double count) {
+        this.count = count;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getCount() {
+        return count;
     }
 
     public int getId() {
@@ -44,23 +59,6 @@ public class CartItemModel {
     public String getImageUrl() {
         return imageUrl;
     }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getCount() {
-        return count;
-    }
-
-    public void setCount(String count) {
-        this.count = count;
-    }
-
 
 
     public void setImageUrl(String imageUrl) {

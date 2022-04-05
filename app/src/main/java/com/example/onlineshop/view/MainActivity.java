@@ -27,6 +27,7 @@ import com.example.onlineshop.utils.AppDatabase;
 import com.example.onlineshop.utils.Repository;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,9 +59,23 @@ public class MainActivity extends AppCompatActivity {
         Repository repository = new Repository(getApplicationContext());
 
 
-        CartItemModel cartItemModel1 = new CartItemModel(0, "ایتم جدید 1", "123456", "125000", "2");
-        CartItemModel cartItemModel2 = new CartItemModel(0, "ایتم جدید 2", "123456", "125000", "2");
+        CartItemModel cartItemModel1 = new CartItemModel(0, "ایتم جدید 1", "123456", 12500, 2);
+        CartItemModel cartItemModel2 = new CartItemModel(0, "ایتم جدید 2", "123456", 125000, 2);
 
+
+        repository.getCartItems().observe(this, new Observer<List<CartItemModel>>() {
+            @Override
+            public void onChanged(List<CartItemModel> cartItemModels) {
+                try {
+                    if (cartItemModels.size()>0)
+                    Log.i(TAG, "onChanged: " + cartItemModels.get(0).getName());
+
+                } finally {
+
+                }
+
+            }
+        });
 
 //        setSupportActionBar(binding.mainToolbar);
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);

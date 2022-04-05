@@ -13,6 +13,7 @@
         <variable
             name="mainActivityViewModel"
             type="com.example.onlineshop.viewmodel.MainActivityViewModel" />
+
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.commodity.CommodityMainFragment.CommodityMainEventListener" />
@@ -244,7 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:hint="price"
-                android:text="@{product_model.price}"
+                android:text="@{String.valueOf(product_model.price)}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

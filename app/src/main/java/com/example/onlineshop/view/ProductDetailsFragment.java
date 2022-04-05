@@ -33,7 +33,7 @@ public class ProductDetailsFragment extends Fragment {
     ProductDetailsEventListener eventListener;
     ImageSliderAdapter adapter = new ImageSliderAdapter();
 
-    public static final String TAG = "ProductDetailsFragment";
+    public String TAG = "ProductDetailsFragment";
 
     @Nullable
     @Override
@@ -62,6 +62,8 @@ public class ProductDetailsFragment extends Fragment {
             }
         });
 
+        Log.i(TAG, "onViewCreated: ");
+
         //TODO convert int to string
         viewModel.getImages(Integer.parseInt(args.getId())).observe(getViewLifecycleOwner(), new Observer<List<Image>>() {
             @Override
@@ -77,7 +79,7 @@ public class ProductDetailsFragment extends Fragment {
         public void onAddToCart(View view, Product model, MainActivityViewModel viewModel, String imageUrl) {
             Log.i(TAG, "onAddToCart 1 : "+model.getName());
             Log.i(TAG, "onAddToCart 2 : "+model.getPrice());
-            viewModel.addCartItem(new CartItemModel(0,model.getName(),imageUrl,model.getPrice(),"1"));
+            viewModel.addCartItem(new CartItemModel(0,model.getName(),imageUrl,model.getPrice(),1));
         }
 
     }

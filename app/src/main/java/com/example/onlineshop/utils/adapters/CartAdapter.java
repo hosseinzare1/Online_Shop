@@ -22,7 +22,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     List<CartItemModel> cartItemModels = new ArrayList<>();
 
 
-OnCartProductData onCartProductData;
+    OnCartProductData onCartProductData;
 
     @NonNull
     @Override
@@ -56,8 +56,8 @@ OnCartProductData onCartProductData;
             binding.addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(onCartProductData!=null && getAdapterPosition()!=RecyclerView.NO_POSITION){
-                        onCartProductData.onAddClickListener(getAdapterPosition());
+                    if (onCartProductData != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        onCartProductData.onAddClickListener(cartItemModels.get(getAdapterPosition()));
 
 
                     }
@@ -69,8 +69,8 @@ OnCartProductData onCartProductData;
                 @Override
                 public void onClick(View view) {
 
-                    if(onCartProductData!=null && getAdapterPosition()!=RecyclerView.NO_POSITION){
-                        onCartProductData.onReduceClickListener(getAdapterPosition());
+                    if (onCartProductData != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        onCartProductData.onReduceClickListener(cartItemModels.get(getAdapterPosition()));
 
 
                     }
@@ -81,9 +81,9 @@ OnCartProductData onCartProductData;
             binding.deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(onCartProductData!=null && getAdapterPosition()!=RecyclerView.NO_POSITION){
+                    if (onCartProductData != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
 
-                        onCartProductData.onDeleteClickListener(getAdapterPosition());
+                        onCartProductData.onDeleteClickListener(cartItemModels.get(getAdapterPosition()));
 
 
                     }
@@ -99,10 +99,12 @@ OnCartProductData onCartProductData;
         notifyDataSetChanged();
     }
 
-    public interface OnCartProductData{
-        void onAddClickListener(int position);
-        void onReduceClickListener(int position);
-        void onDeleteClickListener(int position);
+    public interface OnCartProductData {
+        void onAddClickListener(CartItemModel item);
+
+        void onReduceClickListener(CartItemModel item);
+
+        void onDeleteClickListener(CartItemModel item);
 
     }
 

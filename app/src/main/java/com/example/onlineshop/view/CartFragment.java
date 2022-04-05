@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCartBinding;
+import com.example.onlineshop.databinding.ItemCardCommentBinding;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.utils.adapters.CartAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
@@ -50,7 +51,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
         // Inflate the layout for this fragment
         recyclerView = binding.cartRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -63,10 +64,10 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
             }
         });
 
-        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), new Observer<String>() {
+        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), new Observer<Double>() {
             @Override
-            public void onChanged(String s) {
-                binding.cartPriceTextView.setText(s);
+            public void onChanged(Double aDouble) {
+                binding.cartPriceTextView.setText(String.valueOf(aDouble));
             }
         });
 
@@ -74,18 +75,18 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
     }
 
     @Override
-    public void onAddClickListener(int position) {
-        viewModel.addItemCount(position);
+    public void onAddClickListener(CartItemModel cartItemModel) {
+        viewModel.increaseItemCount(cartItemModel);
     }
 
     @Override
-    public void onReduceClickListener(int position) {
-viewModel.reduceItemCount(position);
+    public void onReduceClickListener(CartItemModel cartItemModel) {
+        viewModel.decreaseItemCount(cartItemModel);
     }
 
     @Override
-    public void onDeleteClickListener(int position) {
-viewModel.deleteFromCart(position);
+    public void onDeleteClickListener(CartItemModel cartItemModel) {
+        viewModel.deleteFromCart(cartItemModel);
     }
 
 
