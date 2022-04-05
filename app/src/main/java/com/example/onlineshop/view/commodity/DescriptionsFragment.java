@@ -15,6 +15,7 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentDescriptionsBinding;
 
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 
 public class DescriptionsFragment extends Fragment {
 
@@ -31,7 +32,7 @@ public class DescriptionsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_descriptions, container, false);
-        viewModel = new ViewModelProvider(this).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
         return binding.getRoot();
     }
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -20,8 +21,14 @@ import android.widget.Toast;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityMainBinding;
+import com.example.onlineshop.databinding.ItemCardCommentBinding;
+import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.utils.AppDatabase;
+import com.example.onlineshop.utils.Repository;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +36,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -47,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.Main_fragmentContainerView);
         navController = navHostFragment.getNavController();
+
+
+        Repository repository = new Repository(getApplicationContext());
+
+
+        CartItemModel cartItemModel1 = new CartItemModel(0, "ایتم جدید 1", "123456", "125000", "2");
+        CartItemModel cartItemModel2 = new CartItemModel(0, "ایتم جدید 2", "123456", "125000", "2");
+
 
 //        setSupportActionBar(binding.mainToolbar);
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -79,41 +93,41 @@ public class MainActivity extends AppCompatActivity {
 
     //search
 /**
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.toolbar_searchview, menu);
-//
-//
-//        SearchView searchView = (SearchView) menu.findItem(R.id.toolbar_searchView).getActionView();
-//        menu.findItem(R.id.toolbar_searchView).expandActionView();
-//        searchView.setQueryHint("جستوجو");
-//        searchView.setIconifiedByDefault(false);
-//
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-////                Toast.makeText(getApplicationContext(), s+"onQueryTextSubmit()", Toast.LENGTH_SHORT).show();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("searchText",s);
-//                bundle.putInt("categoryID",0);
-////                Log.i(TAG, "onQueryTextSubmit: "+);
-//                navController.navigate(R.id.productListFragment,bundle);
-//                Log.i(TAG, "onQueryTextSubmit: "+s);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                Toast.makeText(getApplicationContext(), s+"onQueryTextChange()", Toast.LENGTH_SHORT).show();
-//
-//                return false;
-//            }
-//        });
-//
-//
-//        return true;
-//    }
+ //    @Override
+ //    public boolean onCreateOptionsMenu(Menu menu) {
+ //        MenuInflater menuInflater = getMenuInflater();
+ //        menuInflater.inflate(R.menu.toolbar_searchview, menu);
+ //
+ //
+ //        SearchView searchView = (SearchView) menu.findItem(R.id.toolbar_searchView).getActionView();
+ //        menu.findItem(R.id.toolbar_searchView).expandActionView();
+ //        searchView.setQueryHint("جستوجو");
+ //        searchView.setIconifiedByDefault(false);
+ //
+ //
+ //        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+ //            @Override
+ //            public boolean onQueryTextSubmit(String s) {
+ ////                Toast.makeText(getApplicationContext(), s+"onQueryTextSubmit()", Toast.LENGTH_SHORT).show();
+ //                Bundle bundle = new Bundle();
+ //                bundle.putString("searchText",s);
+ //                bundle.putInt("categoryID",0);
+ ////                Log.i(TAG, "onQueryTextSubmit: "+);
+ //                navController.navigate(R.id.productListFragment,bundle);
+ //                Log.i(TAG, "onQueryTextSubmit: "+s);
+ //                return false;
+ //            }
+ //
+ //            @Override
+ //            public boolean onQueryTextChange(String s) {
+ //                Toast.makeText(getApplicationContext(), s+"onQueryTextChange()", Toast.LENGTH_SHORT).show();
+ //
+ //                return false;
+ //            }
+ //        });
+ //
+ //
+ //        return true;
+ //    }
  **/
 }

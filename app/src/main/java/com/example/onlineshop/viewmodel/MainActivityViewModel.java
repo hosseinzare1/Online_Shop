@@ -1,5 +1,8 @@
 package com.example.onlineshop.viewmodel;
 
+import android.content.Context;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -25,18 +28,28 @@ public class MainActivityViewModel extends ViewModel {
     MutableLiveData<List<CartItemModel>> cartItemsLiveData = new MutableLiveData<>();
 
     MutableLiveData<String> totalPriceLiveData = new MutableLiveData<>();
+    Context context;
 
-    public LiveData<List<Product>> searchProducts(String search_text){
-        return Repository.getInstance().searchProducts(search_text);
+    Repository repository;
+
+
+    public MainActivityViewModel(Context context) {
+        this.context = context;
+        repository = new Repository(context);
+    }
+
+
+    public LiveData<List<Product>> searchProducts(String search_text) {
+        return repository.searchProducts(search_text);
 
     }
 
-public LiveData<List<Category>> getCategories(int groupID){
-    return Repository.getInstance().getCategories(groupID);
-}
+    public LiveData<List<Category>> getCategories(int groupID) {
+        return repository.getCategories(groupID);
+    }
 
     public LiveData<List<Group>> getGroups() {
-        return Repository.getInstance().getGroups();
+        return repository.getGroups();
     }
 
 
@@ -99,6 +112,8 @@ public LiveData<List<Category>> getCategories(int groupID){
 
         setTotalPriceLiveData();
 
+        Log.i(TAG, "addCartItem: " + item.getName());
+
     }
 
     public boolean isProductExist(CartItemModel itemModel) {
@@ -118,13 +133,13 @@ public LiveData<List<Category>> getCategories(int groupID){
 
     public LiveData<Account> updateAccount(Account account) {
 
-        return Repository.getInstance().updateAccount(account);
+        return repository.updateAccount(account);
     }
 
     public LiveData<Account> getAccountDetails(String number) {
         LiveData<Account> liveData = new MutableLiveData<>();
 
-        liveData = Repository.getInstance().getAccountDetails(number, disposable);
+        liveData = repository.getAccountDetails(number, disposable);
 
         //        Log.i(TAG, "getAccountDetails: "+liveData.getValue().getName());
 
@@ -134,24 +149,24 @@ public LiveData<List<Category>> getCategories(int groupID){
 
     public LiveData<List<Product>> getAllItems() {
         LiveData<List<Product>> liveData = new MutableLiveData<>();
-        return Repository.getInstance().getAll(disposable);
-    }
-    public LiveData<List<Product>> getProductsByCategory(int id) {
-        LiveData<List<Product>> liveData = new MutableLiveData<>();
-        return Repository.getInstance().getProductsByCategory(id,disposable);
+        return repository.getAll(disposable);
     }
 
+    public LiveData<List<Product>> getProductsByCategory(int id) {
+        LiveData<List<Product>> liveData = new MutableLiveData<>();
+        return repository.getProductsByCategory(id, disposable);
+    }
 
 
     public LiveData<Product> getDetails(int id) {
         LiveData<Product> liveData = new MutableLiveData<>();
-        return Repository.getInstance().getProduct(id, disposable);
+        return repository.getProduct(id, disposable);
     }
 
 
     public LiveData<List<Image>> getImages(int id) {
         LiveData<List<Image>> liveData = new MutableLiveData<>();
-        return Repository.getInstance().getImages(id, disposable);
+        return repository.getImages(id, disposable);
     }
 
 

@@ -18,11 +18,15 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCommodityMainBinding;
+import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.CommentsAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
+import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 import java.util.List;
 
@@ -43,7 +47,7 @@ public class CommodityMainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_commodity_main, container, false);
-        viewModel = new ViewModelProvider(this).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
         return binding.getRoot();
     }
 
@@ -60,6 +64,8 @@ public class CommodityMainFragment extends Fragment {
         binding.detailsCommentsRecyclerView.setAdapter(commentsAdapter);
         binding.detailsCommentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()
                 , LinearLayoutManager.HORIZONTAL, false));
+
+        binding.setMainActivityViewModel(new ViewModelProvider(requireActivity(), new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class));
 
 
         viewModel.getProduct(id).observe(getViewLifecycleOwner(), product -> {
@@ -86,8 +92,8 @@ public class CommodityMainFragment extends Fragment {
 
     public class CommodityMainEventListener {
 
-        public void onAddToCart(View view, Product product) {
-
+        public void onAddToCart(View view, Product product, MainActivityViewModel viewModel) {
+            viewModel.addCartItem(new CartItemModel(0,product.getName(), product.getImageUrl(), product.getPrice(),"1"));
         }
 
         public void onSeeSpecifications(View view, Product product) {
@@ -109,6 +115,7 @@ public class CommodityMainFragment extends Fragment {
                     );
 
         }
+
 
     }
 

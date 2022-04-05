@@ -21,7 +21,9 @@ import com.example.onlineshop.databinding.FragmentProductsCategoryBinding;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.utils.adapters.GroupsAdapter;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 import java.util.List;
 
@@ -49,7 +51,7 @@ public class ProductsGroupCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_products_category, container, false);
-        this.viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        this.viewModel = new ViewModelProvider(this,new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
         adapter = new GroupsAdapter(viewModel, getContext());
         binding.groupsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.groupsRecyclerView.setAdapter(adapter);

@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.Attribute;
+import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
@@ -32,30 +33,58 @@ public class Repository {
 
     private static Repository repository = null;
     public static final String TAG = "repository";
+    private final Context context;
 
-    public Repository() {
+    private static AppDatabase databaseInstance;
+
+    public Repository(Context context) {
+        this.context = context;
+        databaseInstance = AppDatabase.getInstance(context);
 
     }
 
     //Context context;
-    public static final Repository getInstance() {
+    public static final Repository getInstance(Context context) {
         if (repository == null) {
-            repository = new Repository();
+            repository = new Repository(context);
         }
-
-
         return repository;
 
     }
-//
+
+    public LiveData<List<CartItemModel>> getCartItems() {
+
+
+        return databaseInstance.itemCartDao().getItems();
+
+
+    }
+
+    public void addCartItems(CartItemModel itemModel) {
+
+        databaseInstance.itemCartDao().insertItem(itemModel);
+
+
+    }
+
+    public void updateCartItems(CartItemModel itemModel) {
+
+        databaseInstance.itemCartDao().updateItem(itemModel);
+
+    }
+
+    public void deleteCartItem(CartItemModel itemModel) {
+
+        databaseInstance.itemCartDao().deleteItem(itemModel);
+
+    }
+
+
 //    public static final Repository getInstance(Context context) {
 //        if (repository == null) {
 //            repository = new Repository();
 //        }
-//
-//
 //        return repository;
-//
 //    }
 
     public String getUserNumber(Context context) {

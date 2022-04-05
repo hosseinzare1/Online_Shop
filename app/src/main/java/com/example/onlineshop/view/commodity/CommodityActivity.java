@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityCommodityBinding;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 
 public class CommodityActivity extends AppCompatActivity {
 
@@ -32,7 +33,7 @@ public class CommodityActivity extends AppCompatActivity {
 
         navController.setGraph(R.navigation.commodity_activity_navigation,bundle);
 
-        viewModel = new ViewModelProvider(this).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getApplicationContext())).get(CommodityActivityViewModel.class);
 
 
 

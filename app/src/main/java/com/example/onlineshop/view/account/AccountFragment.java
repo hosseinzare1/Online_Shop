@@ -19,7 +19,9 @@ import androidx.navigation.Navigation;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAccountBinding;
 import com.example.onlineshop.model.Account;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 
 public class AccountFragment extends Fragment {
@@ -47,7 +49,7 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
 
 
         SharedPreferences sharedPreferences

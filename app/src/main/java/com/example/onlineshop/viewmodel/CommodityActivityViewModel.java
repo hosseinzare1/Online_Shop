@@ -1,5 +1,7 @@
 package com.example.onlineshop.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,38 +19,46 @@ import retrofit2.Response;
 
 public class CommodityActivityViewModel extends ViewModel {
 
+    private final Context context;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+    Repository repository;
+
+    public CommodityActivityViewModel(Context context) {
+        this.context = context;
+        repository = new Repository(context);
+    }
 
     @Override
     protected void onCleared() {
         super.onCleared();
         compositeDisposable.clear();
+
     }
 
     public LiveData<Product> getProduct(int id) {
 
-        return Repository.getInstance().getProduct(id, compositeDisposable);
+        return repository.getProduct(id, compositeDisposable);
 
     }
 
     public LiveData<List<Image>> getImages(int id) {
         LiveData<List<Image>> liveData = new MutableLiveData<>();
-        return Repository.getInstance().getImages(id, compositeDisposable);
+        return repository.getImages(id, compositeDisposable);
     }
 
     public LiveData<List<Comment>> getComments(int id) {
 
-        return Repository.getInstance().getComments(id, compositeDisposable);
+        return repository.getComments(id, compositeDisposable);
     }
 
     public LiveData<String> submitComment(Comment comment) {
 
-        return Repository.getInstance().submitComment(comment, compositeDisposable);
+        return repository.submitComment(comment, compositeDisposable);
     }
 
     public LiveData<List<Attribute>> getAttributes(int id) {
 
-        return Repository.getInstance().getProductAttributes(id, compositeDisposable);
+        return repository.getProductAttributes(id, compositeDisposable);
     }
 
 }

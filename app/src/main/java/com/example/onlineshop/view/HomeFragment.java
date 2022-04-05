@@ -22,7 +22,9 @@ import com.example.onlineshop.databinding.FragmentHomeBinding;
 import com.example.onlineshop.utils.adapters.HorizontalProductsAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 
@@ -63,7 +65,7 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(this,new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
 
 
         binding.newsViewPager.setAdapter(imageSliderAdapter);

@@ -19,7 +19,9 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCartBinding;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.utils.adapters.CartAdapter;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
         // Inflate the layout for this fragment
         recyclerView = binding.cartRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

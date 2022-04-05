@@ -20,6 +20,7 @@ import com.example.onlineshop.databinding.FragmentAttributesBinding;
 import com.example.onlineshop.model.Attribute;
 import com.example.onlineshop.utils.adapters.AttributesAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 
 import java.util.List;
 
@@ -56,14 +57,14 @@ public class AttributesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
         adapter = new AttributesAdapter();
         args = AttributesFragmentArgs.fromBundle(getArguments());
         productID = args.getProductId();
         binding.specificationsRecyclerView.setAdapter(adapter);
         binding.specificationsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        viewModel.getAttributes(productID).observe(this,
+        viewModel.getAttributes(productID).observe(getViewLifecycleOwner(),
                 attributes -> {
                     adapter.setAttributes(attributes);
                     Log.i(TAG, "onViewCreated:a "+attributes.get(0).getAttribute());

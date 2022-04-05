@@ -22,6 +22,7 @@ import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.User;
 import com.example.onlineshop.utils.Repository;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 
 import retrofit2.Response;
 
@@ -39,8 +40,11 @@ public class WriteCommentFragment extends DialogFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_write_comments, container, false);
         args = WriteCommentFragmentArgs.fromBundle(getArguments());
         int productID = args.getProductID();
-        String userNumber = Repository.getInstance().getUserNumber(getContext());
-        String userName = Repository.getInstance().getUserName(getContext());
+
+        Repository repository=  new Repository(getContext());
+
+        String userNumber = repository.getUserNumber(getContext());
+        String userName = repository.getUserName(getContext());
 
         Comment comment = new Comment();
 
@@ -57,7 +61,7 @@ public class WriteCommentFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
 
     }
 

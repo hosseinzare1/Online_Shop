@@ -20,7 +20,9 @@ import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
         eventListener = new ProductDetailsEventListener();
 
         binding.setEventListener(eventListener);
@@ -75,7 +77,7 @@ public class ProductDetailsFragment extends Fragment {
         public void onAddToCart(View view, Product model, MainActivityViewModel viewModel, String imageUrl) {
             Log.i(TAG, "onAddToCart 1 : "+model.getName());
             Log.i(TAG, "onAddToCart 2 : "+model.getPrice());
-            viewModel.addCartItem(new CartItemModel(model.getName(),imageUrl,model.getPrice()));
+            viewModel.addCartItem(new CartItemModel(0,model.getName(),imageUrl,model.getPrice(),"1"));
         }
 
     }

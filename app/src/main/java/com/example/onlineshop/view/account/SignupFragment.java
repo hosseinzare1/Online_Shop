@@ -24,6 +24,7 @@ import com.example.onlineshop.model.User;
 import com.example.onlineshop.view.MainActivity;
 import com.example.onlineshop.view.account.Login_Signup_Activity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
+import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;
 
 public class SignupFragment extends Fragment {
 
@@ -45,7 +46,7 @@ public class SignupFragment extends Fragment {
 //        User user = new User();
         this.context = getActivity();
 
-        viewModel = new ViewModelProvider(this).get(LoginSignupViewModel.class);
+        viewModel = new ViewModelProvider(this,new LoginSignupViewModelFactory(getActivity().getApplication())).get(LoginSignupViewModel.class);
 
 //
 //        binding.setModel(user);

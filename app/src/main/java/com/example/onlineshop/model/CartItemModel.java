@@ -1,10 +1,37 @@
 package com.example.onlineshop.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class CartItemModel {
+
+    @PrimaryKey(autoGenerate = true)
+    int id;
+
+
+
    String name;
      String imageUrl;
      String price = "1";
     String count="1";
+
+    public CartItemModel(int id, String name, String imageUrl, String price, String count) {
+        this.id = id;
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.count = count;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -34,11 +61,7 @@ public class CartItemModel {
         this.count = count;
     }
 
-    public CartItemModel(String name, String imageUrl, String price) {
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.price = price;
-    }
+
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;

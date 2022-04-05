@@ -11,6 +11,9 @@
             type="com.example.onlineshop.model.Product" />
 
         <variable
+            name="mainActivityViewModel"
+            type="com.example.onlineshop.viewmodel.MainActivityViewModel" />
+        <variable
             name="eventListener"
             type="com.example.onlineshop.view.commodity.CommodityMainFragment.CommodityMainEventListener" />
 
@@ -253,7 +256,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:onClick="@{(view)->eventListener.onAddToCart(view,product_model)}"
+                android:onClick="@{(view)->eventListener.onAddToCart(view,product_model,mainActivityViewModel)}"
                 android:text="افزودن به سبد خرید"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

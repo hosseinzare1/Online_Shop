@@ -22,7 +22,9 @@ import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.ProductsListAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
+import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 import java.util.List;
 
@@ -69,7 +71,7 @@ public class ProductListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity(),new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
 
 
         //if id==0 , -> search

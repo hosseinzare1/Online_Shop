@@ -1,5 +1,7 @@
 package com.example.onlineshop.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -20,6 +22,11 @@ public class LoginSignupViewModel extends ViewModel {
     public MutableLiveData<User> signInUserMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<User> singUpUserMutableLiveData = new MutableLiveData<>();
 
+    Context context;
+
+    public LoginSignupViewModel(Context context) {
+        this.context = context;
+    }
 
 
     public void onSignInClicked() {
@@ -35,11 +42,11 @@ public class LoginSignupViewModel extends ViewModel {
     }
 
     public LiveData<Integer> login(String number, String password) {
-        return Repository.getInstance().login(number, password, disposable);
+        return Repository.getInstance(context).login(number, password, disposable);
     }
 
     public LiveData<Integer> signup(String number, String password, String name) {
-        return Repository.getInstance().signup(number, password, name, disposable);
+        return Repository.getInstance(context).signup(number, password, name, disposable);
     }
 
     @Override
