@@ -16,21 +16,26 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="1dp"
+        app:cardCornerRadius="8dp"
         android:padding="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="300dp"
-            android:layout_height="250dp">
+            android:layout_width="250dp"
+            android:layout_height="200dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:hint="comment"
+                android:lines="3"
+                android:nestedScrollingEnabled="true"
                 android:text="@{model.text}"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -42,8 +47,8 @@
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:numStars="5"
                 android:rating="@{model.rating}"
                 android:stepSize="1"
@@ -59,6 +64,7 @@
                 android:hint="user name"
                 android:text="@{model.user_name}"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

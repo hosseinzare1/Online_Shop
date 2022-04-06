@@ -39,13 +39,14 @@ public interface API {
     @GET("get_products_by_category/{id}")
     Single<List<Product>> getProductsByCategory(@Path("id") int categoryID);
 
+    @GET("get_same_products/{id}")
+    Single<List<Product>> getSameProducts(@Path("id") int productID);
 
     @GET("get_product/{id}")
     Single<Product> getProduct(@Path("id") int ProductID);
 
     @GET("get_product_attributes/{id}")
     Single<List<Attribute>> getProductAttributes(@Path("id") int ProductID);
-
 
 
     @GET("get_images/{id}")

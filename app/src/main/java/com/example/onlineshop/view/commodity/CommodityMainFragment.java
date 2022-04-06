@@ -23,6 +23,7 @@ import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.CommentsAdapter;
+import com.example.onlineshop.utils.adapters.HorizontalProductsAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
@@ -38,6 +39,8 @@ public class CommodityMainFragment extends Fragment {
 
     ImageSliderAdapter imageSliderAdapter;
     CommentsAdapter commentsAdapter;
+
+    HorizontalProductsAdapter sameProductsAdapter;
     int id;
     private String TAG = "CommodityMainFragment";
 
@@ -64,7 +67,11 @@ public class CommodityMainFragment extends Fragment {
         commentsAdapter = new CommentsAdapter();
         binding.detailsCommentsRecyclerView.setAdapter(commentsAdapter);
         binding.detailsCommentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()
-                , LinearLayoutManager.HORIZONTAL, false));
+                , LinearLayoutManager.HORIZONTAL, true));
+
+        sameProductsAdapter = new HorizontalProductsAdapter();
+        binding.detailsSameCommodityRecyclerView.setAdapter(sameProductsAdapter);
+        binding.detailsSameCommodityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
 
         binding.setMainActivityViewModel(new ViewModelProvider(requireActivity(), new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class));
 
@@ -82,6 +89,10 @@ public class CommodityMainFragment extends Fragment {
 
         viewModel.getComments(id).observe(getViewLifecycleOwner(), comments -> {
             commentsAdapter.setComments(comments);
+        });
+
+        viewModel.getSameProducts(id).observe(getViewLifecycleOwner(),products -> {
+            sameProductsAdapter.setItems(products);
         });
 
     }

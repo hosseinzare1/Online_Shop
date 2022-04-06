@@ -22,7 +22,10 @@ import com.example.onlineshop.model.User;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -319,6 +322,33 @@ public class Repository {
 
                     }
                 });
+
+        return liveData;
+
+
+    }
+
+    public LiveData<List<Product>> getSameProducts(int id, CompositeDisposable disposable) {
+        MutableLiveData<List<Product>> liveData = new MutableLiveData<>();
+
+        RetrofitInstance.getAPI().getSameProducts(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Product>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Product> products) {
+                        liveData.setValue(products);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
 
         return liveData;
 

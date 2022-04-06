@@ -36,8 +36,11 @@ public class CommodityActivityViewModel extends ViewModel {
 
     }
 
+    public LiveData<List<Product>> getSameProducts(int id) {
+        return repository.getSameProducts(id, compositeDisposable);
+    }
+
     public LiveData<List<Image>> getImages(int id) {
-        LiveData<List<Image>> liveData = new MutableLiveData<>();
         return repository.getImages(id, compositeDisposable);
     }
 
