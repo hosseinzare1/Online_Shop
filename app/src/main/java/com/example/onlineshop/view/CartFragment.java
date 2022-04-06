@@ -64,10 +64,10 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
             }
         });
 
-        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), new Observer<Double>() {
+        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), new Observer<Long>() {
             @Override
-            public void onChanged(Double aDouble) {
-                binding.cartPriceTextView.setText(String.valueOf(aDouble));
+            public void onChanged(Long aLong) {
+                binding.setTotalPrice(aLong);
             }
         });
 

@@ -14,10 +14,16 @@ public class Product {
     private String name;
     private String description;
     private String imageUrl;
-    private double price;
+    private long price;
+    private int discount;
 
+    public int getDiscount() {
+        return discount;
+    }
 
-
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
 
     public String getName() {
         return name;
@@ -44,11 +50,11 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public double getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }

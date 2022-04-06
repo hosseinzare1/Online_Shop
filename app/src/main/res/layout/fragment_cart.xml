@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 <data>
 
+<variable
+    name="totalPrice"
+    type="Long" />
 
 </data>
 
@@ -51,21 +54,12 @@
                     android:id="@+id/cartPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{String.format(`%,d`,totalPrice).concat(` تومان `)}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                    app:layout_constraintStart_toEndOf="@+id/textView6"
-                    app:layout_constraintTop_toTopOf="@+id/textView6"
-                    app:layout_constraintVertical_bias="0.558" />
+                    tools:layout_editor_absoluteX="29dp"
+                    tools:layout_editor_absoluteY="18dp" />
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="تومان"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView

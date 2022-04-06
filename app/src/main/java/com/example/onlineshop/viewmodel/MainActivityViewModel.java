@@ -87,15 +87,15 @@ public class MainActivityViewModel extends ViewModel {
 
     }
 
-    public LiveData<Double> getTotalPrice() {
+    public LiveData<Long> getTotalPrice() {
 
-        MutableLiveData<Double> totalPriceLiveData = new MutableLiveData<>();
+        MutableLiveData<Long> totalPriceLiveData = new MutableLiveData<>();
 
         repository.getCartItems().observe((LifecycleOwner) context, new Observer<List<CartItemModel>>() {
             @Override
             public void onChanged(List<CartItemModel> cartItemModels) {
 
-                Double totalPrice = 0.0;
+                long totalPrice = 0;
                 for (CartItemModel item : cartItemModels
                 ) {
                     totalPrice += item.getCount() * item.getPrice();

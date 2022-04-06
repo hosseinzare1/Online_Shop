@@ -1,5 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -70,6 +71,9 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
             binding.getRoot().setOnClickListener(view -> onClickListener.OnItemClickListener(
                     Integer.parseInt(homeItems.get(getAdapterPosition()).getId())));
 
+            binding.originalPriceItemCard.setPaintFlags(
+                    binding.originalPriceItemCard.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG
+            );
 
         }
     }

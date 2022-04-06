@@ -1,5 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -62,8 +63,11 @@ public class HorizontalProductsAdapter extends RecyclerView.Adapter<HorizontalPr
         public HorizontalViewHolder(@NonNull HorizontalItemCardBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            if (onClickListener != null  ){            binding.getRoot().setOnClickListener((view -> onClickListener.onProductClickListener(Integer.parseInt(binding.getModel().getId()))));
+            if (onClickListener != null) {
+                binding.getRoot().setOnClickListener((view -> onClickListener.onProductClickListener(Integer.parseInt(binding.getModel().getId()))));
             }
+            binding.originalPriceHorizontalItem.setPaintFlags(
+                    binding.originalPriceHorizontalItem.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
 

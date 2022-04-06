@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.onlineshop.model.CartItemModel;
 
-@Database(entities = {CartItemModel.class}, version = 5)
+@Database(entities = {CartItemModel.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CartDAO itemCartDao();
 

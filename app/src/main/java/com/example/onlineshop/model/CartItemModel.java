@@ -13,30 +13,40 @@ public class CartItemModel {
 
     String name;
     String imageUrl;
-    double price = 1;
-    double count = 1;
+    public long price = 1;
+    public int count = 1;
+    int discount=1;
 
-    public CartItemModel(int id, String name, String imageUrl, double price, double count) {
+    public CartItemModel(int id, String name, String imageUrl, long price, int count, int discount) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.price = price;
         this.count = count;
+        this.discount = discount;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
-    public void setCount(double count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public double getPrice() {
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public long getPrice() {
         return price;
     }
 
-    public double getCount() {
+    public long getCount() {
         return count;
     }
 

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="model"
             type="com.example.onlineshop.model.Product" />
@@ -14,8 +17,8 @@
         android:layout_width="150dp"
         android:layout_height="250dp"
         android:layout_margin="4dp"
-        app:cardCornerRadius="8dp"
-        android:elevation="1dp">
+        android:elevation="1dp"
+        app:cardCornerRadius="8dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,14 +40,28 @@
                 android:id="@+id/price_horizontal_item_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:hint="Price"
-                android:text="@{String.valueOf(model.price)}"
+                android:text="@{String.format(`%,d`,(model.discount> 0)? model.price*(100-model.discount)/100 : model.price ).concat(` تومان `)}"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_horizontal_item_card" />
+
+
+            <TextView
+                android:id="@+id/original_price_horizontal_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="org_price"
+                android:text="@{String.format(`%,d`,model.price)}"
+                android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="@+id/price_horizontal_item_card"
+                app:layout_constraintStart_toStartOf="@+id/price_horizontal_item_card"
+                app:layout_constraintTop_toBottomOf="@+id/price_horizontal_item_card" />
 
             <TextView
                 android:id="@+id/discount_horizontal_item_card"
@@ -53,9 +70,11 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:hint="50%"
+                android:text="@{String.valueOf(model.discount)+'%'}"
                 android:textAlignment="textEnd"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="12sp"
+                android:visibility="@{(model.discount>0 ?  View.VISIBLE : View.GONE)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/price_horizontal_item_card"
                 app:layout_constraintTop_toBottomOf="@+id/title_horizontal_item_card" />
@@ -76,6 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView_Horizontal_item" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

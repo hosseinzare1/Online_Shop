@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,7 +48,7 @@ public class CommodityMainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_commodity_main, container, false);
-        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(this, new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
         return binding.getRoot();
     }
 
@@ -67,25 +68,20 @@ public class CommodityMainFragment extends Fragment {
 
         binding.setMainActivityViewModel(new ViewModelProvider(requireActivity(), new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class));
 
+        binding.orgPriceCommodityMain.setPaintFlags(
+                binding.orgPriceCommodityMain.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
+        );
 
         viewModel.getProduct(id).observe(getViewLifecycleOwner(), product -> {
-            binding.setProductModel(product);
-//            binding.priceTextview.setText(product.getPrice());
-
+            binding.setModel(product);
         });
-
 
         viewModel.getImages(id).observe(getViewLifecycleOwner(), images -> {
             imageSliderAdapter.setImages(images);
-
         });
 
         viewModel.getComments(id).observe(getViewLifecycleOwner(), comments -> {
-
             commentsAdapter.setComments(comments);
-//            Log.i(TAG, "onViewCreated: " + comments.get(0).getText());
-
-
         });
 
     }
@@ -93,7 +89,7 @@ public class CommodityMainFragment extends Fragment {
     public class CommodityMainEventListener {
 
         public void onAddToCart(View view, Product product, MainActivityViewModel viewModel) {
-            viewModel.addCartItem(new CartItemModel(0,product.getName(), product.getImageUrl(), product.getPrice(),1));
+            viewModel.addCartItem(new CartItemModel(0, product.getName(), product.getImageUrl(), product.getPrice(), 1, product.getDiscount()));
         }
 
         public void onSeeSpecifications(View view, Product product) {
@@ -102,7 +98,6 @@ public class CommodityMainFragment extends Fragment {
         }
 
         public void onSeeDescriptions(View view, Product product) {
-            Log.i(TAG, "onSeeDescriptions: on seeDescription ");
             Navigation.findNavController(view).navigate(
                     CommodityMainFragmentDirections.actionCommodityDetailsFragmentToDescriptionsFragment(product.getDescription()));
         }

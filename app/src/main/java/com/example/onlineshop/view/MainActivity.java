@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         Repository repository = new Repository(getApplicationContext());
 
-
-        CartItemModel cartItemModel1 = new CartItemModel(0, "ایتم جدید 1", "123456", 12500, 2);
-        CartItemModel cartItemModel2 = new CartItemModel(0, "ایتم جدید 2", "123456", 125000, 2);
+//
+//        CartItemModel cartItemModel1 = new CartItemModel(0, "ایتم جدید 1", "123456", 12500, 2);
+//        CartItemModel cartItemModel2 = new CartItemModel(0, "ایتم جدید 2", "123456", 125000, 2);
 
 
         repository.getCartItems().observe(this, new Observer<List<CartItemModel>>() {

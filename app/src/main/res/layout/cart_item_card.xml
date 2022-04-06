@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="model"
-    type="com.example.onlineshop.model.CartItemModel" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.example.onlineshop.model.CartItemModel" />
 
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp">
+        android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,40 +29,38 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_margin="8dp"
                 android:elevation="1dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
 
                 <TextView
+                    android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="قیمت:"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:hint="discount"
+                    android:text="@{String.format(`%,d`,model.price*model.discount/100).concat(` تومان تخفیف `)}"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="12sp"
+                    android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toEndOf="@+id/cartItemPriceTextView"
+                    app:layout_constraintStart_toStartOf="@+id/cartItemPriceTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/cartItemPriceTextView" />
 
                 <TextView
                     android:id="@+id/cartItemPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+
+                    android:hint="price"
+                    android:text="@{String.format(`%,d`,model.price).concat(` تومان `)}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                    app:layout_constraintStart_toEndOf="@+id/textView6"
-                    app:layout_constraintTop_toTopOf="@+id/textView6"
-                    app:layout_constraintVertical_bias="0.558"
-                    android:text="@{String.valueOf(model.price)}"/>
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="تومان"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
@@ -67,6 +68,7 @@
                 setImage="@{model.imageUrl}"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -77,18 +79,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:hint="title"
+                android:text="@{model.name}"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@{model.name}"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/counterLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3"
-                android:padding="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/counter_background"
+                android:padding="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                 <Button
                     android:id="@+id/addButton"
@@ -105,35 +112,39 @@
                     android:id="@+id/minesButton"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/ic_baseline_remove_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
                     app:layout_constraintEnd_toStartOf="@+id/countEditText"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/deleteButton"
+                    app:layout_constraintTop_toTopOf="@+id/deleteButton" />
 
                 <TextView
                     android:id="@+id/countEditText"
-                    android:layout_width="64dp"
+                    android:layout_width="32dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="co"
                     android:text="@{String.valueOf(model.count)}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/minesButton"
-                    app:layout_constraintEnd_toStartOf="@+id/addButton"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/minesButton"
                     app:layout_constraintTop_toTopOf="@+id/minesButton" />
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/ic_baseline_delete_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <Button
-                android:id="@+id/deleteButton"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/ic_baseline_delete_24"
-                app:layout_constraintBottom_toBottomOf="@+id/counterLayout"
-                app:layout_constraintEnd_toStartOf="@+id/counterLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/counterLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
