@@ -3,7 +3,6 @@ package com.example.onlineshop.viewmodel;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.onlineshop.model.Attribute;
@@ -15,7 +14,6 @@ import com.example.onlineshop.utils.Repository;
 import java.util.List;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import retrofit2.Response;
 
 public class CommodityActivityViewModel extends ViewModel {
 
@@ -29,6 +27,9 @@ public class CommodityActivityViewModel extends ViewModel {
     }
 
 
+public void addHistoryItem(Product product){
+        repository.addHistoryItem(product);
+}
 
     public LiveData<Product> getProduct(int id) {
 

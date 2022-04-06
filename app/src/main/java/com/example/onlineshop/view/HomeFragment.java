@@ -121,11 +121,13 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
             Log.i(TAG, "onChanged 2 :" + homeItems.get(2).getName());
 
         });
-        viewModel.getAllItems().observe(getViewLifecycleOwner(), homeItems -> {
-            historyListAdapter.setItems(homeItems);
-            Log.i(TAG, "onChanged 3 :" + homeItems.get(2).getName());
+//        viewModel.getAllItems().observe(getViewLifecycleOwner(), homeItems -> {
+//            historyListAdapter.setItems(homeItems);
+//            Log.i(TAG, "onChanged 3 :" + homeItems.get(2).getName());
+//
+//        });
 
-        });
+        historyListAdapter.setItems(viewModel.getHistory());
 
 
     }

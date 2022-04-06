@@ -7,7 +7,8 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
 
-public class Account extends BaseObservable implements Parcelable {
+
+public class Account extends BaseObservable  {
     private String name;
     private String number;
     private String password;
@@ -65,13 +66,5 @@ public class Account extends BaseObservable implements Parcelable {
         notifyPropertyChanged(BR.email);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
 }

@@ -60,6 +60,45 @@ public class Repository {
 
     }
 
+    public List<Product> getHistory(){
+        return databaseInstance.historyDAO().getItems();
+    }
+
+    public void addHistoryItem(Product product){
+
+        databaseInstance.historyDAO().deleteItem(product.getName());
+
+        if (databaseInstance.historyDAO().getItems().size()>10){
+            databaseInstance.historyDAO().deleteFirstItem();
+        }
+
+        databaseInstance.historyDAO().insertItem(product);
+
+
+    }
+
+    //
+//    public HashSet<String> getHistory() {
+//        Set<String> history;
+//        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.history_file_key), Context.MODE_PRIVATE);
+//        history = sharedPreferences.getStringSet(context.getString(R.string.history_array_key), null);
+//
+//        return (HashSet<String>) history;
+//    }
+//
+//    public void addHistoryItem(String itemID) {
+//        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.history_file_key), Context.MODE_PRIVATE);
+//        Set<String> history = new HashSet<>(sharedPreferences.getStringSet(context.getString(R.string.history_array_key), new HashSet<>()));
+//        history.remove(itemID);
+//        if (history.size() < 14) {
+//            history.add(itemID);
+//        }
+//
+//        sharedPreferences.edit().putStringSet(context.getString(R.string.history_array_key), history).apply();
+//
+//
+//    }
+
     public LiveData<List<CartItemModel>> getCartItems() {
         return databaseInstance.itemCartDao().getItems();
     }

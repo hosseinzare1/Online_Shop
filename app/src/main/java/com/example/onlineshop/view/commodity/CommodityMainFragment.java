@@ -60,6 +60,7 @@ public class CommodityMainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         id = getArguments().getInt("id");
 
+
         imageSliderAdapter = new ImageSliderAdapter();
         binding.detailsImagesViewPager.setAdapter(imageSliderAdapter);
         binding.setEventListener(new CommodityMainEventListener());
@@ -81,6 +82,8 @@ public class CommodityMainFragment extends Fragment {
 
         viewModel.getProduct(id).observe(getViewLifecycleOwner(), product -> {
             binding.setModel(product);
+            viewModel.addHistoryItem(product);
+
         });
 
         viewModel.getImages(id).observe(getViewLifecycleOwner(), images -> {

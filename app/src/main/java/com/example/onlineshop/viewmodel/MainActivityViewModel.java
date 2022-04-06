@@ -127,6 +127,11 @@ public class MainActivityViewModel extends ViewModel {
 
     }
 
+    public List<Product> getHistory(){
+        return repository.getHistory();
+
+    }
+
     public LiveData<List<Product>> getAllItems() {
         LiveData<List<Product>> liveData = new MutableLiveData<>();
         return repository.getAll(disposable);
