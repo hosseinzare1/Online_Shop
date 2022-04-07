@@ -40,7 +40,8 @@
         android:id="@+id/productDetailsFragment"
         android:name="com.example.onlineshop.view.ProductDetailsFragment"
         android:label="ProductDetailsFragment" >
-        <argument android:name="id" />
+        <argument android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/editAccountFragment"

@@ -60,15 +60,15 @@ public class Repository {
 
     }
 
-    public List<Product> getHistory(){
+    public List<Product> getHistory() {
         return databaseInstance.historyDAO().getItems();
     }
 
-    public void addHistoryItem(Product product){
+    public void addHistoryItem(Product product) {
 
         databaseInstance.historyDAO().deleteItem(product.getName());
 
-        if (databaseInstance.historyDAO().getItems().size()>10){
+        if (databaseInstance.historyDAO().getItems().size() > 9) {
             databaseInstance.historyDAO().deleteFirstItem();
         }
 
@@ -405,7 +405,6 @@ public class Repository {
                 .subscribe(new SingleObserver<Product>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                         disposable.add(d);
                     }
 
@@ -505,6 +504,7 @@ public class Repository {
 
     public LiveData<Integer> login(String number, String password, CompositeDisposable disposable) {
         MutableLiveData<Integer> loginLiveData = new MutableLiveData<>();
+        Log.i(TAG, "onSuccess: ok login");
 
 
         RetrofitInstance.getAPI().login(number, password)
@@ -519,11 +519,13 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         loginLiveData.setValue(jsonObjectResponse.code());
+                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body().toString());
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError: " + e.getMessage());
 
                     }
                 });

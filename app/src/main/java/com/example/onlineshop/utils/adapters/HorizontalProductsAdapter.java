@@ -64,7 +64,7 @@ public class HorizontalProductsAdapter extends RecyclerView.Adapter<HorizontalPr
             super(binding.getRoot());
             this.binding = binding;
             if (onClickListener != null) {
-                binding.getRoot().setOnClickListener((view -> onClickListener.onProductClickListener(Integer.parseInt(binding.getModel().getId()))));
+                binding.getRoot().setOnClickListener((view -> onClickListener.onProductClickListener(binding.getModel().getId())));
             }
             binding.originalPriceHorizontalItem.setPaintFlags(
                     binding.originalPriceHorizontalItem.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

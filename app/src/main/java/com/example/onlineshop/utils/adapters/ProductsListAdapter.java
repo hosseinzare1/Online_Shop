@@ -6,11 +6,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ItemCardBinding;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.view.ProductListFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,12 +66,12 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
             super(binding.getRoot());
             this.binding = binding;
 
-//            binding.getRoot().setOnClickListener(view ->
-//                    Navigation.findNavController(view).navigate(ProductListFragmentDirections.
-//                    actionProductListFragmentToProductDetailsFragment(homeItems.get(getAdapterPosition()).getId())));
+            binding.getRoot().setOnClickListener(view ->
+                    Navigation.findNavController(view).navigate(ProductListFragmentDirections.
+                    actionProductListFragmentToProductDetailsFragment(homeItems.get(getAdapterPosition()).getId())));
 
             binding.getRoot().setOnClickListener(view -> onClickListener.OnItemClickListener(
-                    Integer.parseInt(homeItems.get(getAdapterPosition()).getId())));
+                    homeItems.get(getAdapterPosition()).getId()));
 
             binding.originalPriceItemCard.setPaintFlags(
                     binding.originalPriceItemCard.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG

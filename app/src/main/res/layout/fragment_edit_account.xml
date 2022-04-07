@@ -8,10 +8,11 @@
         <variable
             name="model"
             type="com.example.onlineshop.model.Account" />
-        
+
         <variable
             name="viewModel"
             type="com.example.onlineshop.viewmodel.MainActivityViewModel" />
+
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.account.EditAccountFragment.EditAccountEventListener" />
@@ -150,9 +151,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:text="ذخیره"
             android:onClick="@{(view)-> eventListener.onSaveClick(view,model,viewModel)}"
-            
+            android:text="ذخیره"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cancelButton"
@@ -165,8 +166,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:text="لغو"
             android:onClick="@{(view)-> eventListener.onCancelClick(view)}"
+            android:text="لغو"
             app:layout_constraintEnd_toStartOf="@+id/SaveButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

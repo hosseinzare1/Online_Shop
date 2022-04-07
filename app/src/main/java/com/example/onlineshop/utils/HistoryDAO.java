@@ -17,7 +17,7 @@ public interface HistoryDAO {
     @Query("DELETE FROM Product WHERE name = :productName")
     public void deleteItem(String productName);
 
-    @Query("DELETE FROM Product LIMIT 1")
+    @Query("DELETE FROM Product WHERE id = (select id from Product order by id limit 1)")
     public void deleteFirstItem();
 
     @Query("SELECT * FROM Product")

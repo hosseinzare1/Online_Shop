@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this,new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(this, new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
 
 
         binding.newsViewPager.setAdapter(imageSliderAdapter);
@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
         });
 
         binding.historyRecyclerView.setAdapter(historyListAdapter);
-        binding.historyRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false));
+        binding.historyRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, true));
         historyListAdapter.setOnClickListener(id -> {
 //            Intent intent = new Intent(getContext(), CommodityActivity.class);
 //

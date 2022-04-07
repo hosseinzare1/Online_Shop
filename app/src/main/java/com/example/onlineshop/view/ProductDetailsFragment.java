@@ -55,7 +55,7 @@ public class ProductDetailsFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.detailsViewPager.setAdapter(adapter);
         //TODO convert int to string
-        viewModel.getDetails(Integer.parseInt(args.getId())).observe(getViewLifecycleOwner(), new Observer<Product>() {
+        viewModel.getDetails(args.getId()).observe(getViewLifecycleOwner(), new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
                 binding.setModel(product);
@@ -65,7 +65,7 @@ public class ProductDetailsFragment extends Fragment {
         Log.i(TAG, "onViewCreated: ");
 
         //TODO convert int to string
-        viewModel.getImages(Integer.parseInt(args.getId())).observe(getViewLifecycleOwner(), new Observer<List<Image>>() {
+        viewModel.getImages(args.getId()).observe(getViewLifecycleOwner(), new Observer<List<Image>>() {
             @Override
             public void onChanged(List<Image> images) {
                 adapter.setImages(images);

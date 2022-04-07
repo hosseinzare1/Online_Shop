@@ -7,13 +7,15 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
 
+import java.io.Serializable;
 
-public class Account extends BaseObservable  {
+public class Account extends BaseObservable implements Serializable {
     private String name;
     private String number;
     private String password;
     private String address;
     private String email;
+
 
     @Bindable
     public String getName() {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class LoginFragment extends Fragment {
 
     FragmentLoginBinding binding;
     Context context;
+    public static final String TAG = "LoginFragment";
 
     @Nullable
     @Override
@@ -56,6 +58,8 @@ public class LoginFragment extends Fragment {
         viewModel.signInUserMutableLiveData.observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
             public void onChanged(User user) {
+                Log.i(TAG, "onChanged: "+user.getNumber()+"  "+user.getPassword());
+
                 viewModel.login(user.getNumber(), user.getPassword()).observe((LifecycleOwner) context, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {

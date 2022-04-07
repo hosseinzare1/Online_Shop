@@ -82,7 +82,14 @@ public class CommodityMainFragment extends Fragment {
 
         viewModel.getProduct(id).observe(getViewLifecycleOwner(), product -> {
             binding.setModel(product);
-            viewModel.addHistoryItem(product);
+
+// create new object because id must be 0.
+            viewModel.addHistoryItem(new Product(id,0,
+                    product.getName(),
+                    product.getDescription(),
+                    product.getImageUrl(),
+                    product.getPrice(),
+                    product.getDiscount()));
 
         });
 
@@ -94,7 +101,7 @@ public class CommodityMainFragment extends Fragment {
             commentsAdapter.setComments(comments);
         });
 
-        viewModel.getSameProducts(id).observe(getViewLifecycleOwner(),products -> {
+        viewModel.getSameProducts(id).observe(getViewLifecycleOwner(), products -> {
             sameProductsAdapter.setItems(products);
         });
 
@@ -108,7 +115,7 @@ public class CommodityMainFragment extends Fragment {
 
         public void onSeeSpecifications(View view, Product product) {
             Navigation.findNavController(view).navigate(CommodityMainFragmentDirections.
-                    actionCommodityDetailsFragmentToAttributesFragment(Integer.parseInt(product.getId())));
+                    actionCommodityDetailsFragmentToAttributesFragment(product.getId()));
         }
 
         public void onSeeDescriptions(View view, Product product) {
@@ -120,7 +127,7 @@ public class CommodityMainFragment extends Fragment {
 
             Navigation.findNavController(view)
                     .navigate(
-                            CommodityMainFragmentDirections.actionCommodityDetailsFragmentToWriteCommentFragment(Integer.parseInt(product.getId()))
+                            CommodityMainFragmentDirections.actionCommodityDetailsFragmentToWriteCommentFragment(product.getId())
                     );
 
         }
