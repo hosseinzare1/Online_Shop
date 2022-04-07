@@ -117,40 +117,35 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public LiveData<Account> getAccountDetails(String number) {
-        LiveData<Account> liveData = new MutableLiveData<>();
 
-        liveData = repository.getAccountDetails(number, disposable);
-
-        //        Log.i(TAG, "getAccountDetails: "+liveData.getValue().getName());
-
-        return liveData;
+        return repository.getAccountDetails(number, disposable);
 
     }
 
-    public List<Product> getHistory(){
+    public List<Product> getHistory() {
         return repository.getHistory();
 
     }
 
     public LiveData<List<Product>> getAllItems() {
-        LiveData<List<Product>> liveData = new MutableLiveData<>();
         return repository.getAll(disposable);
     }
 
+    public LiveData<List<Product>> getSpecialDiscounts() {
+        return repository.getSpecialDiscounts(disposable);
+    }
+
     public LiveData<List<Product>> getProductsByCategory(int id) {
-        LiveData<List<Product>> liveData = new MutableLiveData<>();
         return repository.getProductsByCategory(id, disposable);
     }
 
 
     public LiveData<Product> getDetails(int id) {
-        LiveData<Product> liveData = new MutableLiveData<>();
         return repository.getProduct(id, disposable);
     }
 
 
     public LiveData<List<Image>> getImages(int id) {
-        LiveData<List<Image>> liveData = new MutableLiveData<>();
         return repository.getImages(id, disposable);
     }
 

@@ -72,14 +72,14 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
         binding.newsViewPagerIndicator.setViewPager(binding.newsViewPager);
 
         binding.discountsRecyclerView.setAdapter(discountsListAdapter);
-        binding.discountsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        binding.discountsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, true));
         discountsListAdapter.setOnClickListener(id -> {
-            Intent intent = new Intent(getContext(), CommodityActivity.class);
-
-            intent.putExtra("id", id);
-
-            startActivity(intent);
-
+//            Intent intent = new Intent(getContext(), CommodityActivity.class);
+//
+//            intent.putExtra("id", id);
+//
+//            startActivity(intent);
+            onProductClickListener(id);
         });
 
         binding.bestsellingRecyclerView.setAdapter(bestsellingListAdapter);
@@ -111,9 +111,9 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
         //TODO change images resource
         viewModel.getImages(1).observe(getViewLifecycleOwner(), images -> imageSliderAdapter.setImages(images));
 
-        viewModel.getAllItems().observe(getViewLifecycleOwner(), homeItems -> {
+        viewModel.getSpecialDiscounts().observe(getViewLifecycleOwner(), homeItems -> {
             discountsListAdapter.setItems(homeItems);
-            Log.i(TAG, "onChanged 1 :" + homeItems.get(2).getName());
+            Log.i(TAG, "onChanged discount :" + homeItems.get(1).getImageUrl());
 
         });
         viewModel.getAllItems().observe(getViewLifecycleOwner(), homeItems -> {

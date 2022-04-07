@@ -394,6 +394,30 @@ public class Repository {
 
     }
 
+    public LiveData<List<Product>> getSpecialDiscounts(CompositeDisposable disposable) {
+        MutableLiveData<List<Product>> liveData = new MutableLiveData<>();
+
+        RetrofitInstance.getAPI().GetSpecialDiscounts().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Product>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Product> products) {
+                        liveData.setValue(products);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+        return liveData;
+    }
+
     public LiveData<Product> getProduct(int id, CompositeDisposable disposable) {
         MutableLiveData<Product> liveData = new MutableLiveData<>();
 

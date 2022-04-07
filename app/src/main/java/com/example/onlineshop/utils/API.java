@@ -48,6 +48,8 @@ public interface API {
     @GET("get_product_attributes/{id}")
     Single<List<Attribute>> getProductAttributes(@Path("id") int ProductID);
 
+    @GET("get_special_discounts/")
+    Single<List<Product>> GetSpecialDiscounts();
 
     @GET("get_images/{id}")
     Single<List<Image>> getImages(@Path("id") int ProductId);
