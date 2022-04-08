@@ -2,6 +2,7 @@ package com.example.onlineshop.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -81,6 +82,7 @@ public class Product {
     public Product() {
     }
 
+    @Ignore
     public Product(int id,int historyDB_id, String name, String description, String imageUrl, long price, int discount) {
         this.id = id;
         this.historyDB_id = historyDB_id;

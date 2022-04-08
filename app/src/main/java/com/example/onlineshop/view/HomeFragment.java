@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(this, new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        if(getActivity() != null) viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
 
         binding.newsViewPager.setAdapter(imageSliderAdapter);

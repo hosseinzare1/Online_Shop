@@ -34,7 +34,7 @@ public interface API {
     Single<Response<JsonObject>> signup(@Field("name") String name, @Field("number") String number, @Field("password") String password);
 
 
-    @GET("getall/")
+    @GET("get_all/")
     Single<List<Product>> getAllItems();
 
     @GET("get_products_by_category/{id}")
@@ -83,8 +83,8 @@ public interface API {
     @GET("get_groups/")
     Single<List<Group>> getGroups();
 
-    @GET("get_categorys/{id}")
-    Single<List<Category>> getCategorys(@Path("id") int groupID);
+    @GET("get_categories/{id}")
+    Single<List<Category>> getCategories(@Path("id") int groupID);
 
     @GET("search_product/{search_text}")
     Single<List<Product>> searchProducts(@Path("search_text") String searchText);

@@ -10,21 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentProductDetailsBinding;
 import com.example.onlineshop.model.CartItemModel;
-import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
-import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
-
-import java.util.List;
 
 public class ProductDetailsFragment extends Fragment {
     FragmentProductDetailsBinding binding;
@@ -48,37 +42,26 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
+        if(getActivity() != null)  viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
         eventListener = new ProductDetailsEventListener();
 
         binding.setEventListener(eventListener);
         binding.setViewModel(viewModel);
         binding.detailsViewPager.setAdapter(adapter);
         //TODO convert int to string
-        viewModel.getDetails(args.getId()).observe(getViewLifecycleOwner(), new Observer<Product>() {
-            @Override
-            public void onChanged(Product product) {
-                binding.setModel(product);
-            }
-        });
+        viewModel.getDetails(args.getId()).observe(getViewLifecycleOwner(), product -> binding.setModel(product));
 
-        Log.i(TAG, "onViewCreated: ");
 
         //TODO convert int to string
-        viewModel.getImages(args.getId()).observe(getViewLifecycleOwner(), new Observer<List<Image>>() {
-            @Override
-            public void onChanged(List<Image> images) {
-                adapter.setImages(images);
-                binding.setImageUrl(images.get(0).getImageUrl());
-            }
+        viewModel.getImages(args.getId()).observe(getViewLifecycleOwner(), images -> {
+            adapter.setImages(images);
+            binding.setImageUrl(images.get(0).getImageUrl());
         });
 
     }
 
-    public class ProductDetailsEventListener {
-        public void onAddToCart(View view, Product model, MainActivityViewModel viewModel, String imageUrl) {
-            Log.i(TAG, "onAddToCart 1 : "+model.getName());
-            Log.i(TAG, "onAddToCart 2 : "+model.getPrice());
+    public static class ProductDetailsEventListener {
+        public void onAddToCart(View view,Product model, MainActivityViewModel viewModel, String imageUrl) {
             viewModel.addCartItem(new CartItemModel(model.getId(),model.getName(),imageUrl,model.getPrice(),1,model.getDiscount()));
         }
 

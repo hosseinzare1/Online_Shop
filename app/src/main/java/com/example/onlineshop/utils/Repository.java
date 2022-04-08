@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
@@ -19,14 +17,10 @@ import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
-import com.example.onlineshop.model.User;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -268,7 +262,7 @@ public class Repository {
 
     public LiveData<List<Category>> getCategories(int groupID) {
         MutableLiveData<List<Category>> liveData = new MutableLiveData<>();
-        RetrofitInstance.getAPI().getCategorys(groupID).subscribeOn(Schedulers.io())
+        RetrofitInstance.getAPI().getCategories(groupID).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<Category>>() {
                     @Override

@@ -63,20 +63,6 @@ public class MainActivity extends AppCompatActivity {
 //        CartItemModel cartItemModel2 = new CartItemModel(0, "ایتم جدید 2", "123456", 125000, 2);
 
 
-        repository.getCartItems().observe(this, new Observer<List<CartItemModel>>() {
-            @Override
-            public void onChanged(List<CartItemModel> cartItemModels) {
-                try {
-                    if (cartItemModels.size()>0)
-                    Log.i(TAG, "onChanged: " + cartItemModels.get(0).getName());
-
-                } finally {
-
-                }
-
-            }
-        });
-
 //        setSupportActionBar(binding.mainToolbar);
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
 //        Objects.requireNonNull(getSupportActionBar()).setTitle("");
