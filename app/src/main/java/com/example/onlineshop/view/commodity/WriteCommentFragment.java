@@ -43,6 +43,8 @@ public class WriteCommentFragment extends DialogFragment {
 
         Repository repository=  new Repository(getContext());
 
+
+        //TODO get name&number from ViewModel
         String userNumber = repository.getUserNumber(getContext());
         String userName = repository.getUserName(getContext());
 

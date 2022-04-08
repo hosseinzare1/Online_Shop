@@ -19,6 +19,8 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCartBinding;
 import com.example.onlineshop.databinding.ItemCardCommentBinding;
 import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.Order;
+import com.example.onlineshop.utils.Repository;
 import com.example.onlineshop.utils.adapters.CartAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
@@ -56,11 +58,18 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
         recyclerView = binding.cartRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(cartAdapter);
+        binding.setEventListener(new CartFragmentEventListener());
+
+        Order order = new Order();
+        order.setUser(viewModel.getUserNumber());
+        binding.setViewModel(viewModel);
+
         viewModel.getCartItems().observe(getViewLifecycleOwner(), new Observer<List<CartItemModel>>() {
             @Override
             public void onChanged(List<CartItemModel> cartItemModels) {
                 cartAdapter.setCartItemModels(cartItemModels);
-
+                order.setOrderItems(cartItemModels);
+                binding.setOrder(order);
             }
         });
 
@@ -91,7 +100,18 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
 
 
     public class CartFragmentEventListener {
+        public void onPayClickListener(View view, Order order, MainActivityViewModel viewModel) {
+            Log.i(TAG, "onPayClickListener: 0 name" + order.getOrderItems().get(0).getName());
+            Log.i(TAG, "onPayClickListener: " + order.getUser());
+            viewModel.submitOrder(order).observe(getViewLifecycleOwner(), new Observer<String>() {
+                        @Override
+                        public void onChanged(String s) {
+                            Log.i(TAG, "onChanged: " + s);
+                        }
+                    }
+            );
 
+        }
 
     }
 }

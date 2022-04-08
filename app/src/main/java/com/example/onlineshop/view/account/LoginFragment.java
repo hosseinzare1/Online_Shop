@@ -87,6 +87,8 @@ public class LoginFragment extends Fragment {
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), user.getName()).apply();
 
 
+
+
                 context.startActivity(new Intent(context, MainActivity.class));
                 ((Login_Signup_Activity) context).finish();
                 break;

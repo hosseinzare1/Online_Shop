@@ -19,10 +19,10 @@ public interface CartDAO {
     @Insert()
     void insertItem(CartItemModel cartItemModel);
 
-    @Query("UPDATE cartitemmodel SET count = count+1 WHERE name = :itemName")
+    @Query("UPDATE cartitemmodel SET quantity = quantity+1 WHERE name = :itemName")
     void increaseItemCount(String itemName);
 
-    @Query("UPDATE cartitemmodel SET count = count-1 WHERE name = :itemName AND count >1")
+    @Query("UPDATE cartitemmodel SET quantity = quantity-1 WHERE name = :itemName AND quantity >1")
     void decreaseItemCount(String itemName);
 
     @Query("DELETE FROM CartItemModel WHERE name = :itemName")

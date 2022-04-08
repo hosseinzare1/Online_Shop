@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="co"
-                    android:text="@{String.valueOf(model.count)}"
+                    android:text="@{String.valueOf(model.quantity)}"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp"

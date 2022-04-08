@@ -3,7 +3,6 @@ package com.example.onlineshop.viewmodel;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.cardview.widget.CardView;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,10 +14,10 @@ import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.Image;
+import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -37,11 +36,18 @@ public class MainActivityViewModel extends ViewModel {
     Repository repository;
 
 
+    public String getUserNumber() {
+        return repository.getUserNumber(context);
+    }
+
     public MainActivityViewModel(Context context) {
         this.context = context;
         repository = new Repository(context);
     }
 
+    public LiveData<String> submitOrder(Order order) {
+        return repository.submitOrder(order, disposable);
+    }
 
     public LiveData<List<Product>> searchProducts(String search_text) {
         return repository.searchProducts(search_text);
@@ -98,7 +104,7 @@ public class MainActivityViewModel extends ViewModel {
                 long totalPrice = 0;
                 for (CartItemModel item : cartItemModels
                 ) {
-                    totalPrice += item.getCount() * item.getPrice();
+                    totalPrice += item.getQuantity() * item.getPrice();
 
                 }
 

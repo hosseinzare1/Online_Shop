@@ -17,6 +17,7 @@ import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.Image;
+import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.model.User;
 import com.google.gson.JsonObject;
@@ -58,6 +59,55 @@ public class Repository {
         }
         return repository;
 
+    }
+
+
+    public LiveData<String> submitComment(Comment comment, CompositeDisposable disposable) {
+        MutableLiveData<String> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().submitComment(comment).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<JsonObject>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull JsonObject jsonObject) {
+                        liveData.setValue(jsonObject.getAsString());
+                        Log.i(TAG, "onSuccess: " + jsonObject.getAsString());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+        return liveData;
+    }
+
+    public LiveData<String> submitOrder(Order order, CompositeDisposable disposable) {
+        MutableLiveData<String> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().submitOrder(order).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<JsonObject>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull JsonObject jsonObject) {
+                        liveData.setValue(jsonObject.toString());
+                        Log.i(TAG, "onSuccess: " + jsonObject.toString());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError: "+ e.toString());
+
+                    }
+                });
+        return liveData;
     }
 
     public List<Product> getHistory() {
@@ -317,29 +367,6 @@ public class Repository {
         return liveData;
     }
 
-    public LiveData<String> submitComment(Comment comment, CompositeDisposable disposable) {
-        MutableLiveData<String> liveData = new MutableLiveData<>();
-        RetrofitInstance.getAPI().submitComment(comment).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<String>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        disposable.add(d);
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull String string) {
-                        liveData.setValue(string);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
-
-        return liveData;
-    }
-
     public LiveData<List<Image>> getImages(int id, CompositeDisposable disposable) {
         MutableLiveData<List<Image>> liveData = new MutableLiveData<>();
         RetrofitInstance.getAPI().getImages(id)
@@ -489,6 +516,7 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Product> homeItems) {
                         productsList.setValue(homeItems);
+                        Log.i(TAG, "onSuccess: " + homeItems.size());
                     }
 
                     @Override

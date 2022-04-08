@@ -79,7 +79,7 @@ public class ProductDetailsFragment extends Fragment {
         public void onAddToCart(View view, Product model, MainActivityViewModel viewModel, String imageUrl) {
             Log.i(TAG, "onAddToCart 1 : "+model.getName());
             Log.i(TAG, "onAddToCart 2 : "+model.getPrice());
-            viewModel.addCartItem(new CartItemModel(0,model.getName(),imageUrl,model.getPrice(),1,model.getDiscount()));
+            viewModel.addCartItem(new CartItemModel(model.getId(),model.getName(),imageUrl,model.getPrice(),1,model.getDiscount()));
         }
 
     }

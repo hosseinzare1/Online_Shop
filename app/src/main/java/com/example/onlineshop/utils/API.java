@@ -6,6 +6,7 @@ import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.Image;
+import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 import com.google.gson.JsonObject;
 
@@ -57,9 +58,11 @@ public interface API {
     @GET("get_comments/{id}")
     Single<List<Comment>> getComments(@Path("id") int ProductID);
 
+    @POST("submit_order/")
+    Single<JsonObject> submitOrder(@Body Order order);
 
     @POST("submit_comment/")
-    Single<String> submitComment(@Body Comment comment);
+    Single<JsonObject> submitComment(@Body Comment comment);
 
     @GET("get_account_details/{number}")
     Single<Account> getAccountDetails(@Path("number") String number);
