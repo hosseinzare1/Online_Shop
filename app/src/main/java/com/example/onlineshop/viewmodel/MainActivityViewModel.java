@@ -25,7 +25,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 public class MainActivityViewModel extends ViewModel {
     private static final String TAG = "viewmodel";
     CompositeDisposable disposable = new CompositeDisposable();
-//
+
 //    List<CartItemModel> cartItemsList = new ArrayList<>();
 //    MutableLiveData<List<CartItemModel>> cartItemsLiveData = new MutableLiveData<>();
 //
@@ -139,6 +139,10 @@ public class MainActivityViewModel extends ViewModel {
 
     public LiveData<List<Product>> getSpecialDiscounts() {
         return repository.getSpecialDiscounts(disposable);
+    }
+
+    public LiveData<List<Product>> getBestSelling() {
+        return repository.getBestselling(disposable);
     }
 
     public LiveData<List<Product>> getProductsByCategory(int id) {

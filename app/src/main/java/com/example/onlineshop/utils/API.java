@@ -52,6 +52,9 @@ public interface API {
     @GET("get_special_discounts/")
     Single<List<Product>> GetSpecialDiscounts();
 
+    @GET("get_bestselling/")
+    Single<List<Product>> getBestselling();
+
     @GET("get_images/{id}")
     Single<List<Image>> getImages(@Path("id") int ProductId);
 

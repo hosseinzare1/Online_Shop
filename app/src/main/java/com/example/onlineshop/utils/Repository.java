@@ -103,7 +103,7 @@ public class Repository {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: "+ e.toString());
+                        Log.i(TAG, "onError: " + e.toString());
 
                     }
                 });
@@ -419,6 +419,31 @@ public class Repository {
         return liveData;
 
 
+    }
+
+    public LiveData<List<Product>> getBestselling(CompositeDisposable disposable) {
+        MutableLiveData<List<Product>> liveData = new MutableLiveData<>();
+        Log.i(TAG, "getBestselling: called");
+        RetrofitInstance.getAPI().getBestselling().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Product>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Product> products) {
+                        liveData.setValue(products);
+                        Log.i(TAG, "onSuccess : best : "+products.size());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.i(TAG, "onError: best : "+e.getMessage());
+                    }
+                });
+
+        return liveData;
     }
 
     public LiveData<List<Product>> getSpecialDiscounts(CompositeDisposable disposable) {
