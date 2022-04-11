@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     NavHostFragment navHostFragment;
     NavController navController;
 
-    private final String TAG = "MainActivity";
+    private final String TAG = "MainActivity2";
 
 
     @Override

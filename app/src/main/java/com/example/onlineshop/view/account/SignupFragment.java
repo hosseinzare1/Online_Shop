@@ -22,7 +22,6 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentSignupBinding;
 import com.example.onlineshop.model.User;
 import com.example.onlineshop.view.MainActivity;
-import com.example.onlineshop.view.account.Login_Signup_Activity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
 import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;
 
@@ -82,7 +81,7 @@ public class SignupFragment extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 SharedPreferences sharedPreferences =
-                        context.getSharedPreferences(context.getString(R.string.logged_in_number_file), Context.MODE_PRIVATE);
+                        context.getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
 
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_number_KEY), user.getNumber()).apply();
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), user.getName()).apply();

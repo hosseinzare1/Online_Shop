@@ -200,12 +200,12 @@ public class Repository {
 //    }
 
     public String getUserNumber(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_number_file), Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
         return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "0");
     }
 
     public String getUserName(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_number_file), Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
         return sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), "0");
     }
 

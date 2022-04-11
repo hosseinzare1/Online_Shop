@@ -19,7 +19,6 @@ import androidx.navigation.Navigation;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAccountBinding;
 import com.example.onlineshop.model.Account;
-import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -53,7 +52,7 @@ public class AccountFragment extends Fragment {
 
 
         SharedPreferences sharedPreferences
-                = getActivity().getSharedPreferences(getString(R.string.logged_in_number_file), Context.MODE_PRIVATE);
+                = getActivity().getSharedPreferences(getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
 
         String number = sharedPreferences.getString(getString(R.string.logged_in_number_KEY), null);
 
