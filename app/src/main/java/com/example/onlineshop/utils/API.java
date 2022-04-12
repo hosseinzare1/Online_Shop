@@ -23,7 +23,6 @@ import retrofit2.http.Path;
 
 public interface API {
 
-
     @FormUrlEncoded
     @POST("login/")
     Single<Response<JsonObject>> login(@Field("number") String number, @Field("password") String password);

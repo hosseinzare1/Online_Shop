@@ -42,7 +42,11 @@ public class MainActivityViewModel extends ViewModel {
 
     public MainActivityViewModel(Context context) {
         this.context = context;
-        repository = new Repository(context);
+        repository = Repository.getInstance(context);
+    }
+
+    public MutableLiveData<Integer> getError() {
+        return repository.getErrorLiveData();
     }
 
     public LiveData<String> submitOrder(Order order) {

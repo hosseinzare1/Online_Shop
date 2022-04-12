@@ -45,4 +45,8 @@
             android:name="productID"
             app:argType="integer" />
     </dialog>
+    <fragment
+        android:id="@+id/errorFragment_commodity"
+        android:name="com.example.onlineshop.view.MainActivityErrorFragment"
+        android:label="errorFragment_commodity" />
 </navigation>

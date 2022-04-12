@@ -22,12 +22,18 @@ public class LoginSignupViewModel extends ViewModel {
     public MutableLiveData<User> signInUserMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<User> singUpUserMutableLiveData = new MutableLiveData<>();
 
+    Repository repository;
+
     Context context;
 
     public LoginSignupViewModel(Context context) {
         this.context = context;
+        repository = Repository.getInstance(context);
     }
 
+    public MutableLiveData<Integer> getErrorLiveData() {
+        return repository.getErrorLiveData();
+    }
 
     public void onSignInClicked() {
         User user = new User(number.getValue(), password.getValue());

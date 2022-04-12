@@ -35,7 +35,7 @@ public class AccountFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
 
@@ -48,7 +48,7 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
 
         SharedPreferences sharedPreferences
@@ -59,13 +59,11 @@ public class AccountFragment extends Fragment {
         AccountFragmentEventListener eventListener = new AccountFragmentEventListener();
 
         binding.setEventListener(eventListener);
-        Log.i(TAG, "onViewCreated: " + number);
 
         viewModel.getAccountDetails(number).observe(getActivity(), new Observer<Account>() {
             @Override
             public void onChanged(Account account) {
                 binding.setModel(account);
-                Log.i(TAG, "onViewCreated: " + account.getName());
             }
         });
 

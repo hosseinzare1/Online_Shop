@@ -10,7 +10,7 @@
         tools:context=".view.account.Login_Signup_Activity">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
+            android:id="@+id/login_signup_NavHost"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"

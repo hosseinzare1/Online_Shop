@@ -51,7 +51,7 @@ public class ProductsGroupCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_products_category, container, false);
-        this.viewModel = new ViewModelProvider(this,new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class);
+        this.viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
         adapter = new GroupsAdapter(viewModel, getContext());
         binding.groupsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.groupsRecyclerView.setAdapter(adapter);

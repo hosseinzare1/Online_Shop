@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.onlineshop.NetworkStatus;
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.Attribute;
@@ -19,7 +20,6 @@ import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -41,12 +41,27 @@ public class Repository {
     public Repository(Context context) {
         this.context = context;
         databaseInstance = AppDatabase.getInstance(context);
-        ArrayList<CartItemModel> cartItems = new ArrayList<>();
 
 
     }
 
-    //Context context;
+    MutableLiveData<Integer> errorLiveData = new MutableLiveData<>(R.string.no_error);
+
+    public MutableLiveData<Integer> getErrorLiveData() {
+        return errorLiveData;
+    }
+
+    public void addError(Throwable e) {
+
+        if (e instanceof java.net.ConnectException | e instanceof java.net.SocketTimeoutException) {
+            //If we can connect to other sites(for example google) then the problem is from the server
+            NetworkStatus.hasInternetConnection().subscribe(aBoolean -> {
+                int error = aBoolean ? (R.string.server_connection_error) : (R.string.internet_connection_error);
+                if (!errorLiveData.getValue().equals(error)) errorLiveData.setValue(error);
+            });
+        }
+    }
+
     public static Repository getInstance(Context context) {
         if (repository == null) {
             repository = new Repository(context);
@@ -62,17 +77,18 @@ public class Repository {
                 .subscribe(new SingleObserver<JsonObject>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
 
                     }
 
                     @Override
                     public void onSuccess(@NonNull JsonObject jsonObject) {
                         liveData.setValue(jsonObject.getAsString());
-                        Log.i(TAG, "onSuccess: " + jsonObject.getAsString());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        addError(e);
 
                     }
                 });
@@ -86,18 +102,19 @@ public class Repository {
                 .subscribe(new SingleObserver<JsonObject>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
 
                     }
 
                     @Override
                     public void onSuccess(@NonNull JsonObject jsonObject) {
                         liveData.setValue(jsonObject.toString());
-                        Log.i(TAG, "onSuccess: " + jsonObject.toString());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.toString());
+                        addError(e);
+
 
                     }
                 });
@@ -121,27 +138,6 @@ public class Repository {
 
     }
 
-    //
-//    public HashSet<String> getHistory() {
-//        Set<String> history;
-//        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.history_file_key), Context.MODE_PRIVATE);
-//        history = sharedPreferences.getStringSet(context.getString(R.string.history_array_key), null);
-//
-//        return (HashSet<String>) history;
-//    }
-//
-//    public void addHistoryItem(String itemID) {
-//        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.history_file_key), Context.MODE_PRIVATE);
-//        Set<String> history = new HashSet<>(sharedPreferences.getStringSet(context.getString(R.string.history_array_key), new HashSet<>()));
-//        history.remove(itemID);
-//        if (history.size() < 14) {
-//            history.add(itemID);
-//        }
-//
-//        sharedPreferences.edit().putStringSet(context.getString(R.string.history_array_key), history).apply();
-//
-//
-//    }
 
     public LiveData<List<CartItemModel>> getCartItems() {
         return databaseInstance.itemCartDao().getItems();
@@ -149,17 +145,9 @@ public class Repository {
 
     public boolean isItemExist(CartItemModel model) {
         List<String> items = databaseInstance.itemCartDao().isItemExist(model.getName());
-        Log.i(TAG, "isItemExist: " + items.size());
         return items.size() > 0;
     }
 
-//    public LiveData<Double> getTotalPrice() {
-//        MutableLiveData<Double> totalPriceLiveData = new MutableLiveData<>();
-//
-//
-//
-//        return totalPriceLiveData;
-//    }
 
     public boolean addCartItem(CartItemModel itemModel) {
 
@@ -192,13 +180,6 @@ public class Repository {
     }
 
 
-//    public static final Repository getInstance(Context context) {
-//        if (repository == null) {
-//            repository = new Repository();
-//        }
-//        return repository;
-//    }
-
     public String getUserNumber(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
         return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "0");
@@ -223,12 +204,11 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Product> products) {
                         liveData.setValue(products);
-//                        Log.i(TAG, "onSuccess: "+products.get(0).getName());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage());
+                        addError(e);
                     }
                 });
         return liveData;
@@ -248,12 +228,12 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Group> groups) {
                         liveData.setValue(groups);
-//                        Log.i(TAG, "onSuccess: g1 " + groups.get(1).getName());
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        addError(e);
 
                     }
                 });
@@ -273,11 +253,11 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Category> categories) {
                         liveData.setValue(categories);
-//                        Log.i(TAG, "onSuccess: g1 " + categories.get(1).getName());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        addError(e);
 
                     }
                 });
@@ -298,12 +278,11 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Account account) {
                         liveData.setValue(account);
-//                        Log.i(TAG, "onSuccess: " + account.getName());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-//                        Log.i(TAG, "onError: " + e.getMessage() + "*****" + e.toString());
+                        addError(e);
                     }
                 });
 
@@ -325,13 +304,12 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull Account account) {
-//                        Log.i(TAG, "onSuccess: " + account.getName());
                         liveData.setValue(account);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage());
+                        addError(e);
                     }
                 });
         return liveData;
@@ -344,7 +322,7 @@ public class Repository {
                 .subscribe(new SingleObserver<List<Comment>>() {
                                @Override
                                public void onSubscribe(@NonNull Disposable d) {
-
+                                   disposable.add(d);
                                }
 
                                @Override
@@ -354,6 +332,7 @@ public class Repository {
 
                                @Override
                                public void onError(@NonNull Throwable e) {
+                                   addError(e);
 
                                }
                            }
@@ -379,6 +358,7 @@ public class Repository {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        addError(e);
 
                     }
                 });
@@ -395,6 +375,7 @@ public class Repository {
                 .subscribe(new SingleObserver<List<Product>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
 
                     }
 
@@ -405,6 +386,7 @@ public class Repository {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        addError(e);
 
                     }
                 });
@@ -417,7 +399,7 @@ public class Repository {
 
     public LiveData<List<Product>> getBestselling(CompositeDisposable disposable) {
         MutableLiveData<List<Product>> liveData = new MutableLiveData<>();
-        Log.i(TAG, "getBestselling: called");
+
         RetrofitInstance.getAPI().getBestselling().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<Product>>() {
                     @Override
@@ -428,12 +410,11 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Product> products) {
                         liveData.setValue(products);
-                        Log.i(TAG, "onSuccess : best : "+products.size());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: best : "+e.getMessage());
+                        addError(e);
                     }
                 });
 
@@ -447,6 +428,7 @@ public class Repository {
                 .subscribe(new SingleObserver<List<Product>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
 
                     }
 
@@ -457,6 +439,7 @@ public class Repository {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        addError(e);
 
                     }
                 });
@@ -467,7 +450,6 @@ public class Repository {
     public LiveData<Product> getProduct(int id, CompositeDisposable disposable) {
         MutableLiveData<Product> liveData = new MutableLiveData<>();
 
-        Log.i(TAG, "getDetails: log ok");
 
         RetrofitInstance.getAPI().getProduct(id)
                 .subscribeOn(Schedulers.io())
@@ -480,13 +462,12 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull Product product) {
-//                        Log.i(TAG, "onSuccess: " + product.getName());
                         liveData.setValue(product);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage());
+                        addError(e);
                     }
                 });
 
@@ -502,6 +483,7 @@ public class Repository {
                 .subscribe(new SingleObserver<List<Attribute>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
 
                     }
 
@@ -512,6 +494,7 @@ public class Repository {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        addError(e);
 
                     }
                 });
@@ -535,12 +518,11 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull List<Product> homeItems) {
                         productsList.setValue(homeItems);
-                        Log.i(TAG, "onSuccess: " + homeItems.size());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage());
+                        addError(e);
                     }
                 });
         return productsList;
@@ -566,7 +548,7 @@ public class Repository {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage());
+                        addError(e);
                     }
                 });
         return productsList;
@@ -575,7 +557,6 @@ public class Repository {
 
     public LiveData<Integer> login(String number, String password, CompositeDisposable disposable) {
         MutableLiveData<Integer> loginLiveData = new MutableLiveData<>();
-        Log.i(TAG, "onSuccess: ok login");
 
 
         RetrofitInstance.getAPI().login(number, password)
@@ -590,13 +571,12 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         loginLiveData.setValue(jsonObjectResponse.code());
-                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body().toString());
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage());
+                        addError(e);
 
                     }
                 });
@@ -615,19 +595,17 @@ public class Repository {
                 .subscribe(new SingleObserver<Response<JsonObject>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.i(TAG, "onSubscribe: " + d.toString());
                         disposable.add(d);
                     }
 
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         signupLiveData.setValue(jsonObjectResponse.code());
-//                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.code());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.i(TAG, "onError: " + e.getMessage());
+                        addError(e);
                     }
                 });
 

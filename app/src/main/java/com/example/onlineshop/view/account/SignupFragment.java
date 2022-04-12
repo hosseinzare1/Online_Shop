@@ -45,7 +45,7 @@ public class SignupFragment extends Fragment {
 //        User user = new User();
         this.context = getActivity();
 
-        viewModel = new ViewModelProvider(this,new LoginSignupViewModelFactory(getActivity().getApplication())).get(LoginSignupViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(),new LoginSignupViewModelFactory(getActivity())).get(LoginSignupViewModel.class);
 
 //
 //        binding.setModel(user);

@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -24,7 +26,10 @@ import com.example.onlineshop.databinding.ActivityMainBinding;
 import com.example.onlineshop.databinding.ItemCardCommentBinding;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.utils.AppDatabase;
+import com.example.onlineshop.utils.ErrorObserver;
 import com.example.onlineshop.utils.Repository;
+import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.IOException;
@@ -44,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     NavHostFragment navHostFragment;
     NavController navController;
-
+    MainActivityViewModel viewModel;
     private final String TAG = "MainActivity2";
+//    ErrorObserver errorObserver;
 
 
     @Override
@@ -54,9 +60,8 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.Main_fragmentContainerView);
         navController = navHostFragment.getNavController();
+        viewModel = new ViewModelProvider(this, new MainActivityViewModelFactory(this)).get(MainActivityViewModel.class);
 
-
-        Repository repository = new Repository(getApplicationContext());
 
 //
 //        CartItemModel cartItemModel1 = new CartItemModel(0, "ایتم جدید 1", "123456", 12500, 2);
@@ -66,9 +71,13 @@ public class MainActivity extends AppCompatActivity {
 //        setSupportActionBar(binding.mainToolbar);
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
 //        Objects.requireNonNull(getSupportActionBar()).setTitle("");
+
+        observeErrors();
+
         binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                setNoConnectionError();
                 switch (item.getItemId()) {
                     case R.id.item_home:
                         navController.navigate(R.id.homeFragment);
@@ -90,10 +99,33 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public void setNoConnectionError() {
+        viewModel.getError().setValue(R.string.no_error);
+    }
+
+    public void observeErrors() {
+       viewModel.getError().observe((LifecycleOwner)this, integer -> {
+//            Log.i(TAG, "observeErrors:changed " + activity.getString(integer));
+            Log.i(TAG, "****live observer***");
+            Log.i(TAG, "observeErrors livedata :"+viewModel.getError().toString());
+            Log.i(TAG, "****live***");
+
+            if (integer != R.string.no_error) {
+                Bundle bundle = new Bundle();
+                bundle.putString("message", this.getString(integer));
+
+                if (integer == R.string.internet_connection_error) {
+                    navController.navigate(R.id.errorFragment_main, bundle);
+                } else if (integer == R.string.server_connection_error) {
+                    navController.navigate(R.id.errorFragment_main, bundle);
+                }
+            }
+        });
+    }
 
 
     //search
-/**
+/*
  //    @Override
  //    public boolean onCreateOptionsMenu(Menu menu) {
  //        MenuInflater menuInflater = getMenuInflater();
@@ -130,5 +162,5 @@ public class MainActivity extends AppCompatActivity {
  //
  //        return true;
  //    }
- **/
+ */
 }

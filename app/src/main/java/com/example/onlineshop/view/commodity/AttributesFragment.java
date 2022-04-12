@@ -1,28 +1,23 @@
 package com.example.onlineshop.view.commodity;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAttributesBinding;
-import com.example.onlineshop.model.Attribute;
 import com.example.onlineshop.utils.adapters.AttributesAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
-
-import java.util.List;
 
 public class AttributesFragment extends Fragment {
 
@@ -46,7 +41,7 @@ public class AttributesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_attributes, container, false);
         // Inflate the layout for this fragment
@@ -57,7 +52,7 @@ public class AttributesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(),new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
         adapter = new AttributesAdapter();
         args = AttributesFragmentArgs.fromBundle(getArguments());
         productID = args.getProductId();

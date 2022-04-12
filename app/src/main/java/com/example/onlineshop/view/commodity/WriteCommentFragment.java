@@ -41,7 +41,7 @@ public class WriteCommentFragment extends DialogFragment {
         args = WriteCommentFragmentArgs.fromBundle(getArguments());
         int productID = args.getProductID();
 
-        Repository repository=  new Repository(getContext());
+        Repository repository=  Repository.getInstance(getActivity());
 
 
         //TODO get name&number from ViewModel
@@ -63,7 +63,7 @@ public class WriteCommentFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this,new CommodityActivityViewModelFactory(getActivity().getApplicationContext())).get(CommodityActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(),new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
 
     }
 

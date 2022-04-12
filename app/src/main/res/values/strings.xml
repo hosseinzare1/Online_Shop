@@ -10,4 +10,8 @@
     <string name="history_file_key">history file key</string>
     <string name="history_array_key">history array key</string>
 
+    <string name="server_connection_error">خطا در برقرای ارتباط با سرور، دوباره تلاش کنید.</string>
+    <string name="internet_connection_error">خطا در اتصال به اینترنت</string>
+    <string name="no_error">no_error</string>
+
 </resources>

@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment {
         this.context = getActivity();
         LoginFragmentEventListener loginFragmentEventListener = new LoginFragmentEventListener();
 //        User model = new User();
-        LoginSignupViewModel viewModel = new ViewModelProvider(this,new LoginSignupViewModelFactory(getActivity().getApplication())).get(LoginSignupViewModel.class);
+        LoginSignupViewModel viewModel = new ViewModelProvider(getActivity(),new LoginSignupViewModelFactory(getActivity())).get(LoginSignupViewModel.class);
 
 
         binding.setEventListener(loginFragmentEventListener);

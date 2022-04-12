@@ -9,15 +9,13 @@
         android:id="@+id/searchFragment"
         android:name="com.example.onlineshop.view.SearchFragment"
 
-        android:label="SearchFragment"
-        >
+        android:label="SearchFragment">
 
         <action
             android:id="@+id/myaction"
-            app:destination="@+id/another_destination"/>
+            app:destination="@+id/another_destination" />
 
     </dialog>
-
 
 
     <fragment
@@ -27,7 +25,7 @@
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.onlineshop.view.account.AccountFragment"
-        android:label="AccountFragment" >
+        android:label="AccountFragment">
         <action
             android:id="@+id/action_accountFragment_to_editAccountFragment"
             app:destination="@id/editAccountFragment"
@@ -39,14 +37,15 @@
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.example.onlineshop.view.ProductDetailsFragment"
-        android:label="ProductDetailsFragment" >
-        <argument android:name="id"
+        android:label="ProductDetailsFragment">
+        <argument
+            android:name="id"
             app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/editAccountFragment"
         android:name="com.example.onlineshop.view.account.EditAccountFragment"
-        android:label="EditAccountFragment" >
+        android:label="EditAccountFragment">
         <argument
             android:name="account"
             app:argType="com.example.onlineshop.model.Account" />
@@ -61,7 +60,7 @@
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.example.onlineshop.view.ProductListFragment"
-        android:label="ProductListFragment" >
+        android:label="ProductListFragment">
         <action
             android:id="@+id/action_productListFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
@@ -72,7 +71,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.onlineshop.view.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_productListFragment"
             app:destination="@id/productListFragment" />
@@ -80,10 +79,20 @@
     <fragment
         android:id="@+id/productsGroupCategoryFragment"
         android:name="com.example.onlineshop.view.ProductsGroupCategoryFragment"
-        android:label="ProductsGroupCategoryFragment" >
+        android:label="ProductsGroupCategoryFragment">
         <action
             android:id="@+id/action_productsGroupCategoryFragment_to_productListFragment"
             app:destination="@id/productListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/errorFragment_main"
+        android:name="com.example.onlineshop.view.MainActivityErrorFragment"
+        android:label="errorFragment_main">
+        <argument
+            android:name="message"
+            app:argType="string" />
+
+    </fragment>
+
 
 </navigation>

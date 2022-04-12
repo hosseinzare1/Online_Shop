@@ -3,6 +3,7 @@ package com.example.onlineshop.viewmodel;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.onlineshop.model.Attribute;
@@ -17,19 +18,23 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class CommodityActivityViewModel extends ViewModel {
 
-    private final Context context;
+    private Context context;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     Repository repository;
 
+    public MutableLiveData<Integer> getErrorLiveData() {
+        return repository.getErrorLiveData();
+    }
+
     public CommodityActivityViewModel(Context context) {
         this.context = context;
-        repository = new Repository(context);
+        repository = Repository.getInstance(context);
     }
 
 
-public void addHistoryItem(Product product){
+    public void addHistoryItem(Product product) {
         repository.addHistoryItem(product);
-}
+    }
 
     public LiveData<Product> getProduct(int id) {
 
