@@ -14,4 +14,8 @@
     <string name="internet_connection_error">خطا در اتصال به اینترنت</string>
     <string name="no_error">no_error</string>
 
+    <string name="INVALID_NUMBER"> شماره وارد شده نامعتبر است.</string>
+    <string name="INVALID_PASSWORD">پسوورد باید حداقل 6 رقم باشد.</string>
+    <string name="MISSING_NAME">نام نامعبر است.</string>
+
 </resources>

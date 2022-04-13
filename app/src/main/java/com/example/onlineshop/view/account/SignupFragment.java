@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -42,27 +41,13 @@ public class SignupFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SignupFragmentEventListener signupFragmentEventListener = new SignupFragmentEventListener();
-//        User user = new User();
         this.context = getActivity();
-
-        viewModel = new ViewModelProvider(getActivity(),new LoginSignupViewModelFactory(getActivity())).get(LoginSignupViewModel.class);
-
-//
-//        binding.setModel(user);
+        if (getActivity() != null) {
+            viewModel = new ViewModelProvider(getActivity(), new LoginSignupViewModelFactory(getActivity())).get(LoginSignupViewModel.class);
+        }
         binding.setEventListener(signupFragmentEventListener);
         binding.setViewModel(viewModel);
 
-        viewModel.singUpUserMutableLiveData.observe(getViewLifecycleOwner(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                viewModel.signup(user.getNumber(), user.getPassword(),user.getName()).observe((LifecycleOwner) context, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer integer) {
-                        showMessage(String.valueOf(integer), user);
-                    }
-                });
-            }
-        });
 
     }
 
@@ -103,19 +88,17 @@ public class SignupFragment extends Fragment {
 
     }
 
-    public static class SignupFragmentEventListener {
+    public class SignupFragmentEventListener {
+
+        public void onSignupClick(View view, LoginSignupViewModel viewModel) {
+            if (viewModel.isSignupFormValid()) {
+                viewModel.signup().observe((LifecycleOwner) context,
+                        integer -> showMessage(String.valueOf(integer), new User(viewModel.number.getValue()
+                                , viewModel.password.getValue(), viewModel.name.getValue())));
+            }
 
 
-
-//        public void SignupBtn(View view,LoginSignupViewModel viewModel , User model){
-//            this.view = view;
-//
-//            viewModel.signup(model.getNumber(),model.getPassword(),model.getName()).observe((LifecycleOwner) context, new Observer<Integer>() {
-//                @Override
-//                public void onChanged(Integer integer) {
-//                 showMessage(String.valueOf(integer),model.getNumber());
-//                }
-//            });
+        }
 
 
         public void SignupToLoginFragment(View view) {

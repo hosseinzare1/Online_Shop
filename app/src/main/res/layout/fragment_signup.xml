@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-<!--        <variable-->
-<!--            name="model"-->
-<!--            type="com.example.onlineshop.model.User" />-->
+        <import type="com.example.onlineshop.viewmodel.LoginSignupViewModel.FormError" />
 
         <variable
             name="eventListener"
@@ -16,6 +13,7 @@
         <variable
             name="viewModel"
             type="com.example.onlineshop.viewmodel.LoginSignupViewModel" />
+
     </data>
 
     <ScrollView
@@ -42,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:errorText='@{viewModel.formErrors.contains(FormError.MISSING_NAME)? @string/MISSING_NAME : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -61,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:errorText='@{viewModel.formErrors.contains(FormError.INVALID_NUMBER)? @string/INVALID_NUMBER : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -80,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:errorText='@{viewModel.formErrors.contains(FormError.INVALID_PASSWORD)? @string/INVALID_PASSWORD : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
@@ -89,7 +90,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="رمز عبور"
-                    android:text="@={viewModel.password}" />
+                    android:text="@={viewModel.password}"
+                    android:textColor="@android:color/primary_text_dark" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:onClick="@{()->viewModel.onSignUpClicked()}"
+                android:onClick="@{(v)->eventListener.onSignupClick(v,viewModel)}"
                 android:text="ثبت نام"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

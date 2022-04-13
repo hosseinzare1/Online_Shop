@@ -1,7 +1,10 @@
 package com.example.onlineshop.viewmodel;
 
 import android.content.Context;
+import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 
+import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,15 +15,87 @@ import com.example.onlineshop.utils.Repository;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class LoginSignupViewModel extends ViewModel {
+
+    public enum FormError {
+        MISSING_NAME,
+        INVALID_NUMBER,
+        INVALID_PASSWORD,
+    }
+
     CompositeDisposable disposable = new CompositeDisposable();
 
+
+    //TODO reset values when switch bitwen fragments ?
+    public MutableLiveData<String> name = new MutableLiveData<>();
     public MutableLiveData<String> number = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
-    public MutableLiveData<String> name = new MutableLiveData<>();
+
+    public ObservableArrayList<FormError> formErrors = new ObservableArrayList<>();
+
+    String TAG = "LoginSignupViewModel";
+
+    public boolean isSigningFormValid() {
+        formErrors.clear();
+
+        //phone validation
+        String numberValue = number.getValue().trim();
+        if (numberValue.startsWith("+98")) {
+            numberValue = numberValue.substring(3);
+        } else if (numberValue.startsWith("0")) {
+            numberValue = numberValue.substring(1);
+        }
+        Log.i(TAG, "isLoginFormValid: ");
+        if (numberValue.length() != 10) {
+            formErrors.add(FormError.INVALID_NUMBER);
+        }
+
+        //password validation
+        if (password.getValue().length() < 6) {
+            formErrors.add(FormError.INVALID_PASSWORD);
+        }
+
+        return formErrors.isEmpty();
+    }
+
+    public boolean isSignupFormValid() {
+        formErrors.clear();
+
+        //name validation
+        if (name.getValue() != null) {
+            if (name.getValue().length() < 3) {
+                formErrors.add(FormError.MISSING_NAME);
+            }
+        } else {
+            formErrors.add(FormError.MISSING_NAME);
+        }
+
+        //phone validation
+        if (number.getValue() != null) {
+            String numberValue = number.getValue().trim();
+            if (numberValue.startsWith("+98")) {
+                numberValue = numberValue.substring(3);
+            } else if (numberValue.startsWith("0")) {
+                numberValue = numberValue.substring(1);
+            }
+            if (numberValue.length() != 10) {
+                formErrors.add(FormError.INVALID_NUMBER);
+            }
+        } else {
+            formErrors.add(FormError.INVALID_NUMBER);
+        }
 
 
-    public MutableLiveData<User> signInUserMutableLiveData = new MutableLiveData<>();
-    public MutableLiveData<User> singUpUserMutableLiveData = new MutableLiveData<>();
+        //password validation
+        if (password.getValue() != null) {
+            if (password.getValue().length() < 6) formErrors.add(FormError.INVALID_PASSWORD);
+        } else {
+            formErrors.add(FormError.INVALID_PASSWORD);
+        }
+
+
+        return formErrors.isEmpty();
+    }
+
 
     Repository repository;
 
@@ -35,24 +110,12 @@ public class LoginSignupViewModel extends ViewModel {
         return repository.getErrorLiveData();
     }
 
-    public void onSignInClicked() {
-        User user = new User(number.getValue(), password.getValue());
-        signInUserMutableLiveData.setValue(user);
-
+    public LiveData<Integer> login() {
+        return repository.login(number.getValue(), password.getValue(), disposable);
     }
 
-    public void onSignUpClicked() {
-        User user = new User(number.getValue(), password.getValue(), name.getValue());
-        singUpUserMutableLiveData.setValue(user);
-
-    }
-
-    public LiveData<Integer> login(String number, String password) {
-        return Repository.getInstance(context).login(number, password, disposable);
-    }
-
-    public LiveData<Integer> signup(String number, String password, String name) {
-        return Repository.getInstance(context).signup(number, password, name, disposable);
+    public LiveData<Integer> signup() {
+        return repository.signup(number.getValue(), password.getValue(), name.getValue(), disposable);
     }
 
     @Override

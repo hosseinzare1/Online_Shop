@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class ImageSetter {
 
@@ -17,6 +18,12 @@ public class ImageSetter {
                 .load(imageURL)
                 .into(view);
 
+    }
+
+
+    @BindingAdapter("app:errorText")
+    public static void setErrorMessage(TextInputLayout view, String errorMessage) {
+        view.setError(errorMessage);
     }
 
 }

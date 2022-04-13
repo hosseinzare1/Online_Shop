@@ -571,13 +571,14 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         loginLiveData.setValue(jsonObjectResponse.code());
+                        Log.i(TAG, "onSuccess: "+jsonObjectResponse.body());
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
-
+                        Log.i(TAG, "onError: "+e.toString());
                     }
                 });
 
@@ -601,11 +602,13 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         signupLiveData.setValue(jsonObjectResponse.code());
+                        Log.i(TAG, "onSuccess: "+jsonObjectResponse.body());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
+                        Log.i(TAG, "onError: "+e.toString());
                     }
                 });
 
