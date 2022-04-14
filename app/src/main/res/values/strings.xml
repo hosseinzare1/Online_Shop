@@ -18,4 +18,15 @@
     <string name="INVALID_PASSWORD">پسوورد باید حداقل 6 رقم باشد.</string>
     <string name="MISSING_NAME">نام نامعبر است.</string>
 
+    <string name="RATING_INVALID">امتیاز موردنظر را انتخاب کنید.</string>
+    <string name="TITLE_INVALID">عنوان دیدگاه نامعتبر است.</string>
+    <string name="TEXT_INVALID">متن وارده نامعتبر است.</string>
+
+
+
+    <string name="comment_submitting_200">دیگاه شما با موفقیت ثبت شد.</string>
+    <string name="comment_submitting_400">ارسال دیدگاه ناموفق بود.</string>
+
+
+
 </resources>

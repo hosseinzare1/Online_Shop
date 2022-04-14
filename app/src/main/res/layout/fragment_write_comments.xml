@@ -5,16 +5,16 @@
 
     <data>
 
-
         <variable
-            name="commentModel"
-            type="com.example.onlineshop.model.Comment" />
+            name="viewModel"
+            type="com.example.onlineshop.viewmodel.CommodityActivityViewModel" />
 
 
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.commodity.WriteCommentFragment.EventListener" />
 
+        <import type="com.example.onlineshop.viewmodel.CommodityActivityViewModel.CommentFormErrors" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
             android:layout_marginEnd="16dp"
             android:text="دیدگاه خود را بنویسید."
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@color/black"
+            android:textColor="@android:color/primary_text_light"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,8 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="64dp"
             android:numStars="5"
-            android:rating="@={(float)commentModel.rating}"
+
+            android:rating="@={viewModel.comment_rating}"
             android:stepSize="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +59,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
+            app:errorText='@{viewModel.commentFormErrors.contains(CommentFormErrors.TITLE_INVALID) ? @string/TITLE_INVALID : ""}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar2">
@@ -66,7 +68,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="عنوان نظر"
-                android:text="@={commentModel.title}" />
+                android:text="@={viewModel.comment_title}"
+                android:textColor="@android:color/primary_text_light" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -76,6 +79,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
+            app:errorText='@{viewModel.commentFormErrors.contains(CommentFormErrors.TEXT_INVALID) ? @string/TEXT_INVALID : ""}'
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout9">
@@ -88,7 +93,7 @@
                 android:maxLines="3"
                 android:nestedScrollingEnabled="true"
                 android:singleLine="false"
-                android:text="@={commentModel.text}" />
+                android:text="@={viewModel.comment_text}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -99,7 +104,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
-            android:onClick="@{(view)-> eventListener.onSendCommentListener(view,commentModel)}"
+            android:onClick="@{(view)-> eventListener.onSendCommentListener(view)}"
             android:text="ثبت نظر"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

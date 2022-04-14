@@ -2,6 +2,7 @@ package com.example.onlineshop.viewmodel;
 
 import android.content.Context;
 
+import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -31,6 +32,13 @@ public class CommodityActivityViewModel extends ViewModel {
         repository = Repository.getInstance(context);
     }
 
+    public String getUserName() {
+        return repository.getUserName(context);
+    }
+
+    public String getUserNumber() {
+        return repository.getUserNumber(context);
+    }
 
     public void addHistoryItem(Product product) {
         repository.addHistoryItem(product);
@@ -55,14 +63,56 @@ public class CommodityActivityViewModel extends ViewModel {
         return repository.getComments(id, compositeDisposable);
     }
 
-    public LiveData<String> submitComment(Comment comment) {
-
-        return repository.submitComment(comment, compositeDisposable);
-    }
 
     public LiveData<List<Attribute>> getAttributes(int id) {
 
         return repository.getProductAttributes(id, compositeDisposable);
+    }
+
+
+    public void clearCommentForm() {
+        comment_rating.setValue(0.0f);
+        comment_title.setValue("");
+        comment_text.setValue("");
+    }
+
+    public MutableLiveData<String> comment_title = new MutableLiveData<>();
+    public MutableLiveData<String> comment_text = new MutableLiveData<>();
+    public MutableLiveData<Float> comment_rating = new MutableLiveData<>();
+    public ObservableArrayList<CommentFormErrors> commentFormErrors = new ObservableArrayList<>();
+
+    public enum CommentFormErrors {
+        RATING_INVALID,
+        TITLE_INVALID,
+        TEXT_INVALID
+    }
+
+    public boolean isCommentFormValid() {
+        commentFormErrors.clear();
+        //title validation
+        if (comment_title.getValue() != null) {
+            if (comment_title.getValue().length() < 3)
+                commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
+        } else commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
+
+        //text validation
+        if (comment_text.getValue() != null) {
+            if (comment_text.getValue().length() < 3)
+                commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
+        } else commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
+
+
+        //rating validation -- show snackBar if not valid.
+        if (comment_rating.getValue() != null) {
+            if (comment_rating.getValue() > 5 | comment_rating.getValue() < 1)
+                commentFormErrors.add(CommentFormErrors.RATING_INVALID);
+        } else commentFormErrors.add(CommentFormErrors.RATING_INVALID);
+
+        return commentFormErrors.isEmpty();
+    }
+
+    public LiveData<String> submitComment(Comment comment) {
+        return repository.submitComment(comment, compositeDisposable);
     }
 
     @Override

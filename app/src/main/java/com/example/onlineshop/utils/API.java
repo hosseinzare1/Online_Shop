@@ -64,7 +64,7 @@ public interface API {
     Single<JsonObject> submitOrder(@Body Order order);
 
     @POST("submit_comment/")
-    Single<JsonObject> submitComment(@Body Comment comment);
+    Single<Response<JsonObject>> submitComment(@Body Comment comment);
 
     @GET("get_account_details/{number}")
     Single<Account> getAccountDetails(@Path("number") String number);

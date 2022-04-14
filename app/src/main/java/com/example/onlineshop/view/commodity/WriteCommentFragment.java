@@ -1,8 +1,6 @@
 package com.example.onlineshop.view.commodity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentWriteCommentsBinding;
 import com.example.onlineshop.model.Comment;
-import com.example.onlineshop.model.User;
-import com.example.onlineshop.utils.Repository;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
-
-import retrofit2.Response;
+import com.google.android.material.snackbar.Snackbar;
 
 public class WriteCommentFragment extends DialogFragment {
     public WriteCommentFragment() {
@@ -38,24 +32,13 @@ public class WriteCommentFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_write_comments, container, false);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
+
         args = WriteCommentFragmentArgs.fromBundle(getArguments());
-        int productID = args.getProductID();
-
-        Repository repository=  Repository.getInstance(getActivity());
-
-
-        //TODO get name&number from ViewModel
-        String userNumber = repository.getUserNumber(getContext());
-        String userName = repository.getUserName(getContext());
-
-        Comment comment = new Comment();
-
-        comment.setUser(userNumber);
-        comment.setUser_name(userName);
-        comment.setProduct(productID);
 
         binding.setEventListener(new EventListener());
-        binding.setCommentModel(comment);
+        binding.setViewModel(viewModel);
 
         return binding.getRoot();
     }
@@ -63,16 +46,50 @@ public class WriteCommentFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity(),new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
 
     }
 
     public class EventListener {
         private static final String TAG = "EventListener";
 
-        public void onSendCommentListener(View view, Comment comment) {
-            viewModel.submitComment(comment);
+        public void onSendCommentListener(View view) {
+            viewModel.isCommentFormValid();
+            if (viewModel.isCommentFormValid()) {
+                Comment comment = new Comment(
+                        viewModel.comment_text.getValue(),
+                        viewModel.comment_title.getValue(),
+                        viewModel.comment_rating.getValue().intValue(),
+                        viewModel.getUserName(),
+                        viewModel.getUserNumber(),
+                        args.getProductID());
 
+                viewModel.submitComment(comment).observe(getViewLifecycleOwner(), new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        showResult(s, view);
+                    }
+                });
+            } else {
+                //show Snackbar of Rating invalid
+                Snackbar.make(view, getString(R.string.RATING_INVALID), Snackbar.LENGTH_LONG).show();
+            }
+
+        }
+
+        public void showResult(String resultCode, View view) {
+            switch (resultCode) {
+                case "200":
+                    if (getParentFragment() != null) {
+                        Snackbar.make(getParentFragment().getView(), getString(R.string.comment_submitting_200), Snackbar.LENGTH_LONG).show();
+                        NavHostFragment.findNavController(getParentFragment()).popBackStack();
+                        viewModel.clearCommentForm();
+                    }
+                    break;
+                case "400":
+                    Snackbar.make(view, getString(R.string.comment_submitting_400), Snackbar.LENGTH_LONG).show();
+                    break;
+
+            }
         }
 
 

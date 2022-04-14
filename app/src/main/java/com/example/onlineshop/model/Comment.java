@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Observable;
 
 public class Comment {
-    private int id;
+
     private int product;
 
     public int rating;
@@ -36,14 +36,6 @@ public class Comment {
 
     public void setProduct(int product) {
         this.product = product;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getText() {

@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import hu.akarnokd.rxjava3.retrofit.Result;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
@@ -74,22 +75,19 @@ public class Repository {
     public LiveData<String> submitComment(Comment comment, CompositeDisposable disposable) {
         MutableLiveData<String> liveData = new MutableLiveData<>();
         RetrofitInstance.getAPI().submitComment(comment).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<JsonObject>() {
+                .subscribe(new SingleObserver<Response<JsonObject>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        disposable.add(d);
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull JsonObject jsonObject) {
-                        liveData.setValue(jsonObject.getAsString());
+                    public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
+                        liveData.setValue(String.valueOf(jsonObjectResponse.code()));
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        addError(e);
-
                     }
                 });
 
@@ -571,14 +569,14 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         loginLiveData.setValue(jsonObjectResponse.code());
-                        Log.i(TAG, "onSuccess: "+jsonObjectResponse.body());
+                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body());
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
-                        Log.i(TAG, "onError: "+e.toString());
+                        Log.i(TAG, "onError: " + e.toString());
                     }
                 });
 
@@ -602,13 +600,13 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         signupLiveData.setValue(jsonObjectResponse.code());
-                        Log.i(TAG, "onSuccess: "+jsonObjectResponse.body());
+                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
-                        Log.i(TAG, "onError: "+e.toString());
+                        Log.i(TAG, "onError: " + e.toString());
                     }
                 });
 
