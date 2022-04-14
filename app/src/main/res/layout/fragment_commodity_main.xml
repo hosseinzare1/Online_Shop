@@ -259,8 +259,8 @@
                         android:id="@+id/details_noComments_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="تاکنون نظری ثبت نشده، اولین نفر باشید!"
                         android:onClick="@{(view)-> eventListener.onWriteComment(view,model)}"
+                        android:text="تاکنون نظری ثبت نشده، اولین نفر باشید!"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/details_comments_recyclerView"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -303,6 +303,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -360,12 +361,23 @@
                 app:layout_constraintTop_toTopOf="@+id/org_price_commodity_main" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/detailsAddToCartButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:onClick="@{(view)->eventListener.onAddToCart(view,model,mainActivityViewModel)}"
                 android:text="افزودن به سبد خرید"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detailsExistInCartTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="موجود  در سبد شما"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

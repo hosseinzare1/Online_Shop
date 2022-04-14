@@ -82,6 +82,7 @@ public class CommodityMainFragment extends Fragment {
                 binding.orgPriceCommodityMain.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG
         );
 
+
         viewModel.getProduct(id).observe(getViewLifecycleOwner(), product -> {
             binding.setModel(product);
 
@@ -121,12 +122,25 @@ public class CommodityMainFragment extends Fragment {
             }
         });
 
+        viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
+
+            boolean isItemExistInCart = false;
+            for (CartItemModel item : cartItemModels)
+                if (item.getId() == id) {
+                    isItemExistInCart = true;
+                    break;
+                }
+            binding.detailsAddToCartButton.setVisibility(isItemExistInCart ? View.GONE : View.VISIBLE);
+            binding.detailsExistInCartTextView.setVisibility(isItemExistInCart ? View.VISIBLE : View.GONE);
+
+        });
+
     }
 
     public class CommodityMainEventListener {
 
         public void onAddToCart(View view, Product product, MainActivityViewModel viewModel) {
-            viewModel.addCartItem(new CartItemModel(0, product.getName(), product.getImageUrl(), product.getPrice(), 1, product.getDiscount()));
+            viewModel.addCartItem(new CartItemModel(product.getId(), product.getName(), product.getImageUrl(), product.getPrice(), 1, product.getDiscount()));
         }
 
         public void onSeeSpecifications(View view, Product product) {
