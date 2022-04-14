@@ -54,6 +54,21 @@
 
                 </androidx.viewpager.widget.ViewPager>
 
+                <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                    android:id="@+id/details_imageViewpage_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:dotsColor="#9e9e9e"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="16dp"
+                    app:dotsSpacing="4dp"
+                    app:dotsStrokeColor="#e0e0e0"
+                    app:dotsStrokeWidth="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/details_images_viewPager"
+                    app:layout_constraintStart_toStartOf="parent" />
+
 
                 <TextView
                     android:id="@+id/title_commodity_main"
@@ -239,9 +254,22 @@
                             app:srcCompat="@drawable/ic_baseline_more_24" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/details_noComments_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="تاکنون نظری ثبت نشده، اولین نفر باشید!"
+                        android:onClick="@{(view)-> eventListener.onWriteComment(view,model)}"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/details_comments_recyclerView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/details_comments_recyclerView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/same_commodity_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -287,7 +315,7 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:background="#FFFFFF"
-            android:elevation="8dp"
+            android:elevation="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -297,12 +325,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:hint="price"
                 android:text="@{String.format(`%,d`,(model.discount>0)? model.price*(100-model.discount)/100 : model.price).concat(` تومان `)}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -310,12 +338,13 @@
                 android:id="@+id/org_price_commodity_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
                 android:hint="org_price"
                 android:text="@{String.format(`%,d`,model.price)}"
                 android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/price_textview"
-                app:layout_constraintStart_toStartOf="@+id/price_textview"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/price_textview" />
 
             <TextView

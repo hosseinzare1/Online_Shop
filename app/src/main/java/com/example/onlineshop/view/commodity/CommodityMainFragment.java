@@ -60,10 +60,12 @@ public class CommodityMainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         id = getArguments().getInt("id");
 
-
         imageSliderAdapter = new ImageSliderAdapter();
         binding.detailsImagesViewPager.setAdapter(imageSliderAdapter);
         binding.setEventListener(new CommodityMainEventListener());
+
+        binding.detailsImageViewpageIndicator.setViewPager(binding.detailsImagesViewPager);
+
 
         commentsAdapter = new CommentsAdapter();
         binding.detailsCommentsRecyclerView.setAdapter(commentsAdapter);
@@ -84,7 +86,7 @@ public class CommodityMainFragment extends Fragment {
             binding.setModel(product);
 
 // create new object because id must be 0.
-            viewModel.addHistoryItem(new Product(id,0,
+            viewModel.addHistoryItem(new Product(id, 0,
                     product.getName(),
                     product.getDescription(),
                     product.getImageUrl(),
@@ -98,11 +100,25 @@ public class CommodityMainFragment extends Fragment {
         });
 
         viewModel.getComments(id).observe(getViewLifecycleOwner(), comments -> {
-            commentsAdapter.setComments(comments);
+
+            // show noComments textView if comments is empty
+            if (comments.size() > 0) {
+                binding.detailsNoCommentsTextView.setVisibility(View.GONE);
+                commentsAdapter.setComments(comments);
+            } else {
+                binding.detailsNoCommentsTextView.setVisibility(View.VISIBLE);
+            }
         });
 
         viewModel.getSameProducts(id).observe(getViewLifecycleOwner(), products -> {
-            sameProductsAdapter.setItems(products);
+
+            // Make the list invisible if empty
+            if (products.size() > 0) {
+                binding.sameCommodityLayout.setVisibility(View.VISIBLE);
+                sameProductsAdapter.setItems(products);
+            } else {
+                binding.sameCommodityLayout.setVisibility(View.GONE);
+            }
         });
 
     }
