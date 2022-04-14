@@ -1,7 +1,6 @@
 package com.example.onlineshop.viewmodel;
 
 import android.content.Context;
-import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
 import androidx.databinding.ObservableArrayList;
@@ -9,7 +8,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.onlineshop.model.User;
 import com.example.onlineshop.utils.Repository;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -38,21 +36,26 @@ public class LoginSignupViewModel extends ViewModel {
         formErrors.clear();
 
         //phone validation
-        String numberValue = number.getValue().trim();
-        if (numberValue.startsWith("+98")) {
-            numberValue = numberValue.substring(3);
-        } else if (numberValue.startsWith("0")) {
-            numberValue = numberValue.substring(1);
-        }
-        Log.i(TAG, "isLoginFormValid: ");
-        if (numberValue.length() != 10) {
+        if (number.getValue() != null) {
+            String numberValue = number.getValue().trim();
+            if (numberValue.startsWith("+98")) {
+                numberValue = numberValue.substring(3);
+            } else if (numberValue.startsWith("0")) {
+                numberValue = numberValue.substring(1);
+            }
+            Log.i(TAG, "isLoginFormValid: ");
+            if (numberValue.length() != 10) {
+                formErrors.add(FormError.INVALID_NUMBER);
+            }
+        } else {
             formErrors.add(FormError.INVALID_NUMBER);
         }
 
+
         //password validation
-        if (password.getValue().length() < 6) {
-            formErrors.add(FormError.INVALID_PASSWORD);
-        }
+        if (password.getValue() != null) {
+            if (password.getValue().length() < 6) formErrors.add(FormError.INVALID_PASSWORD);
+        } else formErrors.add(FormError.INVALID_PASSWORD);
 
         return formErrors.isEmpty();
     }
@@ -99,10 +102,10 @@ public class LoginSignupViewModel extends ViewModel {
 
     Repository repository;
 
-    Context context;
+//    Context context;
 
     public LoginSignupViewModel(Context context) {
-        this.context = context;
+//        this.context = context;
         repository = Repository.getInstance(context);
     }
 

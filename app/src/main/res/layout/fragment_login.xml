@@ -6,10 +6,6 @@
 
     <data>
 
-        <!--        <variable-->
-        <!--            name="model"-->
-        <!--            type="com.example.onlineshop.model.User" />-->
-
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.account.LoginFragment.LoginFragmentEventListener" />
@@ -36,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
-                android:contentDescription="TODO"
                 android:scaleType="fitCenter"
                 android:src="@drawable/login"
                 app:layout_constraintEnd_toEndOf="parent"
