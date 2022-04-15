@@ -1,49 +1,22 @@
 package com.example.onlineshop.view;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.SearchView;
-import android.widget.Toast;
-
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityMainBinding;
-import com.example.onlineshop.databinding.ItemCardCommentBinding;
-import com.example.onlineshop.model.CartItemModel;
-import com.example.onlineshop.utils.AppDatabase;
-import com.example.onlineshop.utils.ErrorObserver;
-import com.example.onlineshop.utils.Repository;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
-import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -61,11 +34,6 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.Main_fragmentContainerView);
         navController = navHostFragment.getNavController();
         viewModel = new ViewModelProvider(this, new MainActivityViewModelFactory(this)).get(MainActivityViewModel.class);
-
-
-//
-//        CartItemModel cartItemModel1 = new CartItemModel(0, "ایتم جدید 1", "123456", 12500, 2);
-//        CartItemModel cartItemModel2 = new CartItemModel(0, "ایتم جدید 2", "123456", 125000, 2);
 
 
 //        setSupportActionBar(binding.mainToolbar);

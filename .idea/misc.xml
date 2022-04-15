@@ -13,6 +13,7 @@
         <entry key="..\:/OnlineShop/app/src/main/res/layout/category_item.xml" value="0.21981981981981982" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/custom_counter.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_account.xml" value="0.4" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_all_comments.xml" value="0.21981981981981982" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_attributes.xml" value="0.21981981981981982" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_cart.xml" value="0.2" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_commodity_error.xml" value="0.21981981981981982" />
@@ -37,6 +38,8 @@
         <entry key="..\:/OnlineShop/app/src/main/res/layout/horizontal_item_card.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/item_card.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/item_card_comment.xml" value="0.4" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/item_card_comment_horizontal.xml" value="0.21981981981981982" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/item_card_comment_vertical.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/item_card_specification.xml" value="0.536" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/login.xml" value="0.264" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/signup.xml" value="0.25416666666666665" />

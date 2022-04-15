@@ -23,10 +23,8 @@
     <string name="TEXT_INVALID">متن وارده نامعتبر است.</string>
 
 
-
     <string name="comment_submitting_200">دیگاه شما با موفقیت ثبت شد.</string>
     <string name="comment_submitting_400">ارسال دیدگاه ناموفق بود.</string>
-
 
 
 </resources>

@@ -67,7 +67,7 @@ public class CommodityMainFragment extends Fragment {
         binding.detailsImageViewpageIndicator.setViewPager(binding.detailsImagesViewPager);
 
 
-        commentsAdapter = new CommentsAdapter();
+        commentsAdapter = new CommentsAdapter(CommentsAdapter.AdapterType.HORIZONTAL);
         binding.detailsCommentsRecyclerView.setAdapter(commentsAdapter);
         binding.detailsCommentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()
                 , LinearLayoutManager.HORIZONTAL, true));
@@ -109,6 +109,10 @@ public class CommodityMainFragment extends Fragment {
             } else {
                 binding.detailsNoCommentsTextView.setVisibility(View.VISIBLE);
             }
+
+            binding.deatilsCommentsCountTextView.setText(comments.size() + " نظر ");
+
+
         });
 
         viewModel.getSameProducts(id).observe(getViewLifecycleOwner(), products -> {
@@ -155,10 +159,16 @@ public class CommodityMainFragment extends Fragment {
 
         public void onWriteComment(View view, Product product) {
 
-            Navigation.findNavController(view)
-                    .navigate(
-                            CommodityMainFragmentDirections.actionCommodityDetailsFragmentToWriteCommentFragment(product.getId())
-                    );
+            Navigation.findNavController(view).navigate(
+                    CommodityMainFragmentDirections.actionCommodityDetailsFragmentToWriteCommentFragment(product.getId())
+            );
+
+        }
+
+        public void onSeeAllComments(View view, Product product) {
+            Navigation.findNavController(view).navigate(
+                    CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(product.getId())
+            );
 
         }
 

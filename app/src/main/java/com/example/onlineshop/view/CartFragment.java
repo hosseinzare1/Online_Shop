@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCartBinding;
-import com.example.onlineshop.databinding.ItemCardCommentBinding;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Order;
 import com.example.onlineshop.utils.Repository;

@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
     HorizontalProductsAdapter historyListAdapter = new HorizontalProductsAdapter();
     MainActivityViewModel viewModel;
     FragmentHomeBinding binding;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -81,8 +82,13 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
         viewModel.getImages(1).observe(getViewLifecycleOwner(), images -> imageSliderAdapter.setImages(images));
         viewModel.getSpecialDiscounts().observe(getViewLifecycleOwner(), homeItems -> discountsListAdapter.setItems(homeItems));
         viewModel.getBestSelling().observe(getViewLifecycleOwner(), homeItems -> bestsellingListAdapter.setItems(homeItems));
-        historyListAdapter.setItems(viewModel.getHistory());
 
+        if (viewModel.getHistory().size() > 0) {
+            binding.historyLayout.setVisibility(View.VISIBLE);
+            historyListAdapter.setItems(viewModel.getHistory());
+        } else {
+            binding.historyLayout.setVisibility(View.GONE);
+        }
     }
 
 

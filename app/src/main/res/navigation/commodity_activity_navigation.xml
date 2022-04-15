@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_commodityDetailsFragment_to_writeCommentFragment"
             app:destination="@id/writeCommentFragment" />
+        <action
+            android:id="@+id/action_commodityDetailsFragment_to_allCommentsFragment"
+            app:destination="@id/allCommentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionsFragment"
@@ -49,4 +52,11 @@
         android:id="@+id/errorFragment_commodity"
         android:name="com.example.onlineshop.view.MainActivityErrorFragment"
         android:label="errorFragment_commodity" />
+    <fragment
+        android:id="@+id/allCommentsFragment"
+        android:name="com.example.onlineshop.view.commodity.AllCommentsFragment"
+        android:label="AllCommentsFragment" >
+        <argument android:name="productID"
+            app:argType="integer" />
+    </fragment>
 </navigation>
