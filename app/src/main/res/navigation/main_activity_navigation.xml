@@ -35,14 +35,6 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/productDetailsFragment"
-        android:name="com.example.onlineshop.view.ProductDetailsFragment"
-        android:label="ProductDetailsFragment">
-        <argument
-            android:name="id"
-            app:argType="integer" />
-    </fragment>
-    <fragment
         android:id="@+id/editAccountFragment"
         android:name="com.example.onlineshop.view.account.EditAccountFragment"
         android:label="EditAccountFragment">
@@ -61,12 +53,15 @@
         android:id="@+id/productListFragment"
         android:name="com.example.onlineshop.view.ProductListFragment"
         android:label="ProductListFragment">
-        <action
-            android:id="@+id/action_productListFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
         <argument
-            android:name="categoryID"
-            app:argType="integer" />
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="group"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productListFragment_to_commodityMainFragment"
+            app:destination="@id/commodityMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -92,6 +87,14 @@
             android:name="message"
             app:argType="string" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/commodityMainFragment"
+        android:name="com.example.onlineshop.view.commodity.CommodityMainFragment"
+        android:label="CommodityMainFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 
 

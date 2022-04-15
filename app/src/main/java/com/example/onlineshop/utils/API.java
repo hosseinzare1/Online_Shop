@@ -36,8 +36,11 @@ public interface API {
     @GET("get_all/")
     Single<List<Product>> getAllItems();
 
-    @GET("get_products_by_category/{id}")
-    Single<List<Product>> getProductsByCategory(@Path("id") int categoryID);
+    @GET("get_products_by_category/{category}")
+    Single<List<Product>> getProductsByCategory(@Path("category") String category);
+
+    @GET("get_products_by_group/{group}")
+    Single<List<Product>> getProductsByGroup(@Path("group") String group);
 
     @GET("get_same_products/{id}")
     Single<List<Product>> getSameProducts(@Path("id") int productID);

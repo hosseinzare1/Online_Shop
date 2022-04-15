@@ -67,8 +67,8 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
             this.binding = binding;
 
             binding.getRoot().setOnClickListener(view ->
-                    Navigation.findNavController(view).navigate(ProductListFragmentDirections.
-                    actionProductListFragmentToProductDetailsFragment(homeItems.get(getAdapterPosition()).getId())));
+                    Navigation.findNavController(view).navigate(ProductListFragmentDirections
+                            .actionProductListFragmentToCommodityMainFragment(homeItems.get(getAdapterPosition()).getId())));
 
             binding.getRoot().setOnClickListener(view -> onClickListener.OnItemClickListener(
                     homeItems.get(getAdapterPosition()).getId()));

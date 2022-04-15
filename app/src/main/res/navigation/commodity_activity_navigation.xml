@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/commodity_activity_navigation"
-    app:startDestination="@id/commodityDetailsFragment">
+    app:startDestination="@id/commodityMainFragment">
 
     <fragment
-        android:id="@+id/commodityDetailsFragment"
+        android:id="@+id/commodityMainFragment"
         android:name="com.example.onlineshop.view.commodity.CommodityMainFragment"
-        android:label="CommodityDetailsFragment" >
+        android:label="CommodityDetailsFragment">
         <action
             android:id="@+id/action_commodityDetailsFragment_to_descriptionsFragment"
             app:destination="@id/descriptionsFragment" />
@@ -23,11 +23,14 @@
         <action
             android:id="@+id/action_commodityDetailsFragment_to_allCommentsFragment"
             app:destination="@id/allCommentsFragment" />
+        <action
+            android:id="@+id/action_commodityDetailsFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionsFragment"
         android:name="com.example.onlineshop.view.commodity.DescriptionsFragment"
-        android:label="DescriptionsFragment" >
+        android:label="DescriptionsFragment">
         <argument
             android:name="descripton"
             app:argType="string" />
@@ -35,7 +38,7 @@
     <fragment
         android:id="@+id/attributesFragment"
         android:name="com.example.onlineshop.view.commodity.AttributesFragment"
-        android:label="AttributesFragment" >
+        android:label="AttributesFragment">
         <argument
             android:name="product_id"
             app:argType="integer" />
@@ -43,7 +46,7 @@
     <dialog
         android:id="@+id/writeCommentFragment"
         android:name="com.example.onlineshop.view.commodity.WriteCommentFragment"
-        android:label="WriteCommentFragment" >
+        android:label="WriteCommentFragment">
         <argument
             android:name="productID"
             app:argType="integer" />
@@ -55,8 +58,25 @@
     <fragment
         android:id="@+id/allCommentsFragment"
         android:name="com.example.onlineshop.view.commodity.AllCommentsFragment"
-        android:label="AllCommentsFragment" >
-        <argument android:name="productID"
+        android:label="AllCommentsFragment">
+        <argument
+            android:name="productID"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.example.onlineshop.view.ProductListFragment"
+        android:label="ProductListFragment">
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="group"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productListFragment_to_commodityMainFragment"
+            app:destination="@id/commodityMainFragment" />
+
+    </fragment>
+
 </navigation>

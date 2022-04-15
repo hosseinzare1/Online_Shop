@@ -149,8 +149,8 @@ public class MainActivityViewModel extends ViewModel {
         return repository.getBestselling(disposable);
     }
 
-    public LiveData<List<Product>> getProductsByCategory(int id) {
-        return repository.getProductsByCategory(id, disposable);
+    public LiveData<List<Product>> getProductsByCategory(String category) {
+        return repository.getProductsByCategory(category, disposable);
     }
 
 
@@ -168,5 +168,9 @@ public class MainActivityViewModel extends ViewModel {
     protected void onCleared() {
         super.onCleared();
         disposable.clear();
+    }
+
+    public LiveData<List<Product>> getProductsByGroup(String group) {
+        return repository.getProductsByGroup(group, disposable);
     }
 }

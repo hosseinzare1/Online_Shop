@@ -23,6 +23,10 @@ public class Product {
     private long price;
     private int discount;
 
+    private String group;
+    private String category;
+
+
     public int getHistoryDB_id() {
         return historyDB_id;
     }
@@ -82,8 +86,24 @@ public class Product {
     public Product() {
     }
 
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Ignore
-    public Product(int id,int historyDB_id, String name, String description, String imageUrl, long price, int discount) {
+    public Product(int id, int historyDB_id, String name, String description, String imageUrl, long price, int discount, String group, String category) {
         this.id = id;
         this.historyDB_id = historyDB_id;
         this.name = name;
@@ -91,5 +111,8 @@ public class Product {
         this.imageUrl = imageUrl;
         this.price = price;
         this.discount = discount;
+
+        this.group = group;
+        this.category = category;
     }
 }

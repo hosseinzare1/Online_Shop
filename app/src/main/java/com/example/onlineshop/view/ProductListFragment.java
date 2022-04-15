@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +28,7 @@ import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -67,39 +70,58 @@ public class ProductListFragment extends Fragment {
         return binding.getRoot();
     }
 
+//    public enum QueryType implements Serializable {
+//        GET_BY_GROUP,
+//        GET_BY_CATEGORY,
+//        SEARCH
+//    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
+        LiveData<List<Product>> liveData = new MutableLiveData<>();
+
+        if (!args.getCategory().equals("")) {
+            liveData = viewModel.getProductsByCategory(args.getCategory());
+        } else {
+            liveData = viewModel.getProductsByGroup(args.getGroup());
+        }
+
+        liveData.observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                productsListAdapter.setProducts(products);
+            }
+        });
 
         //if id==0 , -> search
 
-        Log.i(TAG, "onViewCreated: id:"+args.getCategoryID());
-        Log.i(TAG, "onViewCreated: text:"+getArguments().getString("searchText"));
+//        Log.i(TAG, "onViewCreated: id:" + args.getCategoryID());
+//        Log.i(TAG, "onViewCreated: text:" + getArguments().getString("searchText"));
 
-        if (args.getCategoryID() == 0) {
-            String text =getArguments().getString("searchText");
-
-            viewModel.searchProducts(text).observe(getActivity(), new Observer<List<Product>>() {
-                @Override
-                public void onChanged(List<Product> products) {
-                    productsListAdapter.setProducts(
-                            products
-
-                    );
-                    for (Product p:products
-                         ) {
-                        Log.i(TAG, "for: "+p.getName());
-                    }
-                }
-            });
-
-            viewModel.getAllItems().observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
-        } else {
-            viewModel.getProductsByCategory(args.getCategoryID()).observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
-        }
+//        if (args.getCategoryID() == 0) {
+//            String text = getArguments().getString("searchText");
+//
+//            viewModel.searchProducts(text).observe(getActivity(), new Observer<List<Product>>() {
+//                @Override
+//                public void onChanged(List<Product> products) {
+//                    productsListAdapter.setProducts(
+//                            products
+//
+//                    );
+//                    for (Product p : products
+//                    ) {
+//                        Log.i(TAG, "for: " + p.getName());
+//                    }
+//                }
+//            });
+//
+//            viewModel.getAllItems().observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
+//        } else {
+//            viewModel.getProductsByCategory(args.getCategoryID()).observe(getActivity(), homeItems -> productsListAdapter.setProducts(homeItems));
+//        }
 
 
     }

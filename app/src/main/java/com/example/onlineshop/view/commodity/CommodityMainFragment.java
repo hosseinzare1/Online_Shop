@@ -92,7 +92,9 @@ public class CommodityMainFragment extends Fragment {
                     product.getDescription(),
                     product.getImageUrl(),
                     product.getPrice(),
-                    product.getDiscount()));
+                    product.getDiscount(),
+                    product.getGroup(),
+                    product.getCategory()));
 
         });
 
@@ -170,6 +172,18 @@ public class CommodityMainFragment extends Fragment {
                     CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(product.getId())
             );
 
+        }
+
+        public void onSeeRelatedGroupProducts(View view, Product product) {
+            Navigation.findNavController(view).navigate(CommodityMainFragmentDirections.actionCommodityDetailsFragmentToProductListFragment(
+                    "", product.getGroup()
+            ));
+        }
+
+        public void onSeeRelatedCategoryProducts(View view, Product product) {
+            Navigation.findNavController(view).navigate(CommodityMainFragmentDirections.actionCommodityDetailsFragmentToProductListFragment(
+                    product.getCategory(), ""
+            ));
         }
 
 

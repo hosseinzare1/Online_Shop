@@ -22,7 +22,7 @@ import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 public class ProductDetailsFragment extends Fragment {
     FragmentProductDetailsBinding binding;
-    ProductDetailsFragmentArgs args;
+//    ProductDetailsFragmentArgs args;
     MainActivityViewModel viewModel;
     ProductDetailsEventListener eventListener;
     ImageSliderAdapter adapter = new ImageSliderAdapter();
@@ -33,7 +33,7 @@ public class ProductDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false);
-        args = ProductDetailsFragmentArgs.fromBundle(getArguments());
+//        args = ProductDetailsFragmentArgs.fromBundle(getArguments());
 
 //        binding.setImageUrl();
         return binding.getRoot();
@@ -49,14 +49,14 @@ public class ProductDetailsFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.detailsViewPager.setAdapter(adapter);
         //TODO convert int to string
-        viewModel.getDetails(args.getId()).observe(getViewLifecycleOwner(), product -> binding.setModel(product));
+//        viewModel.getDetails(args.getId()).observe(getViewLifecycleOwner(), product -> binding.setModel(product));
 
 
-        //TODO convert int to string
-        viewModel.getImages(args.getId()).observe(getViewLifecycleOwner(), images -> {
-            adapter.setImages(images);
-            binding.setImageUrl(images.get(0).getImageUrl());
-        });
+//        //TODO convert int to string
+//        viewModel.getImages(args.getId()).observe(getViewLifecycleOwner(), images -> {
+//            adapter.setImages(images);
+//            binding.setImageUrl(images.get(0).getImageUrl());
+//        });
 
     }
 

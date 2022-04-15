@@ -61,7 +61,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 Navigation.findNavController(view).navigate(
                         ProductsGroupCategoryFragmentDirections
                                 .actionProductsGroupCategoryFragmentToProductListFragment(
-                                        Integer.parseInt(categoriesList.get(getAdapterPosition()).getId())));
+                                        categoriesList.get(getAdapterPosition()).getName(), ""));
 
             }));
         }

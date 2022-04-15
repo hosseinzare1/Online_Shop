@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,8 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.GroupItemBinding;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Group;
+import com.example.onlineshop.view.ProductsGroupCategoryFragment;
+import com.example.onlineshop.view.ProductsGroupCategoryFragmentDirections;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 
 import java.util.ArrayList;
@@ -82,6 +85,17 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
         public GroupViewHolder(@NonNull GroupItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.groupNameTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.
+                            actionProductsGroupCategoryFragmentToProductListFragment(
+                                    "",
+                                 groups.get(getAdapterPosition()).getName()
+                            ));
+                }
+            });
+
         }
     }
 }

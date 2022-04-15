@@ -19,8 +19,6 @@
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.commodity.CommodityMainFragment.CommodityMainEventListener" />
-
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,6 +83,50 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/details_images_viewPager"
                     tools:text="عنوان" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layoutDirection="rtl"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/groupChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="1dp"
+                            android:onClick="@{(v)->eventListener.onSeeRelatedGroupProducts(v,model)}"
+                            android:text='@{model.group+" > "}'
+                            app:chipBackgroundColor="@color/white" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/categoryChip"
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:elevation="1dp"
+                            android:onClick="@{(v)->eventListener.onSeeRelatedCategoryProducts(v,model)}"
+                            android:text='@{model.category+" > "}'
+                            app:chipBackgroundColor="@color/white" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
@@ -289,7 +331,7 @@
                     android:elevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
                     <TextView
                         android:id="@+id/textView13"
