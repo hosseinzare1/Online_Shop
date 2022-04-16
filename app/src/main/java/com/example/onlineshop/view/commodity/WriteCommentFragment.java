@@ -1,6 +1,7 @@
 package com.example.onlineshop.view.commodity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,15 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentWriteCommentsBinding;
 import com.example.onlineshop.model.Comment;
+import com.example.onlineshop.utils.Utility;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class WriteCommentFragment extends DialogFragment {
     public WriteCommentFragment() {
@@ -55,13 +62,19 @@ public class WriteCommentFragment extends DialogFragment {
         public void onSendCommentListener(View view) {
             viewModel.isCommentFormValid();
             if (viewModel.isCommentFormValid()) {
+
+
                 Comment comment = new Comment(
                         viewModel.comment_text.getValue(),
                         viewModel.comment_title.getValue(),
                         viewModel.comment_rating.getValue().intValue(),
                         viewModel.getUserName(),
                         viewModel.getUserNumber(),
-                        args.getProductID());
+                        args.getProductID(), Utility.getCurrentShamsidate(),
+                        new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
+                );
+                Log.i(TAG, "onSendCommentListener: date :"+comment.getSubmit_date());
+                Log.i(TAG, "onSendCommentListener: time :"+comment.getSubmit_time());
 
                 viewModel.submitComment(comment).observe(getViewLifecycleOwner(), new Observer<String>() {
                     @Override

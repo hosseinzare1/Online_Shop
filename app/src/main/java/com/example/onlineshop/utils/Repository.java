@@ -53,7 +53,8 @@ public class Repository {
     }
 
     public void addError(Throwable e) {
-
+        Log.i(TAG, "addError: " + e.getMessage());
+        Log.i(TAG, "addError: " + e.getLocalizedMessage());
         if (e instanceof java.net.ConnectException | e instanceof java.net.SocketTimeoutException) {
             //If we can connect to other sites(for example google) then the problem is from the server
             NetworkStatus.hasInternetConnection().subscribe(aBoolean -> {
@@ -106,6 +107,7 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull JsonObject jsonObject) {
+                        Log.i(TAG, "onSuccess: "+jsonObject.toString());
                         liveData.setValue(jsonObject.toString());
                     }
 

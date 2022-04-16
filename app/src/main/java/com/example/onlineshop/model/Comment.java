@@ -17,10 +17,29 @@ public class Comment {
     private String user_name;
     private String user;
 
+    private String submit_time;
+    private String submit_date;
+
+    public String getSubmit_time() {
+        return submit_time;
+    }
+
+    public void setSubmit_time(String submit_time) {
+        this.submit_time = submit_time;
+    }
+
+    public String getSubmit_date() {
+        return submit_date;
+    }
+
+    public void setSubmit_date(String submit_date) {
+        this.submit_date = submit_date;
+    }
+
     public Comment() {
     }
 
-    public Comment( String text, String title, int rating, String user_name, String user, int product) {
+    public Comment(String text, String title, int rating, String user_name, String user, int product, String submit_date, String submit_time) {
 
         this.text = text;
         this.title = title;
@@ -28,6 +47,8 @@ public class Comment {
         this.user_name = user_name;
         this.user = user;
         this.product = product;
+        this.submit_date = submit_date;
+        this.submit_time = submit_time;
     }
 
     public int getProduct() {
