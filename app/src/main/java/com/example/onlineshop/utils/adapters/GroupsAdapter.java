@@ -60,7 +60,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
 
         CategoryAdapter adapter = new CategoryAdapter();
         holder.binding.categorysRecyclerView.setAdapter(adapter);
-        holder.binding.categorysRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+        holder.binding.categorysRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, true));
         holder.binding.setModel(group);
         viewModel.getCategories(Integer.parseInt(group.getId())).observe((LifecycleOwner) context, new Observer<List<Category>>() {
 
@@ -85,16 +85,27 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
         public GroupViewHolder(@NonNull GroupItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.groupNameTextView.setOnClickListener(new View.OnClickListener() {
+            binding.groupItemCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.
                             actionProductsGroupCategoryFragmentToProductListFragment(
-                                    "",
-                                 groups.get(getAdapterPosition()).getName()
+                                    groups.get(getAdapterPosition()).getName(), ""
+
                             ));
                 }
             });
+
+            binding.groupItemsCount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.actionProductsGroupCategoryFragmentToProductListFragment(
+                            "",
+                            groups.get(getAdapterPosition()).getName()
+                    ));
+                }
+            });
+
 
         }
     }

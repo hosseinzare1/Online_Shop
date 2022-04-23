@@ -4,6 +4,7 @@ public class Category {
     private String id;
     private String name;
     private String image_url;
+    private String count;
 
     public String getId() {
         return id;
@@ -27,5 +28,13 @@ public class Category {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
     }
 }
