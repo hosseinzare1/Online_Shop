@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/OnlineShop/app/src/main/res/drawable/counter_background.xml" value="0.2595" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/account_button_item.xml" value="0.41042893187552565" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/account_buttons_item.xml" value="0.21981981981981982" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/activity_commodity.xml" value="0.21981981981981982" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/activity_commodity_details.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/activity_login_signup.xml" value="0.25416666666666665" />
@@ -14,7 +16,7 @@
         <entry key="..\:/OnlineShop/app/src/main/res/layout/category_item.xml" value="0.536" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/custom_counter.xml" value="0.4" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/empity_cart.xml" value="0.21666666666666667" />
-        <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_account.xml" value="0.4" />
+        <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_account.xml" value="0.2" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_all_comments.xml" value="0.21981981981981982" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_attributes.xml" value="0.21981981981981982" />
         <entry key="..\:/OnlineShop/app/src/main/res/layout/fragment_cart.xml" value="0.3092369477911647" />

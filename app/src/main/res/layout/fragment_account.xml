@@ -25,19 +25,6 @@
             android:layout_height="wrap_content">
 
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:text="مشخصات کاربری"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
             <ImageView
 
                 android:id="@+id/imageView2"
@@ -51,131 +38,13 @@
                 app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/buttonsRecyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:onClick="@{(view)-> eventListener.editBtnListener(view,model)}"
-                android:text="تغییر مشخصات"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button4"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout12" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="تاریخچه سفارشات"
-                app:layout_constraintEnd_toStartOf="@+id/button3"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button3" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout12"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout12"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="right"
-                    android:text="@{model.email}" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="ایمیل :" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout13"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout13"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout13"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="right"
-                    android:text="@{model.number}" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="شماره :" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout10"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout10"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="right"
-                    android:text="@{model.name}" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="نام :" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/button3"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout13"
-                tools:layout_editor_absoluteX="8dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="right"
-                    android:text="@{model.address}" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="آدرس :" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <!--            <LinearLayout-->
             <!--                android:layout_width="match_parent"-->

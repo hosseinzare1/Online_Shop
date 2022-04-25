@@ -15,12 +15,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAccountBinding;
 import com.example.onlineshop.model.Account;
+import com.example.onlineshop.utils.adapters.ButtonAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AccountFragment extends Fragment {
@@ -48,7 +53,7 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
 
         SharedPreferences sharedPreferences
@@ -68,10 +73,24 @@ public class AccountFragment extends Fragment {
         });
 
 
+        List<String> texts = new ArrayList<>();
+        List<Integer> icons = new ArrayList<>();
+
+        texts.add("تاریخچه سفارشات");
+        texts.add("مشخصات حساب کاربری");
+        texts.add("نظرات ارسال شده");
+//        texts.add("لیست علاقه مندی ها");
+        icons.add(R.drawable.ic_baseline_shopping_cart_24);
+        icons.add(R.drawable.ic_baseline_account_circle_24);
+        icons.add(R.drawable.ic_baseline_comment_24);
+        ButtonAdapter buttonAdapter = new ButtonAdapter();
+        buttonAdapter.setData(icons, texts);
+        binding.buttonsRecyclerView.setAdapter(buttonAdapter);
+        binding.buttonsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
 
-   public class AccountFragmentEventListener {
+    public class AccountFragmentEventListener {
         public void editBtnListener(View view, Account account) {
 
             Navigation.findNavController(view).navigate(
