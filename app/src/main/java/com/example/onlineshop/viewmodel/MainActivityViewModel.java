@@ -89,6 +89,10 @@ public class MainActivityViewModel extends ViewModel {
         repository.deleteCartItem(cartItemModel);
     }
 
+    public void RemoveAllCartItems() {
+        repository.RemoveAllCartItems();
+    }
+
     public LiveData<List<CartItemModel>> getCartItems() {
         Log.i(TAG, "getCartItems: called ");
 
@@ -97,7 +101,7 @@ public class MainActivityViewModel extends ViewModel {
 
     }
 
-    public LiveData<Long> getTotalPrice() {
+    public MutableLiveData<Long> getTotalPrice() {
 
         MutableLiveData<Long> totalPriceLiveData = new MutableLiveData<>();
 
@@ -113,6 +117,52 @@ public class MainActivityViewModel extends ViewModel {
                 }
 
                 totalPriceLiveData.setValue(totalPrice);
+            }
+        });
+
+
+        return totalPriceLiveData;
+    }
+
+    public MutableLiveData<Long> getTotalPriceWithDiscount() {
+
+        MutableLiveData<Long> totalPriceLiveData = new MutableLiveData<>();
+
+        repository.getCartItems().observe((LifecycleOwner) context, new Observer<List<CartItemModel>>() {
+            @Override
+            public void onChanged(List<CartItemModel> cartItemModels) {
+
+                long totalPriceWithDiscount = 0;
+                for (CartItemModel item : cartItemModels
+                ) {
+                    totalPriceWithDiscount += item.getQuantity() * (item.getPrice() * (100-item.getDiscount())/100);
+
+                }
+
+                totalPriceLiveData.setValue(totalPriceWithDiscount);
+            }
+        });
+
+
+        return totalPriceLiveData;
+    }
+
+    public MutableLiveData<Long> getTotalDiscount() {
+
+        MutableLiveData<Long> totalPriceLiveData = new MutableLiveData<>();
+
+        repository.getCartItems().observe((LifecycleOwner) context, new Observer<List<CartItemModel>>() {
+            @Override
+            public void onChanged(List<CartItemModel> cartItemModels) {
+
+                long totalDiscount = 0;
+                for (CartItemModel item : cartItemModels
+                ) {
+                    totalDiscount += item.getQuantity() * (item.getPrice() * (item.getDiscount())/100);
+
+                }
+
+                totalPriceLiveData.setValue(totalDiscount);
             }
         });
 

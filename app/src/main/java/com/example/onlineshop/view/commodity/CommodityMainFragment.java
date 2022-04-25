@@ -77,7 +77,7 @@ public class CommodityMainFragment extends Fragment {
         binding.detailsSameCommodityRecyclerView.setAdapter(sameProductsAdapter);
         binding.detailsSameCommodityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
 
-        binding.setMainActivityViewModel(new ViewModelProvider(requireActivity(), new MainActivityViewModelFactory(getActivity().getApplication())).get(MainActivityViewModel.class));
+        binding.setMainActivityViewModel(new ViewModelProvider(requireActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class));
 
         binding.orgPriceCommodityMain.setPaintFlags(
                 binding.orgPriceCommodityMain.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG

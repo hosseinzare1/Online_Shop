@@ -21,7 +21,14 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.onlineshop.view.CartFragment"
-        android:label="CartFragment" />
+        android:label="CartFragment" >
+        <action
+            android:id="@+id/action_cartFragment_to_commodityMainFragment"
+            app:destination="@id/commodityMainFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_emptyCartFragment"
+            app:destination="@id/emptyCartFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.onlineshop.view.account.AccountFragment"
@@ -96,6 +103,10 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/emptyCartFragment"
+        android:name="com.example.onlineshop.view.EmptyCartFragment"
+        android:label="EmptyCartFragment" />
 
 
 </navigation>

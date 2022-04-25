@@ -16,6 +16,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardElevation="0dp"
         android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,11 +29,10 @@
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_margin="8dp"
-                android:elevation="1dp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3">
+                app:layout_constraintTop_toBottomOf="@+id/cartItemTitle">
 
                 <TextView
                     android:id="@+id/textView15"
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:hint="discount"
                     android:text="@{String.format(`%,d`,model.price*model.discount/100).concat(` تومان تخفیف `)}"
-                    android:textColor="@android:color/holo_red_light"
+                    android:textColor="#F44336"
                     android:textSize="12sp"
                     android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
                     app:layout_constraintEnd_toEndOf="@+id/cartItemPriceTextView"
@@ -55,7 +55,7 @@
                     android:layout_marginTop="8dp"
 
                     android:hint="price"
-                    android:text="@{String.format(`%,d`,model.price).concat(` تومان `)}"
+                    android:text="@{String.format(`%,d`,(model.discount>0)? model.price*(100-model.discount)/100 : model.price).concat(` تومان `)}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/cartItemImageView"
                 setImage="@{model.imageUrl}"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
@@ -74,7 +74,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/cartItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -82,7 +82,7 @@
                 android:hint="title"
                 android:text="@{model.name}"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -94,7 +94,7 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/counter_background"
                 android:padding="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                 <Button

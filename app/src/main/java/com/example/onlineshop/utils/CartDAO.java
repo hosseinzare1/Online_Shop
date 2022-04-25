@@ -34,6 +34,9 @@ public interface CartDAO {
     @Query("SELECT name FROM CartItemModel WHERE name = :pName")
     List<String> isItemExist(String pName);
 
+    @Query("DELETE FROM CartItemModel")
+    void removeAllCartItems();
+
 
 
 }

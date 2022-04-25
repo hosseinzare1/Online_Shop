@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,21 +68,22 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
         order.setUser(viewModel.getUserNumber());
         binding.setViewModel(viewModel);
 
-        viewModel.getCartItems().observe(getViewLifecycleOwner(), new Observer<List<CartItemModel>>() {
-            @Override
-            public void onChanged(List<CartItemModel> cartItemModels) {
+        viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
+            if (cartItemModels.size() > 0) {
                 cartAdapter.setCartItemModels(cartItemModels);
                 order.setOrderItems(cartItemModels);
                 binding.setOrder(order);
+                binding.setItemCount(cartItemModels.size());
+            } else {
+                Navigation.findNavController(view).navigate(CartFragmentDirections.actionCartFragmentToEmptyCartFragment());
             }
+
         });
 
-        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), new Observer<Long>() {
-            @Override
-            public void onChanged(Long aLong) {
-                binding.setTotalPrice(aLong);
-            }
-        });
+        viewModel.getTotalPrice().observe(getViewLifecycleOwner(), aLong -> binding.setTotalPrice(aLong));
+
+        viewModel.getTotalPriceWithDiscount().observe(getViewLifecycleOwner(), aLong -> binding.setTotalPriceWithDiscount(aLong));
+        viewModel.getTotalDiscount().observe(getViewLifecycleOwner(), aLong -> binding.setTotalDiscount(aLong));
 
         cartAdapter.setOnCartProductData(this);
     }
@@ -104,8 +106,6 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
 
     public class CartFragmentEventListener {
         public void onPayClickListener(View view, Order order, MainActivityViewModel viewModel) {
-            Log.i(TAG, "onPayClickListener: 0 name" + order.getOrderItems().get(0).getName());
-            Log.i(TAG, "onPayClickListener: " + order.getUser());
             order.setSubmit_date(Utility.getCurrentShamsidate());
             order.setSubmit_time(new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()));
             viewModel.submitOrder(order).observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -115,7 +115,10 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
                         }
                     }
             );
+        }
 
+        public void onRemoveAll(View view) {
+            viewModel.RemoveAllCartItems();
         }
 
     }

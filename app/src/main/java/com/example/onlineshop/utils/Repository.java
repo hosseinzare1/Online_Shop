@@ -107,7 +107,7 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull JsonObject jsonObject) {
-                        Log.i(TAG, "onSuccess: "+jsonObject.toString());
+                        Log.i(TAG, "onSuccess: " + jsonObject.toString());
                         liveData.setValue(jsonObject.toString());
                     }
 
@@ -166,6 +166,10 @@ public class Repository {
 
     public void deleteCartItem(CartItemModel itemModel) {
         databaseInstance.itemCartDao().deleteItem(itemModel.getName());
+    }
+
+    public void RemoveAllCartItems() {
+        databaseInstance.itemCartDao().removeAllCartItems();
     }
 
 
