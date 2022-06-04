@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Category;
+import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Order;
@@ -47,6 +48,32 @@ public class MainActivityViewModel extends ViewModel {
 
     public MutableLiveData<Integer> getError() {
         return repository.getErrorLiveData();
+    }
+
+
+    public LiveData<List<Order>> getOrders(String number) {
+
+        return repository.getOrders(number, disposable);
+
+    }
+
+    public LiveData<List<Comment>> getUserComments(String user_number) {
+
+        return repository.getUserComments(user_number, disposable);
+    }
+
+    public void deleteComment(int id) {
+        repository.delete_comment(id, disposable);
+    }
+
+    public void editComment(int id) {
+        repository.edit_comment(id, disposable);
+    }
+
+    public LiveData<Order> getOrder(String order_id) {
+
+        return repository.getOrder(order_id, disposable);
+
     }
 
     public LiveData<String> submitOrder(Order order) {
@@ -135,7 +162,7 @@ public class MainActivityViewModel extends ViewModel {
                 long totalPriceWithDiscount = 0;
                 for (CartItemModel item : cartItemModels
                 ) {
-                    totalPriceWithDiscount += item.getQuantity() * (item.getPrice() * (100-item.getDiscount())/100);
+                    totalPriceWithDiscount += item.getQuantity() * (item.getPrice() * (100 - item.getDiscount()) / 100);
 
                 }
 
@@ -158,7 +185,7 @@ public class MainActivityViewModel extends ViewModel {
                 long totalDiscount = 0;
                 for (CartItemModel item : cartItemModels
                 ) {
-                    totalDiscount += item.getQuantity() * (item.getPrice() * (item.getDiscount())/100);
+                    totalDiscount += item.getQuantity() * (item.getPrice() * (item.getDiscount()) / 100);
 
                 }
 

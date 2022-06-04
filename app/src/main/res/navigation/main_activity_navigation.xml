@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity_navigation"
     app:startDestination="@id/homeFragment">
 
@@ -40,14 +41,17 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_accountFragment_to_orderHistoryListFragment"
+            app:destination="@id/orderHistoryListFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_submittedCommentsFragment"
+            app:destination="@id/submittedCommentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editAccountFragment"
         android:name="com.example.onlineshop.view.account.EditAccountFragment"
         android:label="EditAccountFragment">
-        <argument
-            android:name="account"
-            app:argType="com.example.onlineshop.model.Account" />
         <action
             android:id="@+id/action_editAccountFragment_to_accountFragment"
             app:destination="@id/accountFragment"
@@ -107,6 +111,31 @@
         android:id="@+id/emptyCartFragment"
         android:name="com.example.onlineshop.view.EmptyCartFragment"
         android:label="EmptyCartFragment" />
+    <fragment
+        android:id="@+id/orderHistoryListFragment"
+        android:name="com.example.onlineshop.view.OrderHistoryListFragment"
+        android:label="OrderHistoryListFragment" >
+        <action
+            android:id="@+id/action_orderHistoryListFragment_to_orderDeatilsFragment"
+            app:destination="@id/orderDeatilsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDeatilsFragment"
+        android:name="com.example.onlineshop.view.OrderDeatilsFragment"
+        android:label="fragment_order_deatils"
+        tools:layout="@layout/fragment_order_deatils" >
+        <argument
+            android:name="order_id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileInformationFragment"
+        android:name="com.example.onlineshop.view.ProfileInformationFragment"
+        android:label="ProfileInformationFragment" />
+    <fragment
+        android:id="@+id/submittedCommentsFragment"
+        android:name="com.example.onlineshop.view.SubmittedCommentsFragment"
+        android:label="SubmittedCommentsFragment" />
 
 
 </navigation>

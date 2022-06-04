@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -22,7 +23,6 @@ import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 public class EditAccountFragment extends Fragment {
 
     FragmentEditAccountBinding binding;
-    EditAccountFragmentArgs args;
 
     EditAccountEventListener eventListener;
     MainActivityViewModel viewModel;
@@ -32,13 +32,18 @@ public class EditAccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_account, container, false);
-        args = EditAccountFragmentArgs.fromBundle(getArguments());
         eventListener = new EditAccountEventListener();
-        viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
-        binding.setModel(args.getAccount());
-binding.setViewModel(viewModel);
-binding.setEventListener(eventListener);
+        viewModel.getAccountDetails(viewModel.getUserNumber()).observe(getViewLifecycleOwner(), new Observer<Account>() {
+            @Override
+            public void onChanged(Account account) {
+                binding.setModel(account);
+            }
+        });
+
+        binding.setViewModel(viewModel);
+        binding.setEventListener(eventListener);
 
         return binding.getRoot();
     }
@@ -49,18 +54,17 @@ binding.setEventListener(eventListener);
     }
 
 
-    public class EditAccountEventListener{
+    public class EditAccountEventListener {
 
-        public void onSaveClick(View view, Account account, MainActivityViewModel viewModel){
+        public void onSaveClick(View view, Account account, MainActivityViewModel viewModel) {
             Log.i(TAG, "onSaveClick: ");
             viewModel.updateAccount(account);
             Navigation.findNavController(view).navigate(EditAccountFragmentDirections.actionEditAccountFragmentToAccountFragment());
         }
 
-        public void onCancelClick(View view){
+        public void onCancelClick(View view) {
             Navigation.findNavController(view).navigate(EditAccountFragmentDirections.actionEditAccountFragmentToAccountFragment());
         }
-
 
 
     }

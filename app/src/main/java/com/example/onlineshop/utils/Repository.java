@@ -72,6 +72,75 @@ public class Repository {
 
     }
 
+    public LiveData<List<Order>> getOrders(String number, CompositeDisposable disposable) {
+        MutableLiveData<List<Order>> ordersLiveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().getOrders(number).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                new SingleObserver<List<Order>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Order> orders) {
+                        ordersLiveData.setValue(orders);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                }
+        );
+        return ordersLiveData;
+    }
+
+    public LiveData<Order> getOrder(String order_id, CompositeDisposable disposable) {
+        MutableLiveData<Order> orderLiveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().getOrder(order_id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                new SingleObserver<Order>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Order order) {
+                        orderLiveData.setValue(order);
+                        Log.i(TAG, "onSuccess: " + order.getState());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                }
+        );
+        return orderLiveData;
+    }
+
+    public LiveData<List<Comment>> getUserComments(String user_number, CompositeDisposable disposable) {
+        MutableLiveData<List<Comment>> liveData = new MutableLiveData<>();
+        RetrofitInstance.getAPI().getUserComments(user_number).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Comment>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Comment> comments) {
+                        liveData.setValue(comments);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+        return liveData;
+    }
 
     public LiveData<String> submitComment(Comment comment, CompositeDisposable disposable) {
         MutableLiveData<String> liveData = new MutableLiveData<>();
@@ -79,12 +148,13 @@ public class Repository {
                 .subscribe(new SingleObserver<Response<JsonObject>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
+                        disposable.add(d);
                     }
 
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         liveData.setValue(String.valueOf(jsonObjectResponse.code()));
+                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body());
                     }
 
                     @Override
@@ -342,6 +412,50 @@ public class Repository {
                            }
                 );
         return liveData;
+    }
+
+    public LiveData<Integer> delete_comment(int id, CompositeDisposable disposable) {
+        MutableLiveData<Integer> status = new MutableLiveData<>();
+        RetrofitInstance.getAPI().deleteComment(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<JsonObject>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
+                        status.setValue(jsonObjectResponse.code());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+        return status;
+    }
+
+    public LiveData<Integer> edit_comment(int id, CompositeDisposable disposable) {
+        MutableLiveData<Integer> status = new MutableLiveData<>();
+        RetrofitInstance.getAPI().editComment(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<JsonObject>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
+                        status.setValue(jsonObjectResponse.code());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+        return status;
     }
 
     public LiveData<List<Image>> getImages(int id, CompositeDisposable disposable) {

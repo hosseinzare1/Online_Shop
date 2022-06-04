@@ -68,16 +68,19 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
         order.setUser(viewModel.getUserNumber());
         binding.setViewModel(viewModel);
 
-        viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
-            if (cartItemModels.size() > 0) {
-                cartAdapter.setCartItemModels(cartItemModels);
-                order.setOrderItems(cartItemModels);
-                binding.setOrder(order);
-                binding.setItemCount(cartItemModels.size());
-            } else {
-                Navigation.findNavController(view).navigate(CartFragmentDirections.actionCartFragmentToEmptyCartFragment());
-            }
+        viewModel.getCartItems().observe(getViewLifecycleOwner(), new Observer<List<CartItemModel>>() {
+            @Override
+            public void onChanged(List<CartItemModel> cartItemModels) {
+                if (cartItemModels.size() > 0) {
+                    cartAdapter.setCartItemModels(cartItemModels);
+                    order.setOrder_items(cartItemModels);
+                    binding.setOrder(order);
+                    binding.setItemCount(cartItemModels.size());
+                } else {
+                    Navigation.findNavController(view).navigate(CartFragmentDirections.actionCartFragmentToEmptyCartFragment());
+                }
 
+            }
         });
 
         viewModel.getTotalPrice().observe(getViewLifecycleOwner(), aLong -> binding.setTotalPrice(aLong));

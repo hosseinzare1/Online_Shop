@@ -1,14 +1,89 @@
 package com.example.onlineshop.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class Order {
+
+    int id;
 
     //user number
     String user;
     List<CartItemModel> order_items;
     String submit_time;
     String submit_date;
+
+    long totalPrice;
+    String state;
+    int trackingNumber;
+
+    String transferee_name;
+    String transferee_number;
+    String transferee_address;
+
+    public String getTransferee_name() {
+        return transferee_name;
+    }
+
+    public void setTransferee_name(String transferee_name) {
+        this.transferee_name = transferee_name;
+    }
+
+    public String getTransferee_number() {
+        return transferee_number;
+    }
+
+    public void setTransferee_number(String transferee_number) {
+        this.transferee_number = transferee_number;
+    }
+
+    public String getTransferee_address() {
+        return transferee_address;
+    }
+
+    public void setTransferee_address(String transferee_address) {
+        this.transferee_address = transferee_address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<CartItemModel> getOrder_items() {
+        return order_items;
+    }
+
+    public void setOrder_items(List<CartItemModel> order_items) {
+        this.order_items = order_items;
+    }
+
+    public long getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(long totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getTrackingNumber() {
+        return trackingNumber;
+    }
+
+    public void setTrackingNumber(int trackingNumber) {
+        this.trackingNumber = trackingNumber;
+    }
 
     public String getSubmit_time() {
         return submit_time;
@@ -34,11 +109,5 @@ public class Order {
         this.user = user;
     }
 
-    public List<CartItemModel> getOrderItems() {
-        return order_items;
-    }
 
-    public void setOrderItems(List<CartItemModel> orderItems) {
-        this.order_items = orderItems;
-    }
 }

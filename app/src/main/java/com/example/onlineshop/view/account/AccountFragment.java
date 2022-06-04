@@ -3,7 +3,6 @@ package com.example.onlineshop.view.account;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAccountBinding;
 import com.example.onlineshop.model.Account;
-import com.example.onlineshop.utils.adapters.ButtonAdapter;
+import com.example.onlineshop.utils.adapters.AccountButtonAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -83,10 +82,33 @@ public class AccountFragment extends Fragment {
         icons.add(R.drawable.ic_baseline_shopping_cart_24);
         icons.add(R.drawable.ic_baseline_account_circle_24);
         icons.add(R.drawable.ic_baseline_comment_24);
-        ButtonAdapter buttonAdapter = new ButtonAdapter();
-        buttonAdapter.setData(icons, texts);
-        binding.buttonsRecyclerView.setAdapter(buttonAdapter);
+        AccountButtonAdapter accountButtonAdapter = new AccountButtonAdapter();
+        accountButtonAdapter.setData(icons, texts);
+        binding.buttonsRecyclerView.setAdapter(accountButtonAdapter);
         binding.buttonsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        accountButtonAdapter.setOnClickListener(new AccountButtonAdapter.AccountEventListener() {
+            @Override
+            public void onItemClickListener(String itemText) {
+                switch (itemText) {
+                    case "تاریخچه سفارشات":
+
+                        Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToOrderHistoryListFragment());
+                        break;
+                    case "مشخصات حساب کاربری":
+                        Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToEditAccountFragment());
+
+                        break;
+                    case "نظرات ارسال شده":
+                        Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToSubmittedCommentsFragment());
+
+                        break;
+
+
+                }
+            }
+        });
+
     }
 
 
@@ -94,7 +116,7 @@ public class AccountFragment extends Fragment {
         public void editBtnListener(View view, Account account) {
 
             Navigation.findNavController(view).navigate(
-                    AccountFragmentDirections.actionAccountFragmentToEditAccountFragment(account)
+                    AccountFragmentDirections.actionAccountFragmentToEditAccountFragment()
             );
 
         }

@@ -17,8 +17,13 @@ public class CartItemModel {
     String name;
     @Expose(deserialize = false,serialize = false)
     String imageUrl;
+
+    @SerializedName("unit_price")
     public long price = 1;
+
     public int quantity = 1;
+
+    @SerializedName("unit_discount")
     int discount = 1;
 
     public CartItemModel() {

@@ -8,8 +8,9 @@ import java.util.Observable;
 
 public class Comment {
 
-    private int product;
+    public int id;
 
+    private int product;
     public int rating;
     private String title;
     private String text;
@@ -36,8 +37,20 @@ public class Comment {
         this.submit_date = submit_date;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Comment() {
     }
+
+
+
+
 
     public Comment(String text, String title, int rating, String user_name, String user, int product, String submit_date, String submit_time) {
 

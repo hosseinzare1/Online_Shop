@@ -69,6 +69,12 @@ public interface API {
     @POST("submit_comment/")
     Single<Response<JsonObject>> submitComment(@Body Comment comment);
 
+    @POST("delete_comment/{id}")
+    Single<Response<JsonObject>> deleteComment(@Path("id") int id);
+
+    @POST("edit_comment/{id}")
+    Single<Response<JsonObject>> editComment(@Path("id") int id);
+
     @GET("get_account_details/{number}")
     Single<Account> getAccountDetails(@Path("number") String number);
 
@@ -90,4 +96,17 @@ public interface API {
 
     @GET("search_product/{search_text}")
     Single<List<Product>> searchProducts(@Path("search_text") String searchText);
+
+    @GET("get_orders/{number}")
+    Single<List<Order>> getOrders(@Path("number") String number);
+
+    @GET("get_order_details/{order_id}")
+    Single<Order> getOrder(@Path("order_id") String order_id);
+
+    @GET("get_user_comments/{number}")
+    Single<List<Comment>> getUserComments(@Path("number") String user_number);
+//    @GET("get_order_products")
+//
+//    @GET("get_order/order_id")
+//    Single<Order> getOrder
 }

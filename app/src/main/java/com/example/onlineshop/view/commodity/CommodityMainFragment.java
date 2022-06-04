@@ -88,7 +88,6 @@ public class CommodityMainFragment extends Fragment {
             binding.setModel(product);
 
 
-
             viewModel.addHistoryItem(new Product(id, 0,
                     product.getName(),
                     product.getDescription(),

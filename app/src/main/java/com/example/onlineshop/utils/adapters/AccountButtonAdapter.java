@@ -14,12 +14,12 @@ import com.example.onlineshop.databinding.AccountButtonItemBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder> {
+public class AccountButtonAdapter extends RecyclerView.Adapter<AccountButtonAdapter.ButtonViewHolder> {
 
     List<Integer> icons = new ArrayList<>();
     List<String> texts = new ArrayList<>();
 //
-//    public ButtonAdapter(List<Integer> icons, List<String> texts) {
+//    public AccountButtonAdapter(List<Integer> icons, List<String> texts) {
 //        this.icons = icons;
 //        this.texts = texts;
 //    }
@@ -28,6 +28,16 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
         this.icons = icons;
         this.texts = texts;
         notifyDataSetChanged();
+    }
+
+    public interface AccountEventListener {
+        void onItemClickListener(String itemText);
+    }
+
+    AccountEventListener eventListener;
+
+    public void setOnClickListener(AccountEventListener eventListener) {
+        this.eventListener = eventListener;
     }
 
     @NonNull
@@ -57,6 +67,13 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
         public ButtonViewHolder(@NonNull AccountButtonItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    eventListener.onItemClickListener(texts.get(getAdapterPosition()));
+                }
+            });
         }
     }
 
