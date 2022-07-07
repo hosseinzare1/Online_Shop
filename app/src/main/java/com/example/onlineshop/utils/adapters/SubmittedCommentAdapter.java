@@ -25,11 +25,13 @@ public class SubmittedCommentAdapter extends RecyclerView.Adapter<SubmittedComme
         notifyDataSetChanged();
     }
 
+
+
     public interface EventListener {
 
         void onDeleteCommentListener(int id);
 
-        void onEditCommentListener(int id);
+        void onEditCommentListener(Comment comment);
 
 
     }
@@ -77,7 +79,7 @@ public class SubmittedCommentAdapter extends RecyclerView.Adapter<SubmittedComme
                 binding.editComment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        eventListener.onEditCommentListener(comments.get(getAdapterPosition()).getId());
+                        eventListener.onEditCommentListener(comments.get(getAdapterPosition()));
                     }
                 });
 

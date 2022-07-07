@@ -1,12 +1,15 @@
 package com.example.onlineshop.model;
 
+import android.os.Parcelable;
+
 import androidx.databinding.ObservableField;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class Comment {
+public class Comment implements Serializable {
 
     public int id;
 

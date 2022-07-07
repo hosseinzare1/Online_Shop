@@ -1,5 +1,7 @@
 package com.example.onlineshop.view.account;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +61,19 @@ public class EditAccountFragment extends Fragment {
         public void onSaveClick(View view, Account account, MainActivityViewModel viewModel) {
             Log.i(TAG, "onSaveClick: ");
             viewModel.updateAccount(account);
+
+            SharedPreferences sharedPreferences = getActivity().getApplicationContext()
+                    .getSharedPreferences(getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
+            sharedPreferences.edit().putString(getString(R.string.logged_in_name_KEY),account.getName()).apply();
+            sharedPreferences.edit().putString(getString(R.string.logged_in_number_KEY),account.getNumber()).apply();
+            sharedPreferences.edit().putString(getString(R.string.logged_in_address_KEY),account.getAddress()).apply();
+            sharedPreferences.edit().putString(getString(R.string.logged_in_email_KEY),account.getEmail()).apply();
+
+
+
             Navigation.findNavController(view).navigate(EditAccountFragmentDirections.actionEditAccountFragmentToAccountFragment());
+
+
         }
 
         public void onCancelClick(View view) {

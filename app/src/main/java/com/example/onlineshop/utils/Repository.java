@@ -254,15 +254,23 @@ public class Repository {
     }
 
 
+    public String getUserName(Context context) {
+        SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), "name");
+    }
     public String getUserNumber(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
-        return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "0");
+        SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "number");
+    }
+    public String getUserAddress(Context context) {
+        SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(context.getString(R.string.logged_in_address_KEY), "address");
+    }
+    public String getUserEmail(Context context) {
+        SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(context.getString(R.string.logged_in_email_KEY), "email");
     }
 
-    public String getUserName(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
-        return sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), "0");
-    }
 
 
     public LiveData<List<Product>> searchProducts(String search_text) {
@@ -436,9 +444,10 @@ public class Repository {
         return status;
     }
 
-    public LiveData<Integer> edit_comment(int id, CompositeDisposable disposable) {
+    public LiveData<Integer> edit_comment(Comment comment, CompositeDisposable disposable) {
         MutableLiveData<Integer> status = new MutableLiveData<>();
-        RetrofitInstance.getAPI().editComment(id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        Log.i(TAG, "edit_comment: id = " + comment.getId());
+        RetrofitInstance.getAPI().editComment(comment, comment.getId()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<JsonObject>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -448,6 +457,9 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         status.setValue(jsonObjectResponse.code());
+                        Log.i(TAG, "onSuccess:mess " + jsonObjectResponse.message());
+                        Log.i(TAG, "onSuccess:err " + jsonObjectResponse.errorBody());
+                        Log.i(TAG, "onSuccess:body " + jsonObjectResponse.body());
                     }
 
                     @Override
@@ -673,8 +685,8 @@ public class Repository {
 
     }
 
-    public LiveData<Integer> login(String number, String password, CompositeDisposable disposable) {
-        MutableLiveData<Integer> loginLiveData = new MutableLiveData<>();
+    public LiveData<Response<JsonObject>> login(String number, String password, CompositeDisposable disposable) {
+        MutableLiveData<Response<JsonObject>> loginLiveData = new MutableLiveData<>();
 
 
         RetrofitInstance.getAPI().login(number, password)
@@ -688,7 +700,7 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
-                        loginLiveData.setValue(jsonObjectResponse.code());
+                        loginLiveData.setValue(jsonObjectResponse);
                         Log.i(TAG, "onSuccess: " + jsonObjectResponse.body());
 
                     }

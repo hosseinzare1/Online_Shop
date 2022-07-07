@@ -1,9 +1,11 @@
 package com.example.onlineshop.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable{
 
     int id;
 
@@ -109,5 +111,17 @@ public class Order {
         this.user = user;
     }
 
-
+    @NonNull
+    @Override
+    public String toString() {
+        String s = "user: " + getUser() + "\n" +
+                "time: " + getSubmit_time() + "\n" +
+                "date: " + getSubmit_date() + "\n" +
+                "price: " + getTotalPrice() + "\n" +
+                "name: " + getTransferee_name() + "\n" +
+                "number: " + getTransferee_number() + "\n" +
+                "address: " + getTransferee_address() + "\n"+
+                "orders: "+order_items.get(0);
+        return s;
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.onlineshop.view.commodity;
+package com.example.onlineshop.view.account;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,36 +15,41 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.FragmentWriteCommentBinding;
+import com.example.onlineshop.databinding.FragmentEditCommentBinding;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.utils.Utility;
-import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
-import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
+import com.example.onlineshop.viewmodel.MainActivityViewModel;
+import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class WriteCommentFragment extends DialogFragment {
-    public WriteCommentFragment() {
+public class EditCommentFragment extends DialogFragment {
+    public EditCommentFragment() {
     }
 
-    FragmentWriteCommentBinding binding;
-    WriteCommentFragmentArgs args;
-    CommodityActivityViewModel viewModel;
+    FragmentEditCommentBinding binding;
+    EditCommentFragmentArgs args;
+    MainActivityViewModel viewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_write_comment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_comment, container, false);
         if (getActivity() != null)
-            viewModel = new ViewModelProvider(getActivity(), new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
-        args = WriteCommentFragmentArgs.fromBundle(getArguments());
+        args = EditCommentFragmentArgs.fromBundle(getArguments());
 
         binding.setEventListener(new EventListener());
         binding.setViewModel(viewModel);
+
+
+        viewModel.comment_title.setValue(args.getComment().getTitle());
+        viewModel.comment_text.setValue(args.getComment().getText());
+        viewModel.comment_rating.setValue((float) args.getComment().getRating());
 
         return binding.getRoot();
     }
@@ -60,8 +65,8 @@ public class WriteCommentFragment extends DialogFragment {
 
         public void onSendCommentListener(View view) {
             viewModel.isCommentFormValid();
+            Log.i(TAG, "onSendCommentListener: clicked");
             if (viewModel.isCommentFormValid()) {
-
 
                 Comment comment = new Comment(
                         viewModel.comment_text.getValue(),
@@ -69,17 +74,20 @@ public class WriteCommentFragment extends DialogFragment {
                         viewModel.comment_rating.getValue().intValue(),
                         viewModel.getUserName(),
                         viewModel.getUserNumber(),
-                        args.getProductID(), Utility.getCurrentShamsidate(),
+                        args.getComment().getId(),
+                        Utility.getCurrentShamsidate(),
                         new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
                 );
+                comment.setId(args.getComment().getId());
+                Log.i(TAG, "onSendCommentListener: valid");
 
-                Log.i(TAG, "onSendCommentListener: name :"+viewModel.getUserName());
-                viewModel.submitComment(comment).observe(getViewLifecycleOwner(), new Observer<String>() {
+                viewModel.editComment(comment).observe(getViewLifecycleOwner(), new Observer<Integer>() {
                     @Override
-                    public void onChanged(String s) {
-                        showResult(s, view);
+                    public void onChanged(Integer resultCode) {
+                        showResult(resultCode, view);
                     }
                 });
+
             } else {
                 //show Snackbar of Rating invalid
                 Snackbar.make(view, getString(R.string.RATING_INVALID), Snackbar.LENGTH_LONG).show();
@@ -87,16 +95,16 @@ public class WriteCommentFragment extends DialogFragment {
 
         }
 
-        public void showResult(String resultCode, View view) {
+        public void showResult(Integer resultCode, View view) {
             switch (resultCode) {
-                case "200":
+                case 201:
                     if (getParentFragment() != null) {
                         Snackbar.make(getParentFragment().getView(), getString(R.string.comment_submitting_200), Snackbar.LENGTH_LONG).show();
                         NavHostFragment.findNavController(getParentFragment()).popBackStack();
                         viewModel.clearCommentForm();
                     }
                     break;
-                case "400":
+                case 400:
                     Snackbar.make(view, getString(R.string.comment_submitting_400), Snackbar.LENGTH_LONG).show();
                     break;
 

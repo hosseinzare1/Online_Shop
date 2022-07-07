@@ -66,7 +66,7 @@ public class SignupFragment extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 SharedPreferences sharedPreferences =
-                        context.getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
+                        context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
 
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_number_KEY), user.getNumber()).apply();
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), user.getName()).apply();

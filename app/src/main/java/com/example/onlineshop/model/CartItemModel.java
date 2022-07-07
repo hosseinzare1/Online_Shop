@@ -1,5 +1,6 @@
 package com.example.onlineshop.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,9 +14,7 @@ public class CartItemModel {
     @SerializedName("product")
     int id;
 
-    @Expose(deserialize = false,serialize = false)
     String name;
-    @Expose(deserialize = false,serialize = false)
     String imageUrl;
 
     @SerializedName("unit_price")
@@ -25,6 +24,18 @@ public class CartItemModel {
 
     @SerializedName("unit_discount")
     int discount = 1;
+
+    @NonNull
+    @Override
+    public String toString() {
+        String s = "user: " + getId() + "\n" +
+                "name: " + getName() + "\n" +
+                "url: " + getImageUrl() + "\n" +
+                "price: " + getPrice() + "\n" +
+                "quantity: " + getQuantity() + "\n" +
+                "discount: " + getDiscount() + "\n" ;
+        return s;
+    }
 
     public CartItemModel() {
     }

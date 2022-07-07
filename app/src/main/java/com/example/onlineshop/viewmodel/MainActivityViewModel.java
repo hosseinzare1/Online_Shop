@@ -3,6 +3,7 @@ package com.example.onlineshop.viewmodel;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -36,9 +37,16 @@ public class MainActivityViewModel extends ViewModel {
 
     Repository repository;
 
+    public String getUserName() {
+        return repository.getUserName(context);
+    }
 
     public String getUserNumber() {
         return repository.getUserNumber(context);
+    }
+
+    public String getUserAddress() {
+        return repository.getUserAddress(context);
     }
 
     public MainActivityViewModel(Context context) {
@@ -62,12 +70,54 @@ public class MainActivityViewModel extends ViewModel {
         return repository.getUserComments(user_number, disposable);
     }
 
-    public void deleteComment(int id) {
-        repository.delete_comment(id, disposable);
+    public LiveData<Integer> deleteComment(int id) {
+        return repository.delete_comment(id, disposable);
     }
 
-    public void editComment(int id) {
-        repository.edit_comment(id, disposable);
+    public LiveData<Integer> editComment(Comment comment) {
+        return repository.edit_comment(comment, disposable);
+    }
+
+
+    public void clearCommentForm() {
+        comment_rating.setValue(0.0f);
+        comment_title.setValue("");
+        comment_text.setValue("");
+    }
+
+    public MutableLiveData<String> comment_title = new MutableLiveData<>();
+    public MutableLiveData<String> comment_text = new MutableLiveData<>();
+    public MutableLiveData<Float> comment_rating = new MutableLiveData<>();
+    public ObservableArrayList<CommodityActivityViewModel.CommentFormErrors> commentFormErrors = new ObservableArrayList<>();
+
+    public enum CommentFormErrors {
+        RATING_INVALID,
+        TITLE_INVALID,
+        TEXT_INVALID
+    }
+
+    public boolean isCommentFormValid() {
+        commentFormErrors.clear();
+        //title validation
+        if (comment_title.getValue() != null) {
+            if (comment_title.getValue().length() < 3)
+                commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TITLE_INVALID);
+        } else commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TITLE_INVALID);
+
+        //text validation
+        if (comment_text.getValue() != null) {
+            if (comment_text.getValue().length() < 3)
+                commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TEXT_INVALID);
+        } else commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TEXT_INVALID);
+
+
+        //rating validation -- show snackBar if not valid.
+        if (comment_rating.getValue() != null) {
+            if (comment_rating.getValue() > 5 | comment_rating.getValue() < 1)
+                commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.RATING_INVALID);
+        } else commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.RATING_INVALID);
+
+        return commentFormErrors.isEmpty();
     }
 
     public LiveData<Order> getOrder(String order_id) {

@@ -65,7 +65,6 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
         binding.setEventListener(new CartFragmentEventListener());
 
         Order order = new Order();
-        order.setUser(viewModel.getUserNumber());
         binding.setViewModel(viewModel);
 
         viewModel.getCartItems().observe(getViewLifecycleOwner(), new Observer<List<CartItemModel>>() {
@@ -109,15 +108,11 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
 
     public class CartFragmentEventListener {
         public void onPayClickListener(View view, Order order, MainActivityViewModel viewModel) {
-            order.setSubmit_date(Utility.getCurrentShamsidate());
-            order.setSubmit_time(new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()));
-            viewModel.submitOrder(order).observe(getViewLifecycleOwner(), new Observer<String>() {
-                        @Override
-                        public void onChanged(String s) {
-                            Log.i(TAG, "onChanged: " + s);
-                        }
-                    }
-            );
+
+            Navigation.findNavController(view)
+                    .navigate(CartFragmentDirections.actionCartFragmentToOrderCompletionFragment(order));
+
+
         }
 
         public void onRemoveAll(View view) {

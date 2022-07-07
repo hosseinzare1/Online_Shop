@@ -9,8 +9,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.onlineshop.utils.Repository;
+import com.google.gson.JsonObject;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import retrofit2.Response;
 
 public class LoginSignupViewModel extends ViewModel {
 
@@ -113,7 +115,7 @@ public class LoginSignupViewModel extends ViewModel {
         return repository.getErrorLiveData();
     }
 
-    public LiveData<Integer> login() {
+    public LiveData<Response<JsonObject>> login() {
         return repository.login(number.getValue(), password.getValue(), disposable);
     }
 

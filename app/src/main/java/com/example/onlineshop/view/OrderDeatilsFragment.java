@@ -58,9 +58,10 @@ public class OrderDeatilsFragment extends Fragment {
         binding.orderProductsRecyclerView.setAdapter(adapter);
 
         viewModel.getOrder(args.getOrderId()).observe(getViewLifecycleOwner(), order -> {
+            Log.i(TAG, "onViewCreated: "+order.toString());
             binding.setModel(order);
             adapter.setItems(order.getOrder_items());
-            Log.i(TAG, "onViewCreated: "+order.getOrder_items());
+            Log.i(TAG, "onViewCreated: "+order.getOrder_items().get(0).toString());
         });
 
 

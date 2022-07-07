@@ -19,6 +19,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface API {
@@ -72,8 +73,8 @@ public interface API {
     @POST("delete_comment/{id}")
     Single<Response<JsonObject>> deleteComment(@Path("id") int id);
 
-    @POST("edit_comment/{id}")
-    Single<Response<JsonObject>> editComment(@Path("id") int id);
+    @PUT("edit_comment/{id}")
+    Single<Response<JsonObject>> editComment(@Body Comment comment,@Path("id") int id);
 
     @GET("get_account_details/{number}")
     Single<Account> getAccountDetails(@Path("number") String number);

@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -66,8 +67,9 @@ public class SubmittedCommentsFragment extends Fragment {
             }
 
             @Override
-            public void onEditCommentListener(int id) {
-                viewModel.editComment(id);
+            public void onEditCommentListener(Comment comment) {
+                Navigation.findNavController(view).navigate(
+                        SubmittedCommentsFragmentDirections.actionSubmittedCommentsFragmentToEditCommentFragment(comment));
             }
         });
     }

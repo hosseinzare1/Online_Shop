@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_cartFragment_to_emptyCartFragment"
             app:destination="@id/emptyCartFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_orderCompletionFragment"
+            app:destination="@id/orderCompletionFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -135,7 +138,27 @@
     <fragment
         android:id="@+id/submittedCommentsFragment"
         android:name="com.example.onlineshop.view.SubmittedCommentsFragment"
-        android:label="SubmittedCommentsFragment" />
+        android:label="SubmittedCommentsFragment" >
+        <action
+            android:id="@+id/action_submittedCommentsFragment_to_editCommentFragment"
+            app:destination="@id/editCommentFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/editCommentFragment"
+        android:name="com.example.onlineshop.view.account.EditCommentFragment"
+        android:label="EditCommentFragment" >
+        <argument
+            android:name="Comment"
+            app:argType="com.example.onlineshop.model.Comment" />
+    </dialog>
+    <fragment
+        android:id="@+id/orderCompletionFragment"
+        android:name="com.example.onlineshop.view.OrderCompletionFragment"
+        android:label="OrderCompletionFragment" >
+        <argument
+            android:name="order"
+            app:argType="com.example.onlineshop.model.Order" />
+    </fragment>
 
 
 </navigation>
