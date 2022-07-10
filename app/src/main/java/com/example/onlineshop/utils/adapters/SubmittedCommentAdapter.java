@@ -1,7 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -67,20 +66,10 @@ public class SubmittedCommentAdapter extends RecyclerView.Adapter<SubmittedComme
             this.binding = binding;
             if (eventListener != null) {
 
-                binding.deleteComment.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        eventListener.onDeleteCommentListener(comments.get(getAdapterPosition()).getId());
-                    }
-                });
+                binding.deleteComment.setOnClickListener(view -> eventListener.onDeleteCommentListener(comments.get(getAdapterPosition()).getId()));
 
 
-                binding.editComment.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        eventListener.onEditCommentListener(comments.get(getAdapterPosition()));
-                    }
-                });
+                binding.editComment.setOnClickListener(view -> eventListener.onEditCommentListener(comments.get(getAdapterPosition())));
 
             }
 

@@ -20,6 +20,7 @@ import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.utils.adapters.SubmittedCommentAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
+import com.google.android.material.snackbar.Snackbar;
 
 public class SubmittedCommentsFragment extends Fragment {
 
@@ -37,11 +38,12 @@ public class SubmittedCommentsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_submitted_comments, container, false);
         // Inflate the layout for this fragment
-        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
         return binding.getRoot();
     }
@@ -54,13 +56,17 @@ public class SubmittedCommentsFragment extends Fragment {
         binding.submittedCommentsRecyclerView.setAdapter(adapter);
 
         viewModel.getUserComments(viewModel.getUserNumber()).observe(getViewLifecycleOwner(),
-                comments -> adapter.setComments(comments));
+                adapter::setComments);
 
 
         adapter.setEventListener(new SubmittedCommentAdapter.EventListener() {
             @Override
             public void onDeleteCommentListener(int id) {
-                viewModel.deleteComment(id);
+                viewModel.deleteComment(id).observe(getViewLifecycleOwner(), integer -> {
+                    if (integer == 200)
+                        Snackbar.make(view, "نظر شما با موفقیت حذف شد.", Snackbar.LENGTH_LONG).show();
+                    else Snackbar.make(view, "عملیات ناموفق بود.", Snackbar.LENGTH_LONG).show();
+                });
             }
 
             @Override

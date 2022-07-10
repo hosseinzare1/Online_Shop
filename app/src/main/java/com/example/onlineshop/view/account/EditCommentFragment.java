@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -75,18 +74,13 @@ public class EditCommentFragment extends DialogFragment {
                         viewModel.getUserName(),
                         viewModel.getUserNumber(),
                         args.getComment().getId(),
-                        Utility.getCurrentShamsidate(),
+                        Utility.getCurrentSolarHijri(),
                         new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
                 );
                 comment.setId(args.getComment().getId());
                 Log.i(TAG, "onSendCommentListener: valid");
 
-                viewModel.editComment(comment).observe(getViewLifecycleOwner(), new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer resultCode) {
-                        showResult(resultCode, view);
-                    }
-                });
+                viewModel.editComment(comment).observe(getViewLifecycleOwner(), resultCode -> showResult(resultCode, view));
 
             } else {
                 //show Snackbar of Rating invalid

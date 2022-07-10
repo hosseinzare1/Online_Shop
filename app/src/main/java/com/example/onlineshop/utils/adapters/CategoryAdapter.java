@@ -57,13 +57,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         public CategoryViewHolder(CategoryItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.getRoot().setOnClickListener((view -> {
-                Navigation.findNavController(view).navigate(
-                        ProductsGroupCategoryFragmentDirections
-                                .actionProductsGroupCategoryFragmentToProductListFragment(
-                                        categoriesList.get(getAdapterPosition()).getName(), ""));
-
-            }));
+            binding.getRoot().setOnClickListener((view -> Navigation.findNavController(view).navigate(
+                    ProductsGroupCategoryFragmentDirections
+                            .actionProductsGroupCategoryFragmentToProductListFragment(
+                                    categoriesList.get(getAdapterPosition()).getName(), ""))));
         }
     }
 }

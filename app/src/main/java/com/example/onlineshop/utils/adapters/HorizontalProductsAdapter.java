@@ -20,7 +20,7 @@ public class HorizontalProductsAdapter extends RecyclerView.Adapter<HorizontalPr
     List<Product> homeItems = new ArrayList<>();
 
     public interface OnClickListener {
-        public void onProductClickListener(int id);
+        void onProductClickListener(int id);
     }
 
     OnClickListener onClickListener;
@@ -37,8 +37,7 @@ public class HorizontalProductsAdapter extends RecyclerView.Adapter<HorizontalPr
                 LayoutInflater.from(parent.getContext()), R.layout.horizontal_item_card, parent, false);
 
 
-        HorizontalViewHolder viewHolder = new HorizontalViewHolder(binding);
-        return viewHolder;
+        return new HorizontalViewHolder(binding);
     }
 
     @Override

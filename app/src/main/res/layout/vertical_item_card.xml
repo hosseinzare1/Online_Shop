@@ -32,7 +32,7 @@
                 setImage="@{model.imageUrl}"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                tools:srcCompat="@drawable/ic_baseline_product_tamplate_24"
+                tools:srcCompat="@drawable/ic_baseline_product_sample_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

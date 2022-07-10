@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,8 +23,6 @@ import com.example.onlineshop.utils.adapters.CartAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
-
-import java.util.List;
 
 
 public class CartFragment extends Fragment implements CartAdapter.OnCartProductData {
@@ -43,7 +40,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false);
         return binding.getRoot();
     }
@@ -52,7 +49,8 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
         // Inflate the layout for this fragment
         recyclerView = binding.cartRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -62,19 +60,16 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
         Order order = new Order();
         binding.setViewModel(viewModel);
 
-        viewModel.getCartItems().observe(getViewLifecycleOwner(), new Observer<List<CartItemModel>>() {
-            @Override
-            public void onChanged(List<CartItemModel> cartItemModels) {
-                if (cartItemModels.size() > 0) {
-                    cartAdapter.setCartItemModels(cartItemModels);
-                    order.setOrder_items(cartItemModels);
-                    binding.setOrder(order);
-                    binding.setItemCount(cartItemModels.size());
-                } else {
-                    Navigation.findNavController(view).navigate(CartFragmentDirections.actionCartFragmentToEmptyCartFragment());
-                }
-
+        viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
+            if (cartItemModels.size() > 0) {
+                cartAdapter.setCartItemModels(cartItemModels);
+                order.setOrder_items(cartItemModels);
+                binding.setOrder(order);
+                binding.setItemCount(cartItemModels.size());
+            } else {
+                Navigation.findNavController(view).navigate(CartFragmentDirections.actionCartFragmentToEmptyCartFragment());
             }
+
         });
 
         viewModel.getTotalPrice().observe(getViewLifecycleOwner(), aLong -> binding.setTotalPrice(aLong));

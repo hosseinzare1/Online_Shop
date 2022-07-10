@@ -27,13 +27,12 @@ public class CartItemModel {
     @NonNull
     @Override
     public String toString() {
-        String s = "user: " + getId() + "\n" +
+        return "user: " + getId() + "\n" +
                 "name: " + getName() + "\n" +
                 "url: " + getImageUrl() + "\n" +
                 "price: " + getPrice() + "\n" +
                 "quantity: " + getQuantity() + "\n" +
-                "discount: " + getDiscount() + "\n" ;
-        return s;
+                "discount: " + getDiscount() + "\n";
     }
 
     public CartItemModel() {

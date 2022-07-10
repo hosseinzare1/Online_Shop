@@ -66,14 +66,11 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
         Handler handler = new Handler();
 
         final int[] currentPage = {0};
-        Runnable update = new Runnable()  {
-
-            public void run() {
-                if ( currentPage[0] == imageSliderAdapter.getCount()) {
-                    currentPage[0] = 0;
-                }
-                binding.newsViewPager.setCurrentItem(currentPage[0]++, true);
+        Runnable update = () -> {
+            if ( currentPage[0] == imageSliderAdapter.getCount()) {
+                currentPage[0] = 0;
             }
+            binding.newsViewPager.setCurrentItem(currentPage[0]++, true);
         };
 
 

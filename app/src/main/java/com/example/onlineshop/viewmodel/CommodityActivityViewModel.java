@@ -21,7 +21,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class CommodityActivityViewModel extends ViewModel {
 
-    private Context context;
+    private final Context context;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     Repository repository;
 
@@ -96,25 +96,6 @@ public class CommodityActivityViewModel extends ViewModel {
         InputValidator.titleValidation(comment_title.getValue(),commentFormErrors);
         InputValidator.textValidation(comment_text.getValue(),commentFormErrors);
         InputValidator.ratingValidation(comment_rating.getValue(),commentFormErrors);
-//
-//        //title validation
-//        if (comment_title.getValue() != null) {
-//            if (comment_title.getValue().length() < 3)
-//                commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
-//        } else commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
-//
-//        //text validation
-//        if (comment_text.getValue() != null) {
-//            if (comment_text.getValue().length() < 3)
-//                commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
-//        } else commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
-//
-//
-//        //rating validation -- show snackBar if not valid.
-//        if (comment_rating.getValue() != null) {
-//            if (comment_rating.getValue() > 5 | comment_rating.getValue() < 1)
-//                commentFormErrors.add(CommentFormErrors.RATING_INVALID);
-//        } else commentFormErrors.add(CommentFormErrors.RATING_INVALID);
 
         return commentFormErrors.isEmpty();
     }

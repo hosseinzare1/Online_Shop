@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -16,14 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.databinding.FragmentProductsCategoryBinding;
-import com.example.onlineshop.model.Group;
 import com.example.onlineshop.utils.adapters.GroupsAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
-
-import java.util.List;
 
 public class ProductsGroupCategoryFragment extends Fragment {
 
@@ -45,22 +40,20 @@ public class ProductsGroupCategoryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_products_category, container, false);
-        this.viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        if (getActivity() != null)
+            this.viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
         adapter = new GroupsAdapter(viewModel, getContext());
         binding.groupsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.groupsRecyclerView.setAdapter(adapter);
         adapter.getItemCount();
 
-        viewModel.getGroups().observe(getViewLifecycleOwner(), new Observer<List<Group>>() {
-            @Override
-            public void onChanged(List<Group> groups) {
-                adapter.setGroups(groups);
-                Log.i(TAG, "onChanged: " + groups.get(1).getName());
-            }
+        viewModel.getGroups().observe(getViewLifecycleOwner(), groups -> {
+            adapter.setGroups(groups);
+            Log.i(TAG, "onChanged: " + groups.get(1).getName());
         });
 
 

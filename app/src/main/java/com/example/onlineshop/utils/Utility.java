@@ -5,37 +5,26 @@ import java.util.Locale;
 /**
  * Created by JFP on 11/22/2017.
  */
+@SuppressWarnings("deprecation")
 public class Utility {
     public String strWeekDay = "";
     public String strMonth = "";
-    public String nowDate() {
-        Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-"
-                + calendar.get(Calendar.DAY_OF_MONTH) + " "
-                + calendar.getTime().getHours() + ":" + calendar.getTime().getMinutes() + ":"
-                + calendar.getTime().getSeconds();
-    }
-    public String nowdate() {
-        Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.DAY_OF_MONTH);
-    }
-    private class SolarCalendar {
+@SuppressWarnings({"SwitchStatementWithTooFewBranches", "IfStatementWithIdenticalBranches", "deprecation"})
+private class SolarCalendar {
         int date;
         int month;
         int year;
         public SolarCalendar() {
-            Date MiladiDate = new Date();
-            calcSolarCalendar(MiladiDate);
+            Date Gregorian_date = new Date();
+            calcSolarCalendar(Gregorian_date);
         }
-        public SolarCalendar(Date MiladiDate) {
-            calcSolarCalendar(MiladiDate);
-        }
-        private void calcSolarCalendar(Date MiladiDate) {
+
+        private void calcSolarCalendar(Date Gregorian_date) {
             int ld;
-            int miladiYear = MiladiDate.getYear() + 1900;
-            int miladiMonth = MiladiDate.getMonth() + 1;
-            int miladiDate = MiladiDate.getDate();
-            int WeekDay = MiladiDate.getDay();
+            int gregorianYear = Gregorian_date.getYear() + 1900;
+            int gregorianMonth = Gregorian_date.getMonth() + 1;
+            int gregorianDate = Gregorian_date.getDate();
+            int WeekDay = Gregorian_date.getDay();
             int[] buf1 = new int[12];
             int[] buf2 = new int[12];
             buf1[0] = 0;
@@ -62,8 +51,8 @@ public class Utility {
             buf2[9] = 274;
             buf2[10] = 305;
             buf2[11] = 335;
-            if ((miladiYear % 4) != 0) {
-                date = buf1[miladiMonth - 1] + miladiDate;
+            if ((gregorianYear % 4) != 0) {
+                date = buf1[gregorianMonth - 1] + gregorianDate;
                 if (date > 79) {
                     date = date - 79;
                     if (date <= 186) {
@@ -77,7 +66,6 @@ public class Utility {
                                 date = (date % 31);
                                 break;
                         }
-                        year = miladiYear - 621;
                     } else {
                         date = date - 186;
                         switch (date % 30) {
@@ -90,10 +78,10 @@ public class Utility {
                                 date = (date % 30);
                                 break;
                         }
-                        year = miladiYear - 621;
                     }
+                    year = gregorianYear - 621;
                 } else {
-                    if ((miladiYear > 1996) && (miladiYear % 4) == 1) {
+                    if ((gregorianYear > 1996) && (gregorianYear % 4) == 1) {
                         ld = 11;
                     } else {
                         ld = 10;
@@ -109,11 +97,11 @@ public class Utility {
                             date = (date % 30);
                             break;
                     }
-                    year = miladiYear - 622;
+                    year = gregorianYear - 622;
                 }
             } else {
-                date = buf2[miladiMonth - 1] + miladiDate;
-                if (miladiYear >= 1996) {
+                date = buf2[gregorianMonth - 1] + gregorianDate;
+                if (gregorianYear >= 1996) {
                     ld = 79;
                 } else {
                     ld = 80;
@@ -131,7 +119,7 @@ public class Utility {
                                 date = (date % 31);
                                 break;
                         }
-                        year = miladiYear - 621;
+                        year = gregorianYear - 621;
                     } else {
                         date = date - 186;
                         switch (date % 30) {
@@ -144,7 +132,7 @@ public class Utility {
                                 date = (date % 30);
                                 break;
                         }
-                        year = miladiYear - 621;
+                        year = gregorianYear - 621;
                     }
                 } else {
                     date = date + 10;
@@ -158,7 +146,7 @@ public class Utility {
                             date = (date % 30);
                             break;
                     }
-                    year = miladiYear - 622;
+                    year = gregorianYear - 622;
                 }
             }
             switch (month) {
@@ -224,20 +212,20 @@ public class Utility {
             }
         }
     }
-    public static String getCurrentShamsidate() {
+    public static String getCurrentSolarHijri() {
         Locale loc = new Locale("en_US");
         Utility util = new Utility();
         SolarCalendar sc = util.new SolarCalendar();
-        return String.valueOf(sc.year) + "/" + String.format(loc, "%02d",
+        return sc.year + "/" + String.format(loc, "%02d",
                 sc.month) + "/" + String.format(loc, "%02d", sc.date);
     }
     public String day_of_week() {
-        Date MiladiDate = new Date();
-        MiladiDate.setDate(6);
-        MiladiDate.setMonth(12);
-        MiladiDate.setYear(1396);
+        Date Gregorian_date = new Date();
+        Gregorian_date.setDate(6);
+        Gregorian_date.setMonth(12);
+        Gregorian_date.setYear(1396);
         SolarCalendar solarCalendar = new SolarCalendar();
-        solarCalendar.calcSolarCalendar(MiladiDate);
+        solarCalendar.calcSolarCalendar(Gregorian_date);
         return strWeekDay;
     }
     public String day_of_week(int year, int month, int day) {

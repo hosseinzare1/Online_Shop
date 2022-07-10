@@ -51,7 +51,7 @@ String TAG = "AttributesAdapter";
         return attributes.size();
     }
 
-    public class AttributesViewHolder extends RecyclerView.ViewHolder {
+    public static class AttributesViewHolder extends RecyclerView.ViewHolder {
         ItemCardSpecificationBinding binding;
 
         public AttributesViewHolder(@NonNull ItemCardSpecificationBinding binding) {

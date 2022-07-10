@@ -53,7 +53,8 @@ public class MainActivityErrorFragment extends Fragment {
 
         assert getArguments() != null;
         message = getArguments().getString("message");
-        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
         binding.errorTextview.setText(message);
         binding.errorTextview.setOnClickListener(view1 -> {

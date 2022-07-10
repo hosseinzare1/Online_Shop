@@ -114,7 +114,7 @@ public class Order implements Serializable{
     @NonNull
     @Override
     public String toString() {
-        String s = "user: " + getUser() + "\n" +
+        return "user: " + getUser() + "\n" +
                 "time: " + getSubmit_time() + "\n" +
                 "date: " + getSubmit_date() + "\n" +
                 "price: " + getTotalPrice() + "\n" +
@@ -122,6 +122,5 @@ public class Order implements Serializable{
                 "number: " + getTransferee_number() + "\n" +
                 "address: " + getTransferee_address() + "\n"+
                 "orders: "+order_items.get(0);
-        return s;
     }
 }

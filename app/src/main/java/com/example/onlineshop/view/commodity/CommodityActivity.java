@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -44,7 +43,7 @@ public class CommodityActivity extends AppCompatActivity {
     }
 
     public void observeErrors() {
-        viewModel.getErrorLiveData().observe((LifecycleOwner)this, integer -> {
+        viewModel.getErrorLiveData().observe(this, integer -> {
             if (integer != R.string.no_error) {
                 Bundle bundle = new Bundle();
                 bundle.putString("message", this.getString(integer));

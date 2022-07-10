@@ -2,7 +2,6 @@ package com.example.onlineshop.view.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -20,7 +19,7 @@ import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;
 public class Login_Signup_Activity extends AppCompatActivity {
 
     ActivityLoginSignupBinding binding;
-    private static String TAG = "LoginSignup";
+    private static final String TAG = "LoginSignup";
 
     LoginSignupViewModel viewModel;
 
@@ -58,7 +57,7 @@ public class Login_Signup_Activity extends AppCompatActivity {
     }
 
     public void observeErrors() {
-        viewModel.getErrorLiveData().observe((LifecycleOwner) this, integer -> {
+        viewModel.getErrorLiveData().observe(this, integer -> {
             if (integer != R.string.no_error) {
                 Bundle bundle = new Bundle();
                 bundle.putString("message", this.getString(integer));

@@ -8,9 +8,6 @@
             name="model"
             type="com.example.onlineshop.model.Account" />
 
-        <variable
-            name="eventListener"
-            type="com.example.onlineshop.view.account.AccountFragment.AccountFragmentEventListener" />
 
     </data>
 

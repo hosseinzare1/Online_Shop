@@ -1,7 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,11 +17,6 @@ public class AccountButtonAdapter extends RecyclerView.Adapter<AccountButtonAdap
 
     List<Integer> icons = new ArrayList<>();
     List<String> texts = new ArrayList<>();
-//
-//    public AccountButtonAdapter(List<Integer> icons, List<String> texts) {
-//        this.icons = icons;
-//        this.texts = texts;
-//    }
 
     public void setData(List<Integer> icons, List<String> texts) {
         this.icons = icons;
@@ -68,12 +62,7 @@ public class AccountButtonAdapter extends RecyclerView.Adapter<AccountButtonAdap
             super(binding.getRoot());
             this.binding = binding;
 
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    eventListener.onItemClickListener(texts.get(getAdapterPosition()));
-                }
-            });
+            binding.getRoot().setOnClickListener(view -> eventListener.onItemClickListener(texts.get(getAdapterPosition())));
         }
     }
 

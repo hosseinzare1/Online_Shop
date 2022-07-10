@@ -52,7 +52,8 @@ public class AttributesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(getActivity(),new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(),new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
         adapter = new AttributesAdapter();
         args = AttributesFragmentArgs.fromBundle(getArguments());
         productID = args.getProductId();

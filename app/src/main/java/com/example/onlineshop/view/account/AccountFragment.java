@@ -11,14 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAccountBinding;
-import com.example.onlineshop.model.Account;
 import com.example.onlineshop.utils.adapters.AccountButtonAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
@@ -52,7 +50,8 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
 
         SharedPreferences sharedPreferences
@@ -60,16 +59,8 @@ public class AccountFragment extends Fragment {
 
         String number = sharedPreferences.getString(getString(R.string.logged_in_number_KEY), null);
 
-        AccountFragmentEventListener eventListener = new AccountFragmentEventListener();
 
-        binding.setEventListener(eventListener);
-
-        viewModel.getAccountDetails(number).observe(getActivity(), new Observer<Account>() {
-            @Override
-            public void onChanged(Account account) {
-                binding.setModel(account);
-            }
-        });
+        viewModel.getAccountDetails(number).observe(getActivity(), account -> binding.setModel(account));
 
 
         List<String> texts = new ArrayList<>();
@@ -87,40 +78,26 @@ public class AccountFragment extends Fragment {
         binding.buttonsRecyclerView.setAdapter(accountButtonAdapter);
         binding.buttonsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        accountButtonAdapter.setOnClickListener(new AccountButtonAdapter.AccountEventListener() {
-            @Override
-            public void onItemClickListener(String itemText) {
-                switch (itemText) {
-                    case "تاریخچه سفارشات":
+        accountButtonAdapter.setOnClickListener(itemText -> {
+            switch (itemText) {
+                case "تاریخچه سفارشات":
 
-                        Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToOrderHistoryListFragment());
-                        break;
-                    case "مشخصات حساب کاربری":
-                        Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToEditAccountFragment());
+                    Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToOrderHistoryListFragment());
+                    break;
+                case "مشخصات حساب کاربری":
+                    Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToEditAccountFragment());
 
-                        break;
-                    case "نظرات ارسال شده":
-                        Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToSubmittedCommentsFragment());
+                    break;
+                case "نظرات ارسال شده":
+                    Navigation.findNavController(view).navigate(AccountFragmentDirections.actionAccountFragmentToSubmittedCommentsFragment());
 
-                        break;
+                    break;
 
 
-                }
             }
         });
 
     }
 
 
-    public class AccountFragmentEventListener {
-        public void editBtnListener(View view, Account account) {
-
-            Navigation.findNavController(view).navigate(
-                    AccountFragmentDirections.actionAccountFragmentToEditAccountFragment()
-            );
-
-        }
-
-
-    }
 }

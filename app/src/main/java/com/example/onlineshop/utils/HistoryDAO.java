@@ -12,15 +12,15 @@ import java.util.List;
 public interface HistoryDAO {
 
     @Insert
-    public void insertItem(Product product);
+    void insertItem(Product product);
 
     @Query("DELETE FROM Product WHERE name = :productName")
-    public void deleteItem(String productName);
+    void deleteItem(String productName);
 
     @Query("DELETE FROM Product WHERE id = (select id from Product order by id limit 1)")
-    public void deleteFirstItem();
+    void deleteFirstItem();
 
     @Query("SELECT * FROM Product")
-    public List<Product> getItems();
+    List<Product> getItems();
 
 }

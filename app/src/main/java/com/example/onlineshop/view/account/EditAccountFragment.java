@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -35,14 +34,10 @@ public class EditAccountFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_account, container, false);
         eventListener = new EditAccountEventListener();
-        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 
-        viewModel.getAccountDetails(viewModel.getUserNumber()).observe(getViewLifecycleOwner(), new Observer<Account>() {
-            @Override
-            public void onChanged(Account account) {
-                binding.setModel(account);
-            }
-        });
+        viewModel.getAccountDetails(viewModel.getUserNumber()).observe(getViewLifecycleOwner(), account -> binding.setModel(account));
 
         binding.setViewModel(viewModel);
         binding.setEventListener(eventListener);
@@ -62,15 +57,20 @@ public class EditAccountFragment extends Fragment {
 
             if(viewModel.isProfileFormValid(account)){
 
-            Log.i(TAG, "onSaveClick: ");
-            viewModel.updateAccount(account);
+                SharedPreferences sharedPreferences = getActivity().getApplicationContext()
+                        .getSharedPreferences(getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
 
-            SharedPreferences sharedPreferences = getActivity().getApplicationContext()
-                    .getSharedPreferences(getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
-            sharedPreferences.edit().putString(getString(R.string.logged_in_name_KEY),account.getName()).apply();
-            sharedPreferences.edit().putString(getString(R.string.logged_in_number_KEY),account.getNumber()).apply();
-            sharedPreferences.edit().putString(getString(R.string.logged_in_address_KEY),account.getAddress()).apply();
-            sharedPreferences.edit().putString(getString(R.string.logged_in_email_KEY),account.getEmail()).apply();
+            viewModel.updateAccount(account).observe(getViewLifecycleOwner(),newAccount ->{
+
+                        sharedPreferences.edit().putString(getString(R.string.logged_in_name_KEY),newAccount.getName()).apply();
+                        sharedPreferences.edit().putString(getString(R.string.logged_in_number_KEY),newAccount.getNumber()).apply();
+                        sharedPreferences.edit().putString(getString(R.string.logged_in_address_KEY),newAccount.getAddress()).apply();
+                        sharedPreferences.edit().putString(getString(R.string.logged_in_email_KEY),newAccount.getEmail()).apply();
+
+                    }
+                    );
+
+
 
 
 

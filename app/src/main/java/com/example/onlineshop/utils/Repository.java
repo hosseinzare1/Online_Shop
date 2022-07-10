@@ -29,7 +29,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
 
@@ -37,12 +37,10 @@ public class Repository {
 
     private static Repository repository = null;
     public static final String TAG = "repository";
-    private final Context context;
 
     private static AppDatabase databaseInstance;
 
     public Repository(Context context) {
-        this.context = context;
         databaseInstance = AppDatabase.getInstance(context);
 
 
@@ -59,10 +57,21 @@ public class Repository {
         Log.i(TAG, "addError: " + e.getLocalizedMessage());
         if (e instanceof java.net.ConnectException | e instanceof java.net.SocketTimeoutException) {
             //If we can connect to other sites(for example google) then the problem is from the server
-            NetworkStatus.hasInternetConnection().subscribe(aBoolean -> {
-                int error = aBoolean ? (R.string.server_connection_error) : (R.string.internet_connection_error);
-                if (!errorLiveData.getValue().equals(error)) errorLiveData.setValue(error);
-            });
+            NetworkStatus.hasInternetConnection().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SingleObserver<Boolean>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+                        @Override
+                        public void onSuccess(@NonNull Boolean aBoolean) {
+                            int error = aBoolean ? (R.string.server_connection_error) : (R.string.internet_connection_error);
+                            if (!errorLiveData.getValue().equals(error)) errorLiveData.setValue(error);
+                        }
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                        }
+                    });
         }
     }
 
@@ -77,34 +86,31 @@ public class Repository {
     public LiveData<List<Order>> getOrders(String number, CompositeDisposable disposable) {
         MutableLiveData<List<Order>> ordersLiveData = new MutableLiveData<>();
         RetrofitInstance.getAPI().getOrders(number).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .map(new Function<List<Order>, List<Order>>() {
-                    @Override
-                    public List<Order> apply(List<Order> orders) throws Throwable {
-                        List<Order> convertedOrders = new ArrayList<>();
+                .map(orders -> {
+                    List<Order> convertedOrders = new ArrayList<>();
 
-                        for (Order order : orders
-                        ) {
+                    for (Order order : orders
+                    ) {
 
-                            switch (order.getState()) {
-                                case "1":
-                                    order.setState("ثبت شده");
-                                    break;
-                                case "2":
-                                    order.setState("در حال پردازش");
-                                    break;
-                                case "3":
-                                    order.setState("تحویل به اداره پست");
-                                    break;
-                                default:
-                                    order.setState("نامشخص");
-                            }
-
-                            convertedOrders.add(order);
+                        switch (order.getState()) {
+                            case "1":
+                                order.setState("ثبت شده");
+                                break;
+                            case "2":
+                                order.setState("در حال پردازش");
+                                break;
+                            case "3":
+                                order.setState("تحویل به اداره پست");
+                                break;
+                            default:
+                                order.setState("نامشخص");
                         }
 
-
-                        return convertedOrders;
+                        convertedOrders.add(order);
                     }
+
+
+                    return convertedOrders;
                 }).subscribe(
                         new SingleObserver<List<Order>>() {
                             @Override
@@ -129,24 +135,21 @@ public class Repository {
     public LiveData<Order> getOrder(String order_id, CompositeDisposable disposable) {
         MutableLiveData<Order> orderLiveData = new MutableLiveData<>();
         RetrofitInstance.getAPI().getOrder(order_id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .map(new Function<Order, Order>() {
-                    @Override
-                    public Order apply(Order order) throws Throwable {
-                        switch (order.getState()) {
-                            case "1":
-                                order.setState("ثبت شده");
-                                break;
-                            case "2":
-                                order.setState("در حال پردازش");
-                                break;
-                            case "3":
-                                order.setState("تحویل به اداره پست");
-                                break;
-                            default:
-                                order.setState("نامشخص");
-                        }
-                        return order;
+                .map(order -> {
+                    switch (order.getState()) {
+                        case "1":
+                            order.setState("ثبت شده");
+                            break;
+                        case "2":
+                            order.setState("در حال پردازش");
+                            break;
+                        case "3":
+                            order.setState("تحویل به اداره پست");
+                            break;
+                        default:
+                            order.setState("نامشخص");
                     }
+                    return order;
                 }).subscribe(
                         new SingleObserver<Order>() {
                             @Override
@@ -271,15 +274,11 @@ public class Repository {
     }
 
 
-    public boolean addCartItem(CartItemModel itemModel) {
+    public void addCartItem(CartItemModel itemModel) {
 
-        if (isItemExist(itemModel)) {
-
-            return false;
-        } else {
+        if (!isItemExist(itemModel)) {
             databaseInstance.itemCartDao().insertItem(itemModel);
 
-            return true;
         }
 
 
@@ -785,7 +784,7 @@ public class Repository {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
-                        Log.i(TAG, "onError: " + e.toString());
+                        Log.i(TAG, "onError: " + e);
                     }
                 });
 
@@ -815,7 +814,7 @@ public class Repository {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
-                        Log.i(TAG, "onError: " + e.toString());
+                        Log.i(TAG, "onError: " + e);
                     }
                 });
 

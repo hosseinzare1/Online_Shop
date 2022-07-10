@@ -23,7 +23,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
     List<Product> homeItems = new ArrayList<>();
 
     public interface OnClickListener {
-        public void OnItemClickListener(int id);
+        void OnItemClickListener(int id);
     }
 
     OnClickListener onClickListener;

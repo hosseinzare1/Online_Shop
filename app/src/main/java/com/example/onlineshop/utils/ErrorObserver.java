@@ -23,14 +23,6 @@ public class ErrorObserver {
     int errorLayoutID;
     private final String TAG = "ErrorObserver";
 
-    //    public ErrorObserver(Fragment fragment, MutableLiveData<Integer> errorLiveData) {
-//        this.errorLiveData = errorLiveData;
-//        this.fragment = fragment;
-//        navController = Navigation.findNavController(fragment.requireView());
-//
-//        observeErrors();
-//
-//    }
     public ErrorObserver(Activity activity, NavController navController, MutableLiveData<Integer> errorLiveData, @IdRes int errorLayoutID) {
         this.errorLiveData = errorLiveData;
 //        this.fragment = fragment;

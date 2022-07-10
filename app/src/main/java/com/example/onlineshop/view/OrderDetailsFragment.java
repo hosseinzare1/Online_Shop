@@ -16,21 +16,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.FragmentOrderDeatilsBinding;
+import com.example.onlineshop.databinding.FragmentOrderDetailsBinding;
 import com.example.onlineshop.utils.adapters.OrderProductAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
-public class OrderDeatilsFragment extends Fragment {
+public class OrderDetailsFragment extends Fragment {
 
-    FragmentOrderDeatilsBinding binding;
+    FragmentOrderDetailsBinding binding;
     MainActivityViewModel viewModel;
-    OrderDeatilsFragmentArgs args;
+    OrderDetailsFragmentArgs args;
 
-    String TAG = "OrderDeatilsFragment";
+    String TAG = "OrderDetailsFragment";
 
-    public OrderDeatilsFragment() {
+    public OrderDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +41,12 @@ public class OrderDeatilsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_deatils, container, false);
-        viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
-        args = OrderDeatilsFragmentArgs.fromBundle(getArguments());
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_details, container, false);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        args = OrderDetailsFragmentArgs.fromBundle(getArguments());
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
@@ -64,15 +65,12 @@ public class OrderDeatilsFragment extends Fragment {
             Log.i(TAG, "onViewCreated: "+order.getOrder_items().get(0).toString());
         });
 
-        adapter.setOnClickListener(new OrderProductAdapter.ClickListener() {
-            @Override
-            public void onItemClick(int id) {
-                Intent intent = new Intent(getContext(), CommodityActivity.class);
+        adapter.setOnClickListener(id -> {
+            Intent intent = new Intent(getContext(), CommodityActivity.class);
 
-                intent.putExtra("id", id);
+            intent.putExtra("id", id);
 
-                startActivity(intent);
-            }
+            startActivity(intent);
         });
 
 

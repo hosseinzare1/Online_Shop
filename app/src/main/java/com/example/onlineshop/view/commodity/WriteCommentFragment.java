@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -69,17 +68,12 @@ public class WriteCommentFragment extends DialogFragment {
                         viewModel.comment_rating.getValue().intValue(),
                         viewModel.getUserName(),
                         viewModel.getUserNumber(),
-                        args.getProductID(), Utility.getCurrentShamsidate(),
+                        args.getProductID(), Utility.getCurrentSolarHijri(),
                         new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
                 );
 
                 Log.i(TAG, "onSendCommentListener: name :"+viewModel.getUserName());
-                viewModel.submitComment(comment).observe(getViewLifecycleOwner(), new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-                        showResult(s, view);
-                    }
-                });
+                viewModel.submitComment(comment).observe(getViewLifecycleOwner(), s -> showResult(s, view));
             } else {//TODO fix bug when there if other error
                 //show Snackbar of Rating invalid
                 Snackbar.make(view, getString(R.string.RATING_INVALID), Snackbar.LENGTH_LONG).show();

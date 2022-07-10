@@ -13,7 +13,7 @@ Context context ;
     public LoginSignupViewModelFactory(Context context) {
         this.context = context;
     }
-
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> aClass) {

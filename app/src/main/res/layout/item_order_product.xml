@@ -32,7 +32,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/ic_baseline_product_tamplate_24" />
+                tools:srcCompat="@drawable/ic_baseline_product_sample_24" />
 
             <TextView
                 android:id="@+id/cartItemTitle"

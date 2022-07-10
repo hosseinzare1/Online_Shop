@@ -124,9 +124,9 @@
     </fragment>
     <fragment
         android:id="@+id/orderDeatilsFragment"
-        android:name="com.example.onlineshop.view.OrderDeatilsFragment"
+        android:name="com.example.onlineshop.view.OrderDetailsFragment"
         android:label="fragment_order_deatils"
-        tools:layout="@layout/fragment_order_deatils" >
+        tools:layout="@layout/fragment_order_details" >
         <argument
             android:name="order_id"
             app:argType="string" />

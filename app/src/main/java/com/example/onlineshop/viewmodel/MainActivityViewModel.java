@@ -7,7 +7,6 @@ import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.example.onlineshop.model.Account;
@@ -26,13 +25,8 @@ import java.util.List;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class MainActivityViewModel extends ViewModel {
-    private static final String TAG = "viewmodel";
+    private static final String TAG = "MainActivityViewModel";
     CompositeDisposable disposable = new CompositeDisposable();
-
-//    List<CartItemModel> cartItemsList = new ArrayList<>();
-//    MutableLiveData<List<CartItemModel>> cartItemsLiveData = new MutableLiveData<>();
-//
-//    MutableLiveData<String> totalPriceLiveData = new MutableLiveData<>();
 
     Context context;
 
@@ -171,19 +165,16 @@ public class MainActivityViewModel extends ViewModel {
 
         MutableLiveData<Long> totalPriceLiveData = new MutableLiveData<>();
 
-        repository.getCartItems().observe((LifecycleOwner) context, new Observer<List<CartItemModel>>() {
-            @Override
-            public void onChanged(List<CartItemModel> cartItemModels) {
+        repository.getCartItems().observe((LifecycleOwner) context, cartItemModels -> {
 
-                long totalPrice = 0;
-                for (CartItemModel item : cartItemModels
-                ) {
-                    totalPrice += item.getQuantity() * item.getPrice();
+            long totalPrice = 0;
+            for (CartItemModel item : cartItemModels
+            ) {
+                totalPrice += item.getQuantity() * item.getPrice();
 
-                }
-
-                totalPriceLiveData.setValue(totalPrice);
             }
+
+            totalPriceLiveData.setValue(totalPrice);
         });
 
 
@@ -194,19 +185,16 @@ public class MainActivityViewModel extends ViewModel {
 
         MutableLiveData<Long> totalPriceLiveData = new MutableLiveData<>();
 
-        repository.getCartItems().observe((LifecycleOwner) context, new Observer<List<CartItemModel>>() {
-            @Override
-            public void onChanged(List<CartItemModel> cartItemModels) {
+        repository.getCartItems().observe((LifecycleOwner) context, cartItemModels -> {
 
-                long totalPriceWithDiscount = 0;
-                for (CartItemModel item : cartItemModels
-                ) {
-                    totalPriceWithDiscount += item.getQuantity() * (item.getPrice() * (100 - item.getDiscount()) / 100);
+            long totalPriceWithDiscount = 0;
+            for (CartItemModel item : cartItemModels
+            ) {
+                totalPriceWithDiscount += item.getQuantity() * (item.getPrice() * (100 - item.getDiscount()) / 100);
 
-                }
-
-                totalPriceLiveData.setValue(totalPriceWithDiscount);
             }
+
+            totalPriceLiveData.setValue(totalPriceWithDiscount);
         });
 
 
@@ -217,19 +205,16 @@ public class MainActivityViewModel extends ViewModel {
 
         MutableLiveData<Long> totalPriceLiveData = new MutableLiveData<>();
 
-        repository.getCartItems().observe((LifecycleOwner) context, new Observer<List<CartItemModel>>() {
-            @Override
-            public void onChanged(List<CartItemModel> cartItemModels) {
+        repository.getCartItems().observe((LifecycleOwner) context, cartItemModels -> {
 
-                long totalDiscount = 0;
-                for (CartItemModel item : cartItemModels
-                ) {
-                    totalDiscount += item.getQuantity() * (item.getPrice() * (item.getDiscount()) / 100);
+            long totalDiscount = 0;
+            for (CartItemModel item : cartItemModels
+            ) {
+                totalDiscount += item.getQuantity() * (item.getPrice() * (item.getDiscount()) / 100);
 
-                }
-
-                totalPriceLiveData.setValue(totalDiscount);
             }
+
+            totalPriceLiveData.setValue(totalDiscount);
         });
 
 

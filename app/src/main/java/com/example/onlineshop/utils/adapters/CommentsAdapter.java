@@ -1,7 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -81,12 +80,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Holder
         public Holder(@NonNull ItemCardCommentHorizontalBinding horizontalBinding) {
             super(horizontalBinding.getRoot());
             this.horizontalBinding = horizontalBinding;
-            horizontalBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onClickListener.onItemClick(getAdapterPosition());
-                }
-            });
+            horizontalBinding.getRoot().setOnClickListener(view -> onClickListener.onItemClick(getAdapterPosition()));
         }
 
         public Holder(@NonNull ItemCardCommentVerticalBinding verticalBinding) {

@@ -14,6 +14,7 @@ public class CommodityActivityViewModelFactory implements ViewModelProvider.Fact
         this.context = context;
     }
 
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> aClass) {

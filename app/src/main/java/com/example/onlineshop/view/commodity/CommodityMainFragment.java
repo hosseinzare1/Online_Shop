@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,7 +37,7 @@ public class CommodityMainFragment extends Fragment {
 
     HorizontalProductsAdapter sameProductsAdapter;
     int id;
-    private String TAG = "CommodityMainFragment";
+    private final String TAG = "CommodityMainFragment";
 
     public CommodityMainFragment() {
     }
@@ -47,7 +46,8 @@ public class CommodityMainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_commodity_main, container, false);
-        viewModel = new ViewModelProvider(getActivity(), new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
+        if (getActivity() != null)
+            viewModel = new ViewModelProvider(getActivity(), new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
         return binding.getRoot();
     }
 
@@ -92,9 +92,7 @@ public class CommodityMainFragment extends Fragment {
 
         });
 
-        viewModel.getImages(id).observe(getViewLifecycleOwner(), images -> {
-            imageSliderAdapter.setImages(images);
-        });
+        viewModel.getImages(id).observe(getViewLifecycleOwner(), images -> imageSliderAdapter.setImages(images));
 
         viewModel.getComments(id).observe(getViewLifecycleOwner(), comments -> {
 
@@ -135,23 +133,11 @@ public class CommodityMainFragment extends Fragment {
 
         });
 
-        sameProductsAdapter.setOnClickListener(new HorizontalProductsAdapter.OnClickListener() {
-            @Override
-            public void onProductClickListener(int id) {
-                viewModel.selectedProductLiveData.setValue(id);
+        sameProductsAdapter.setOnClickListener(id1 -> viewModel.selectedProductLiveData.setValue(id1));
 
-            }
-        });
-
-        commentsAdapter.setOnItemClickListener(new CommentsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Navigation.findNavController(view).navigate(
-                        CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(id,position)
-                );
-
-            }
-        });
+        commentsAdapter.setOnItemClickListener(position -> Navigation.findNavController(view).navigate(
+                CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(id,position)
+        ));
 
 
     }
@@ -160,22 +146,26 @@ public class CommodityMainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel.selectedProductLiveData.observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer id) {
-                loadData(id,view);
-                binding.commodityScrollView.fullScroll(ScrollView.FOCUS_UP);
-            }
+        viewModel.selectedProductLiveData.observe(getViewLifecycleOwner(), id -> {
+            loadData(id,view);
+            binding.commodityScrollView.fullScroll(ScrollView.FOCUS_UP);
         });
 
 
         viewModel.selectedProductLiveData.setValue(getArguments().getInt("id"));
     }
 
-    public class CommodityMainEventListener {
+    public static class CommodityMainEventListener {
 
         public void onAddToCart(View view, Product product, MainActivityViewModel viewModel) {
-            viewModel.addCartItem(new CartItemModel(product.getId(), product.getName(), product.getImageUrl(), product.getPrice(), 1, product.getDiscount()));
+            viewModel.addCartItem(
+                    new CartItemModel(product.getId(),
+                            product.getName(),
+                            product.getImageUrl(),
+                            product.getPrice(),
+                            1,
+                            product.getDiscount()));
+
         }
 
         public void onSeeSpecifications(View view, Product product) {

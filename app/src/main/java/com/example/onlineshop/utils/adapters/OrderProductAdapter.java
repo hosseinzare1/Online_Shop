@@ -3,7 +3,6 @@ package com.example.onlineshop.utils.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -62,12 +61,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         public OrderProductViewHolder(@NonNull ItemOrderProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clickListener.onItemClick(items.get(getAdapterPosition()).getId());
-                }
-            });
+            binding.getRoot().setOnClickListener(view -> clickListener.onItemClick(items.get(getAdapterPosition()).getId()));
         }
     }
 

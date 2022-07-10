@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -26,9 +25,6 @@ import com.example.onlineshop.view.MainActivity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
 import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
@@ -110,14 +106,11 @@ public class LoginFragment extends Fragment {
         public void onSignInClick(View view, LoginSignupViewModel viewModel) {
 
             if (viewModel.isSigningFormValid()) viewModel.login().observe((LifecycleOwner) context,
-                    new Observer<Response<JsonObject>>() {
-                        @Override
-                        public void onChanged(Response<JsonObject> response) {
+                    response -> {
 
-                            Log.i(TAG, "onChanged: user :::: "+response.body().toString());
-                            showMessage(String.valueOf(response.code()),
-                                    new Gson().fromJson(response.body(),User.class));
-                        }
+                        Log.i(TAG, "onChanged: user :::: "+response.body().toString());
+                        showMessage(String.valueOf(response.code()),
+                                new Gson().fromJson(response.body(),User.class));
                     });
         }
 

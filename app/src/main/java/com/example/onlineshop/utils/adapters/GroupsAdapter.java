@@ -3,20 +3,17 @@ package com.example.onlineshop.utils.adapters;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.GroupItemBinding;
-import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.view.ProductsGroupCategoryFragmentDirections;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
@@ -60,13 +57,9 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
         holder.binding.categorysRecyclerView.setAdapter(adapter);
         holder.binding.categorysRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, true));
         holder.binding.setModel(group);
-        viewModel.getCategories(Integer.parseInt(group.getId())).observe((LifecycleOwner) context, new Observer<List<Category>>() {
-
-            @Override
-            public void onChanged(List<Category> categories) {
-                adapter.setCategoriesList(categories);
-                Log.i(TAG, "onChanged: " + categories.get(1).getName());
-            }
+        viewModel.getCategories(Integer.parseInt(group.getId())).observe((LifecycleOwner) context, categories -> {
+            adapter.setCategoriesList(categories);
+            Log.i(TAG, "onChanged: " + categories.get(1).getName());
         });
 
 
@@ -83,26 +76,16 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
         public GroupViewHolder(@NonNull GroupItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.groupItemCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.
-                            actionProductsGroupCategoryFragmentToProductListFragment(
-                                    groups.get(getAdapterPosition()).getName(), ""
+            binding.groupItemCard.setOnClickListener(view -> Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.
+                    actionProductsGroupCategoryFragmentToProductListFragment(
+                            groups.get(getAdapterPosition()).getName(), ""
 
-                            ));
-                }
-            });
+                    )));
 
-            binding.groupItemsCount.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.actionProductsGroupCategoryFragmentToProductListFragment(
-                            "",
-                            groups.get(getAdapterPosition()).getName()
-                    ));
-                }
-            });
+            binding.groupItemsCount.setOnClickListener(view -> Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.actionProductsGroupCategoryFragmentToProductListFragment(
+                    "",
+                    groups.get(getAdapterPosition()).getName()
+            )));
 
 
         }
