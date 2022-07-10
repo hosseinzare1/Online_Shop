@@ -1,6 +1,7 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,16 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Holder
         notifyDataSetChanged();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public OnItemClickListener onClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,6 +66,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Holder
             holder.verticalBinding.setModel(comments.get(position));
         }
 
+
     }
 
     @Override
@@ -62,18 +74,25 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Holder
         return comments.size();
     }
 
-    public static class Holder extends RecyclerView.ViewHolder {
+    public class Holder extends RecyclerView.ViewHolder {
         ItemCardCommentHorizontalBinding horizontalBinding;
         ItemCardCommentVerticalBinding verticalBinding;
 
         public Holder(@NonNull ItemCardCommentHorizontalBinding horizontalBinding) {
             super(horizontalBinding.getRoot());
             this.horizontalBinding = horizontalBinding;
+            horizontalBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickListener.onItemClick(getAdapterPosition());
+                }
+            });
         }
 
         public Holder(@NonNull ItemCardCommentVerticalBinding verticalBinding) {
             super(verticalBinding.getRoot());
             this.verticalBinding = verticalBinding;
+
         }
     }
 

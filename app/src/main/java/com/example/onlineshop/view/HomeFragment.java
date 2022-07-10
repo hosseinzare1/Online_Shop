@@ -1,9 +1,8 @@
 package com.example.onlineshop.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,8 @@ import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
-import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class HomeFragment extends Fragment implements HorizontalProductsAdapter.OnClickListener {
@@ -63,6 +63,27 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
 
         binding.newsViewPager.setAdapter(imageSliderAdapter);
         binding.newsViewPagerIndicator.setViewPager(binding.newsViewPager);
+        Handler handler = new Handler();
+
+        final int[] currentPage = {0};
+        Runnable update = new Runnable()  {
+
+            public void run() {
+                if ( currentPage[0] == imageSliderAdapter.getCount()) {
+                    currentPage[0] = 0;
+                }
+                binding.newsViewPager.setCurrentItem(currentPage[0]++, true);
+            }
+        };
+
+
+        new Timer().schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 100, 3000);
 
         binding.discountsRecyclerView.setAdapter(discountsListAdapter);
         binding.discountsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, true));
@@ -79,7 +100,7 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
 
 
         //TODO change images resource
-        viewModel.getImages(1).observe(getViewLifecycleOwner(), images -> imageSliderAdapter.setImages(images));
+        viewModel.getNewsImages().observe(getViewLifecycleOwner(), images -> imageSliderAdapter.setImages(images));
         viewModel.getSpecialDiscounts().observe(getViewLifecycleOwner(), homeItems -> discountsListAdapter.setItems(homeItems));
         viewModel.getBestSelling().observe(getViewLifecycleOwner(), homeItems -> bestsellingListAdapter.setItems(homeItems));
 

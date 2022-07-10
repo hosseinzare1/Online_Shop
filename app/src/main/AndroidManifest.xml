@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineShop">
         <activity
-            android:name=".view.commodity.CommodityActivity"
+            android:name="com.example.onlineshop.view.commodity.CommodityActivity"
             android:exported="true" />
         <activity
-            android:name=".view.account.Login_Signup_Activity"
+            android:name="com.example.onlineshop.view.account.Login_Signup_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.example.onlineshop.view.MainActivity"
             android:exported="true" />
     </application>
 

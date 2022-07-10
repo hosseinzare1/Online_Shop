@@ -61,19 +61,50 @@
         <entry key="..\:/OnlineShop/app/src/main/res/layout/vertical_item_card.xml" value="0.21666666666666667" />
         <entry key="..\:/OnlineShop/app/src/main/res/menu/main_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/OnlineShop/app/src/main/res/menu/toolbar_searchview.xml" value="0.21981981981981982" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.195" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1655" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/drawable/ic_baseline_keyboard_arrow_left_24.xml" value="0.1655" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/drawable/ic_baseline_more_24.xml" value="0.1755" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/drawable/ic_baseline_product_tamplate_24.xml" value="0.1755" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/account_button_item.xml" value="0.4" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/activity_commodity.xml" value="0.20521590423257802" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/activity_login_signup.xml" value="0.20521590423257802" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/activity_main.xml" value="0.20521590423257802" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/cart_item_card.xml" value="0.4" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/category_item.xml" value="0.536" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/custom_counter.xml" value="0.20521590423257802" />
         <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_account.xml" value="0.21621621621621623" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_cart.xml" value="0.20405405405405405" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_edit_account.xml" value="0.18840579710144928" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_all_comments.xml" value="0.20521590423257802" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_attributes.xml" value="0.20521590423257802" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_cart.xml" value="0.4" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_commodity_main.xml" value="0.176" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_descriptions.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_edit_account.xml" value="0.264" />
         <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_edit_comment.xml" value="0.21621621621621623" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_order_completion.xml" value="0.4" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_order_deatils.xml" value="0.2" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_empity_cart.xml" value="0.20521590423257802" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_mainactivity_error.xml" value="0.20521590423257802" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_order_completion.xml" value="0.264" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_order_deatils.xml" value="0.3827751196172249" />
         <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_order_history_list.xml" value="0.264" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_write_comment.xml" value="0.21621621621621623" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_card_comment_vertical.xml" value="0.21621621621621623" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_card_specification.xml" value="0.1" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_order_history.xml" value="0.4" />
-        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_order_product.xml" value="0.2" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_product_details.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_product_list.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_products_category.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_signup.xml" value="0.264" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_submitted_comments.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/fragment_write_comment.xml" value="0.4" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/group_item.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/horizontal_item_card.xml" value="0.4" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/image_slider_item.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_card_comment_horizontal.xml" value="0.4" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_card_comment_vertical.xml" value="0.264" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_card_specification.xml" value="0.264" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_order_history.xml" value="0.4774774774774775" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_order_product.xml" value="0.4" />
         <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/item_submitted_comment.xml" value="0.21621621621621623" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/layout/vertical_item_card.xml" value="0.4" />
+        <entry key="..\:/Programing/Android Projects/OnlineShop/app/src/main/res/menu/main_navigation_menu.xml" value="0.21621621621621623" />
       </map>
     </option>
   </component>

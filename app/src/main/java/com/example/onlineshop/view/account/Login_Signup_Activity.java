@@ -10,11 +10,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityLoginSignupBinding;
-import com.example.onlineshop.utils.ErrorObserver;
 import com.example.onlineshop.view.MainActivity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
 import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;

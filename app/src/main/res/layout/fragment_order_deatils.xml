@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -25,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="کد رهگیری:"
+                android:text="@string/trackingNumber"
+                android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +34,9 @@
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="تاریخ ثبت سفارش:"
+                android:text="@string/order_submit_date"
+                android:textAppearance="?attr/textAppearanceBody2"
+
                 app:layout_constraintEnd_toEndOf="@+id/textView27"
                 app:layout_constraintTop_toTopOf="@+id/DataTime" />
 
@@ -41,7 +44,9 @@
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="تحویل گیرنده:"
+                android:text="@string/order_transferee_name"
+                android:textAppearance="?attr/textAppearanceBody2"
+
                 app:layout_constraintEnd_toEndOf="@+id/textView28"
                 app:layout_constraintTop_toTopOf="@+id/userName" />
 
@@ -49,7 +54,9 @@
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="شماره تماس:"
+                android:text="@string/order_transferee_number"
+                android:textAppearance="?attr/textAppearanceBody2"
+
                 app:layout_constraintEnd_toEndOf="@+id/textView29"
                 app:layout_constraintTop_toTopOf="@+id/userNumber" />
 
@@ -57,7 +64,9 @@
                 android:id="@+id/textView31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ارسال به:"
+                android:text="@string/order_transferee_address"
+                android:textAppearance="?attr/textAppearanceBody2"
+
                 app:layout_constraintEnd_toEndOf="@+id/textView30"
                 app:layout_constraintTop_toTopOf="@+id/userAddress" />
 
@@ -65,7 +74,9 @@
                 android:id="@+id/textView32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="مبلغ کل:"
+                android:text="@string/order_totalPrice"
+                android:textAppearance="?attr/textAppearanceBody2"
+
                 app:layout_constraintEnd_toEndOf="@+id/textView31"
                 app:layout_constraintTop_toTopOf="@+id/totalPrice" />
 
@@ -74,10 +85,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="وضعیت"
+                android:text="@{model.state}"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                tools:text="وضعیت" />
 
             <TextView
                 android:id="@+id/trackingNumber"
@@ -87,6 +100,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@{String.valueOf(model.trackingNumber)}"
                 android:textAlignment="textEnd"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +114,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@{model.submit_date +` - `+ model.submit_time}"
                 android:textAlignment="textEnd"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/trackingNumber"
@@ -112,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@{model.transferee_name}"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/DataTime"
@@ -125,6 +141,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@{model.transferee_number}"
                 android:textAlignment="textEnd"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/userName"
@@ -137,6 +154,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@{model.transferee_address}"
+                android:textAppearance="?attr/textAppearanceBody1"
+
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/userNumber"
@@ -149,6 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@{String.format(`%,d`,model.totalPrice).concat(` تومان `)}"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/userAddress"
@@ -158,8 +178,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/orderProductsRecyclerView"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="16dp"
+                android:background="?attr/backgroundColor"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/state" />

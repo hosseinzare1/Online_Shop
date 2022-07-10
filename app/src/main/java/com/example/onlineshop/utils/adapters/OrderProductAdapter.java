@@ -3,6 +3,7 @@ package com.example.onlineshop.utils.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ItemOrderProductBinding;
 import com.example.onlineshop.model.CartItemModel;
-import com.example.onlineshop.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,16 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
     private static final String TAG = "OrderProductAdapter";
     List<CartItemModel> items = new ArrayList<>();
+
+    public interface ClickListener {
+        void onItemClick(int id);
+    }
+
+    ClickListener clickListener;
+
+    public void setOnClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 
     public void setItems(List<CartItemModel> items) {
         this.items = items;
@@ -38,7 +48,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderProductViewHolder holder, int position) {
         holder.binding.setModel(items.get(position));
-        Log.i(TAG, "onBindViewHolder: "+items.get(position).getName());
+        Log.i(TAG, "onBindViewHolder: " + items.get(position).getName());
     }
 
     @Override
@@ -52,6 +62,12 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         public OrderProductViewHolder(@NonNull ItemOrderProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.onItemClick(items.get(getAdapterPosition()).getId());
+                }
+            });
         }
     }
 

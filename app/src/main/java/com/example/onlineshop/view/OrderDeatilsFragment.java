@@ -1,12 +1,12 @@
 package com.example.onlineshop.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentOrderDeatilsBinding;
-import com.example.onlineshop.model.Order;
 import com.example.onlineshop.utils.adapters.OrderProductAdapter;
+import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -62,6 +62,17 @@ public class OrderDeatilsFragment extends Fragment {
             binding.setModel(order);
             adapter.setItems(order.getOrder_items());
             Log.i(TAG, "onViewCreated: "+order.getOrder_items().get(0).toString());
+        });
+
+        adapter.setOnClickListener(new OrderProductAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int id) {
+                Intent intent = new Intent(getContext(), CommodityActivity.class);
+
+                intent.putExtra("id", id);
+
+                startActivity(intent);
+            }
         });
 
 

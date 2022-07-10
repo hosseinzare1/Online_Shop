@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.example.onlineshop.model.Order;
 import com.example.onlineshop.utils.Utility;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,8 +60,6 @@ public class OrderCompletionFragment extends Fragment {
         binding.setItemCount(order.getOrder_items().size());
 
         order.setUser(viewModel.getUserNumber());
-        order.setSubmit_date(Utility.getCurrentShamsidate());
-        order.setSubmit_time(new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date()));
 
         viewModel.getTotalPriceWithDiscount().observe(getViewLifecycleOwner(), order::setTotalPrice);
 
@@ -81,15 +81,29 @@ public class OrderCompletionFragment extends Fragment {
 
     public class EventListener{
         public void onPayClickListener(View view,Order order){
+            order.setSubmit_date(Utility.getCurrentShamsidate());
+            order.setSubmit_time(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
+
             Log.i(TAG, "onPayClickListener: "+order.toString());
+
+            // TODO The payment method is implemented in this section
 
             viewModel.submitOrder(order).observe(getViewLifecycleOwner(), new Observer<String>() {
                         @Override
                         public void onChanged(String s) {
                             Log.i(TAG, "onChanged: " + s);
+
+                            Snackbar.make(view,"سفارش شما با موفقیت ثبت شد."+"برای پیگیری سفارش به صفحه پروفایل خود مراجعه نمایید."
+                                    ,Snackbar.LENGTH_LONG).show();
+
+                            viewModel.RemoveAllCartItems();
+
+                            Navigation.findNavController(view).popBackStack();
                         }
                     }
             );
+
+
         }
 
 

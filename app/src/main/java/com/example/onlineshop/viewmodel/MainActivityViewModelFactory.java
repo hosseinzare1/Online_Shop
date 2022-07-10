@@ -1,6 +1,5 @@
 package com.example.onlineshop.viewmodel;
 
-import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;

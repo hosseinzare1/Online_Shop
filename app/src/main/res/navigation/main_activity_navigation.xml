@@ -132,10 +132,6 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/profileInformationFragment"
-        android:name="com.example.onlineshop.view.ProfileInformationFragment"
-        android:label="ProfileInformationFragment" />
-    <fragment
         android:id="@+id/submittedCommentsFragment"
         android:name="com.example.onlineshop.view.SubmittedCommentsFragment"
         android:label="SubmittedCommentsFragment" >

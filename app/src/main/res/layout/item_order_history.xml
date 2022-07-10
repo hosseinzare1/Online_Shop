@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="1dp"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{`کد رهگیری:`+String.valueOf(model.trackingNumber)}"
+                android:text="@{`کد سفارش: `+String.valueOf(model.trackingNumber)}"
+            android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="کد سفارش:" />
@@ -36,24 +38,27 @@
                 android:id="@+id/textView23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="@{String.valueOf(model.totalPrice)+` تومان `}"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="@{String.format(`%,d`,model.totalPrice).concat(` تومان `)}"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="قیمت کل" />
+                tools:text="16,400,000" />
 
             <TextView
                 android:id="@+id/textView25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="@{`تاریخ ثبت:`+model.submit_date+`-`+model.submit_time}"
+                android:text="@{``+model.submit_date+` - `+model.submit_time}"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceCaption"
+
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView23"
                 tools:text="تاریخ ثبت" />
 
@@ -63,10 +68,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{`وضعیت`+model.state}"
+                android:text="@{model.state}"
+                android:textAppearance="?attr/textAppearanceBody1"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:text="وضعیت" />
+                tools:text="در حال پردازش" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24"
+                android:contentDescription="see more" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

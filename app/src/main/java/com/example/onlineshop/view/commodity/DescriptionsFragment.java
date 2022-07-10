@@ -41,7 +41,7 @@ public class DescriptionsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         args = DescriptionsFragmentArgs.fromBundle(getArguments());
-        binding.descriptionTextView.setText(args.getDescripton());
+        binding.descriptionTextView.setText(args.getDescription());
 
     }
 }

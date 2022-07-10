@@ -43,42 +43,48 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#e0e0e0"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+            app:layout_constraintTop_toBottomOf="@+id/topLayout"
             android:overScrollMode="never"
             >
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cartRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
                     android:background="#FFFFFF"
+                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:overScrollMode="never"/>
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/summeryLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:background="#FFFFFF"
-                    android:elevation="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cartRecyclerView">
+                    app:layout_constraintTop_toBottomOf="@+id/cartRecyclerView">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
 
                     <TextView
                         android:id="@+id/textView3"
@@ -86,9 +92,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="خلاصه سبد"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:text="@string/cart_summery_title"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,7 +104,8 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:text="@{String.valueOf(itemCount)+` کالا `}"
-                        android:textSize="12sp"
+                        android:textAppearance="?attr/textAppearanceCaption"
+
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="16 کالا" />
@@ -109,7 +115,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:text="قیمت کالا ها"
+                        android:text="@string/order_original_prices"
+                        android:textAppearance="?attr/textAppearanceBody2"
+
                         app:layout_constraintEnd_toEndOf="@+id/textView3"
                         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -118,7 +126,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="تخفیف کالا ها"
+                        android:text="@string/order_total_discount"
+                        android:textAppearance="?attr/textAppearanceBody2"
+
                         app:layout_constraintEnd_toEndOf="@+id/textView20"
                         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -127,7 +137,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="جمع سبد خرید"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/order_totalPrice"
+                        android:textAppearance="?attr/textAppearanceBody2"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView21"
                         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -136,8 +150,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{String.format(`%,d`,totalPrice).concat(` تومان `)}"
-                        app:layout_constraintStart_toStartOf="@+id/textView19"
-                        app:layout_constraintTop_toTopOf="@+id/textView20" />
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                        app:layout_constraintTop_toTopOf="@+id/textView20"
+                        tools:text="10,000,000" />
 
                     <TextView
                         android:id="@+id/totalDiscountTextView"
@@ -145,9 +161,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text='@{String.format(`%,d`,totalDiscount).concat(` تومان `)}'
+                        android:textAppearance="?attr/textAppearanceBody1"
                         android:textColor="#F44336"
-                        app:layout_constraintStart_toStartOf="@+id/totalPriceTextView"
-                        app:layout_constraintTop_toBottomOf="@+id/totalPriceTextView" />
+                        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                        app:layout_constraintTop_toBottomOf="@+id/totalPriceTextView"
+                        tools:text="10%" />
 
                     <TextView
                         android:id="@+id/totalPriceWithDiscountTextView"
@@ -155,17 +173,21 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@{String.format(`%,d`,totalPriceWithDiscount).concat(` تومان `)}"
-                        app:layout_constraintStart_toStartOf="@+id/totalDiscountTextView"
-                        app:layout_constraintTop_toBottomOf="@+id/totalDiscountTextView" />
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                        app:layout_constraintTop_toBottomOf="@+id/totalDiscountTextView"
+                        tools:text="9,000,000" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/bottomLayout"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
+            android:background="#FFFFFF"
+
             android:elevation="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -178,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:onClick="@{(view)-> eventListener.onPayClickListener(view,order,viewModel)}"
-                android:text="پرداخت"
+                android:text="@string/goto_completePayment"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -188,8 +210,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="جمع سبد خرید"
-                android:textSize="10sp"
+                android:text="@string/order_totalPrice"
+                android:textAppearance="@style/Theme.OnlineShop.Caption"
                 app:layout_constraintEnd_toEndOf="@+id/cartPriceTextView"
                 app:layout_constraintHorizontal_bias="0.546"
                 app:layout_constraintStart_toStartOf="@+id/cartPriceTextView"
@@ -212,9 +234,11 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout6"
+            android:id="@+id/topLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -227,6 +251,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:text='@{itemCount+" کالا "}'
+                android:textAppearance="@style/Theme.OnlineShop.Caption"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -238,8 +263,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{(view)-> eventListener.onRemoveAll(view)}"
-                android:text="حذف کالا ها"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:text="@string/Empty_the_shopping_cart"
+                android:textAppearance="?attr/textAppearanceButton"
                 app:icon="@drawable/ic_baseline_delete_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

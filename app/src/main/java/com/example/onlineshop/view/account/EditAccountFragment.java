@@ -59,6 +59,9 @@ public class EditAccountFragment extends Fragment {
     public class EditAccountEventListener {
 
         public void onSaveClick(View view, Account account, MainActivityViewModel viewModel) {
+
+            if(viewModel.isProfileFormValid(account)){
+
             Log.i(TAG, "onSaveClick: ");
             viewModel.updateAccount(account);
 
@@ -72,6 +75,7 @@ public class EditAccountFragment extends Fragment {
 
 
             Navigation.findNavController(view).navigate(EditAccountFragmentDirections.actionEditAccountFragmentToAccountFragment());
+            }
 
 
         }

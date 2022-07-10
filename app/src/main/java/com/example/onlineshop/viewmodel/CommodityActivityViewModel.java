@@ -12,6 +12,7 @@ import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.utils.InputValidator;
 import com.example.onlineshop.utils.Repository;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class CommodityActivityViewModel extends ViewModel {
     private Context context;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     Repository repository;
+
+    public MutableLiveData<Integer> selectedProductLiveData = new MutableLiveData<>();
 
     public MutableLiveData<Integer> getErrorLiveData() {
         return repository.getErrorLiveData();
@@ -84,34 +87,34 @@ public class CommodityActivityViewModel extends ViewModel {
     public MutableLiveData<String> comment_title = new MutableLiveData<>();
     public MutableLiveData<String> comment_text = new MutableLiveData<>();
     public MutableLiveData<Float> comment_rating = new MutableLiveData<>();
-    public ObservableArrayList<CommentFormErrors> commentFormErrors = new ObservableArrayList<>();
+    public ObservableArrayList<InputValidator.InputErrors> commentFormErrors = new ObservableArrayList<>();
 
-    public enum CommentFormErrors {
-        RATING_INVALID,
-        TITLE_INVALID,
-        TEXT_INVALID
-    }
 
     public boolean isCommentFormValid() {
         commentFormErrors.clear();
-        //title validation
-        if (comment_title.getValue() != null) {
-            if (comment_title.getValue().length() < 3)
-                commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
-        } else commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
 
-        //text validation
-        if (comment_text.getValue() != null) {
-            if (comment_text.getValue().length() < 3)
-                commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
-        } else commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
-
-
-        //rating validation -- show snackBar if not valid.
-        if (comment_rating.getValue() != null) {
-            if (comment_rating.getValue() > 5 | comment_rating.getValue() < 1)
-                commentFormErrors.add(CommentFormErrors.RATING_INVALID);
-        } else commentFormErrors.add(CommentFormErrors.RATING_INVALID);
+        InputValidator.titleValidation(comment_title.getValue(),commentFormErrors);
+        InputValidator.textValidation(comment_text.getValue(),commentFormErrors);
+        InputValidator.ratingValidation(comment_rating.getValue(),commentFormErrors);
+//
+//        //title validation
+//        if (comment_title.getValue() != null) {
+//            if (comment_title.getValue().length() < 3)
+//                commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
+//        } else commentFormErrors.add(CommentFormErrors.TITLE_INVALID);
+//
+//        //text validation
+//        if (comment_text.getValue() != null) {
+//            if (comment_text.getValue().length() < 3)
+//                commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
+//        } else commentFormErrors.add(CommentFormErrors.TEXT_INVALID);
+//
+//
+//        //rating validation -- show snackBar if not valid.
+//        if (comment_rating.getValue() != null) {
+//            if (comment_rating.getValue() > 5 | comment_rating.getValue() < 1)
+//                commentFormErrors.add(CommentFormErrors.RATING_INVALID);
+//        } else commentFormErrors.add(CommentFormErrors.RATING_INVALID);
 
         return commentFormErrors.isEmpty();
     }

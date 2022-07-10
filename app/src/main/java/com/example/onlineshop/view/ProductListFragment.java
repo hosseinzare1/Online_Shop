@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +23,9 @@ import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.ProductsListAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
-import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
-import java.io.Serializable;
 import java.util.List;
 
 

@@ -1,7 +1,7 @@
 package com.example.onlineshop.view;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +20,12 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCartBinding;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Order;
-import com.example.onlineshop.utils.Repository;
-import com.example.onlineshop.utils.Utility;
 import com.example.onlineshop.utils.adapters.CartAdapter;
-import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
+import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 
 public class CartFragment extends Fragment implements CartAdapter.OnCartProductData {
@@ -103,6 +98,15 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
     @Override
     public void onDeleteClickListener(CartItemModel cartItemModel) {
         viewModel.deleteFromCart(cartItemModel);
+    }
+
+    @Override
+    public void onProductClickListener(int id) {
+        Intent intent = new Intent(getContext(), CommodityActivity.class);
+
+        intent.putExtra("id", id);
+
+        startActivity(intent);
     }
 
 

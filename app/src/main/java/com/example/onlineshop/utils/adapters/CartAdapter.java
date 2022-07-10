@@ -1,21 +1,15 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.CartItemCardBinding;
 import com.example.onlineshop.model.CartItemModel;
-import com.example.onlineshop.view.CartFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,12 +51,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             this.binding = binding;
 
             binding.cartItemImageView.setOnClickListener(view ->
-                    Navigation.findNavController(view).navigate(
-                            CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartItemModels.get(getAdapterPosition()).getId())
-                    ));
-            binding.cartItemTitle.setOnClickListener(view -> Navigation.findNavController(view).navigate(
-                    CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartItemModels.get(getAdapterPosition()).getId())
-            ));
+                            onCartProductData.onProductClickListener(cartItemModels.get(getAdapterPosition()).getId())
+//                    Navigation.findNavController(view).navigate(
+//                            CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartItemModels.get(getAdapterPosition()).getId())
+//            )
+            );
+
+            binding.cartItemTitle.setOnClickListener(view ->
+                            onCartProductData.onProductClickListener(cartItemModels.get(getAdapterPosition()).getId())
+
+//                    Navigation.findNavController(view).navigate(
+//                    CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartItemModels.get(getAdapterPosition()).getId())
+//            )
+            );
 
 
             binding.addButton.setOnClickListener(view -> {
@@ -99,6 +100,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
         void onDeleteClickListener(CartItemModel item);
 
+        void onProductClickListener(int id);
     }
 
     public void setOnCartProductData(OnCartProductData onCartProductData) {

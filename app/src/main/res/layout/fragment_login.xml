@@ -14,7 +14,7 @@
             name="viewModel"
             type="com.example.onlineshop.viewmodel.LoginSignupViewModel" />
 
-        <import type="com.example.onlineshop.viewmodel.LoginSignupViewModel.FormError" />
+        <import type="com.example.onlineshop.utils.InputValidator.InputErrors" />
 
     </data>
 
@@ -36,7 +36,8 @@
                 android:src="@drawable/login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/login_image" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:errorText='@{viewModel.formErrors.contains(FormError.INVALID_NUMBER) ? @string/INVALID_NUMBER : ""}'
+                app:errorText='@{viewModel.formErrors.contains(InputErrors.INVALID_NUMBER) ? @string/INVALID_NUMBER : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login">
@@ -56,10 +57,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="شماره موبایل"
-                    android:minHeight="48dp"
+                    android:hint="@string/number_hint"
                     android:text="@={viewModel.number}"
-                    android:textColor="@color/black" />
+                    tools:text="09033093041"
+                    android:textAppearance="@style/Theme.OnlineShop.Body1"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -69,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:errorText='@{viewModel.formErrors.contains(FormError.INVALID_PASSWORD) ? @string/INVALID_PASSWORD : ""}'
+                app:errorText='@{viewModel.formErrors.contains(InputErrors.INVALID_PASSWORD) ? @string/INVALID_PASSWORD : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputLayout1">
@@ -80,10 +82,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="رمز عبور"
-                    android:minHeight="48dp"
+                    android:hint="@string/password_hint"
                     android:text="@={viewModel.password}"
-                    android:textColor="@color/black" />
+                    android:textAppearance="@style/Theme.OnlineShop.Body1"
+
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -92,7 +95,8 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:onClick="@{(v)->eventListener.onSignInClick(v,viewModel)}"
-                android:text="ورود"
+                android:text="@string/login"
+                android:textAppearance="?attr/textAppearanceButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,8 +112,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:onClick="@{(v) -> eventListener.LoginToSignupFragment(v)}"
-                android:text="حسابی ندارید؟ثبت نام کنید"
-                android:textColor="@color/design_default_color_primary_dark"
+                android:text="@string/goto_SignupFragment"
+                android:textColor="@color/link"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login_btn" />

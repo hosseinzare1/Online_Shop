@@ -16,8 +16,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="0dp"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,12 +25,10 @@
             android:padding="4dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/bottomLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cartItemTitle">
 
@@ -38,14 +36,16 @@
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="discount"
+                    android:layout_marginBottom="8dp"
                     android:text="@{String.format(`%,d`,model.price*model.discount/100).concat(` تومان تخفیف `)}"
-                    android:textColor="#F44336"
-                    android:textSize="12sp"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textColor="@android:color/holo_red_light"
                     android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/cartItemPriceTextView"
                     app:layout_constraintStart_toStartOf="@+id/cartItemPriceTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/cartItemPriceTextView" />
+                    app:layout_constraintTop_toBottomOf="@+id/cartItemPriceTextView"
+                    tools:text="26,000 تومان تخفیف" />
 
                 <TextView
                     android:id="@+id/cartItemPriceTextView"
@@ -54,12 +54,11 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
 
-                    android:hint="price"
                     android:text="@{String.format(`%,d`,(model.discount>0)? model.price*(100-model.discount)/100 : model.price).concat(` تومان `)}"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textAppearance="?attr/textAppearanceBody1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="104,000" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -68,7 +67,7 @@
                 setImage="@{model.imageUrl}"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/product_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -79,28 +78,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="title"
                 android:text="@{model.name}"
-                android:textColor="@color/black"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
                 app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="نام محصول" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/counterLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/counter_background"
                 android:padding="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                app:layout_constraintBottom_toBottomOf="@+id/cartItemImageView"
+                app:layout_constraintEnd_toStartOf="@+id/cartItemImageView">
 
                 <Button
                     android:id="@+id/addButton"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:background="@drawable/ic_baseline_add_24"
                     app:layout_constraintBottom_toBottomOf="@+id/countEditText"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,8 +108,8 @@
 
                 <Button
                     android:id="@+id/minesButton"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/ic_baseline_remove_24"
                     app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
@@ -124,20 +122,18 @@
                     android:layout_width="32dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="co"
                     android:text="@{String.valueOf(model.quantity)}"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textAppearance="?attr/textAppearanceBody1"
                     app:layout_constraintBottom_toBottomOf="@+id/minesButton"
                     app:layout_constraintStart_toEndOf="@+id/minesButton"
-                    app:layout_constraintTop_toTopOf="@+id/minesButton" />
+                    app:layout_constraintTop_toTopOf="@+id/minesButton"
+                    tools:text="2" />
 
                 <Button
                     android:id="@+id/deleteButton"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:background="@drawable/ic_baseline_delete_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

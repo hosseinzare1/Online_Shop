@@ -18,6 +18,7 @@ import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
+import com.example.onlineshop.utils.InputValidator;
 import com.example.onlineshop.utils.Repository;
 
 import java.util.List;
@@ -78,6 +79,16 @@ public class MainActivityViewModel extends ViewModel {
         return repository.edit_comment(comment, disposable);
     }
 
+    public ObservableArrayList<InputValidator.InputErrors> profileFormErrors = new ObservableArrayList<>();
+
+    public boolean isProfileFormValid(Account account) {
+        profileFormErrors.clear();
+        InputValidator.nameValidation(account.getName(), profileFormErrors);
+        InputValidator.phoneNumberValidation(account.getNumber(), profileFormErrors);
+        InputValidator.passwordValidation(account.getPassword(), profileFormErrors);
+        return profileFormErrors.isEmpty();
+    }
+
 
     public void clearCommentForm() {
         comment_rating.setValue(0.0f);
@@ -88,34 +99,15 @@ public class MainActivityViewModel extends ViewModel {
     public MutableLiveData<String> comment_title = new MutableLiveData<>();
     public MutableLiveData<String> comment_text = new MutableLiveData<>();
     public MutableLiveData<Float> comment_rating = new MutableLiveData<>();
-    public ObservableArrayList<CommodityActivityViewModel.CommentFormErrors> commentFormErrors = new ObservableArrayList<>();
+    public ObservableArrayList<InputValidator.InputErrors> commentFormErrors = new ObservableArrayList<>();
 
-    public enum CommentFormErrors {
-        RATING_INVALID,
-        TITLE_INVALID,
-        TEXT_INVALID
-    }
 
     public boolean isCommentFormValid() {
         commentFormErrors.clear();
-        //title validation
-        if (comment_title.getValue() != null) {
-            if (comment_title.getValue().length() < 3)
-                commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TITLE_INVALID);
-        } else commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TITLE_INVALID);
 
-        //text validation
-        if (comment_text.getValue() != null) {
-            if (comment_text.getValue().length() < 3)
-                commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TEXT_INVALID);
-        } else commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.TEXT_INVALID);
-
-
-        //rating validation -- show snackBar if not valid.
-        if (comment_rating.getValue() != null) {
-            if (comment_rating.getValue() > 5 | comment_rating.getValue() < 1)
-                commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.RATING_INVALID);
-        } else commentFormErrors.add(CommodityActivityViewModel.CommentFormErrors.RATING_INVALID);
+        InputValidator.titleValidation(comment_title.getValue(), commentFormErrors);
+        InputValidator.textValidation(comment_text.getValue(), commentFormErrors);
+        InputValidator.ratingValidation(comment_rating.getValue(), commentFormErrors);
 
         return commentFormErrors.isEmpty();
     }
@@ -148,9 +140,6 @@ public class MainActivityViewModel extends ViewModel {
 
         repository.addCartItem(item);
 
-//        //TODO disable add button if exist
-
-        Log.i(TAG, "addCartItem: " + item.getName());
 
     }
 
@@ -290,6 +279,9 @@ public class MainActivityViewModel extends ViewModel {
         return repository.getImages(id, disposable);
     }
 
+    public LiveData<List<Image>> getNewsImages(){
+        return repository.getNewsImages(disposable);
+    }
 
     @Override
     protected void onCleared() {

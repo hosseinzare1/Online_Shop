@@ -32,7 +32,7 @@
         android:name="com.example.onlineshop.view.commodity.DescriptionsFragment"
         android:label="DescriptionsFragment">
         <argument
-            android:name="descripton"
+            android:name="description"
             app:argType="string" />
     </fragment>
     <fragment
@@ -61,6 +61,9 @@
         android:label="AllCommentsFragment">
         <argument
             android:name="productID"
+            app:argType="integer" />
+        <argument
+            android:name="recyclerPosition"
             app:argType="integer" />
     </fragment>
     <fragment

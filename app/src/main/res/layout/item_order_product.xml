@@ -16,8 +16,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="0dp"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        app:cardElevation="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,12 +27,12 @@
             <ImageView
                 android:id="@+id/cartItemImageView"
                 setImage="@{model.imageUrl}"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@drawable/ic_baseline_product_tamplate_24" />
 
             <TextView
                 android:id="@+id/cartItemTitle"
@@ -40,25 +40,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="title"
                 android:text="@{model.name}"
-                android:textColor="@color/black"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="نام محصول" />
 
             <TextView
                 android:id="@+id/cartItemPriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
-                android:hint="price"
                 android:text="@{String.format(`%,d`,(model.discount>0)? model.price*(100-model.discount)/100 : model.price).concat(` تومان `)}"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="قیمت" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{` تعداد: `+String.valueOf(model.quantity)}"
+                android:textAppearance="?attr/textAppearanceCaption"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cartItemImageView"
+                tools:text="تعداد" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

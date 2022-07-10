@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -16,12 +15,9 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAllCommentsBinding;
-import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.utils.adapters.CommentsAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
-
-import java.util.List;
 
 public class AllCommentsFragment extends Fragment {
 
@@ -56,7 +52,12 @@ public class AllCommentsFragment extends Fragment {
         binding.allCommentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         viewModel.getComments(args.getProductID()).observe(getViewLifecycleOwner(),
-                comments -> commentsAdapter.setComments(comments));
+                comments -> {
+                    commentsAdapter.setComments(comments);
+//                    try {
+                        binding.allCommentsRecyclerView.scrollToPosition(args.getRecyclerPosition());
+//                    }catch
+        });
 
 
     }

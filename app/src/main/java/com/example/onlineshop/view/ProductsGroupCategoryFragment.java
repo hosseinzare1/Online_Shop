@@ -18,10 +18,8 @@ import android.view.ViewGroup;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.databinding.FragmentProductsCategoryBinding;
-import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.utils.adapters.GroupsAdapter;
-import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 

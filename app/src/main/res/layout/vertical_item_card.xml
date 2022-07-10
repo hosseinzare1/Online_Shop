@@ -32,21 +32,21 @@
                 setImage="@{model.imageUrl}"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                tools:srcCompat="@drawable/ic_baseline_product_tamplate_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/titleTextView"
                 android:layout_width="0dp"
-
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:hint="title"
                 android:text="@{model.name}"
-                android:textColor="@color/black"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintEnd_toStartOf="@+id/itemImageView"
-                app:layout_constraintTop_toTopOf="@+id/itemImageView" />
+                app:layout_constraintTop_toTopOf="@+id/itemImageView"
+                tools:text="نام محصول" />
 
             <TextView
                 android:id="@+id/priceTextView"
@@ -54,36 +54,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginBottom="32dp"
-                android:hint="price"
                 android:text="@{String.format(`%,d`,(model.discount>0)? model.price*(100-model.discount)/100 : model.price).concat(` تومان `)}"
-                android:textColor="@color/black"
-                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="14,200,000" />
 
             <TextView
                 android:id="@+id/original_price_item_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="orgPrice"
                 android:text="@{String.format(`%,d`,model.price)}"
+                android:textAppearance="?attr/textAppearanceCaption"
                 android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@+id/priceTextView"
                 app:layout_constraintStart_toStartOf="@+id/priceTextView"
-                app:layout_constraintTop_toBottomOf="@+id/priceTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/priceTextView"
+                tools:text="15,680,000" />
 
             <TextView
                 android:id="@+id/discount_textView_item_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:hint="discount"
+                android:layout_marginStart="8dp"
                 android:text="@{String.valueOf(model.discount)+'%'}"
+                android:textAppearance="?attr/textAppearanceCaption"
                 android:textColor="@android:color/holo_red_light"
                 android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
-                app:layout_constraintEnd_toStartOf="@+id/itemImageView"
-                app:layout_constraintTop_toTopOf="@+id/priceTextView" />
+                app:layout_constraintStart_toEndOf="@+id/original_price_item_card"
+                app:layout_constraintTop_toTopOf="@+id/original_price_item_card"
+                tools:text="50%" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

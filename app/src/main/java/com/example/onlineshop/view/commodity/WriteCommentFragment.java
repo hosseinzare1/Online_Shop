@@ -80,7 +80,7 @@ public class WriteCommentFragment extends DialogFragment {
                         showResult(s, view);
                     }
                 });
-            } else {
+            } else {//TODO fix bug when there if other error
                 //show Snackbar of Rating invalid
                 Snackbar.make(view, getString(R.string.RATING_INVALID), Snackbar.LENGTH_LONG).show();
             }

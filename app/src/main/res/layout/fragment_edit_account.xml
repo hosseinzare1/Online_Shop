@@ -16,6 +16,8 @@
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.account.EditAccountFragment.EditAccountEventListener" />
+
+        <import type="com.example.onlineshop.utils.InputValidator.InputErrors" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,16 +32,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            app:errorText='@{viewModel.profileFormErrors.contains(InputErrors.INVALID_PASSWORD) ? @string/INVALID_PASSWORD : ""}'
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
             tools:layout_editor_absoluteX="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="رمزعبور فعلی"
+                android:hint="@string/password_hint"
                 android:text="@={model.password}"
+                android:textAppearance="?attr/textAppearanceBody1"
 
-                android:textColor="@color/black" />
+                />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -58,10 +62,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ایمیل"
+                android:hint="@string/email_hint"
                 android:text="@={model.email}"
-
-                android:textColor="@color/black" />
+                android:textAppearance="?attr/textAppearanceBody1"
+                tools:text="hosseiny625@gmail.com" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,11 +84,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="آدرس"
+                android:hint="@string/address_hint"
                 android:text="@={model.address}"
-
-                android:textColor="@color/black" />
-
+                android:textAppearance="?attr/textAppearanceBody1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            app:errorText='@{viewModel.profileFormErrors.contains(InputErrors.INVALID_NUMBER) ? @string/INVALID_NUMBER : ""}'
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
@@ -103,10 +106,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:hint="شماره"
-
+                android:hint="@string/number_hint"
                 android:text="@={model.number}"
-                android:textColor="@color/black" />
+                android:textAppearance="?attr/textAppearanceBody1"
+                tools:text="09033093041" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -117,18 +120,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:errorText='@{viewModel.profileFormErrors.contains(InputErrors.INVALID_NAME) ? @string/MISSING_NAME : ""}'
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="نام"
+                android:hint="@string/name_hint"
                 android:text="@={model.name}"
-
-                android:textColor="@color/black" />
+                android:textAppearance="?attr/textAppearanceBody1"
+                tools:text="نام و نام خانوادگی"
+                />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -138,8 +144,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="مشخصات کاربری"
-            android:textSize="16sp"
+            android:text="@string/editAccountTitle"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -152,8 +158,8 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:onClick="@{(view)-> eventListener.onSaveClick(view,model,viewModel)}"
-            android:text="ذخیره"
-
+            android:text="@string/save_account"
+            android:textAppearance="?attr/textAppearanceButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cancelButton"
@@ -167,7 +173,8 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:onClick="@{(view)-> eventListener.onCancelClick(view)}"
-            android:text="لغو"
+            android:text="@string/cancel"
+            android:textAppearance="?attr/textAppearanceButton"
             app:layout_constraintEnd_toStartOf="@+id/SaveButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

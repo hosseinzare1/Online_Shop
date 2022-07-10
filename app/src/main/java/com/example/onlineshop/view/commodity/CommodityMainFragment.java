@@ -4,22 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCommodityMainBinding;
 import com.example.onlineshop.model.CartItemModel;
 import com.example.onlineshop.model.Product;
-import com.example.onlineshop.utils.Utility;
 import com.example.onlineshop.utils.adapters.CommentsAdapter;
 import com.example.onlineshop.utils.adapters.HorizontalProductsAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
@@ -27,11 +27,6 @@ import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class CommodityMainFragment extends Fragment {
 
@@ -56,10 +51,8 @@ public class CommodityMainFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        id = getArguments().getInt("id");
+    private void loadData(int id,View view){
+
 
         imageSliderAdapter = new ImageSliderAdapter();
         binding.detailsImagesViewPager.setAdapter(imageSliderAdapter);
@@ -142,6 +135,41 @@ public class CommodityMainFragment extends Fragment {
 
         });
 
+        sameProductsAdapter.setOnClickListener(new HorizontalProductsAdapter.OnClickListener() {
+            @Override
+            public void onProductClickListener(int id) {
+                viewModel.selectedProductLiveData.setValue(id);
+
+            }
+        });
+
+        commentsAdapter.setOnItemClickListener(new CommentsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Navigation.findNavController(view).navigate(
+                        CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(id,position)
+                );
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        viewModel.selectedProductLiveData.observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer id) {
+                loadData(id,view);
+                binding.commodityScrollView.fullScroll(ScrollView.FOCUS_UP);
+            }
+        });
+
+
+        viewModel.selectedProductLiveData.setValue(getArguments().getInt("id"));
     }
 
     public class CommodityMainEventListener {
@@ -170,7 +198,7 @@ public class CommodityMainFragment extends Fragment {
 
         public void onSeeAllComments(View view, Product product) {
             Navigation.findNavController(view).navigate(
-                    CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(product.getId())
+                    CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(product.getId(),0)
             );
 
         }

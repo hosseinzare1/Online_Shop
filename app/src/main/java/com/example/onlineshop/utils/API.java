@@ -61,6 +61,9 @@ public interface API {
     @GET("get_images/{id}")
     Single<List<Image>> getImages(@Path("id") int ProductId);
 
+    @GET("get_news_images/")
+    Single<List<Image>> getNewsImages();
+
     @GET("get_comments/{id}")
     Single<List<Comment>> getComments(@Path("id") int ProductID);
 

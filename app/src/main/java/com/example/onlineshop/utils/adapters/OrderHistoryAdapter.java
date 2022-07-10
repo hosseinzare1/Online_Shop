@@ -1,7 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ItemOrderHistoryBinding;
 import com.example.onlineshop.model.Order;
-import com.example.onlineshop.view.OrderHistoryListFragment;
 import com.example.onlineshop.view.OrderHistoryListFragmentDirections;
 
 import java.util.ArrayList;

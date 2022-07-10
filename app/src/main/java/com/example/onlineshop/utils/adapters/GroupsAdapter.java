@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,6 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.GroupItemBinding;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Group;
-import com.example.onlineshop.view.ProductsGroupCategoryFragment;
 import com.example.onlineshop.view.ProductsGroupCategoryFragmentDirections;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 

@@ -13,8 +13,8 @@
         <variable
             name="eventListener"
             type="com.example.onlineshop.view.commodity.WriteCommentFragment.EventListener" />
+        <import type="com.example.onlineshop.utils.InputValidator.InputErrors" />
 
-        <import type="com.example.onlineshop.viewmodel.CommodityActivityViewModel.CommentFormErrors" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,11 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="دیدگاه خود را بنویسید."
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@android:color/primary_text_light"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:text="@string/writeCommentFragment_title"
+            android:textAppearance="?attr/textAppearanceHeadline5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +56,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            app:errorText='@{viewModel.commentFormErrors.contains(CommentFormErrors.TITLE_INVALID) ? @string/TITLE_INVALID : ""}'
+            app:errorText='@{viewModel.commentFormErrors.contains(InputErrors.INVALID_TITLE) ? @string/TITLE_INVALID : ""}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar2">
@@ -67,9 +64,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="عنوان نظر"
+                android:hint="@string/comment_title_hint"
                 android:text="@={viewModel.comment_title}"
-                android:textColor="@android:color/primary_text_light" />
+                android:textAppearance="?attr/textAppearanceBody1"
+                tools:text="عنوان نظر" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -79,7 +77,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            app:errorText='@{viewModel.commentFormErrors.contains(CommentFormErrors.TEXT_INVALID) ? @string/TEXT_INVALID : ""}'
+            app:errorText='@{viewModel.commentFormErrors.contains(InputErrors.INVALID_TEXT) ? @string/TEXT_INVALID : ""}'
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,12 +86,15 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="متن نظر"
-                android:lines="3"
-                android:maxLines="3"
+                android:hint="@string/comment_text_hint"
+                tools:text="متن نظر"
+                android:lines="4"
+                android:maxLines="4"
                 android:nestedScrollingEnabled="true"
                 android:singleLine="false"
-                android:text="@={viewModel.comment_text}" />
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:text="@={viewModel.comment_text}"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -105,7 +106,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
             android:onClick="@{(view)-> eventListener.onSendCommentListener(view)}"
-            android:text="ثبت نظر"
+            android:text="@string/submit_comment"
+            android:textAppearance="?attr/textAppearanceButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

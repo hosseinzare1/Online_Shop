@@ -1,6 +1,5 @@
 package com.example.onlineshop.utils.adapters;
 
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

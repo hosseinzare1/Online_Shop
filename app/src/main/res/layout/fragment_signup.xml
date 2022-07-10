@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.example.onlineshop.viewmodel.LoginSignupViewModel.FormError" />
+
+        <import type="com.example.onlineshop.utils.InputValidator.InputErrors" />
 
         <variable
             name="eventListener"
@@ -31,7 +31,8 @@
                 android:layout_height="300dp"
                 android:src="@drawable/signup"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/signup_image" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -40,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:errorText='@{viewModel.formErrors.contains(FormError.MISSING_NAME)? @string/MISSING_NAME : ""}'
+                app:errorText='@{viewModel.formErrors.contains(InputErrors.INVALID_NAME)? @string/MISSING_NAME : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView">
@@ -49,7 +50,8 @@
                     android:id="@+id/signup_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="نام کاربری"
+                    android:hint="@string/username_hint"
+                    android:textAppearance="?attr/textAppearanceBody1"
                     android:text="@={viewModel.name}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:errorText='@{viewModel.formErrors.contains(FormError.INVALID_NUMBER)? @string/INVALID_NUMBER : ""}'
+                app:errorText='@{viewModel.formErrors.contains(InputErrors.INVALID_NUMBER)? @string/INVALID_NUMBER : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -69,7 +71,8 @@
                     android:id="@+id/signup_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="شماره تلفن"
+                    android:hint="@string/number_hint"
+                    android:textAppearance="?attr/textAppearanceBody1"
                     android:text="@={viewModel.number}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:errorText='@{viewModel.formErrors.contains(FormError.INVALID_PASSWORD)? @string/INVALID_PASSWORD : ""}'
+                app:errorText='@{viewModel.formErrors.contains(InputErrors.INVALID_PASSWORD)? @string/INVALID_PASSWORD : ""}'
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
@@ -89,9 +92,10 @@
                     android:id="@+id/signup_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="رمز عبور"
+                    android:hint="@string/password_hint"
                     android:text="@={viewModel.password}"
-                    android:textColor="@android:color/primary_text_dark" />
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,9 +106,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:onClick="@{(v)->eventListener.onSignupClick(v,viewModel)}"
-                android:text="ثبت نام"
+                android:text="@string/signup"
+                android:textAppearance="?attr/textAppearanceButton"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
 
@@ -118,8 +122,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:onClick="@{(v)-> eventListener.SignupToLoginFragment(v)}"
-                android:text="حسابی دارید؟وارد شوید"
-                android:textColor="@color/design_default_color_primary_dark"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:text="@string/goto_LoginFragment"
+                android:textColor="@color/link"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button" />

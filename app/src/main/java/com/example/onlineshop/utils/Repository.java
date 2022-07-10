@@ -20,14 +20,16 @@ import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import hu.akarnokd.rxjava3.retrofit.Result;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
 
@@ -74,48 +76,96 @@ public class Repository {
 
     public LiveData<List<Order>> getOrders(String number, CompositeDisposable disposable) {
         MutableLiveData<List<Order>> ordersLiveData = new MutableLiveData<>();
-        RetrofitInstance.getAPI().getOrders(number).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                new SingleObserver<List<Order>>() {
+        RetrofitInstance.getAPI().getOrders(number).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .map(new Function<List<Order>, List<Order>>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        disposable.add(d);
-                    }
+                    public List<Order> apply(List<Order> orders) throws Throwable {
+                        List<Order> convertedOrders = new ArrayList<>();
 
-                    @Override
-                    public void onSuccess(@NonNull List<Order> orders) {
-                        ordersLiveData.setValue(orders);
-                    }
+                        for (Order order : orders
+                        ) {
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
+                            switch (order.getState()) {
+                                case "1":
+                                    order.setState("ثبت شده");
+                                    break;
+                                case "2":
+                                    order.setState("در حال پردازش");
+                                    break;
+                                case "3":
+                                    order.setState("تحویل به اداره پست");
+                                    break;
+                                default:
+                                    order.setState("نامشخص");
+                            }
 
+                            convertedOrders.add(order);
+                        }
+
+
+                        return convertedOrders;
                     }
-                }
-        );
+                }).subscribe(
+                        new SingleObserver<List<Order>>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+                                disposable.add(d);
+                            }
+
+                            @Override
+                            public void onSuccess(@NonNull List<Order> orders) {
+                                ordersLiveData.setValue(orders);
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+                        }
+                );
         return ordersLiveData;
     }
 
     public LiveData<Order> getOrder(String order_id, CompositeDisposable disposable) {
         MutableLiveData<Order> orderLiveData = new MutableLiveData<>();
-        RetrofitInstance.getAPI().getOrder(order_id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                new SingleObserver<Order>() {
+        RetrofitInstance.getAPI().getOrder(order_id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .map(new Function<Order, Order>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        disposable.add(d);
+                    public Order apply(Order order) throws Throwable {
+                        switch (order.getState()) {
+                            case "1":
+                                order.setState("ثبت شده");
+                                break;
+                            case "2":
+                                order.setState("در حال پردازش");
+                                break;
+                            case "3":
+                                order.setState("تحویل به اداره پست");
+                                break;
+                            default:
+                                order.setState("نامشخص");
+                        }
+                        return order;
                     }
+                }).subscribe(
+                        new SingleObserver<Order>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+                                disposable.add(d);
+                            }
 
-                    @Override
-                    public void onSuccess(@NonNull Order order) {
-                        orderLiveData.setValue(order);
-                        Log.i(TAG, "onSuccess: " + order.getState());
-                    }
+                            @Override
+                            public void onSuccess(@NonNull Order order) {
+                                orderLiveData.setValue(order);
+                                Log.i(TAG, "onSuccess: " + order.getState());
+                            }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
+                            @Override
+                            public void onError(@NonNull Throwable e) {
 
-                    }
-                }
-        );
+                            }
+                        }
+                );
         return orderLiveData;
     }
 
@@ -192,7 +242,9 @@ public class Repository {
     }
 
     public List<Product> getHistory() {
-        return databaseInstance.historyDAO().getItems();
+        List<Product> productList = databaseInstance.historyDAO().getItems();
+        Collections.reverse(productList);
+        return productList;
     }
 
     public void addHistoryItem(Product product) {
@@ -258,19 +310,21 @@ public class Repository {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
         return sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), "name");
     }
+
     public String getUserNumber(Context context) {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
         return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "number");
     }
+
     public String getUserAddress(Context context) {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
         return sharedPreferences.getString(context.getString(R.string.logged_in_address_KEY), "address");
     }
+
     public String getUserEmail(Context context) {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
         return sharedPreferences.getString(context.getString(R.string.logged_in_email_KEY), "email");
     }
-
 
 
     public LiveData<List<Product>> searchProducts(String search_text) {
@@ -468,6 +522,29 @@ public class Repository {
                     }
                 });
         return status;
+    }
+
+    public LiveData<List<Image>> getNewsImages(CompositeDisposable disposable) {
+        MutableLiveData<List<Image>> liveData = new MutableLiveData<>();
+
+        RetrofitInstance.getAPI().getNewsImages().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<List<Image>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull List<Image> images) {
+                        liveData.setValue(images);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+        return liveData;
     }
 
     public LiveData<List<Image>> getImages(int id, CompositeDisposable disposable) {
