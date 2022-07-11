@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,10 +58,8 @@ public class OrderDetailsFragment extends Fragment {
         binding.orderProductsRecyclerView.setAdapter(adapter);
 
         viewModel.getOrder(args.getOrderId()).observe(getViewLifecycleOwner(), order -> {
-            Log.i(TAG, "onViewCreated: "+order.toString());
             binding.setModel(order);
             adapter.setItems(order.getOrder_items());
-            Log.i(TAG, "onViewCreated: "+order.getOrder_items().get(0).toString());
         });
 
         adapter.setOnClickListener(id -> {

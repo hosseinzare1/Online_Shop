@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,8 +72,6 @@ public class LoginFragment extends Fragment {
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), user.getName()).apply();
 //                sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), "hossein").apply();
 
-                Log.i(TAG, "showMessage:user "+sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), "0"));
-                Log.i(TAG, "showMessage:number "+sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "0"));
                 context.startActivity(new Intent(context, MainActivity.class));
                 ((Login_Signup_Activity) context).finish();
                 break;
@@ -106,15 +103,12 @@ public class LoginFragment extends Fragment {
         public void onSignInClick(View view, LoginSignupViewModel viewModel) {
 
             if (viewModel.isSigningFormValid()) viewModel.login().observe((LifecycleOwner) context,
-                    response -> {
-
-                        Log.i(TAG, "onChanged: user :::: "+response.body().toString());
-                        showMessage(String.valueOf(response.code()),
-                                new Gson().fromJson(response.body(),User.class));
-                    });
+                    response -> showMessage(String.valueOf(response.code()),
+                            new Gson().fromJson(response.body(),User.class)));
         }
 
         public void LoginToSignupFragment(View view) {
+            viewModel.clearFields();
             Navigation.findNavController(view).navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment());
 
         }

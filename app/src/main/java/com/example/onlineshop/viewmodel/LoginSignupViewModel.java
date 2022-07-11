@@ -19,7 +19,6 @@ public class LoginSignupViewModel extends ViewModel {
     CompositeDisposable disposable = new CompositeDisposable();
 
 
-    //TODO reset values when switch between fragments ?
     public MutableLiveData<String> name = new MutableLiveData<>();
     public MutableLiveData<String> number = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
@@ -27,6 +26,12 @@ public class LoginSignupViewModel extends ViewModel {
     public ObservableArrayList<InputValidator.InputErrors> formErrors = new ObservableArrayList<>();
 
     String TAG = "LoginSignupViewModel";
+
+    public void clearFields() {
+        name.setValue("");
+        number.setValue("");
+        password.setValue("");
+    }
 
     public boolean isSigningFormValid() {
         formErrors.clear();

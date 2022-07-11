@@ -37,7 +37,7 @@
                 tools:text="گوشی موبایل" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categorys_recyclerView"
+                android:id="@+id/categories_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"

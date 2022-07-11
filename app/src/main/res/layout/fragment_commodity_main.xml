@@ -312,7 +312,7 @@
                         app:layout_constraintTop_toTopOf="@+id/details_comments_recyclerView" />
 
                     <TextView
-                        android:id="@+id/deatilsCommentsCountTextView"
+                        android:id="@+id/detailsCommentsCountTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"

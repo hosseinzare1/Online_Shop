@@ -3,7 +3,6 @@ package com.example.onlineshop.utils;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.IdRes;
 //import androidx.lifecycle.DefaultLifecycleObserver;
@@ -39,10 +38,7 @@ public class ErrorObserver {
 
     public void observeErrors() {
         errorLiveData.observe((LifecycleOwner) activity, integer -> {
-//            Log.i(TAG, "observeErrors:changed " + activity.getString(integer));
-            Log.i(TAG, "****live observer***");
-            Log.i(TAG, "observeErrors livedata :"+errorLiveData.toString());
-            Log.i(TAG, "****live***");
+
 
             if (integer != R.string.no_error) {
                 Bundle bundle = new Bundle();

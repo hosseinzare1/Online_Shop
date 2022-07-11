@@ -1,7 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -47,7 +46,6 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderProductViewHolder holder, int position) {
         holder.binding.setModel(items.get(position));
-        Log.i(TAG, "onBindViewHolder: " + items.get(position).getName());
     }
 
     @Override

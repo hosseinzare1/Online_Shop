@@ -1,7 +1,6 @@
 package com.example.onlineshop.viewmodel;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.LifecycleOwner;
@@ -154,7 +153,6 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public LiveData<List<CartItemModel>> getCartItems() {
-        Log.i(TAG, "getCartItems: called ");
 
         return repository.getCartItems();
 

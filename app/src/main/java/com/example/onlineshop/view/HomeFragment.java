@@ -96,7 +96,6 @@ public class HomeFragment extends Fragment implements HorizontalProductsAdapter.
         historyListAdapter.setOnClickListener(this);
 
 
-        //TODO change images resource
         viewModel.getNewsImages().observe(getViewLifecycleOwner(), images -> imageSliderAdapter.setImages(images));
         viewModel.getSpecialDiscounts().observe(getViewLifecycleOwner(), homeItems -> discountsListAdapter.setItems(homeItems));
         viewModel.getBestSelling().observe(getViewLifecycleOwner(), homeItems -> bestsellingListAdapter.setItems(homeItems));

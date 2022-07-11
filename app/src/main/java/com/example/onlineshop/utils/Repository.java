@@ -2,7 +2,6 @@ package com.example.onlineshop.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -29,7 +28,6 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
 
@@ -53,8 +51,7 @@ public class Repository {
     }
 
     public void addError(Throwable e) {
-        Log.i(TAG, "addError: " + e.getMessage());
-        Log.i(TAG, "addError: " + e.getLocalizedMessage());
+
         if (e instanceof java.net.ConnectException | e instanceof java.net.SocketTimeoutException) {
             //If we can connect to other sites(for example google) then the problem is from the server
             NetworkStatus.hasInternetConnection().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -160,7 +157,6 @@ public class Repository {
                             @Override
                             public void onSuccess(@NonNull Order order) {
                                 orderLiveData.setValue(order);
-                                Log.i(TAG, "onSuccess: " + order.getState());
                             }
 
                             @Override
@@ -207,7 +203,6 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         liveData.setValue(String.valueOf(jsonObjectResponse.code()));
-                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body());
                     }
 
                     @Override
@@ -230,7 +225,6 @@ public class Repository {
 
                     @Override
                     public void onSuccess(@NonNull JsonObject jsonObject) {
-                        Log.i(TAG, "onSuccess: " + jsonObject.toString());
                         liveData.setValue(jsonObject.toString());
                     }
 
@@ -499,7 +493,6 @@ public class Repository {
 
     public LiveData<Integer> edit_comment(Comment comment, CompositeDisposable disposable) {
         MutableLiveData<Integer> status = new MutableLiveData<>();
-        Log.i(TAG, "edit_comment: id = " + comment.getId());
         RetrofitInstance.getAPI().editComment(comment, comment.getId()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<JsonObject>>() {
                     @Override
@@ -510,9 +503,6 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         status.setValue(jsonObjectResponse.code());
-                        Log.i(TAG, "onSuccess:mess " + jsonObjectResponse.message());
-                        Log.i(TAG, "onSuccess:err " + jsonObjectResponse.errorBody());
-                        Log.i(TAG, "onSuccess:body " + jsonObjectResponse.body());
                     }
 
                     @Override
@@ -777,14 +767,11 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         loginLiveData.setValue(jsonObjectResponse);
-                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body());
-
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
-                        Log.i(TAG, "onError: " + e);
                     }
                 });
 
@@ -808,13 +795,11 @@ public class Repository {
                     @Override
                     public void onSuccess(@NonNull Response<JsonObject> jsonObjectResponse) {
                         signupLiveData.setValue(jsonObjectResponse.code());
-                        Log.i(TAG, "onSuccess: " + jsonObjectResponse.body());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         addError(e);
-                        Log.i(TAG, "onError: " + e);
                     }
                 });
 

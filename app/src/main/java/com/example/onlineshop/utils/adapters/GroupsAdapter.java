@@ -1,7 +1,6 @@
 package com.example.onlineshop.utils.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -54,13 +53,10 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewH
         Group group = groups.get(position);
 
         CategoryAdapter adapter = new CategoryAdapter();
-        holder.binding.categorysRecyclerView.setAdapter(adapter);
-        holder.binding.categorysRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, true));
+        holder.binding.categoriesRecyclerView.setAdapter(adapter);
+        holder.binding.categoriesRecyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, true));
         holder.binding.setModel(group);
-        viewModel.getCategories(Integer.parseInt(group.getId())).observe((LifecycleOwner) context, categories -> {
-            adapter.setCategoriesList(categories);
-            Log.i(TAG, "onChanged: " + categories.get(1).getName());
-        });
+        viewModel.getCategories(Integer.parseInt(group.getId())).observe((LifecycleOwner) context, adapter::setCategoriesList);
 
 
     }

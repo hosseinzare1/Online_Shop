@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,6 @@ public class OrderCompletionFragment extends Fragment {
         viewModel.getTotalPriceWithDiscount().observe(getViewLifecycleOwner(), order::setTotalPrice);
 
         order.setTransferee_name(viewModel.getUserName());
-        Log.i(TAG, "onCreateView: "+viewModel.getUserName());
         order.setTransferee_number(viewModel.getUserNumber());
         order.setTransferee_address(viewModel.getUserAddress());
 
@@ -83,12 +81,10 @@ public class OrderCompletionFragment extends Fragment {
             order.setSubmit_date(Utility.getCurrentSolarHijri());
             order.setSubmit_time(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
 
-            Log.i(TAG, "onPayClickListener: "+ order);
 
             // TODO The payment method is implemented in this section
 
             viewModel.submitOrder(order).observe(getViewLifecycleOwner(), s -> {
-                Log.i(TAG, "onChanged: " + s);
 
                 Snackbar.make(view,"سفارش شما با موفقیت ثبت شد."+"برای پیگیری سفارش به صفحه پروفایل خود مراجعه نمایید."
                         ,Snackbar.LENGTH_LONG).show();

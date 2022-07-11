@@ -104,7 +104,7 @@ public class CommodityMainFragment extends Fragment {
                 binding.detailsNoCommentsTextView.setVisibility(View.VISIBLE);
             }
 
-            binding.deatilsCommentsCountTextView.setText(comments.size() + " نظر ");
+            binding.detailsCommentsCountTextView.setText(comments.size() + " نظر ");
 
 
         });

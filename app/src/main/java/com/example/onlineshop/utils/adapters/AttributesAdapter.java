@@ -1,6 +1,5 @@
 package com.example.onlineshop.utils.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -22,7 +21,6 @@ String TAG = "AttributesAdapter";
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
         notifyDataSetChanged();
-        Log.i(TAG, "setAttributes: ");
     }
 
 
@@ -43,7 +41,6 @@ String TAG = "AttributesAdapter";
     @Override
     public void onBindViewHolder(@NonNull AttributesViewHolder holder, int position) {
         holder.binding.setModel(attributes.get(position));
-        Log.i(TAG, "onBindViewHolder: "+attributes.get(position));
     }
 
     @Override

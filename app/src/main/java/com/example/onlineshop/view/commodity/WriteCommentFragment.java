@@ -1,7 +1,6 @@
 package com.example.onlineshop.view.commodity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,11 +71,7 @@ public class WriteCommentFragment extends DialogFragment {
                         new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
                 );
 
-                Log.i(TAG, "onSendCommentListener: name :"+viewModel.getUserName());
                 viewModel.submitComment(comment).observe(getViewLifecycleOwner(), s -> showResult(s, view));
-            } else {//TODO fix bug when there if other error
-                //show Snackbar of Rating invalid
-                Snackbar.make(view, getString(R.string.RATING_INVALID), Snackbar.LENGTH_LONG).show();
             }
 
         }
@@ -87,7 +82,6 @@ public class WriteCommentFragment extends DialogFragment {
                     if (getParentFragment() != null) {
                         Snackbar.make(getParentFragment().getView(), getString(R.string.comment_submitting_200), Snackbar.LENGTH_LONG).show();
                         NavHostFragment.findNavController(getParentFragment()).popBackStack();
-                        viewModel.clearCommentForm();
                     }
                     break;
                 case "400":

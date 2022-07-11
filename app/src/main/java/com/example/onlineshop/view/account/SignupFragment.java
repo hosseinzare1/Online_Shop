@@ -102,8 +102,8 @@ public class SignupFragment extends Fragment {
 
 
         public void SignupToLoginFragment(View view) {
+            viewModel.clearFields();
             Navigation.findNavController(view).navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment());
-
         }
 
 

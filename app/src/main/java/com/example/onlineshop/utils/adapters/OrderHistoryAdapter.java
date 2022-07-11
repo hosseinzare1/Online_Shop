@@ -51,7 +51,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             this.binding = binding;
 
             binding.getRoot().setOnClickListener(view -> Navigation.findNavController(view)
-                    .navigate(OrderHistoryListFragmentDirections.actionOrderHistoryListFragmentToOrderDeatilsFragment(String.valueOf(orders.get(getAdapterPosition()).getId()))));
+                    .navigate(OrderHistoryListFragmentDirections.actionOrderHistoryListFragmentToOrderDetailsFragment(String.valueOf(orders.get(getAdapterPosition()).getId()))));
         }
     }
 }

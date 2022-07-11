@@ -1,7 +1,6 @@
 package com.example.onlineshop.view.commodity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,12 +60,7 @@ public class AttributesFragment extends Fragment {
         binding.specificationsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         viewModel.getAttributes(productID).observe(getViewLifecycleOwner(),
-                attributes -> {
-                    adapter.setAttributes(attributes);
-                    Log.i(TAG, "onViewCreated:a "+attributes.get(0).getAttribute());
-                    Log.i(TAG, "onViewCreated:v "+attributes.get(0).getAttribute_value());
-        }
+                attributes -> adapter.setAttributes(attributes)
         );
-//        adapter.setAttributes();
     }
 }

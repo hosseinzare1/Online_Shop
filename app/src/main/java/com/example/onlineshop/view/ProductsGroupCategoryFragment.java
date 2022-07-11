@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,10 +50,7 @@ public class ProductsGroupCategoryFragment extends Fragment {
         binding.groupsRecyclerView.setAdapter(adapter);
         adapter.getItemCount();
 
-        viewModel.getGroups().observe(getViewLifecycleOwner(), groups -> {
-            adapter.setGroups(groups);
-            Log.i(TAG, "onChanged: " + groups.get(1).getName());
-        });
+        viewModel.getGroups().observe(getViewLifecycleOwner(), groups -> adapter.setGroups(groups));
 
 
         return binding.getRoot();

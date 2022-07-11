@@ -1,7 +1,6 @@
 package com.example.onlineshop.view.account;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,6 @@ public class EditCommentFragment extends DialogFragment {
 
         public void onSendCommentListener(View view) {
             viewModel.isCommentFormValid();
-            Log.i(TAG, "onSendCommentListener: clicked");
             if (viewModel.isCommentFormValid()) {
 
                 Comment comment = new Comment(
@@ -78,13 +76,9 @@ public class EditCommentFragment extends DialogFragment {
                         new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
                 );
                 comment.setId(args.getComment().getId());
-                Log.i(TAG, "onSendCommentListener: valid");
 
                 viewModel.editComment(comment).observe(getViewLifecycleOwner(), resultCode -> showResult(resultCode, view));
 
-            } else {
-                //show Snackbar of Rating invalid
-                Snackbar.make(view, getString(R.string.RATING_INVALID), Snackbar.LENGTH_LONG).show();
             }
 
         }
@@ -95,7 +89,6 @@ public class EditCommentFragment extends DialogFragment {
                     if (getParentFragment() != null) {
                         Snackbar.make(getParentFragment().getView(), getString(R.string.comment_submitting_200), Snackbar.LENGTH_LONG).show();
                         NavHostFragment.findNavController(getParentFragment()).popBackStack();
-                        viewModel.clearCommentForm();
                     }
                     break;
                 case 400:

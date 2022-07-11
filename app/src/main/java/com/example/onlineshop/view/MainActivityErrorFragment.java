@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +57,11 @@ public class MainActivityErrorFragment extends Fragment {
 
         binding.errorTextview.setText(message);
         binding.errorTextview.setOnClickListener(view1 -> {
-            Log.i(TAG, "live : "+viewModel.getError().toString());
-            Log.i(TAG, "onclick a : " + getActivity().getString(viewModel.getError().getValue()));
+
             viewModel.getError().setValue(R.string.no_error);
-            Log.i(TAG, "onclick a : " + getActivity().getString(viewModel.getError().getValue()));
 
             Navigation.findNavController(view1).popBackStack();
-            Log.i(TAG, "onClick: pop");
+
 
         });
 

@@ -45,7 +45,6 @@ public class ProductDetailsFragment extends Fragment {
         binding.setEventListener(eventListener);
         binding.setViewModel(viewModel);
         binding.detailsViewPager.setAdapter(adapter);
-        //TODO convert int to string
 
 
     }

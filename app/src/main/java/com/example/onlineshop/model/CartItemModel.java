@@ -38,12 +38,12 @@ public class CartItemModel {
     public CartItemModel() {
     }
 
-    public CartItemModel(int id, String name, String imageUrl, long price, int count, int discount) {
+    public CartItemModel(int id, String name, String imageUrl, long price, int quantity, int discount) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.quantity = count;
+        this.quantity = quantity;
         this.discount = discount;
     }
 

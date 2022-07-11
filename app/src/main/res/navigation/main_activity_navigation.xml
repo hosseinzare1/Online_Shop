@@ -6,17 +6,6 @@
     app:startDestination="@id/homeFragment">
 
 
-    <dialog
-        android:id="@+id/searchFragment"
-        android:name="com.example.onlineshop.view.SearchFragment"
-
-        android:label="SearchFragment">
-
-        <action
-            android:id="@+id/myaction"
-            app:destination="@+id/another_destination" />
-
-    </dialog>
 
 
     <fragment
@@ -119,13 +108,13 @@
         android:name="com.example.onlineshop.view.OrderHistoryListFragment"
         android:label="OrderHistoryListFragment" >
         <action
-            android:id="@+id/action_orderHistoryListFragment_to_orderDeatilsFragment"
-            app:destination="@id/orderDeatilsFragment" />
+            android:id="@+id/action_orderHistoryListFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/orderDeatilsFragment"
+        android:id="@+id/orderDetailsFragment"
         android:name="com.example.onlineshop.view.OrderDetailsFragment"
-        android:label="fragment_order_deatils"
+        android:label="fragment_order_details"
         tools:layout="@layout/fragment_order_details" >
         <argument
             android:name="order_id"
