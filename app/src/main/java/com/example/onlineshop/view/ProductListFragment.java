@@ -19,7 +19,7 @@ import com.example.onlineshop.R;
 
 import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.model.Product;
-import com.example.onlineshop.utils.adapters.ProductsListAdapter;
+import com.example.onlineshop.utils.adapters.ProductsVerticalAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
@@ -31,7 +31,7 @@ public class ProductListFragment extends Fragment {
 
     FragmentProductListBinding binding;
     MainActivityViewModel viewModel;
-    ProductsListAdapter productsListAdapter;
+    ProductsVerticalAdapter productsVerticalAdapter;
     ProductListFragmentArgs args;
     private final String TAG = "ProductListFragment";
 
@@ -44,8 +44,8 @@ public class ProductListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_list, container, false);
-        productsListAdapter = new ProductsListAdapter();
-        productsListAdapter.setOnClickListener(id -> {
+        productsVerticalAdapter = new ProductsVerticalAdapter();
+        productsVerticalAdapter.setOnClickListener(id -> {
 
             Intent intent = new Intent(getContext(), CommodityActivity.class);
 
@@ -55,7 +55,7 @@ public class ProductListFragment extends Fragment {
 
         });
         binding.HomeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.HomeRecyclerView.setAdapter(productsListAdapter);
+        binding.HomeRecyclerView.setAdapter(productsVerticalAdapter);
 
         args = ProductListFragmentArgs.fromBundle(getArguments());
 
@@ -76,7 +76,7 @@ public class ProductListFragment extends Fragment {
             liveData = viewModel.getProductsByGroup(args.getGroup());
         }
 
-        liveData.observe(getViewLifecycleOwner(), products -> productsListAdapter.setProducts(products));
+        liveData.observe(getViewLifecycleOwner(), products -> productsVerticalAdapter.setProducts(products));
 
         //if id==0 , -> search
 

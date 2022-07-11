@@ -20,20 +20,20 @@ import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupViewHolder> {
+public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
         notifyDataSetChanged();
     }
 
-    private static final String TAG = "GroupsAdapter";
+    private static final String TAG = "GroupAdapter";
 
     List<Group> groups = new ArrayList<>();
     MainActivityViewModel viewModel;
     Context context;
 
-    public GroupsAdapter(MainActivityViewModel viewModel, Context context) {
+    public GroupAdapter(MainActivityViewModel viewModel, Context context) {
         this.viewModel = viewModel;
         this.context = context;
     }

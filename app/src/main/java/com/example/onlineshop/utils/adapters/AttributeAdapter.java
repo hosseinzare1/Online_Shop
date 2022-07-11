@@ -14,10 +14,10 @@ import com.example.onlineshop.model.Attribute;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.AttributesViewHolder> {
+public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.AttributesViewHolder> {
 
     private List<Attribute> attributes = new ArrayList<>();
-String TAG = "AttributesAdapter";
+String TAG = "AttributeAdapter";
     public void setAttributes(List<Attribute> attributes) {
         this.attributes = attributes;
         notifyDataSetChanged();

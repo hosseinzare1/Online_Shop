@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentHomeBinding;
-import com.example.onlineshop.utils.adapters.HorizontalProductsAdapter;
+import com.example.onlineshop.utils.adapters.ProductHorizontalAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
@@ -27,15 +27,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class HomeFragment extends Fragment implements HorizontalProductsAdapter.OnClickListener {
+public class HomeFragment extends Fragment implements ProductHorizontalAdapter.OnClickListener {
 
     public static final String TAG = "HomeFragment";
 
 
     ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter();
-    HorizontalProductsAdapter discountsListAdapter = new HorizontalProductsAdapter();
-    HorizontalProductsAdapter bestsellingListAdapter = new HorizontalProductsAdapter();
-    HorizontalProductsAdapter historyListAdapter = new HorizontalProductsAdapter();
+    ProductHorizontalAdapter discountsListAdapter = new ProductHorizontalAdapter();
+    ProductHorizontalAdapter bestsellingListAdapter = new ProductHorizontalAdapter();
+    ProductHorizontalAdapter historyListAdapter = new ProductHorizontalAdapter();
     MainActivityViewModel viewModel;
     FragmentHomeBinding binding;
 

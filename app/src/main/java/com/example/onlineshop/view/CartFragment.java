@@ -17,20 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCartBinding;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Order;
-import com.example.onlineshop.utils.adapters.CartAdapter;
+import com.example.onlineshop.utils.adapters.CartProductAdapter;
 import com.example.onlineshop.view.commodity.CommodityActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
 
-public class CartFragment extends Fragment implements CartAdapter.OnCartProductData {
+public class CartFragment extends Fragment implements CartProductAdapter.OnCartProductData {
     private static final String TAG = "CartFragment";
 
     FragmentCartBinding binding;
     MainActivityViewModel viewModel;
-    CartAdapter cartAdapter = new CartAdapter();
+    CartProductAdapter cartProductAdapter = new CartProductAdapter();
     RecyclerView recyclerView;
 
 
@@ -54,7 +54,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
         // Inflate the layout for this fragment
         recyclerView = binding.cartRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(cartAdapter);
+        recyclerView.setAdapter(cartProductAdapter);
         binding.setEventListener(new CartFragmentEventListener());
 
         Order order = new Order();
@@ -62,7 +62,7 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
 
         viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
             if (cartItemModels.size() > 0) {
-                cartAdapter.setCartItemModels(cartItemModels);
+                cartProductAdapter.setCartItemModels(cartItemModels);
                 order.setOrder_items(cartItemModels);
                 binding.setOrder(order);
                 binding.setItemCount(cartItemModels.size());
@@ -77,22 +77,22 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartProductD
         viewModel.getTotalPriceWithDiscount().observe(getViewLifecycleOwner(), aLong -> binding.setTotalPriceWithDiscount(aLong));
         viewModel.getTotalDiscount().observe(getViewLifecycleOwner(), aLong -> binding.setTotalDiscount(aLong));
 
-        cartAdapter.setOnCartProductData(this);
+        cartProductAdapter.setOnCartProductData(this);
     }
 
     @Override
-    public void onAddClickListener(CartItemModel cartItemModel) {
-        viewModel.increaseItemCount(cartItemModel);
+    public void onAddClickListener(CartProduct cartProduct) {
+        viewModel.increaseItemCount(cartProduct);
     }
 
     @Override
-    public void onReduceClickListener(CartItemModel cartItemModel) {
-        viewModel.decreaseItemCount(cartItemModel);
+    public void onReduceClickListener(CartProduct cartProduct) {
+        viewModel.decreaseItemCount(cartProduct);
     }
 
     @Override
-    public void onDeleteClickListener(CartItemModel cartItemModel) {
-        viewModel.deleteFromCart(cartItemModel);
+    public void onDeleteClickListener(CartProduct cartProduct) {
+        viewModel.deleteFromCart(cartProduct);
     }
 
     @Override

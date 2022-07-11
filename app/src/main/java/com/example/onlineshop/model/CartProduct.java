@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
 
 @Entity
-public class CartItemModel {
+public class CartProduct {
 
     @PrimaryKey(autoGenerate = true)
     @SerializedName("product")
@@ -35,10 +35,10 @@ public class CartItemModel {
                 "discount: " + getDiscount() + "\n";
     }
 
-    public CartItemModel() {
+    public CartProduct() {
     }
 
-    public CartItemModel(int id, String name, String imageUrl, long price, int quantity, int discount) {
+    public CartProduct(int id, String name, String imageUrl, long price, int quantity, int discount) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;

@@ -10,7 +10,7 @@ import com.example.onlineshop.NetworkStatus;
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.Attribute;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
@@ -258,17 +258,17 @@ public class Repository {
     }
 
 
-    public LiveData<List<CartItemModel>> getCartItems() {
+    public LiveData<List<CartProduct>> getCartItems() {
         return databaseInstance.itemCartDao().getItems();
     }
 
-    public boolean isItemExist(CartItemModel model) {
+    public boolean isItemExist(CartProduct model) {
         List<String> items = databaseInstance.itemCartDao().isItemExist(model.getName());
         return items.size() > 0;
     }
 
 
-    public void addCartItem(CartItemModel itemModel) {
+    public void addCartItem(CartProduct itemModel) {
 
         if (!isItemExist(itemModel)) {
             databaseInstance.itemCartDao().insertItem(itemModel);
@@ -279,7 +279,7 @@ public class Repository {
     }
 
 
-    public void deleteCartItem(CartItemModel itemModel) {
+    public void deleteCartItem(CartProduct itemModel) {
         databaseInstance.itemCartDao().deleteItem(itemModel.getName());
     }
 
@@ -288,12 +288,12 @@ public class Repository {
     }
 
 
-    public void increaseItemCount(CartItemModel model) {
+    public void increaseItemCount(CartProduct model) {
         databaseInstance.itemCartDao().increaseItemCount(model.getName());
 
     }
 
-    public void decreaseItemCount(CartItemModel model) {
+    public void decreaseItemCount(CartProduct model) {
         databaseInstance.itemCartDao().decreaseItemCount(model.getName());
 
     }

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentProductsCategoryBinding;
-import com.example.onlineshop.utils.adapters.GroupsAdapter;
+import com.example.onlineshop.utils.adapters.GroupAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -24,7 +24,7 @@ public class ProductsGroupCategoryFragment extends Fragment {
     private static final String TAG = "ProductListFragment";
     FragmentProductsCategoryBinding binding;
     MainActivityViewModel viewModel;
-    GroupsAdapter adapter;
+    GroupAdapter adapter;
 
     public ProductsGroupCategoryFragment() {
         // Required empty public constructor
@@ -45,7 +45,7 @@ public class ProductsGroupCategoryFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_products_category, container, false);
         if (getActivity() != null)
             this.viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
-        adapter = new GroupsAdapter(viewModel, getContext());
+        adapter = new GroupAdapter(viewModel, getContext());
         binding.groupsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.groupsRecyclerView.setAdapter(adapter);
         adapter.getItemCount();

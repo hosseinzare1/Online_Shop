@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.CartItemCardBinding;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
+public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.CartHolder> {
     CartItemCardBinding binding;
-    List<CartItemModel> cartItemModels = new ArrayList<>();
+    List<CartProduct> cartProducts = new ArrayList<>();
 
 
     OnCartProductData onCartProductData;
@@ -32,14 +32,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartHolder holder, int position) {
-        CartItemModel model = cartItemModels.get(position);
+        CartProduct model = cartProducts.get(position);
         binding.setModel(model);
     }
 
 
     @Override
     public int getItemCount() {
-        return cartItemModels.size();
+        return cartProducts.size();
     }
 
 
@@ -51,54 +51,54 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             this.binding = binding;
 
             binding.cartItemImageView.setOnClickListener(view ->
-                            onCartProductData.onProductClickListener(cartItemModels.get(getAdapterPosition()).getId())
+                            onCartProductData.onProductClickListener(cartProducts.get(getAdapterPosition()).getId())
 //                    Navigation.findNavController(view).navigate(
-//                            CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartItemModels.get(getAdapterPosition()).getId())
+//                            CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartProducts.get(getAdapterPosition()).getId())
 //            )
             );
 
             binding.cartItemTitle.setOnClickListener(view ->
-                            onCartProductData.onProductClickListener(cartItemModels.get(getAdapterPosition()).getId())
+                            onCartProductData.onProductClickListener(cartProducts.get(getAdapterPosition()).getId())
 
 //                    Navigation.findNavController(view).navigate(
-//                    CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartItemModels.get(getAdapterPosition()).getId())
+//                    CartFragmentDirections.actionCartFragmentToCommodityMainFragment(cartProducts.get(getAdapterPosition()).getId())
 //            )
             );
 
 
             binding.addButton.setOnClickListener(view -> {
                 if (onCartProductData != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
-                    onCartProductData.onAddClickListener(cartItemModels.get(getAdapterPosition()));
+                    onCartProductData.onAddClickListener(cartProducts.get(getAdapterPosition()));
                 }
             });
 
             binding.minesButton.setOnClickListener(view -> {
                 if (onCartProductData != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
-                    onCartProductData.onReduceClickListener(cartItemModels.get(getAdapterPosition()));
+                    onCartProductData.onReduceClickListener(cartProducts.get(getAdapterPosition()));
                 }
             });
 
             binding.deleteButton.setOnClickListener(view -> {
                 if (onCartProductData != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
-                    onCartProductData.onDeleteClickListener(cartItemModels.get(getAdapterPosition()));
+                    onCartProductData.onDeleteClickListener(cartProducts.get(getAdapterPosition()));
                 }
             });
 
         }
     }
 
-    public void setCartItemModels(List<CartItemModel> cartItemModels) {
-        this.cartItemModels = cartItemModels;
+    public void setCartItemModels(List<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
 
         notifyDataSetChanged();
     }
 
     public interface OnCartProductData {
-        void onAddClickListener(CartItemModel item);
+        void onAddClickListener(CartProduct item);
 
-        void onReduceClickListener(CartItemModel item);
+        void onReduceClickListener(CartProduct item);
 
-        void onDeleteClickListener(CartItemModel item);
+        void onDeleteClickListener(CartProduct item);
 
         void onProductClickListener(int id);
     }

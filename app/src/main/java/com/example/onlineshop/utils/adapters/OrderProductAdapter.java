@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ItemOrderProductBinding;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapter.OrderProductViewHolder> {
 
     private static final String TAG = "OrderProductAdapter";
-    List<CartItemModel> items = new ArrayList<>();
+    List<CartProduct> items = new ArrayList<>();
 
     public interface ClickListener {
         void onItemClick(int id);
@@ -30,7 +30,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         this.clickListener = clickListener;
     }
 
-    public void setItems(List<CartItemModel> items) {
+    public void setItems(List<CartProduct> items) {
         this.items = items;
         notifyDataSetChanged();
     }

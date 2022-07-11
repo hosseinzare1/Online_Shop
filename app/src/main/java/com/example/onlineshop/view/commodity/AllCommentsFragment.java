@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAllCommentsBinding;
-import com.example.onlineshop.utils.adapters.CommentsAdapter;
+import com.example.onlineshop.utils.adapters.CommentAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 
@@ -48,13 +48,13 @@ public class AllCommentsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        CommentsAdapter commentsAdapter = new CommentsAdapter(CommentsAdapter.AdapterType.VERTICAL);
-        binding.allCommentsRecyclerView.setAdapter(commentsAdapter);
+        CommentAdapter commentAdapter = new CommentAdapter(CommentAdapter.AdapterType.VERTICAL);
+        binding.allCommentsRecyclerView.setAdapter(commentAdapter);
         binding.allCommentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         viewModel.getComments(args.getProductID()).observe(getViewLifecycleOwner(),
                 comments -> {
-                    commentsAdapter.setComments(comments);
+                    commentAdapter.setComments(comments);
 //                    try {
                         binding.allCommentsRecyclerView.scrollToPosition(args.getRecyclerPosition());
 //                    }catch

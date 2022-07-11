@@ -11,7 +11,7 @@ public class Order implements Serializable{
 
     //user number
     String user;
-    List<CartItemModel> order_items;
+    List<CartProduct> order_items;
     String submit_time;
     String submit_date;
 
@@ -55,11 +55,11 @@ public class Order implements Serializable{
         this.id = id;
     }
 
-    public List<CartItemModel> getOrder_items() {
+    public List<CartProduct> getOrder_items() {
         return order_items;
     }
 
-    public void setOrder_items(List<CartItemModel> order_items) {
+    public void setOrder_items(List<CartProduct> order_items) {
         this.order_items = order_items;
     }
 

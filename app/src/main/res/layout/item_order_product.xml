@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="com.example.onlineshop.model.CartItemModel" />
+            type="com.example.onlineshop.model.CartProduct" />
 
     </data>
 

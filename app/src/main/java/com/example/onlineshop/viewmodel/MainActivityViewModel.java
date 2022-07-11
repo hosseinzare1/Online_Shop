@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.onlineshop.model.Account;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Group;
@@ -129,30 +129,30 @@ public class MainActivityViewModel extends ViewModel {
     }
 
 
-    public void addCartItem(CartItemModel item) {
+    public void addCartItem(CartProduct item) {
 
         repository.addCartItem(item);
 
 
     }
 
-    public void increaseItemCount(CartItemModel cartItemModel) {
-        repository.increaseItemCount(cartItemModel);
+    public void increaseItemCount(CartProduct cartProduct) {
+        repository.increaseItemCount(cartProduct);
     }
 
-    public void decreaseItemCount(CartItemModel cartItemModel) {
-        repository.decreaseItemCount(cartItemModel);
+    public void decreaseItemCount(CartProduct cartProduct) {
+        repository.decreaseItemCount(cartProduct);
     }
 
-    public void deleteFromCart(CartItemModel cartItemModel) {
-        repository.deleteCartItem(cartItemModel);
+    public void deleteFromCart(CartProduct cartProduct) {
+        repository.deleteCartItem(cartProduct);
     }
 
     public void RemoveAllCartItems() {
         repository.RemoveAllCartItems();
     }
 
-    public LiveData<List<CartItemModel>> getCartItems() {
+    public LiveData<List<CartProduct>> getCartItems() {
 
         return repository.getCartItems();
 
@@ -166,7 +166,7 @@ public class MainActivityViewModel extends ViewModel {
         repository.getCartItems().observe((LifecycleOwner) context, cartItemModels -> {
 
             long totalPrice = 0;
-            for (CartItemModel item : cartItemModels
+            for (CartProduct item : cartItemModels
             ) {
                 totalPrice += item.getQuantity() * item.getPrice();
 
@@ -186,7 +186,7 @@ public class MainActivityViewModel extends ViewModel {
         repository.getCartItems().observe((LifecycleOwner) context, cartItemModels -> {
 
             long totalPriceWithDiscount = 0;
-            for (CartItemModel item : cartItemModels
+            for (CartProduct item : cartItemModels
             ) {
                 totalPriceWithDiscount += item.getQuantity() * (item.getPrice() * (100 - item.getDiscount()) / 100);
 
@@ -206,7 +206,7 @@ public class MainActivityViewModel extends ViewModel {
         repository.getCartItems().observe((LifecycleOwner) context, cartItemModels -> {
 
             long totalDiscount = 0;
-            for (CartItemModel item : cartItemModels
+            for (CartProduct item : cartItemModels
             ) {
                 totalDiscount += item.getQuantity() * (item.getPrice() * (item.getDiscount()) / 100);
 

@@ -15,7 +15,7 @@ import com.example.onlineshop.model.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Holder> {
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> {
     private List<Comment> comments = new ArrayList<>();
 
     public enum AdapterType {
@@ -25,7 +25,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Holder
 
     AdapterType adapterType;
 
-    public CommentsAdapter(AdapterType adapterType) {
+    public CommentAdapter(AdapterType adapterType) {
         this.adapterType = adapterType;
     }
 

@@ -17,10 +17,10 @@ import android.widget.ScrollView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentCommodityMainBinding;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Product;
-import com.example.onlineshop.utils.adapters.CommentsAdapter;
-import com.example.onlineshop.utils.adapters.HorizontalProductsAdapter;
+import com.example.onlineshop.utils.adapters.CommentAdapter;
+import com.example.onlineshop.utils.adapters.ProductHorizontalAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
@@ -33,9 +33,9 @@ public class CommodityMainFragment extends Fragment {
     CommodityActivityViewModel viewModel;
 
     ImageSliderAdapter imageSliderAdapter;
-    CommentsAdapter commentsAdapter;
+    CommentAdapter commentAdapter;
 
-    HorizontalProductsAdapter sameProductsAdapter;
+    ProductHorizontalAdapter sameProductsAdapter;
     int id;
     private final String TAG = "CommodityMainFragment";
 
@@ -61,12 +61,12 @@ public class CommodityMainFragment extends Fragment {
         binding.detailsImageViewpageIndicator.setViewPager(binding.detailsImagesViewPager);
 
 
-        commentsAdapter = new CommentsAdapter(CommentsAdapter.AdapterType.HORIZONTAL);
-        binding.detailsCommentsRecyclerView.setAdapter(commentsAdapter);
+        commentAdapter = new CommentAdapter(CommentAdapter.AdapterType.HORIZONTAL);
+        binding.detailsCommentsRecyclerView.setAdapter(commentAdapter);
         binding.detailsCommentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()
                 , LinearLayoutManager.HORIZONTAL, true));
 
-        sameProductsAdapter = new HorizontalProductsAdapter();
+        sameProductsAdapter = new ProductHorizontalAdapter();
         binding.detailsSameCommodityRecyclerView.setAdapter(sameProductsAdapter);
         binding.detailsSameCommodityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
 
@@ -99,7 +99,7 @@ public class CommodityMainFragment extends Fragment {
             // show noComments textView if comments is empty
             if (comments.size() > 0) {
                 binding.detailsNoCommentsTextView.setVisibility(View.GONE);
-                commentsAdapter.setComments(comments);
+                commentAdapter.setComments(comments);
             } else {
                 binding.detailsNoCommentsTextView.setVisibility(View.VISIBLE);
             }
@@ -123,7 +123,7 @@ public class CommodityMainFragment extends Fragment {
         viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
 
             boolean isItemExistInCart = false;
-            for (CartItemModel item : cartItemModels)
+            for (CartProduct item : cartItemModels)
                 if (item.getId() == id) {
                     isItemExistInCart = true;
                     break;
@@ -135,7 +135,7 @@ public class CommodityMainFragment extends Fragment {
 
         sameProductsAdapter.setOnClickListener(id1 -> viewModel.selectedProductLiveData.setValue(id1));
 
-        commentsAdapter.setOnItemClickListener(position -> Navigation.findNavController(view).navigate(
+        commentAdapter.setOnItemClickListener(position -> Navigation.findNavController(view).navigate(
                 CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(id,position)
         ));
 
@@ -159,7 +159,7 @@ public class CommodityMainFragment extends Fragment {
 
         public void onAddToCart(View view, Product product, MainActivityViewModel viewModel) {
             viewModel.addCartItem(
-                    new CartItemModel(product.getId(),
+                    new CartProduct(product.getId(),
                             product.getName(),
                             product.getImageUrl(),
                             product.getPrice(),

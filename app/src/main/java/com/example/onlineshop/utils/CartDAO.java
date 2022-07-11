@@ -6,7 +6,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 
 import java.util.List;
 
@@ -15,24 +15,24 @@ public interface CartDAO {
 
 
     @Insert()
-    void insertItem(CartItemModel cartItemModel);
+    void insertItem(CartProduct cartProduct);
 
-    @Query("UPDATE cartitemmodel SET quantity = quantity+1 WHERE name = :itemName")
+    @Query("UPDATE CartProduct SET quantity = quantity+1 WHERE name = :itemName")
     void increaseItemCount(String itemName);
 
-    @Query("UPDATE cartitemmodel SET quantity = quantity-1 WHERE name = :itemName AND quantity >1")
+    @Query("UPDATE CartProduct SET quantity = quantity-1 WHERE name = :itemName AND quantity >1")
     void decreaseItemCount(String itemName);
 
-    @Query("DELETE FROM CartItemModel WHERE name = :itemName")
+    @Query("DELETE FROM CartProduct WHERE name = :itemName")
     void deleteItem(String itemName);
 
-    @Query("SELECT * FROM CartItemModel")
-    LiveData<List<CartItemModel>> getItems();
+    @Query("SELECT * FROM CartProduct")
+    LiveData<List<CartProduct>> getItems();
 
-    @Query("SELECT name FROM CartItemModel WHERE name = :pName")
+    @Query("SELECT name FROM CartProduct WHERE name = :pName")
     List<String> isItemExist(String pName);
 
-    @Query("DELETE FROM CartItemModel")
+    @Query("DELETE FROM CartProduct")
     void removeAllCartItems();
 
 

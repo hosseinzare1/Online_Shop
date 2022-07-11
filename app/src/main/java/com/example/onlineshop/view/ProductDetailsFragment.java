@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentProductDetailsBinding;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
@@ -52,7 +52,7 @@ public class ProductDetailsFragment extends Fragment {
     public static class ProductDetailsEventListener {
         public void onAddToCart(View view,Product model, MainActivityViewModel viewModel, String imageUrl) {
             viewModel.addCartItem(
-                    new CartItemModel(model.getId(),
+                    new CartProduct(model.getId(),
                             model.getName(),
                             imageUrl,
                             model.getPrice(),

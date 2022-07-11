@@ -17,7 +17,7 @@ import com.example.onlineshop.view.ProductListFragmentDirections;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapter.Holder> {
+public class ProductsVerticalAdapter extends RecyclerView.Adapter<ProductsVerticalAdapter.Holder> {
 
     VerticalItemCardBinding binding;
     List<Product> homeItems = new ArrayList<>();

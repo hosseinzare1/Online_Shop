@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAttributesBinding;
-import com.example.onlineshop.utils.adapters.AttributesAdapter;
+import com.example.onlineshop.utils.adapters.AttributeAdapter;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 
@@ -22,7 +22,7 @@ public class AttributesFragment extends Fragment {
 
     FragmentAttributesBinding binding;
     CommodityActivityViewModel viewModel;
-    AttributesAdapter adapter;
+    AttributeAdapter adapter;
     AttributesFragmentArgs args;
     int productID;
     public  final String TAG ="AttributesFragment" ;
@@ -53,7 +53,7 @@ public class AttributesFragment extends Fragment {
 
         if (getActivity() != null)
             viewModel = new ViewModelProvider(getActivity(),new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
-        adapter = new AttributesAdapter();
+        adapter = new AttributeAdapter();
         args = AttributesFragmentArgs.fromBundle(getArguments());
         productID = args.getProductId();
         binding.specificationsRecyclerView.setAdapter(adapter);

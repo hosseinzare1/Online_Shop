@@ -15,7 +15,7 @@ import com.example.onlineshop.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorizontalProductsAdapter extends RecyclerView.Adapter<HorizontalProductsAdapter.HorizontalViewHolder> {
+public class ProductHorizontalAdapter extends RecyclerView.Adapter<ProductHorizontalAdapter.HorizontalViewHolder> {
 
     List<Product> homeItems = new ArrayList<>();
 
@@ -31,7 +31,7 @@ public class HorizontalProductsAdapter extends RecyclerView.Adapter<HorizontalPr
 
     @NonNull
     @Override
-    public HorizontalProductsAdapter.HorizontalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductHorizontalAdapter.HorizontalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         HorizontalItemCardBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()), R.layout.horizontal_item_card, parent, false);
@@ -41,7 +41,7 @@ public class HorizontalProductsAdapter extends RecyclerView.Adapter<HorizontalPr
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HorizontalProductsAdapter.HorizontalViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductHorizontalAdapter.HorizontalViewHolder holder, int position) {
         holder.binding.setModel(homeItems.get(position));
     }
 

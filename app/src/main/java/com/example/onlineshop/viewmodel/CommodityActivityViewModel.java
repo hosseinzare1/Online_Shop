@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.onlineshop.model.Attribute;
-import com.example.onlineshop.model.CartItemModel;
+import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Comment;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Product;
@@ -36,7 +36,7 @@ public class CommodityActivityViewModel extends ViewModel {
         repository = Repository.getInstance(context);
     }
 
-    public LiveData<List<CartItemModel>> getCartItems() {
+    public LiveData<List<CartProduct>> getCartItems() {
         return repository.getCartItems();
     }
 
