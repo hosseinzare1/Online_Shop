@@ -1,4 +1,4 @@
-package com.example.onlineshop.view.account;
+package com.example.onlineshop.view.authentication;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +18,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.onlineshop.R;
+
 import com.example.onlineshop.databinding.FragmentLoginBinding;
+
 import com.example.onlineshop.model.User;
 import com.example.onlineshop.view.MainActivity;
+import com.example.onlineshop.view.authentication.Login_Signup_Activity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
 import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;
 import com.google.gson.Gson;

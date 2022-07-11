@@ -1,4 +1,4 @@
-package com.example.onlineshop.view;
+package com.example.onlineshop.view.cart;
 
 import android.os.Bundle;
 

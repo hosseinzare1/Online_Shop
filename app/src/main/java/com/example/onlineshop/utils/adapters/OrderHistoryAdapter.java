@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ItemOrderHistoryBinding;
 import com.example.onlineshop.model.Order;
-import com.example.onlineshop.view.OrderHistoryListFragmentDirections;
+import com.example.onlineshop.view.account.OrderHistoryListFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;

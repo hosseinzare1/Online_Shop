@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.onlineshop.NetworkStatus;
 import com.example.onlineshop.R;
 import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.Attribute;

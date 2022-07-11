@@ -23,7 +23,7 @@
 
         <variable
             name="eventListener"
-            type="com.example.onlineshop.view.CartFragment.CartFragmentEventListener" />
+            type="com.example.onlineshop.view.cart.CartFragment.CartFragmentEventListener" />
 
         <variable
             name="order"

@@ -31,13 +31,13 @@
 
         <variable
             name="eventListener"
-            type="com.example.onlineshop.view.OrderCompletionFragment.EventListener" />
+            type="com.example.onlineshop.view.cart.OrderCompletionFragment.EventListener" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.OrderCompletionFragment">
+        tools:context=".view.cart.OrderCompletionFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

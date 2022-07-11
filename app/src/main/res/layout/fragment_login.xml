@@ -8,7 +8,7 @@
 
         <variable
             name="eventListener"
-            type="com.example.onlineshop.view.account.LoginFragment.LoginFragmentEventListener" />
+            type="com.example.onlineshop.view.authentication.LoginFragment.LoginFragmentEventListener" />
 
         <variable
             name="viewModel"

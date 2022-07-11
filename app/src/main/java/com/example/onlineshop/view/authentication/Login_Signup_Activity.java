@@ -1,4 +1,4 @@
-package com.example.onlineshop.view.account;
+package com.example.onlineshop.view.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

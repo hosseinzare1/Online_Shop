@@ -1,4 +1,4 @@
-package com.example.onlineshop.view;
+package com.example.onlineshop.view.account;
 
 import android.os.Bundle;
 
@@ -14,51 +14,45 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.FragmentProductsCategoryBinding;
-import com.example.onlineshop.utils.adapters.GroupAdapter;
+import com.example.onlineshop.databinding.FragmentOrderHistoryListBinding;
+import com.example.onlineshop.utils.adapters.OrderHistoryAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
-public class ProductsGroupCategoryFragment extends Fragment {
+public class OrderHistoryListFragment extends Fragment {
 
-    private static final String TAG = "ProductListFragment";
-    FragmentProductsCategoryBinding binding;
+    FragmentOrderHistoryListBinding binding;
     MainActivityViewModel viewModel;
-    GroupAdapter adapter;
 
-    public ProductsGroupCategoryFragment() {
+    public OrderHistoryListFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_products_category, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_history_list, container, false);
         if (getActivity() != null)
-            this.viewModel = new ViewModelProvider(getActivity(),new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
-        adapter = new GroupAdapter(viewModel, getContext());
-        binding.groupsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.groupsRecyclerView.setAdapter(adapter);
-        adapter.getItemCount();
-
-        viewModel.getGroups().observe(getViewLifecycleOwner(), groups -> adapter.setGroups(groups));
-
-
+            viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+        // Inflate the layout for this fragment
         return binding.getRoot();
-
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        OrderHistoryAdapter adapter = new OrderHistoryAdapter();
+        viewModel.getOrders(viewModel.getUserNumber()).observe(getViewLifecycleOwner(), adapter::setOrders);
+
+        binding.OrderHistoryListRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        binding.OrderHistoryListRecyclerView.setAdapter(adapter);
 
 
     }

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.VerticalItemCardBinding;
 import com.example.onlineshop.model.Product;
-import com.example.onlineshop.view.ProductListFragmentDirections;
+import com.example.onlineshop.view.category.ProductListFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;

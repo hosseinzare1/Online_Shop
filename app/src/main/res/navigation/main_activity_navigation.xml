@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.onlineshop.view.CartFragment"
+        android:name="com.example.onlineshop.view.cart.CartFragment"
         android:label="CartFragment" >
         <action
             android:id="@+id/action_cartFragment_to_commodityMainFragment"
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.example.onlineshop.view.ProductListFragment"
+        android:name="com.example.onlineshop.view.category.ProductListFragment"
         android:label="ProductListFragment">
         <argument
             android:name="category"
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/productsGroupCategoryFragment"
-        android:name="com.example.onlineshop.view.ProductsGroupCategoryFragment"
+        android:name="com.example.onlineshop.view.category.ProductsGroupCategoryFragment"
         android:label="ProductsGroupCategoryFragment">
         <action
             android:id="@+id/action_productsGroupCategoryFragment_to_productListFragment"
@@ -101,11 +101,11 @@
     </fragment>
     <fragment
         android:id="@+id/emptyCartFragment"
-        android:name="com.example.onlineshop.view.EmptyCartFragment"
+        android:name="com.example.onlineshop.view.cart.EmptyCartFragment"
         android:label="EmptyCartFragment" />
     <fragment
         android:id="@+id/orderHistoryListFragment"
-        android:name="com.example.onlineshop.view.OrderHistoryListFragment"
+        android:name="com.example.onlineshop.view.account.OrderHistoryListFragment"
         android:label="OrderHistoryListFragment" >
         <action
             android:id="@+id/action_orderHistoryListFragment_to_orderDetailsFragment"
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderDetailsFragment"
-        android:name="com.example.onlineshop.view.OrderDetailsFragment"
+        android:name="com.example.onlineshop.view.account.OrderDetailsFragment"
         android:label="fragment_order_details"
         tools:layout="@layout/fragment_order_details" >
         <argument
@@ -122,7 +122,7 @@
     </fragment>
     <fragment
         android:id="@+id/submittedCommentsFragment"
-        android:name="com.example.onlineshop.view.SubmittedCommentsFragment"
+        android:name="com.example.onlineshop.view.account.SubmittedCommentsFragment"
         android:label="SubmittedCommentsFragment" >
         <action
             android:id="@+id/action_submittedCommentsFragment_to_editCommentFragment"
@@ -138,7 +138,7 @@
     </dialog>
     <fragment
         android:id="@+id/orderCompletionFragment"
-        android:name="com.example.onlineshop.view.OrderCompletionFragment"
+        android:name="com.example.onlineshop.view.cart.OrderCompletionFragment"
         android:label="OrderCompletionFragment" >
         <argument
             android:name="order"

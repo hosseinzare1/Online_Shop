@@ -1,4 +1,4 @@
-package com.example.onlineshop;
+package com.example.onlineshop.utils;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

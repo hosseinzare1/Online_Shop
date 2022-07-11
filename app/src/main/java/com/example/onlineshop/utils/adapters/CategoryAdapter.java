@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.CategoryItemBinding;
 import com.example.onlineshop.model.Category;
-import com.example.onlineshop.view.ProductsGroupCategoryFragmentDirections;
+import com.example.onlineshop.view.category.ProductsGroupCategoryFragmentDirections;
 
 
 import java.util.ArrayList;

@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.EmptyCartFragment">
+        tools:context=".view.cart.EmptyCartFragment">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

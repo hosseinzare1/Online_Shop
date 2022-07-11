@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.account.Login_Signup_Activity">
+        tools:context=".view.authentication.Login_Signup_Activity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/login_signup_NavHost"
