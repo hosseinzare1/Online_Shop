@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentOrderDetailsBinding;
 import com.example.onlineshop.utils.adapters.OrderProductAdapter;
-import com.example.onlineshop.view.commodity.CommodityActivity;
+import com.example.onlineshop.view.commodity.ProductActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -63,7 +63,7 @@ public class OrderDetailsFragment extends Fragment {
         });
 
         adapter.setOnClickListener(id -> {
-            Intent intent = new Intent(getContext(), CommodityActivity.class);
+            Intent intent = new Intent(getContext(), ProductActivity.class);
 
             intent.putExtra("id", id);
 

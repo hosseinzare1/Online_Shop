@@ -1,4 +1,6 @@
 package com.example.onlineshop.utils;
+import org.jetbrains.annotations.NonNls;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -7,7 +9,9 @@ import java.util.Locale;
  */
 @SuppressWarnings("deprecation")
 public class Utility {
+    @NonNls
     public String strWeekDay = "";
+    @NonNls
     public String strMonth = "";
 @SuppressWarnings({"SwitchStatementWithTooFewBranches", "IfStatementWithIdenticalBranches", "deprecation"})
 private class SolarCalendar {
@@ -228,6 +232,7 @@ private class SolarCalendar {
         solarCalendar.calcSolarCalendar(Gregorian_date);
         return strWeekDay;
     }
+    @NonNls
     public String day_of_week(int year, int month, int day) {
         Calendar now = Calendar.getInstance();
         now.set(year, month, day);

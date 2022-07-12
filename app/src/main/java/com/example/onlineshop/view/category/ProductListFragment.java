@@ -20,7 +20,7 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentProductListBinding;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.ProductsVerticalAdapter;
-import com.example.onlineshop.view.commodity.CommodityActivity;
+import com.example.onlineshop.view.commodity.ProductActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -47,7 +47,7 @@ public class ProductListFragment extends Fragment {
         productsVerticalAdapter = new ProductsVerticalAdapter();
         productsVerticalAdapter.setOnClickListener(id -> {
 
-            Intent intent = new Intent(getContext(), CommodityActivity.class);
+            Intent intent = new Intent(getContext(), ProductActivity.class);
 
             intent.putExtra("id", id);
 

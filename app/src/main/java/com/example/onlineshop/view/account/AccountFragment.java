@@ -21,13 +21,15 @@ import com.example.onlineshop.utils.adapters.AccountButtonAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AccountFragment extends Fragment {
 
-    private static final String TAG = "account";
+    private static final String TAG = "AccountFragment";
     FragmentAccountBinding binding;
     MainActivityViewModel viewModel;
 
@@ -50,25 +52,28 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (getActivity() != null)
+        if (getActivity() != null){
             viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
+            SharedPreferences sharedPreferences
+                    = getActivity().getSharedPreferences(getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
+            String number = sharedPreferences.getString(getString(R.string.logged_in_number_KEY), null);
+            viewModel.getAccountDetails(number).observe(getActivity(), account -> binding.setModel(account));
+        }else {
+            Navigation.findNavController(view).popBackStack();
+        }
 
 
-        SharedPreferences sharedPreferences
-                = getActivity().getSharedPreferences(getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
 
-        String number = sharedPreferences.getString(getString(R.string.logged_in_number_KEY), null);
-
-
-        viewModel.getAccountDetails(number).observe(getActivity(), account -> binding.setModel(account));
-
-
-        List<String> texts = new ArrayList<>();
+        @NonNls List<String> texts = new ArrayList<>();
         List<Integer> icons = new ArrayList<>();
 
         texts.add("تاریخچه سفارشات");
         texts.add("مشخصات حساب کاربری");
         texts.add("نظرات ارسال شده");
+
+        texts.add(getString(R.string.order_history));
+        texts.add(getString(R.string.account_details));
+        texts.add(getString(R.string.submit_comment));
 //        texts.add("لیست علاقه مندی ها");
         icons.add(R.drawable.ic_baseline_shopping_cart_24);
         icons.add(R.drawable.ic_baseline_account_circle_24);

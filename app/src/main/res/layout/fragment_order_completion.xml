@@ -115,7 +115,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="@string/order_transferee_address_hint"
+                                android:hint="@string/order_transferee_address"
                                 android:text="@={order.transferee_address}"
                                 android:textAppearance="?attr/textAppearanceBody1"
                                 tools:text="آدرس مقصد" />
@@ -137,7 +137,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="@string/order_transferee_number_hint"
+                                android:hint="@string/order_transferee_number"
                                 android:text="@={order.transferee_name}"
                                 android:textAppearance="?attr/textAppearanceBody1"
                                 tools:text="حسین زرعی بارنجی" />
@@ -161,7 +161,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="@string/order_transferee_number_hint"
+                                android:hint="@string/order_transferee_number"
                                 android:text="@={order.transferee_number}"
                                 android:textAppearance="?attr/textAppearanceBody1"
                                 tools:text="09033093041" />
@@ -239,7 +239,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
-                            android:text="@string/order_totalPrice"
+                            android:text="@string/order_total_price"
                             android:textAppearance="?attr/textAppearanceBody2"
 
                             app:layout_constraintBottom_toBottomOf="parent"

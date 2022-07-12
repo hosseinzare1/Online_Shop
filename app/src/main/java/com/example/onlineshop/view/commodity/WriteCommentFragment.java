@@ -20,6 +20,8 @@ import com.example.onlineshop.viewmodel.CommodityActivityViewModel;
 import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -61,7 +63,7 @@ public class WriteCommentFragment extends DialogFragment {
             if (viewModel.isCommentFormValid()) {
 
 
-                Comment comment = new Comment(
+                @NonNls Comment comment = new Comment(
                         viewModel.comment_text.getValue(),
                         viewModel.comment_title.getValue(),
                         viewModel.comment_rating.getValue().intValue(),
@@ -80,12 +82,12 @@ public class WriteCommentFragment extends DialogFragment {
             switch (resultCode) {
                 case "200":
                     if (getParentFragment() != null) {
-                        Snackbar.make(getParentFragment().getView(), getString(R.string.comment_submitting_200), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(getParentFragment().getView(), getString(R.string.comment_submitting_successful), Snackbar.LENGTH_LONG).show();
                         NavHostFragment.findNavController(getParentFragment()).popBackStack();
                     }
                     break;
                 case "400":
-                    Snackbar.make(view, getString(R.string.comment_submitting_400), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, getString(R.string.comment_submitting_failed), Snackbar.LENGTH_LONG).show();
                     break;
 
             }

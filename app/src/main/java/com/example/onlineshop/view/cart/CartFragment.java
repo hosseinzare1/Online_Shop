@@ -20,7 +20,7 @@ import com.example.onlineshop.databinding.FragmentCartBinding;
 import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Order;
 import com.example.onlineshop.utils.adapters.CartProductAdapter;
-import com.example.onlineshop.view.commodity.CommodityActivity;
+import com.example.onlineshop.view.commodity.ProductActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -97,7 +97,7 @@ public class CartFragment extends Fragment implements CartProductAdapter.OnCartP
 
     @Override
     public void onProductClickListener(int id) {
-        Intent intent = new Intent(getContext(), CommodityActivity.class);
+        Intent intent = new Intent(getContext(), ProductActivity.class);
 
         intent.putExtra("id", id);
 

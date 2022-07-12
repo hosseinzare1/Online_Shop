@@ -8,7 +8,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.AccountButtonItemBinding;
+import com.example.onlineshop.databinding.CardAccountButtonBinding;
+
+import org.jetbrains.annotations.NonNls;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class AccountButtonAdapter extends RecyclerView.Adapter<AccountButtonAdap
     }
 
     public interface AccountEventListener {
+        @NonNls
         void onItemClickListener(String itemText);
     }
 
@@ -37,8 +40,8 @@ public class AccountButtonAdapter extends RecyclerView.Adapter<AccountButtonAdap
     @NonNull
     @Override
     public ButtonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AccountButtonItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
-                , R.layout.account_button_item
+        CardAccountButtonBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
+                , R.layout.card_account_button
                 , parent
                 , false);
         return new ButtonViewHolder(binding);
@@ -56,9 +59,9 @@ public class AccountButtonAdapter extends RecyclerView.Adapter<AccountButtonAdap
     }
 
     public class ButtonViewHolder extends RecyclerView.ViewHolder {
-        AccountButtonItemBinding binding;
+        CardAccountButtonBinding binding;
 
-        public ButtonViewHolder(@NonNull AccountButtonItemBinding binding) {
+        public ButtonViewHolder(@NonNull CardAccountButtonBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

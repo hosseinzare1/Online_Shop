@@ -9,7 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.CategoryItemBinding;
+import com.example.onlineshop.databinding.CardCategoryBinding;
 import com.example.onlineshop.model.Category;
 import com.example.onlineshop.view.category.ProductsGroupCategoryFragmentDirections;
 
@@ -29,9 +29,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CategoryItemBinding binding = DataBindingUtil.inflate(
+        CardCategoryBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext())
-                , R.layout.category_item
+                , R.layout.card_category
                 , parent
                 , false);
 
@@ -52,9 +52,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
-        CategoryItemBinding binding;
+        CardCategoryBinding binding;
 
-        public CategoryViewHolder(CategoryItemBinding binding) {
+        public CategoryViewHolder(CardCategoryBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             binding.getRoot().setOnClickListener((view -> Navigation.findNavController(view).navigate(

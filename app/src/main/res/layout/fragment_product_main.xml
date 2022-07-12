@@ -18,7 +18,7 @@
 
         <variable
             name="eventListener"
-            type="com.example.onlineshop.view.commodity.CommodityMainFragment.CommodityMainEventListener" />
+            type="com.example.onlineshop.view.commodity.ProductMainFragment.CommodityMainEventListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
-                        android:text="@string/ProductSpecifications"
+                        android:text="@string/product_specifications"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -186,7 +186,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/SeeFullProductSpecifications"
+                            android:text="@string/see_product_attributes"
                             android:textAppearance="?attr/textAppearanceButton"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -221,7 +221,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/SeeProductIntroduction"
+                            android:text="@string/see_product_description"
                             android:textAppearance="?attr/textAppearanceButton"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -247,7 +247,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="@string/Comments"
+                        android:text="@string/comments"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -281,7 +281,7 @@
                             android:id="@+id/textView12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/WriteComment"
+                            android:text="@string/write_comment_button"
                             android:textAppearance="?attr/textAppearanceButton"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -304,7 +304,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{(view)-> eventListener.onWriteComment(view,model)}"
-                        android:text="@string/NoComments"
+                        android:text="@string/no_comments_caption"
                         android:textAppearance="?attr/textAppearanceCaption"
                         app:layout_constraintBottom_toBottomOf="@+id/details_comments_recyclerView"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -341,7 +341,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@string/similarProducts"
+                        android:text="@string/similar_products"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -420,7 +420,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:onClick="@{(view)->eventListener.onAddToCart(view,model,mainActivityViewModel)}"
-                android:text="@string/AddToCart"
+                android:text="@string/add_to_card"
                 android:textAppearance="?attr/textAppearanceButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -431,7 +431,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:text="@string/AlreadyExist"
+                android:text="@string/already_exist_in_cart"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

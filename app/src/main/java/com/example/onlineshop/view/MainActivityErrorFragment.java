@@ -51,7 +51,7 @@ public class MainActivityErrorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         assert getArguments() != null;
-        message = getArguments().getString("message");
+        message = getArguments().getString(getString(R.string.error_message_key));
         if (getActivity() != null)
             viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
 

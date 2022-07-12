@@ -9,9 +9,7 @@
     <string name="logged_in_email_KEY">logged_in_email_KEY</string>
 
     <string name="history_file_key">history file key</string>
-    <string name="history_array_key">history array key</string>
 
-    <string name="empty_cart">سبد خرید شما خالی است</string>
 
     <string name="server_connection_error">خطا در برقرای ارتباط با سرور، دوباره تلاش کنید.</string>
     <string name="internet_connection_error">خطا در اتصال به اینترنت</string>
@@ -25,62 +23,101 @@
     <string name="TITLE_INVALID">عنوان دیدگاه نامعتبر است.</string>
     <string name="TEXT_INVALID">متن وارده نامعتبر است.</string>
 
-
-    <string name="comment_submitting_200">دیگاه شما با موفقیت ثبت شد.</string>
-    <string name="comment_submitting_400">ارسال دیدگاه ناموفق بود.</string>
-    <string name="writeCommentFragment_title">دیدگاه خود را بنویسید</string>
+    <!--comments-->
+    <string name="edit_comment_title">دیدگاه خود را بنویسید.</string>
+    <string name="comment_submitting_successful">دیگاه شما با موفقیت ثبت شد.</string>
+    <string name="comment_submitting_failed">ارسال دیدگاه ناموفق بود.</string>
+    <string name="write_comment_title">دیدگاه خود را بنویسید</string>
     <string name="comment_title_hint">عنوان نظر</string>
     <string name="comment_text_hint">متن نظر</string>
     <string name="submit_comment">ثبت نظر</string>
+
+    <!--    login & signup-->
     <string name="username_hint">نام کاربری</string>
     <string name="number_hint">شماره تلفن</string>
     <string name="password_hint">رمز عبور</string>
+    <string name="login">ورود</string>
     <string name="signup">ثبت نام</string>
     <string name="goto_LoginFragment">حسابی دارید؟وارد شوید</string>
-    <string name="trackingNumber">کد رهگیری:</string>
+    <string name="goto_SignupFragment">حسابی ندارید؟ثبت نام کنید</string>
+
+    <!--    submitted orders-->
+    <string name="tracking_number">کد رهگیری:</string>
     <string name="order_submit_date">تاریخ ثبت سفارش:</string>
     <string name="order_transferee_name">تحویل گیرنده:</string>
     <string name="order_transferee_number">شماره تماس:</string>
     <string name="order_transferee_address">ارسال به:</string>
-    <string name="order_totalPrice">مبلغ کل:</string>
+    <string name="order_total_price">مبلغ کل:</string>
     <string name="Pay">پرداخت</string>
-    <string name="order_transferee_address_hint">ارسال به</string>
-    <string name="order_transferee_number_hint">شماره تلفن گیرنده</string>
+
+
+    <!--    cart-->
+    <string name="cart_database_name">cart_item_database</string>
     <string name="cart_summery_title">خلاصه سبد</string>
     <string name="order_original_prices">قیمت کالا ها</string>
     <string name="order_total_discount">تخفیف کالا ها</string>
-    <string name="login">ورود</string>
-    <string name="goto_SignupFragment">حسابی ندارید؟ثبت نام کنید</string>
-    <string name="SpecialDiscount">تخفیف های ویژه</string>
-    <string name="bestSelling">پر فروش ترین محصولات</string>
-    <string name="history">بازدید های اخیر</string>
-    <string name="historyOfUser">بازدید های اخیر</string>
+    <string name="Empty_the_shopping_cart">حذف کالا ها</string>
+    <string name="goto_complete_payment">ادامه فرایند خرید</string>
+    <string name="empty_cart">سبد خرید شما خالی است</string>
+
+
+    <!--home-->
+    <string name="special_discount">تخفیف های ویژه</string>
+    <string name="best_selling">پر فروش ترین محصولات</string>
+    <string name="history_of_user">بازدید های اخیر</string>
+
+    <!--image content-->
     <string name="login_image">login image</string>
     <string name="signup_image">signup image</string>
     <string name="empty_cart_image">empty cart image</string>
-    <string name="write_your_comment">دیدگاه خود را بنویسید.</string>
-    <string name="write_comment_title">دیدگاه خود را بنویسید.</string>
+    <string name="button_icon">ButtonIcon</string>
+    <string name="profile_image">Profile image</string>
+    <string name="category_image">Category Image</string>
+    <string name="product_image">Product Image</string>
+
+    <!--account-->
+    <string name="edit_account_title">مشخصات کاربری</string>
     <string name="email_hint">ایمیل</string>
     <string name="address_hint">آدرس</string>
     <string name="name_hint">نام و نام خانوادگی</string>
     <string name="save_account">ذخیره</string>
     <string name="cancel">لغو</string>
-    <string name="editAccountTitle">مشخصات کاربری</string>
-    <string name="ProductSpecifications">مشخصات محصول</string>
-    <string name="SeeFullProductSpecifications">مشاهده کامل مشخصات</string>
-    <string name="SeeProductIntroduction">معرفی محصول</string>
-    <string name="Comments">دیدگاه کاربران</string>
-    <string name="NoComments">تاکنون نظری ثبت نشده، اولین نفر باشید!</string>
-    <string name="WriteComment">دیدگاه خود را بنویسید</string>
-    <string name="similarProducts">محصولات مشابه</string>
-    <string name="AddToCart">افزودن به سبد خرید</string>
-    <string name="AlreadyExist">موجود در سبد شما</string>
-    <string name="button_icon">ButtonIcon</string>
-    <string name="Empty_the_shopping_cart">حذف کالا ها</string>
-    <string name="goto_completePayment">ادامه فرایند خرید</string>
-    <string name="profile_image">Profile image</string>
-    <string name="category_image">Category Image</string>
-    <string name="product_image">Product Image</string>
+
+    <!--    product fragment-->
+    <string name="product_specifications">مشخصات محصول</string>
+    <string name="see_product_attributes">مشاهده کامل مشخصات</string>
+    <string name="see_product_description">معرفی محصول</string>
+    <string name="comments_count">%1$d! + نظر </string>
+    <string name="comments">دیدگاه کاربران</string>
+    <string name="no_comments_caption">تاکنون نظری ثبت نشده، اولین نفر باشید!</string>
+    <string name="write_comment_button">دیدگاه خود را بنویسید</string>
+    <string name="similar_products">محصولات مشابه</string>
+    <string name="add_to_card">افزودن به سبد خرید</string>
+    <string name="already_exist_in_cart">موجود در سبد شما</string>
+
+    <!--    account-->
+    <string name="order_history">تاریخچه سفارشات</string>
+    <string name="account_details">مشخصات حساب کاربری</string>
+    <string name="submitted_comments">نظرات ارسال شده</string>
+
+    <!--messages-->
+    <string name="error_message_key">message</string>
+    <string name="successful_login_message">ورود موفق بود، خوش آمدید</string>
+    <string name="no_account_message">حسابی با این شماره وجود ندارد.</string>
+    <string name="invalid_password_message">رمز عبور اشتباه است.</string>
+    <string name="invalid_data_message">داده ها نامعتبر هستند</string>
+    <string name="unexpected_value">\"Unexpected value: \"</string>
+    <string name="successful_order_submitting_message">سفارش شما با موفقیت ثبت شد. برای پیگیری سفارش به صفحه پروفایل خود مراجعه نمایید.</string>
+    <string name="comment">\" نظر \"</string>
+
+    <string name="default_name">name</string>
+    <string name="default_number">number</string>
+    <string name="default_address">address</string>
+    <string name="default_email">address</string>
+    <string name="number_already_exist_message">این شماره قبلا ثبت شده.</string>
+    <string name="successful_signup_message">ثبت نام موفق بود، خوش آمدید</string>
+    <string name="successful_comment_delete_message">نظر شما با موفقیت حذف شد.</string>
+    <string name="unsuccessful_comment_delete_message">عملیات ناموفق بود.</string>
 
 
 </resources>

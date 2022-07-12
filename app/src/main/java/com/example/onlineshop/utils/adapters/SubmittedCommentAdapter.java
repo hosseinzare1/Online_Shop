@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.ItemSubmittedCommentBinding;
+import com.example.onlineshop.databinding.CardSubmittedCommentBinding;
 import com.example.onlineshop.model.Comment;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class SubmittedCommentAdapter extends RecyclerView.Adapter<SubmittedComme
     @NonNull
     @Override
     public SubmittedCommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemSubmittedCommentBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_submitted_comment, parent, false);
+        CardSubmittedCommentBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_submitted_comment, parent, false);
 
         return new SubmittedCommentViewHolder(binding);
     }
@@ -59,9 +59,9 @@ public class SubmittedCommentAdapter extends RecyclerView.Adapter<SubmittedComme
     }
 
     public class SubmittedCommentViewHolder extends RecyclerView.ViewHolder {
-        ItemSubmittedCommentBinding binding;
+        CardSubmittedCommentBinding binding;
 
-        public SubmittedCommentViewHolder(@NonNull ItemSubmittedCommentBinding binding) {
+        public SubmittedCommentViewHolder(@NonNull CardSubmittedCommentBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             if (eventListener != null) {

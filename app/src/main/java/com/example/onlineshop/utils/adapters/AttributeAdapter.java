@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.ItemCardSpecificationBinding;
+import com.example.onlineshop.databinding.CardAttributeBinding;
 import com.example.onlineshop.model.Attribute;
 
 import java.util.ArrayList;
@@ -27,11 +27,11 @@ String TAG = "AttributeAdapter";
     @NonNull
     @Override
     public AttributesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemCardSpecificationBinding binding;
+        CardAttributeBinding binding;
 
         binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.item_card_specification,
+                R.layout.card_attribute,
                 parent,
                 false);
 
@@ -49,9 +49,9 @@ String TAG = "AttributeAdapter";
     }
 
     public static class AttributesViewHolder extends RecyclerView.ViewHolder {
-        ItemCardSpecificationBinding binding;
+        CardAttributeBinding binding;
 
-        public AttributesViewHolder(@NonNull ItemCardSpecificationBinding binding) {
+        public AttributesViewHolder(@NonNull CardAttributeBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

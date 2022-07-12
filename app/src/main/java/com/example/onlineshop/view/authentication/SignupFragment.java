@@ -21,7 +21,6 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentSignupBinding;
 import com.example.onlineshop.model.User;
 import com.example.onlineshop.view.MainActivity;
-import com.example.onlineshop.view.authentication.Login_Signup_Activity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
 import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;
 
@@ -58,12 +57,12 @@ public class SignupFragment extends Fragment {
         String message;
         switch (code) {
             case "210":
-                message = "این شماره قبلا ثبت شده.";
+                message = getString(R.string.number_already_exist_message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 break;
             case "211":
-                message = "ثبت نام موفق بود، خوش آمدید";
+                message = getString(R.string.successful_signup_message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 SharedPreferences sharedPreferences =
@@ -77,12 +76,12 @@ public class SignupFragment extends Fragment {
                 ((Login_Signup_Activity) context).finish();
                 break;
             case "220":
-                message = "داده ها نامعتبر هستند";
+                message = getString(R.string.invalid_data_message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 break;
             default:
-                message = "Unexpected value: " + code;
+                message = getString(R.string.unexpected_value)+ code;
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         }
 

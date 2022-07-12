@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.ItemOrderProductBinding;
+import com.example.onlineshop.databinding.CardProductCartBinding;
 import com.example.onlineshop.model.CartProduct;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     @NonNull
     @Override
     public OrderProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemOrderProductBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_order_product, parent, false);
+        CardProductCartBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_product_cart, parent, false);
 
         return new OrderProductViewHolder(binding);
     }
@@ -54,9 +54,9 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     }
 
     public class OrderProductViewHolder extends RecyclerView.ViewHolder {
-        ItemOrderProductBinding binding;
+        CardProductCartBinding binding;
 
-        public OrderProductViewHolder(@NonNull ItemOrderProductBinding binding) {
+        public OrderProductViewHolder(@NonNull CardProductCartBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             binding.getRoot().setOnClickListener(view -> clickListener.onItemClick(items.get(getAdapterPosition()).getId()));

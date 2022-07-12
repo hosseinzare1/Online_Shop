@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.GroupItemBinding;
+import com.example.onlineshop.databinding.CardGroupBinding;
 import com.example.onlineshop.model.Group;
 import com.example.onlineshop.view.category.ProductsGroupCategoryFragmentDirections;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
@@ -41,8 +41,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     @NonNull
     @Override
     public GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        GroupItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
-                , R.layout.group_item
+        CardGroupBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
+                , R.layout.card_group
                 , parent
                 , false);
         return new GroupViewHolder(binding);
@@ -67,9 +67,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     }
 
     public class GroupViewHolder extends RecyclerView.ViewHolder {
-        GroupItemBinding binding;
+        CardGroupBinding binding;
 
-        public GroupViewHolder(@NonNull GroupItemBinding binding) {
+        public GroupViewHolder(@NonNull CardGroupBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             binding.groupItemCard.setOnClickListener(view -> Navigation.findNavController(view).navigate(ProductsGroupCategoryFragmentDirections.

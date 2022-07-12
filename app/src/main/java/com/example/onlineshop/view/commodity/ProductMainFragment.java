@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.FragmentCommodityMainBinding;
+import com.example.onlineshop.databinding.FragmentProductMainBinding;
 import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.utils.adapters.CommentAdapter;
@@ -27,9 +27,9 @@ import com.example.onlineshop.viewmodel.CommodityActivityViewModelFactory;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
-public class CommodityMainFragment extends Fragment {
+public class ProductMainFragment extends Fragment {
 
-    FragmentCommodityMainBinding binding;
+    FragmentProductMainBinding binding;
     CommodityActivityViewModel viewModel;
 
     ImageSliderAdapter imageSliderAdapter;
@@ -37,15 +37,15 @@ public class CommodityMainFragment extends Fragment {
 
     ProductHorizontalAdapter sameProductsAdapter;
     int id;
-    private final String TAG = "CommodityMainFragment";
+    private final String TAG = "ProductMainFragment";
 
-    public CommodityMainFragment() {
+    public ProductMainFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_commodity_main, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_main, container, false);
         if (getActivity() != null)
             viewModel = new ViewModelProvider(getActivity(), new CommodityActivityViewModelFactory(getActivity())).get(CommodityActivityViewModel.class);
         return binding.getRoot();
@@ -104,7 +104,7 @@ public class CommodityMainFragment extends Fragment {
                 binding.detailsNoCommentsTextView.setVisibility(View.VISIBLE);
             }
 
-            binding.detailsCommentsCountTextView.setText(comments.size() + " نظر ");
+            binding.detailsCommentsCountTextView.setText(getString(R.string.comments_count,comments.size()));
 
 
         });
@@ -136,7 +136,7 @@ public class CommodityMainFragment extends Fragment {
         sameProductsAdapter.setOnClickListener(id1 -> viewModel.selectedProductLiveData.setValue(id1));
 
         commentAdapter.setOnItemClickListener(position -> Navigation.findNavController(view).navigate(
-                CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(id,position)
+                ProductMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(id,position)
         ));
 
 
@@ -169,38 +169,38 @@ public class CommodityMainFragment extends Fragment {
         }
 
         public void onSeeSpecifications(View view, Product product) {
-            Navigation.findNavController(view).navigate(CommodityMainFragmentDirections.
+            Navigation.findNavController(view).navigate(ProductMainFragmentDirections.
                     actionCommodityDetailsFragmentToAttributesFragment(product.getId()));
         }
 
         public void onSeeDescriptions(View view, Product product) {
             Navigation.findNavController(view).navigate(
-                    CommodityMainFragmentDirections.actionCommodityDetailsFragmentToDescriptionsFragment(product.getDescription()));
+                    ProductMainFragmentDirections.actionCommodityDetailsFragmentToDescriptionsFragment(product.getDescription()));
         }
 
         public void onWriteComment(View view, Product product) {
 
             Navigation.findNavController(view).navigate(
-                    CommodityMainFragmentDirections.actionCommodityDetailsFragmentToWriteCommentFragment(product.getId())
+                    ProductMainFragmentDirections.actionCommodityDetailsFragmentToWriteCommentFragment(product.getId())
             );
 
         }
 
         public void onSeeAllComments(View view, Product product) {
             Navigation.findNavController(view).navigate(
-                    CommodityMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(product.getId(),0)
+                    ProductMainFragmentDirections.actionCommodityDetailsFragmentToAllCommentsFragment(product.getId(),0)
             );
 
         }
 
         public void onSeeRelatedGroupProducts(View view, Product product) {
-            Navigation.findNavController(view).navigate(CommodityMainFragmentDirections.actionCommodityDetailsFragmentToProductListFragment(
+            Navigation.findNavController(view).navigate(ProductMainFragmentDirections.actionCommodityDetailsFragmentToProductListFragment(
                     "", product.getGroup()
             ));
         }
 
         public void onSeeRelatedCategoryProducts(View view, Product product) {
-            Navigation.findNavController(view).navigate(CommodityMainFragmentDirections.actionCommodityDetailsFragmentToProductListFragment(
+            Navigation.findNavController(view).navigate(ProductMainFragmentDirections.actionCommodityDetailsFragmentToProductListFragment(
                     product.getCategory(), ""
             ));
         }

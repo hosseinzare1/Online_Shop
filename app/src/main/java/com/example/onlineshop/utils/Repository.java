@@ -18,6 +18,8 @@ import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 import com.google.gson.JsonObject;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +35,7 @@ import retrofit2.Response;
 public class Repository {
 
     private static Repository repository = null;
-    public static final String TAG = "repository";
+    public static final String TAG = "Repository";
 
     private static AppDatabase databaseInstance;
 
@@ -85,7 +87,7 @@ public class Repository {
                 .map(orders -> {
                     List<Order> convertedOrders = new ArrayList<>();
 
-                    for (Order order : orders
+                    for (@NonNls Order order : orders
                     ) {
 
                         switch (order.getState()) {
@@ -131,7 +133,7 @@ public class Repository {
     public LiveData<Order> getOrder(String order_id, CompositeDisposable disposable) {
         MutableLiveData<Order> orderLiveData = new MutableLiveData<>();
         RetrofitInstance.getAPI().getOrder(order_id).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .map(order -> {
+                .map((@NonNls Order order) -> {
                     switch (order.getState()) {
                         case "1":
                             order.setState("ثبت شده");
@@ -300,22 +302,22 @@ public class Repository {
 
     public String getUserName(Context context) {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
-        return sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), "name");
+        return sharedPreferences.getString(context.getString(R.string.logged_in_name_KEY), context.getString(R.string.default_name));
     }
 
     public String getUserNumber(Context context) {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
-        return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), "number");
+        return sharedPreferences.getString(context.getString(R.string.logged_in_number_KEY), context.getString(R.string.default_name));
     }
 
     public String getUserAddress(Context context) {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
-        return sharedPreferences.getString(context.getString(R.string.logged_in_address_KEY), "address");
+        return sharedPreferences.getString(context.getString(R.string.logged_in_address_KEY), context.getString(R.string.default_address));
     }
 
     public String getUserEmail(Context context) {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(context.getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
-        return sharedPreferences.getString(context.getString(R.string.logged_in_email_KEY), "email");
+        return sharedPreferences.getString(context.getString(R.string.logged_in_email_KEY), context.getString(R.string.default_email));
     }
 
 

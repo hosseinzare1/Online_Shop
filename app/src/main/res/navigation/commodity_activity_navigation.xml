@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/commodityMainFragment"
-        android:name="com.example.onlineshop.view.commodity.CommodityMainFragment"
+        android:name="com.example.onlineshop.view.commodity.ProductMainFragment"
         android:label="CommodityDetailsFragment">
         <action
             android:id="@+id/action_commodityDetailsFragment_to_descriptionsFragment"

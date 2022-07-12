@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnlineShop">
         <activity
-            android:name="com.example.onlineshop.view.commodity.CommodityActivity"
+            android:name="com.example.onlineshop.view.commodity.ProductActivity"
             android:exported="true" />
         <activity
             android:name="com.example.onlineshop.view.authentication.Login_Signup_Activity"

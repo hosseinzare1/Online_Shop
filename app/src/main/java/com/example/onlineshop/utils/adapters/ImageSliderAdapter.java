@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.ImageSliderItemBinding;
+import com.example.onlineshop.databinding.ItemImageSliderBinding;
 import com.example.onlineshop.model.Image;
 
 import java.util.ArrayList;
@@ -44,8 +44,8 @@ public class ImageSliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        ImageSliderItemBinding binding = DataBindingUtil
-                .inflate(LayoutInflater.from(container.getContext()), R.layout.image_slider_item, container, false);
+        ItemImageSliderBinding binding = DataBindingUtil
+                .inflate(LayoutInflater.from(container.getContext()), R.layout.item_image_slider, container, false);
 
         binding.setModel(images.get(position));
         container.addView(binding.getRoot());

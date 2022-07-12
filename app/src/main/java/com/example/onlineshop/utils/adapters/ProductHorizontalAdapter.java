@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.HorizontalItemCardBinding;
+import com.example.onlineshop.databinding.CardProductHorizontalBinding;
 import com.example.onlineshop.model.Product;
 
 import java.util.ArrayList;
@@ -33,8 +33,8 @@ public class ProductHorizontalAdapter extends RecyclerView.Adapter<ProductHorizo
     @Override
     public ProductHorizontalAdapter.HorizontalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        HorizontalItemCardBinding binding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()), R.layout.horizontal_item_card, parent, false);
+        CardProductHorizontalBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()), R.layout.card_product_horizontal, parent, false);
 
 
         return new HorizontalViewHolder(binding);
@@ -57,9 +57,9 @@ public class ProductHorizontalAdapter extends RecyclerView.Adapter<ProductHorizo
 
     public class HorizontalViewHolder extends RecyclerView.ViewHolder {
 
-        HorizontalItemCardBinding binding;
+        CardProductHorizontalBinding binding;
 
-        public HorizontalViewHolder(@NonNull HorizontalItemCardBinding binding) {
+        public HorizontalViewHolder(@NonNull CardProductHorizontalBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             if (onClickListener != null) {

@@ -64,8 +64,8 @@ public class SubmittedCommentsFragment extends Fragment {
             public void onDeleteCommentListener(int id) {
                 viewModel.deleteComment(id).observe(getViewLifecycleOwner(), integer -> {
                     if (integer == 200)
-                        Snackbar.make(view, "نظر شما با موفقیت حذف شد.", Snackbar.LENGTH_LONG).show();
-                    else Snackbar.make(view, "عملیات ناموفق بود.", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view, R.string.successful_comment_delete_message, Snackbar.LENGTH_LONG).show();
+                    else Snackbar.make(view, R.string.unsuccessful_comment_delete_message, Snackbar.LENGTH_LONG).show();
                 });
             }
 

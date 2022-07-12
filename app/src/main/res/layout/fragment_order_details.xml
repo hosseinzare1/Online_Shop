@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/trackingNumber"
+                android:text="@string/tracking_number"
                 android:textAppearance="?attr/textAppearanceBody2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,7 +74,7 @@
                 android:id="@+id/textView32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/order_totalPrice"
+                android:text="@string/order_total_price"
                 android:textAppearance="?attr/textAppearanceBody2"
 
                 app:layout_constraintEnd_toEndOf="@+id/textView31"

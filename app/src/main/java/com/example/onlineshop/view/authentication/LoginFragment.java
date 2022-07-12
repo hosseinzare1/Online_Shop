@@ -23,7 +23,6 @@ import com.example.onlineshop.databinding.FragmentLoginBinding;
 
 import com.example.onlineshop.model.User;
 import com.example.onlineshop.view.MainActivity;
-import com.example.onlineshop.view.authentication.Login_Signup_Activity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
 import com.example.onlineshop.viewmodel.LoginSignupViewModelFactory;
 import com.google.gson.Gson;
@@ -65,7 +64,7 @@ public class LoginFragment extends Fragment {
 
         switch (code) {
             case "212":
-                message = "ورود موفق بود، خوش آمدید";
+                message = getString(R.string.successful_login_message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 SharedPreferences sharedPreferences =
@@ -79,23 +78,23 @@ public class LoginFragment extends Fragment {
                 ((Login_Signup_Activity) context).finish();
                 break;
             case "213":
-                message = "حسابی با این شماره وجود ندارد.";
+                message = getString(R.string.no_account_message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 break;
 
             case "214":
-                message = "رمز عبور اشتباه است.";
+                message = getString(R.string.invalid_password_message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 break;
             case "220":
-                message = "داده ها نامعتبر هستند";
+                message = getString(R.string.invalid_data_message);
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
                 break;
             default:
-                message = "Unexpected value: " + code;
+                message = getString(R.string.unexpected_value) + code;
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         }
 

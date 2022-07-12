@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.ItemCardCommentHorizontalBinding;
-import com.example.onlineshop.databinding.ItemCardCommentVerticalBinding;
+import com.example.onlineshop.databinding.CardCommentHorizontalBinding;
+import com.example.onlineshop.databinding.CardCommentVerticalBinding;
 import com.example.onlineshop.model.Comment;
 
 import java.util.ArrayList;
@@ -48,10 +48,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (adapterType == AdapterType.HORIZONTAL) {
-            ItemCardCommentHorizontalBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_card_comment_horizontal, parent, false);
+            CardCommentHorizontalBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_comment_horizontal, parent, false);
             return new Holder(binding);
         } else {
-            ItemCardCommentVerticalBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_card_comment_vertical, parent, false);
+           CardCommentVerticalBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_comment_vertical, parent, false);
             return new Holder(binding);
         }
     }
@@ -74,16 +74,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Holder> 
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        ItemCardCommentHorizontalBinding horizontalBinding;
-        ItemCardCommentVerticalBinding verticalBinding;
+        CardCommentHorizontalBinding horizontalBinding;
+        CardCommentVerticalBinding verticalBinding;
 
-        public Holder(@NonNull ItemCardCommentHorizontalBinding horizontalBinding) {
+        public Holder(@NonNull CardCommentHorizontalBinding horizontalBinding) {
             super(horizontalBinding.getRoot());
             this.horizontalBinding = horizontalBinding;
             horizontalBinding.getRoot().setOnClickListener(view -> onClickListener.onItemClick(getAdapterPosition()));
         }
 
-        public Holder(@NonNull ItemCardCommentVerticalBinding verticalBinding) {
+        public Holder(@NonNull CardCommentVerticalBinding verticalBinding) {
             super(verticalBinding.getRoot());
             this.verticalBinding = verticalBinding;
 

@@ -10,7 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.VerticalItemCardBinding;
+import com.example.onlineshop.databinding.CardProductVerticalBinding;
 import com.example.onlineshop.model.Product;
 import com.example.onlineshop.view.category.ProductListFragmentDirections;
 
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ProductsVerticalAdapter extends RecyclerView.Adapter<ProductsVerticalAdapter.Holder> {
 
-    VerticalItemCardBinding binding;
+    CardProductVerticalBinding binding;
     List<Product> homeItems = new ArrayList<>();
 
     public interface OnClickListener {
@@ -36,7 +36,7 @@ public class ProductsVerticalAdapter extends RecyclerView.Adapter<ProductsVertic
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.vertical_item_card, parent, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_product_vertical, parent, false);
         return new Holder(binding);
     }
 
@@ -60,9 +60,9 @@ public class ProductsVerticalAdapter extends RecyclerView.Adapter<ProductsVertic
 
     public class Holder extends RecyclerView.ViewHolder {
 
-        VerticalItemCardBinding binding;
+        CardProductVerticalBinding binding;
 
-        public Holder(@NonNull VerticalItemCardBinding binding) {
+        public Holder(@NonNull CardProductVerticalBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

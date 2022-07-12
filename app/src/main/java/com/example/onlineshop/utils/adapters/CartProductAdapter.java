@@ -8,14 +8,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.CartItemCardBinding;
+import com.example.onlineshop.databinding.CardCartBinding;
 import com.example.onlineshop.model.CartProduct;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.CartHolder> {
-    CartItemCardBinding binding;
+    CardCartBinding binding;
     List<CartProduct> cartProducts = new ArrayList<>();
 
 
@@ -25,7 +25,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     @Override
     public CartHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.cart_item_card, parent, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_cart, parent, false);
         return new CartHolder(binding);
     }
 
@@ -44,9 +44,9 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
 
     public class CartHolder extends RecyclerView.ViewHolder {
-        CartItemCardBinding binding;
+        CardCartBinding binding;
 
-        public CartHolder(@NonNull CartItemCardBinding binding) {
+        public CartHolder(@NonNull CardCartBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

@@ -10,6 +10,8 @@ import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
 import com.google.gson.JsonObject;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
@@ -23,6 +25,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface API {
+
 
     @FormUrlEncoded
     @POST("login/")

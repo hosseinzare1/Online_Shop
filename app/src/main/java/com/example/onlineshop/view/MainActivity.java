@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
        viewModel.getError().observe(this, integer -> {
             if (integer != R.string.no_error) {
                 Bundle bundle = new Bundle();
-                bundle.putString("message", this.getString(integer));
+                bundle.putString(getString(R.string.error_message_key), this.getString(integer));
 
                 if (integer == R.string.internet_connection_error) {
                     navController.navigate(R.id.errorFragment_main, bundle);

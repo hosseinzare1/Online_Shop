@@ -42,7 +42,7 @@ public class ErrorObserver {
 
             if (integer != R.string.no_error) {
                 Bundle bundle = new Bundle();
-                bundle.putString("message", activity.getString(integer));
+                bundle.putString(activity.getString(R.string.error_message_key), activity.getString(integer));
 
                 if (integer == R.string.internet_connection_error) {
                     navController.navigate(errorLayoutID, bundle);

@@ -9,7 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
-import com.example.onlineshop.databinding.ItemOrderHistoryBinding;
+import com.example.onlineshop.databinding.CardOrderBinding;
 import com.example.onlineshop.model.Order;
 import com.example.onlineshop.view.account.OrderHistoryListFragmentDirections;
 
@@ -29,7 +29,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @NonNull
     @Override
     public OrderHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemOrderHistoryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_order_history, parent, false);
+        CardOrderBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.card_order, parent, false);
         return new OrderHistoryViewHolder(binding);
     }
 
@@ -44,9 +44,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     }
 
     public class OrderHistoryViewHolder extends RecyclerView.ViewHolder {
-        ItemOrderHistoryBinding binding;
+        CardOrderBinding binding;
 
-        public OrderHistoryViewHolder(@NonNull ItemOrderHistoryBinding binding) {
+        public OrderHistoryViewHolder(@NonNull CardOrderBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

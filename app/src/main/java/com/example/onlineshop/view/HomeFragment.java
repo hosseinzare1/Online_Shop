@@ -19,7 +19,7 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentHomeBinding;
 import com.example.onlineshop.utils.adapters.ProductHorizontalAdapter;
 import com.example.onlineshop.utils.adapters.ImageSliderAdapter;
-import com.example.onlineshop.view.commodity.CommodityActivity;
+import com.example.onlineshop.view.commodity.ProductActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment implements ProductHorizontalAdapter.O
     @Override
     public void onProductClickListener(int id) {
         startActivity(
-                new Intent(getContext(), CommodityActivity.class)
+                new Intent(getContext(), ProductActivity.class)
                         .putExtra("id", id)
         );
     }

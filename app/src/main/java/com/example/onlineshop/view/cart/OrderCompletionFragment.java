@@ -86,7 +86,7 @@ public class OrderCompletionFragment extends Fragment {
 
             viewModel.submitOrder(order).observe(getViewLifecycleOwner(), s -> {
 
-                Snackbar.make(view,"سفارش شما با موفقیت ثبت شد."+"برای پیگیری سفارش به صفحه پروفایل خود مراجعه نمایید."
+                Snackbar.make(view, R.string.successful_order_submitting_message
                         ,Snackbar.LENGTH_LONG).show();
 
                 viewModel.RemoveAllCartItems();

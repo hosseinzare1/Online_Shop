@@ -2,6 +2,8 @@ package com.example.onlineshop.model;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NonNls;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -111,6 +113,7 @@ public class Order implements Serializable{
         this.user = user;
     }
 
+    @NonNls
     @NonNull
     @Override
     public String toString() {
