@@ -37,7 +37,6 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -51,14 +50,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/username_hint"
-                    android:textAppearance="?attr/textAppearanceBody1"
                     android:text="@={viewModel.name}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout2"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -72,14 +69,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/number_hint"
-                    android:textAppearance="?attr/textAppearanceBody1"
                     android:text="@={viewModel.number}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout3"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -94,7 +89,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
                     android:text="@={viewModel.password}"
-                    android:textAppearance="?attr/textAppearanceBody1"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

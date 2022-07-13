@@ -42,7 +42,6 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout1"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -60,14 +59,12 @@
                     android:hint="@string/number_hint"
                     android:text="@={viewModel.number}"
                     tools:text="09033093041"
-                    android:textAppearance="@style/Theme.OnlineShop.Body1"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayout2"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -84,7 +81,6 @@
                     android:layout_marginTop="16dp"
                     android:hint="@string/password_hint"
                     android:text="@={viewModel.password}"
-                    android:textAppearance="@style/Theme.OnlineShop.Body1"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>

@@ -23,7 +23,26 @@
         <item name="textAppearanceBody1">@style/Theme.OnlineShop.Body1</item>
         <item name="textAppearanceSubtitle1">@style/Theme.OnlineShop.Subtitle1</item>
 
+        <item name="textInputStyle">
+            @style/MyCustomTextInputStyle
+        </item>
+<!--        <item name="textInputFilledStyle">@style/MyCustomTextInputStyle</item>-->
+<!--        <item name="editTextStyle">-->
+<!--            @style/MyCustomEditTextStyle-->
+<!--        </item>-->
+
     </style>
+
+
+    <style name="MyCustomTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/error</item>
+        <item name="android:textColorHintInverse">@color/error</item>
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+    </style>
+
+<!--    <style name="MyCustomEditTextStyle" parent="Widget.MaterialCompo">-->
+<!--        <item name="android:textColor">@color/error</item>-->
+<!--    </style>-->
 
 
 </resources>
