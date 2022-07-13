@@ -31,6 +31,7 @@ public class LoginSignupViewModel extends ViewModel {
         name.setValue("");
         number.setValue("");
         password.setValue("");
+        formErrors.clear();
     }
 
     public boolean isSigningFormValid() {

@@ -15,8 +15,6 @@
         android:layout_width="250dp"
         android:layout_height="184dp"
         android:layout_margin="8dp"
-        android:elevation="1dp"
-        android:padding="8dp"
         app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

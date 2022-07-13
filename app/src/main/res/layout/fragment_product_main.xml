@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:elevation="1dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -24,7 +23,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E6E6E6"
+        android:background="@color/white_gray"
         tools:context=".view.CommodityDetailsActivity">
 
         <ScrollView
@@ -176,12 +175,11 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/button_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_more_24"
-                            android:contentDescription="@string/button_icon"
-                            />
+                            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -212,11 +210,10 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/button_icon"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_more_24"
-                            android:contentDescription="@string/button_icon"
-                            />
+                            app:srcCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -291,11 +288,10 @@
                             android:id="@+id/imageView4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/button_icon"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_more_24"
-                            android:contentDescription="@string/button_icon"
-                            />
+                            app:srcCompat="@drawable/ic_baseline_more_24" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -369,8 +365,8 @@
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:background="#FFFFFF"
-            android:elevation="16dp"
+            android:background="@color/white"
+            android:elevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -380,39 +376,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                tools:text="90,000"
                 android:text="@{String.format(`%,d`,(model.discount>0)? model.price*(100-model.discount)/100 : model.price).concat(` تومان `)}"
                 android:textAppearance="@style/Theme.OnlineShop.Body1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="90,000" />
 
             <TextView
                 android:id="@+id/org_price_commodity_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                tools:text="100,000"
                 android:text="@{String.format(`%,d`,model.price)}"
                 android:textAppearance="?attr/textAppearanceCaption"
                 android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/price_textview"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/price_textview" />
+                app:layout_constraintTop_toBottomOf="@+id/price_textview"
+                tools:text="100,000" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                tools:text="10%"
                 android:text="@{String.valueOf(model.discount)+'%'}"
                 android:textAppearance="?attr/textAppearanceCaption"
                 android:textColor="@android:color/holo_red_light"
                 android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toEndOf="@+id/org_price_commodity_main"
-                app:layout_constraintTop_toTopOf="@+id/org_price_commodity_main" />
+                app:layout_constraintTop_toTopOf="@+id/org_price_commodity_main"
+                tools:text="10%" />
 
             <Button
                 android:id="@+id/detailsAddToCartButton"

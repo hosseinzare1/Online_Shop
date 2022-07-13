@@ -24,7 +24,7 @@
     <string name="TEXT_INVALID">متن وارده نامعتبر است.</string>
 
     <!--comments-->
-    <string name="edit_comment_title">دیدگاه خود را بنویسید.</string>
+    <string name="edit_comment_title">دیدگاه خود را بنویسید</string>
     <string name="comment_submitting_successful">دیگاه شما با موفقیت ثبت شد.</string>
     <string name="comment_submitting_failed">ارسال دیدگاه ناموفق بود.</string>
     <string name="write_comment_title">دیدگاه خود را بنویسید</string>

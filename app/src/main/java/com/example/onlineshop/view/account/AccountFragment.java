@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAccountBinding;
 import com.example.onlineshop.utils.adapters.AccountButtonAdapter;
+import com.example.onlineshop.utils.adapters.ProductHorizontalAdapter;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -52,28 +53,23 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (getActivity() != null){
+        if (getActivity() != null) {
             viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
             SharedPreferences sharedPreferences
                     = getActivity().getSharedPreferences(getString(R.string.logged_in_shared_preferences), Context.MODE_PRIVATE);
             String number = sharedPreferences.getString(getString(R.string.logged_in_number_KEY), null);
             viewModel.getAccountDetails(number).observe(getActivity(), account -> binding.setModel(account));
-        }else {
+        } else {
             Navigation.findNavController(view).popBackStack();
         }
-
 
 
         @NonNls List<String> texts = new ArrayList<>();
         List<Integer> icons = new ArrayList<>();
 
-        texts.add("تاریخچه سفارشات");
-        texts.add("مشخصات حساب کاربری");
-        texts.add("نظرات ارسال شده");
-
         texts.add(getString(R.string.order_history));
         texts.add(getString(R.string.account_details));
-        texts.add(getString(R.string.submit_comment));
+        texts.add(getString(R.string.submitted_comments));
 //        texts.add("لیست علاقه مندی ها");
         icons.add(R.drawable.ic_baseline_shopping_cart_24);
         icons.add(R.drawable.ic_baseline_account_circle_24);
@@ -82,6 +78,18 @@ public class AccountFragment extends Fragment {
         accountButtonAdapter.setData(icons, texts);
         binding.buttonsRecyclerView.setAdapter(accountButtonAdapter);
         binding.buttonsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ProductHorizontalAdapter historyAdapter = new ProductHorizontalAdapter();
+        binding.historyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.historyRecyclerView.setAdapter(historyAdapter);
+
+
+        if (viewModel.getHistory().size() > 0) {
+            binding.historyLayout.setVisibility(View.VISIBLE);
+            historyAdapter.setItems(viewModel.getHistory());
+        } else {
+            binding.historyLayout.setVisibility(View.GONE);
+        }
 
         accountButtonAdapter.setOnClickListener(itemText -> {
             switch (itemText) {
