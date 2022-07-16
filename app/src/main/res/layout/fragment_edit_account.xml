@@ -33,7 +33,9 @@
             android:layout_marginTop="32dp"
             app:errorText='@{viewModel.profileFormErrors.contains(InputErrors.INVALID_PASSWORD) ? @string/INVALID_PASSWORD : ""}'
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
-            tools:layout_editor_absoluteX="16dp">
+            tools:layout_editor_absoluteX="16dp"
+
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -41,7 +43,7 @@
                 android:hint="@string/password_hint"
                 android:text="@={model.password}"
                 android:textAppearance="?attr/textAppearanceBody1"
-
+                android:inputType="textPassword"
                 />
 
 

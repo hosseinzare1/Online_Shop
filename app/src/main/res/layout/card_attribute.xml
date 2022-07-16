@@ -28,17 +28,18 @@
 
             <TextView
                 android:id="@+id/attribute_value_textview"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
-                tools:text="مقدار مشخصه"
                 android:text="@{model.attribute_value}"
                 android:textAlignment="viewEnd"
                 android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/attribute_name_textview"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="مقدار مشخصه" />
 
             <TextView
                 android:id="@+id/attribute_name_textview"
@@ -46,13 +47,12 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginEnd="8dp"
-                tools:text="نام مشخصه"
                 android:text="@{model.attribute}"
                 android:textAlignment="viewEnd"
                 android:textAppearance="?attr/textAppearanceCaption"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/attribute_value_textview"
+                tools:text="نام مشخصه" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

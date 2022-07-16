@@ -5,7 +5,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white_gray">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,7 +84,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="?attr/backgroundColor"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +120,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="?attr/backgroundColor"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"

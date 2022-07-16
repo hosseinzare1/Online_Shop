@@ -65,6 +65,7 @@ public class EditAccountFragment extends Fragment {
                         sharedPreferences.edit().putString(getString(R.string.logged_in_number_KEY),newAccount.getNumber()).apply();
                         sharedPreferences.edit().putString(getString(R.string.logged_in_address_KEY),newAccount.getAddress()).apply();
                         sharedPreferences.edit().putString(getString(R.string.logged_in_email_KEY),newAccount.getEmail()).apply();
+                        Navigation.findNavController(view).navigate(EditAccountFragmentDirections.actionEditAccountFragmentToAccountFragment());
 
                     }
                     );
@@ -73,7 +74,6 @@ public class EditAccountFragment extends Fragment {
 
 
 
-            Navigation.findNavController(view).navigate(EditAccountFragmentDirections.actionEditAccountFragmentToAccountFragment());
             }
 
 

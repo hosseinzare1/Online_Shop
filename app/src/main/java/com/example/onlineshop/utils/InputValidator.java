@@ -24,7 +24,7 @@ public class InputValidator {
     }
 
 
-    //number
+    //number TODO: More advanced validation should be implemented
     public static void phoneNumberValidation(@Nullable String number, ObservableArrayList<InputErrors> errorsList) {
         if (number != null) {
             String numberValue = number.trim();
@@ -52,7 +52,7 @@ public class InputValidator {
 
         //title validation
         if (title != null) {
-            if (title.length() < 3)
+            if (title.length() < 3 || title.length() >18)
                 errorsList.add(InputErrors.INVALID_TITLE);
         } else errorsList.add(InputErrors.INVALID_TITLE);
 

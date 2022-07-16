@@ -67,13 +67,17 @@
 
             <TextView
                 android:id="@+id/commentTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:lines="1"
+                android:maxLines="1"
                 android:text="@{model.title}"
-                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10"
                 tools:text="عنوان نظر" />
 
@@ -87,7 +91,8 @@
                 android:textAppearance="?attr/textAppearanceCaption"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="1400-12-04 14:30"/>
+                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                tools:text="1400-12-04 14:30" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

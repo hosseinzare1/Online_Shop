@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +58,46 @@ public class LoginFragment extends Fragment {
         binding.setViewModel(viewModel);
 
 
+        initializeTextChangeListeners();
+    }
+
+    void initializeTextChangeListeners() {
+        binding.loginNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!viewModel.formErrors.isEmpty()) {
+                    viewModel.isSigningFormValid();
+                }
+            }
+        });
+        binding.loginPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!viewModel.formErrors.isEmpty()) {
+                    viewModel.isSigningFormValid();
+                }
+            }
+        });
     }
 
     public void showMessage(String code, User user) {
@@ -72,7 +114,6 @@ public class LoginFragment extends Fragment {
 
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_number_KEY), user.getNumber()).apply();
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), user.getName()).apply();
-//                sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), "hossein").apply();
 
                 context.startActivity(new Intent(context, MainActivity.class));
                 ((Login_Signup_Activity) context).finish();
@@ -104,9 +145,11 @@ public class LoginFragment extends Fragment {
 
         public void onSignInClick(View view, LoginSignupViewModel viewModel) {
 
-            if (viewModel.isSigningFormValid()) viewModel.login().observe((LifecycleOwner) context,
-                    response -> showMessage(String.valueOf(response.code()),
-                            new Gson().fromJson(response.body(),User.class)));
+            if (viewModel.isSigningFormValid())
+                viewModel.login().observe((LifecycleOwner) context,
+                        response -> showMessage(String.valueOf(response.code()),
+                                new Gson().fromJson(response.body(),
+                                        User.class)));
         }
 
         public void LoginToSignupFragment(View view) {

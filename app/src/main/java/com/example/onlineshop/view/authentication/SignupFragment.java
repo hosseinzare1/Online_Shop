@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,9 +50,65 @@ public class SignupFragment extends Fragment {
         binding.setEventListener(signupFragmentEventListener);
         binding.setViewModel(viewModel);
 
-
+        initializeTextChangeListeners();
     }
 
+    void initializeTextChangeListeners() {
+        binding.signupUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!viewModel.formErrors.isEmpty()) {
+                    viewModel.isSignupFormValid();
+                }
+            }
+        });
+        binding.signupPhoneNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!viewModel.formErrors.isEmpty()) {
+                    viewModel.isSigningFormValid();
+                }
+            }
+        });
+        binding.signupPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!viewModel.formErrors.isEmpty()) {
+                    viewModel.isSigningFormValid();
+                }
+            }
+        });
+    }
 
     public void showMessage(String code, User user) {
 
@@ -81,7 +139,7 @@ public class SignupFragment extends Fragment {
 
                 break;
             default:
-                message = getString(R.string.unexpected_value)+ code;
+                message = getString(R.string.unexpected_value) + code;
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         }
 

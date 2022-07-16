@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.onlineshop.R;
@@ -71,7 +72,7 @@ public class EditCommentFragment extends DialogFragment {
                         viewModel.comment_rating.getValue().intValue(),
                         viewModel.getUserName(),
                         viewModel.getUserNumber(),
-                        args.getComment().getId(),
+                        args.getComment().getProduct(),
                         Utility.getCurrentSolarHijri(),
                         new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date())
                 );

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,8 +77,8 @@ public class OrderCompletionFragment extends Fragment {
     }
 
 
-    public class EventListener{
-        public void onPayClickListener(View view,Order order){
+    public class EventListener {
+        public void onPayClickListener(View view, Order order) {
             order.setSubmit_date(Utility.getCurrentSolarHijri());
             order.setSubmit_time(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
 
@@ -86,13 +87,13 @@ public class OrderCompletionFragment extends Fragment {
 
             viewModel.submitOrder(order).observe(getViewLifecycleOwner(), s -> {
 
-                Snackbar.make(view, R.string.successful_order_submitting_message
-                        ,Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(view, R.string.successful_order_submitting_message
+                                , Snackbar.LENGTH_LONG).show();
 
-                viewModel.RemoveAllCartItems();
+                        viewModel.RemoveAllCartItems();
 
-                Navigation.findNavController(view).popBackStack();
-            }
+                        Navigation.findNavController(view).popBackStack();
+                    }
             );
 
 

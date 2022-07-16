@@ -43,6 +43,10 @@ public class MainActivityViewModel extends ViewModel {
         return repository.getUserAddress(context);
     }
 
+    public String getUserEmail() {
+        return repository.getUserEmail(context);
+    }
+
     public MainActivityViewModel(Context context) {
         this.context = context;
         repository = Repository.getInstance(context);

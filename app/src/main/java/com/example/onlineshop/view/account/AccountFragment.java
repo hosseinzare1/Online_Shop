@@ -1,6 +1,7 @@
 package com.example.onlineshop.view.account;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,11 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.FragmentAccountBinding;
 import com.example.onlineshop.utils.adapters.AccountButtonAdapter;
 import com.example.onlineshop.utils.adapters.ProductHorizontalAdapter;
+import com.example.onlineshop.view.commodity.ProductActivity;
 import com.example.onlineshop.viewmodel.MainActivityViewModel;
 import com.example.onlineshop.viewmodel.MainActivityViewModelFactory;
 
@@ -77,10 +80,10 @@ public class AccountFragment extends Fragment {
         AccountButtonAdapter accountButtonAdapter = new AccountButtonAdapter();
         accountButtonAdapter.setData(icons, texts);
         binding.buttonsRecyclerView.setAdapter(accountButtonAdapter);
-        binding.buttonsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.buttonsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL,true));
 
         ProductHorizontalAdapter historyAdapter = new ProductHorizontalAdapter();
-        binding.historyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.historyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
         binding.historyRecyclerView.setAdapter(historyAdapter);
 
 
@@ -90,6 +93,19 @@ public class AccountFragment extends Fragment {
         } else {
             binding.historyLayout.setVisibility(View.GONE);
         }
+
+        historyAdapter.setOnClickListener(new ProductHorizontalAdapter.OnClickListener() {
+            @Override
+            public void onProductClickListener(int id) {
+
+                Intent intent = new Intent(getContext(), ProductActivity.class);
+
+                intent.putExtra("id", id);
+
+                startActivity(intent);
+
+            }
+        });
 
         accountButtonAdapter.setOnClickListener(itemText -> {
             switch (itemText) {

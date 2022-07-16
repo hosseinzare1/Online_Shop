@@ -17,10 +17,10 @@
 
     <string name="INVALID_NUMBER"> شماره وارد شده نامعتبر است.</string>
     <string name="INVALID_PASSWORD">پسوورد باید حداقل 6 رقم باشد.</string>
-    <string name="MISSING_NAME">نام نامعبر است.</string>
+    <string name="MISSING_NAME">نام کاربری باید حداقل 3 حرف باشد.</string>
 
     <string name="RATING_INVALID">امتیاز موردنظر را انتخاب کنید.</string>
-    <string name="TITLE_INVALID">عنوان دیدگاه نامعتبر است.</string>
+    <string name="TITLE_INVALID">عنوان دیدگاه باید بین 3~18  کاراکتر باشد.</string>
     <string name="TEXT_INVALID">متن وارده نامعتبر است.</string>
 
     <!--comments-->
@@ -47,16 +47,16 @@
     <string name="order_transferee_name">تحویل گیرنده:</string>
     <string name="order_transferee_number">شماره تماس:</string>
     <string name="order_transferee_address">ارسال به:</string>
-    <string name="order_total_price">مبلغ کل:</string>
+    <string name="order_total_price">مبلغ کل</string>
     <string name="Pay">پرداخت</string>
 
 
     <!--    cart-->
     <string name="cart_database_name">cart_item_database</string>
     <string name="cart_summery_title">خلاصه سبد</string>
-    <string name="order_original_prices">قیمت کالا ها</string>
-    <string name="order_total_discount">تخفیف کالا ها</string>
-    <string name="Empty_the_shopping_cart">حذف کالا ها</string>
+    <string name="order_original_prices">قیمت کالاها</string>
+    <string name="order_total_discount">تخفیف کالاها</string>
+    <string name="Empty_the_shopping_cart">حذف کالاها</string>
     <string name="goto_complete_payment">ادامه فرایند خرید</string>
     <string name="empty_cart">سبد خرید شما خالی است</string>
 
@@ -87,7 +87,7 @@
     <string name="product_specifications">مشخصات محصول</string>
     <string name="see_product_attributes">مشاهده کامل مشخصات</string>
     <string name="see_product_description">معرفی محصول</string>
-    <string name="comments_count">%1$d! + نظر </string>
+    <string name="comments_count">%1$d نظر </string>
     <string name="comments">دیدگاه کاربران</string>
     <string name="no_comments_caption">تاکنون نظری ثبت نشده، اولین نفر باشید!</string>
     <string name="write_comment_button">دیدگاه خود را بنویسید</string>
@@ -110,14 +110,15 @@
     <string name="successful_order_submitting_message">سفارش شما با موفقیت ثبت شد. برای پیگیری سفارش به صفحه پروفایل خود مراجعه نمایید.</string>
     <string name="comment">\" نظر \"</string>
 
-    <string name="default_name">name</string>
-    <string name="default_number">number</string>
-    <string name="default_address">address</string>
-    <string name="default_email">address</string>
+    <string name="default_name">name default</string>
+    <string name="default_number">number default</string>
+    <string name="default_address">address default</string>
+    <string name="default_email">email default</string>
     <string name="number_already_exist_message">این شماره قبلا ثبت شده.</string>
     <string name="successful_signup_message">ثبت نام موفق بود، خوش آمدید</string>
     <string name="successful_comment_delete_message">نظر شما با موفقیت حذف شد.</string>
     <string name="unsuccessful_comment_delete_message">عملیات ناموفق بود.</string>
+    <string name="order_state">وضعیت سفارش</string>
 
 
 </resources>

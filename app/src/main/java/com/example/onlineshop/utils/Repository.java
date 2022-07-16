@@ -2,6 +2,7 @@ package com.example.onlineshop.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,10 +17,12 @@ import com.example.onlineshop.model.Group;
 import com.example.onlineshop.model.Image;
 import com.example.onlineshop.model.Order;
 import com.example.onlineshop.model.Product;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.jetbrains.annotations.NonNls;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -61,11 +64,14 @@ public class Repository {
                         public void onSubscribe(@NonNull Disposable d) {
 
                         }
+
                         @Override
                         public void onSuccess(@NonNull Boolean aBoolean) {
                             int error = aBoolean ? (R.string.server_connection_error) : (R.string.internet_connection_error);
-                            if (!errorLiveData.getValue().equals(error)) errorLiveData.setValue(error);
+                            if (!errorLiveData.getValue().equals(error))
+                                errorLiveData.setValue(error);
                         }
+
                         @Override
                         public void onError(@NonNull Throwable e) {
                         }
@@ -171,7 +177,9 @@ public class Repository {
 
     public LiveData<List<Comment>> getUserComments(String user_number, CompositeDisposable disposable) {
         MutableLiveData<List<Comment>> liveData = new MutableLiveData<>();
-        RetrofitInstance.getAPI().getUserComments(user_number).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        RetrofitInstance.getAPI().getUserComments(user_number)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<Comment>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {

@@ -13,8 +13,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/group_item_card"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_margin="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@{model.name}"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categories_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,12 +51,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:text='@{model.count+" کالا "}'
-                android:textColor="@color/link"
                 android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="@color/link"
+                app:layout_constraintBottom_toBottomOf="@+id/groupName_textView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/groupName_textView"
                 tools:text="63 کالا" />
 
 

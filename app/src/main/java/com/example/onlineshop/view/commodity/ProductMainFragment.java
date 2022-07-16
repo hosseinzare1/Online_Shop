@@ -148,6 +148,7 @@ public class ProductMainFragment extends Fragment {
 
         viewModel.selectedProductLiveData.observe(getViewLifecycleOwner(), id -> {
             loadData(id,view);
+            viewModel.clearCommentForm();
             binding.commodityScrollView.fullScroll(ScrollView.FOCUS_UP);
         });
 

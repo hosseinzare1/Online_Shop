@@ -82,6 +82,7 @@ public class CommodityActivityViewModel extends ViewModel {
         comment_rating.setValue(0.0f);
         comment_title.setValue("");
         comment_text.setValue("");
+        commentFormErrors.clear();
     }
 
     public MutableLiveData<String> comment_title = new MutableLiveData<>();

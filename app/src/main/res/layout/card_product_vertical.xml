@@ -24,13 +24,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?attr/backgroundColor">
 
             <ImageView
                 android:id="@+id/itemImageView"
                 setImage="@{model.imageUrl}"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/ic_baseline_product_sample_24" />
@@ -39,11 +43,15 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
+                android:lines="2"
+                android:maxLines="2"
                 android:text="@{model.name}"
-                android:textAppearance="?attr/textAppearanceHeadline6"
+
+                android:textAppearance="?attr/textAppearanceSubtitle1"
                 app:layout_constraintEnd_toStartOf="@+id/itemImageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/itemImageView"
                 tools:text="نام محصول" />
 
@@ -51,7 +59,7 @@
                 android:id="@+id/priceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="32dp"
                 android:text="@{String.format(`%,d`,(model.discount>0)? model.price*(100-model.discount)/100 : model.price).concat(` تومان `)}"
                 android:textAppearance="?attr/textAppearanceBody1"
