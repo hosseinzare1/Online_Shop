@@ -33,7 +33,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     @Override
     public void onBindViewHolder(@NonNull CartHolder holder, int position) {
         CartProduct model = cartProducts.get(position);
-        binding.setModel(model);
+        holder.bind(model);
     }
 
 
@@ -42,13 +42,20 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         return cartProducts.size();
     }
 
+    public void clearItems() {
+    cartProducts.clear();
+    notifyDataSetChanged();
+    }
+
 
     public class CartHolder extends RecyclerView.ViewHolder {
-        CardCartBinding binding;
+
+        public void bind(CartProduct product){
+            binding.setModel(product);
+        }
 
         public CartHolder(@NonNull CardCartBinding binding) {
             super(binding.getRoot());
-            this.binding = binding;
 
             binding.cartItemImageView.setOnClickListener(view ->
                             onCartProductData.onProductClickListener(cartProducts.get(getAdapterPosition()).getId())

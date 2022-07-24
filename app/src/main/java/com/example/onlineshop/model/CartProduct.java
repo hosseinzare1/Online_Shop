@@ -6,8 +6,10 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 @Entity
-public class CartProduct {
+public class CartProduct implements Comparable<CartProduct> {
 
     @PrimaryKey(autoGenerate = true)
     @SerializedName("product")
@@ -95,5 +97,16 @@ public class CartProduct {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+
+    @Override
+    public int compareTo(CartProduct cartProduct) {
+        int result = 1;
+        if (cartProduct.id == this.id && cartProduct.quantity == this.quantity) {
+            result = 0;
+        }
+        return result;
+
     }
 }

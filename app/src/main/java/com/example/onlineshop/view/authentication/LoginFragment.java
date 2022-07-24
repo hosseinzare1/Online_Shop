@@ -23,6 +23,7 @@ import com.example.onlineshop.R;
 
 import com.example.onlineshop.databinding.FragmentLoginBinding;
 
+import com.example.onlineshop.model.Account;
 import com.example.onlineshop.model.User;
 import com.example.onlineshop.view.MainActivity;
 import com.example.onlineshop.viewmodel.LoginSignupViewModel;
@@ -100,7 +101,7 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    public void showMessage(String code, User user) {
+    public void showMessage(String code, Account user) {
 
         String message;
 
@@ -114,7 +115,8 @@ public class LoginFragment extends Fragment {
 
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_number_KEY), user.getNumber()).apply();
                 sharedPreferences.edit().putString(context.getString(R.string.logged_in_name_KEY), user.getName()).apply();
-
+                sharedPreferences.edit().putString(getString(R.string.logged_in_address_KEY),user.getAddress()).apply();
+                sharedPreferences.edit().putString(getString(R.string.logged_in_email_KEY),user.getEmail()).apply();
                 context.startActivity(new Intent(context, MainActivity.class));
                 ((Login_Signup_Activity) context).finish();
                 break;
@@ -149,7 +151,7 @@ public class LoginFragment extends Fragment {
                 viewModel.login().observe((LifecycleOwner) context,
                         response -> showMessage(String.valueOf(response.code()),
                                 new Gson().fromJson(response.body(),
-                                        User.class)));
+                                        Account.class)));
         }
 
         public void LoginToSignupFragment(View view) {

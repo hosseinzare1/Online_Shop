@@ -50,11 +50,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text='@{model.count+" کالا "}'
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:textAppearance="?attr/textAppearanceCaption"
                     app:layout_constraintTop_toBottomOf="@+id/categoryName_textview"
-                    android:text='@{model.count+" کالا "}'
                     tools:text="67 کالا" />
             </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

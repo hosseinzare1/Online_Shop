@@ -2,6 +2,7 @@ package com.example.onlineshop.view.cart;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,9 @@ public class CartFragment extends Fragment implements CartProductAdapter.OnCartP
 
         viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
             if (cartItemModels.size() > 0) {
+                cartProductAdapter.clearItems();
                 cartProductAdapter.setCartItemModels(cartItemModels);
+
                 order.setOrder_items(cartItemModels);
                 binding.setOrder(order);
                 binding.setItemCount(cartItemModels.size());
@@ -83,6 +86,7 @@ public class CartFragment extends Fragment implements CartProductAdapter.OnCartP
     @Override
     public void onAddClickListener(CartProduct cartProduct) {
         viewModel.increaseItemCount(cartProduct);
+
     }
 
     @Override
@@ -107,10 +111,11 @@ public class CartFragment extends Fragment implements CartProductAdapter.OnCartP
 
     public class CartFragmentEventListener {
         public void onPayClickListener(View view, Order order, MainActivityViewModel viewModel) {
+//
+//            Navigation.findNavController(view)
+//                    .navigate(CartFragmentDirections.actionCartFragmentToOrderCompletionFragment(order));
 
-            Navigation.findNavController(view)
-                    .navigate(CartFragmentDirections.actionCartFragmentToOrderCompletionFragment(order));
-
+            cartProductAdapter.clearItems();
 
         }
 

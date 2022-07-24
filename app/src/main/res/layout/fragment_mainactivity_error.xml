@@ -23,7 +23,7 @@
                 android:layout_marginEnd="32dp"
                 android:text="خطا، مجددا تلاش کنید."
                 android:textAlignment="center"
-                android:textColor="#E91E63"
+                android:textColor="@color/error"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

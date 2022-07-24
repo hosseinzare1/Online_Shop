@@ -23,7 +23,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white_gray"
         tools:context=".view.CommodityDetailsActivity">
 
         <ScrollView
@@ -45,7 +44,6 @@
                     android:id="@+id/details_images_viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:background="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -72,7 +70,7 @@
                     android:id="@+id/title_commodity_main"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
+                    android:background="?attr/backgroundColor"
                     android:padding="16dp"
                     android:text="@{model.name}"
                     android:textAppearance="?attr/textAppearanceHeadline6"
@@ -111,7 +109,7 @@
                             android:onClick="@{(v)->eventListener.onSeeRelatedGroupProducts(v,model)}"
                             android:text='@{model.group+" > "}'
                             android:textAppearance="@style/Theme.OnlineShop.Caption"
-                            app:chipBackgroundColor="@color/white" />
+                            app:chipBackgroundColor="?attr/backgroundColor" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/categoryChip"
@@ -122,7 +120,7 @@
                             android:onClick="@{(v)->eventListener.onSeeRelatedCategoryProducts(v,model)}"
                             android:text='@{model.category+" > "}'
                             android:textAppearance="@style/Theme.OnlineShop.Caption"
-                            app:chipBackgroundColor="@color/white" />
+                            app:chipBackgroundColor="?attr/backgroundColor" />
 
                     </com.google.android.material.chip.ChipGroup>
 
@@ -132,8 +130,8 @@
                     android:id="@+id/constraintLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/backgroundColor"
                     android:layout_marginTop="8dp"
-                    android:background="@color/white"
                     android:elevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -233,7 +231,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
+                    android:background="?attr/backgroundColor"
                     android:elevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -315,7 +313,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:onClick="@{(view) -> eventListener.onSeeAllComments(view,model)}"
-                        android:textColor="#2196F3"
+                        android:textColor="@color/link"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="16 نظر" />
@@ -326,7 +324,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="#FFFFFF"
+                    android:background="?attr/backgroundColor"
                     android:elevation="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -366,7 +364,7 @@
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:background="@color/white"
+            android:background="?attr/backgroundColor"
             android:elevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -405,7 +403,7 @@
                 android:layout_marginStart="8dp"
                 android:text="@{String.valueOf(model.discount)+'%'}"
                 android:textAppearance="?attr/textAppearanceCaption"
-                android:textColor="@android:color/holo_red_light"
+                android:textColor="@color/discount_color"
                 android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toEndOf="@+id/org_price_commodity_main"
                 app:layout_constraintTop_toTopOf="@+id/org_price_commodity_main"
