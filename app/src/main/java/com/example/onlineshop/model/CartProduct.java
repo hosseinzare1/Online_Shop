@@ -2,11 +2,11 @@ package com.example.onlineshop.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Objects;
 
 @Entity
 public class CartProduct implements Comparable<CartProduct> {
@@ -40,6 +40,7 @@ public class CartProduct implements Comparable<CartProduct> {
     public CartProduct() {
     }
 
+    @Ignore
     public CartProduct(int id, String name, String imageUrl, long price, int quantity, int discount) {
         this.id = id;
         this.name = name;

@@ -240,9 +240,6 @@ public class MainActivityViewModel extends ViewModel {
 
     }
 
-    public LiveData<List<Product>> getAllItems() {
-        return repository.getAll(disposable);
-    }
 
     public LiveData<List<Product>> getSpecialDiscounts() {
         return repository.getSpecialDiscounts(disposable);

@@ -708,32 +708,6 @@ public class Repository {
 
     }
 
-    public LiveData<List<Product>> getAll(CompositeDisposable disposable) {
-        MutableLiveData<List<Product>> productsList = new MutableLiveData<>();
-
-        RetrofitInstance.getAPI().getAllItems()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<Product>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        disposable.add(d);
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull List<Product> homeItems) {
-                        productsList.setValue(homeItems);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        addError(e);
-                    }
-                });
-        return productsList;
-
-    }
-
     public LiveData<List<Product>> getProductsByCategory(String category, CompositeDisposable disposable) {
         MutableLiveData<List<Product>> productsList = new MutableLiveData<>();
 

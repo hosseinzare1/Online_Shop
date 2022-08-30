@@ -63,24 +63,24 @@ public class HomeFragment extends Fragment implements ProductHorizontalAdapter.O
 
         binding.newsViewPager.setAdapter(imageSliderAdapter);
         binding.newsViewPagerIndicator.setViewPager(binding.newsViewPager);
-        Handler handler = new Handler();
-
-        final int[] currentPage = {0};
-        Runnable update = () -> {
-            if ( currentPage[0] == imageSliderAdapter.getCount()) {
-                currentPage[0] = 0;
-            }
-            binding.newsViewPager.setCurrentItem(currentPage[0]++, true);
-        };
-
-
-        new Timer().schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        }, 100, 3000);
+//        Handler handler = new Handler();
+//
+//        final int[] currentPage = {0};
+//        Runnable update = () -> {
+//            if ( currentPage[0] == imageSliderAdapter.getCount()) {
+//                currentPage[0] = 0;
+//            }
+//            binding.newsViewPager.setCurrentItem(currentPage[0]++, true);
+//        };
+//
+//
+//        new Timer().schedule(new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//                handler.post(update);
+//            }
+//        }, 100, 3000);
 
         binding.discountsRecyclerView.setAdapter(discountsListAdapter);
         binding.discountsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, true));

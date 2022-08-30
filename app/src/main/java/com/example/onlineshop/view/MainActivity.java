@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.onlineshop.R;
 import com.example.onlineshop.databinding.ActivityMainBinding;
@@ -34,16 +35,16 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             setNoConnectionError();
             switch (item.getItemId()) {
-                case R.id.item_home:
+                case R.id.homeFragment:
                     navController.navigate(R.id.homeFragment);
                     break;
-                case R.id.item_categories:
+                case R.id.productsGroupCategoryFragment:
                     navController.navigate(R.id.productsGroupCategoryFragment);
                     break;
-                case R.id.item_cart:
+                case R.id.cartFragment:
                     navController.navigate(R.id.cartFragment);
                     break;
-                case R.id.item_account:
+                case R.id.accountFragment:
                     navController.navigate(R.id.accountFragment);
                     break;
             }

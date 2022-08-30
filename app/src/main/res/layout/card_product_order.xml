@@ -49,7 +49,7 @@
                 tools:text="نام محصول" />
 
             <TextView
-                android:id="@+id/cartItemPriceTextView"
+                android:id="@+id/PriceText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

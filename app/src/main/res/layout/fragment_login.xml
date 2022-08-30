@@ -57,9 +57,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:hint="@string/number_hint"
+                    android:singleLine="true"
                     android:text="@={viewModel.number}"
-                    tools:text="09033093041"
-                    />
+                    tools:text="09033093041" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -80,9 +80,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:hint="@string/password_hint"
-                    android:text="@={viewModel.password}"
+                    android:singleLine="true"
 
-                    />
+                    android:text="@={viewModel.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineshop.R;
@@ -34,6 +35,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     public void onBindViewHolder(@NonNull CartHolder holder, int position) {
         CartProduct model = cartProducts.get(position);
         holder.bind(model);
+        holder.setIsRecyclable(false);
     }
 
 
@@ -43,14 +45,16 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     }
 
     public void clearItems() {
-    cartProducts.clear();
-    notifyDataSetChanged();
+        List<CartProduct> emptyList = new ArrayList<>();
+        setCartItemModels(emptyList);
+//        cartProducts.clear();
+//        notifyDataSetChanged();
     }
 
 
     public class CartHolder extends RecyclerView.ViewHolder {
 
-        public void bind(CartProduct product){
+        public void bind(CartProduct product) {
             binding.setModel(product);
         }
 
@@ -94,10 +98,11 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         }
     }
 
-    public void setCartItemModels(List<CartProduct> cartProducts) {
-        this.cartProducts = cartProducts;
-
-        notifyDataSetChanged();
+    public void setCartItemModels(List<CartProduct> data) {
+        DiffCallBack diffCallBack = new DiffCallBack(cartProducts, data);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallBack);
+        this.cartProducts = data;
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public interface OnCartProductData {
@@ -113,4 +118,37 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
     public void setOnCartProductData(OnCartProductData onCartProductData) {
         this.onCartProductData = onCartProductData;
     }
+
+    class DiffCallBack extends DiffUtil.Callback {
+
+        List<CartProduct> oldItems = new ArrayList<>();
+        List<CartProduct> newItems = new ArrayList<>();
+
+        public DiffCallBack(List<CartProduct> oldItems, List<CartProduct> newItems) {
+            this.oldItems = oldItems;
+            this.newItems = newItems;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return oldItems.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newItems.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            return (oldItems.get(oldItemPosition) == newItems.get(newItemPosition));
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            return (oldItems.get(oldItemPosition).quantity == newItems.get(newItemPosition).quantity);
+        }
+    }
+
+
 }

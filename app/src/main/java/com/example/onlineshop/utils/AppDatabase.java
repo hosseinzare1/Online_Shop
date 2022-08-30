@@ -11,7 +11,7 @@ import com.example.onlineshop.R;
 import com.example.onlineshop.model.CartProduct;
 import com.example.onlineshop.model.Product;
 
-@Database(entities = {CartProduct.class, Product.class}, version = 13)
+@Database(entities = {CartProduct.class, Product.class}, version = 14,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CartDAO itemCartDao();
 

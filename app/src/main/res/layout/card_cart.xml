@@ -44,13 +44,13 @@
                     android:textColor="@android:color/holo_red_light"
                     android:visibility="@{(model.discount>0)? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/cartItemPriceTextView"
-                    app:layout_constraintStart_toStartOf="@+id/cartItemPriceTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/cartItemPriceTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/PriceText"
+                    app:layout_constraintStart_toStartOf="@+id/PriceText"
+                    app:layout_constraintTop_toBottomOf="@+id/PriceText"
                     tools:text="26,000 تومان تخفیف" />
 
                 <TextView
-                    android:id="@+id/cartItemPriceTextView"
+                    android:id="@+id/PriceText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

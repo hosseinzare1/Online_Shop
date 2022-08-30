@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/item_home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="خانه" />
     <item
-        android:id="@+id/item_categories"
+        android:id="@+id/productsGroupCategoryFragment"
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
         android:title="دسته‌بندی‌ها"/>
     <item
-        android:id="@+id/item_cart"
+        android:id="@+id/cartFragment"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="سبد خرید" />
     <item
-        android:id="@+id/item_account"
+        android:id="@+id/accountFragment"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="حساب‌ کاربری" />
 

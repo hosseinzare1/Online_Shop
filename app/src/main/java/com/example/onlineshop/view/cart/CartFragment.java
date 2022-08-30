@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,9 +54,15 @@ public class CartFragment extends Fragment implements CartProductAdapter.OnCartP
         if (getActivity() != null)
             viewModel = new ViewModelProvider(getActivity(), new MainActivityViewModelFactory(getActivity())).get(MainActivityViewModel.class);
         // Inflate the layout for this fragment
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView = binding.cartRecyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(cartProductAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         binding.setEventListener(new CartFragmentEventListener());
 
         Order order = new Order();
@@ -63,7 +70,7 @@ public class CartFragment extends Fragment implements CartProductAdapter.OnCartP
 
         viewModel.getCartItems().observe(getViewLifecycleOwner(), cartItemModels -> {
             if (cartItemModels.size() > 0) {
-                cartProductAdapter.clearItems();
+//                cartProductAdapter.clearItems();
                 cartProductAdapter.setCartItemModels(cartItemModels);
 
                 order.setOrder_items(cartItemModels);
@@ -112,8 +119,8 @@ public class CartFragment extends Fragment implements CartProductAdapter.OnCartP
     public class CartFragmentEventListener {
         public void onPayClickListener(View view, Order order, MainActivityViewModel viewModel) {
 //
-//            Navigation.findNavController(view)
-//                    .navigate(CartFragmentDirections.actionCartFragmentToOrderCompletionFragment(order));
+            Navigation.findNavController(view)
+                    .navigate(CartFragmentDirections.actionCartFragmentToOrderCompletionFragment(order));
 
             cartProductAdapter.clearItems();
 

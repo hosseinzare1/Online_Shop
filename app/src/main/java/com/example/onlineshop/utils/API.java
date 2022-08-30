@@ -37,9 +37,6 @@ public interface API {
     Single<Response<JsonObject>> signup(@Field("name") String name, @Field("number") String number, @Field("password") String password);
 
 
-    @GET("get_all/")
-    Single<List<Product>> getAllItems();
-
     @GET("get_products_by_category/{category}")
     Single<List<Product>> getProductsByCategory(@Path("category") String category);
 

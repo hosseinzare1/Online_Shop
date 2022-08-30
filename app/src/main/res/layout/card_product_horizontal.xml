@@ -14,35 +14,33 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        >
+        app:cardCornerRadius="8dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
 
             <ImageView
                 android:id="@+id/imageView_Horizontal_item"
                 setImage="@{model.imageUrl}"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_baseline_product_sample_24"/>
+                tools:src="@drawable/ic_baseline_product_sample_24" />
 
 
             <TextView
                 android:id="@+id/price_horizontal_item_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@{String.format(`%,d`,(model.discount> 0)? model.price*(100-model.discount)/100 : model.price ).concat(` تومان `)}"
                 android:textAlignment="textStart"
                 android:textAppearance="?attr/textAppearanceBody2"
@@ -58,26 +56,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                tools:text="29,900,000"
                 android:text="@{String.format(`%,d`,model.price)}"
-                android:visibility="@{(model.discount>0)? View.VISIBLE : View.INVISIBLE}"
                 android:textAppearance="?attr/textAppearanceCaption"
+                android:visibility="@{(model.discount>0)? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/price_horizontal_item_card"
-                app:layout_constraintStart_toStartOf="@+id/price_horizontal_item_card"
-                app:layout_constraintTop_toBottomOf="@+id/price_horizontal_item_card" />
+                app:layout_constraintEnd_toStartOf="@+id/discount_horizontal_item_card"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price_horizontal_item_card"
+                tools:text="29,900,000" />
 
             <TextView
                 android:id="@+id/discount_horizontal_item_card"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:text="@{String.valueOf(model.discount)+'%'}"
                 android:textAlignment="textEnd"
+                android:textAppearance="?attr/textAppearanceCaption"
                 android:textColor="@color/discount_color"
                 android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceCaption"
                 android:visibility="@{(model.discount>0 ?  View.VISIBLE : View.GONE)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/original_price_horizontal_item"
                 app:layout_constraintTop_toTopOf="@+id/original_price_horizontal_item"
                 tools:text="15%" />
@@ -93,8 +93,8 @@
                 android:maxLines="2"
                 android:singleLine="false"
                 android:text="@{model.name}"
-                android:textAlignment="viewEnd"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textAlignment="center"
+                android:textAppearance="@style/Theme.OnlineShop.Subtitle1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView_Horizontal_item"

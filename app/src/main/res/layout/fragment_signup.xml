@@ -50,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/username_hint"
+                    android:singleLine="true"
                     android:text="@={viewModel.name}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,6 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/number_hint"
+                    android:singleLine="true"
                     android:text="@={viewModel.number}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -88,8 +90,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint"
-                    android:text="@={viewModel.password}"
-                    />
+                    android:singleLine="true"
+                    android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
