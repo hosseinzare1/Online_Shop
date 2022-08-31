@@ -15,7 +15,7 @@ To run this project, you will need to run its server and add the following envir
 
 ## Screenshots
 
-![Home](https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png)
+![Home](https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png) ![Categories](https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/categories.png)
 
 
 ## Features
