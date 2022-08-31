@@ -14,9 +14,7 @@ To run this project, you will need to run its server and add the following envir
 - `BASE_URL`
 
 ## Screenshots
-<img src="https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png" alt="Home" style="width:300px;">
-
-<img src="https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/categories.png" alt="Categories" style="width:200px;">
+<img src="https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png" alt="Home" style="width:300px;"> <img src="https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/categories.png" alt="Categories" style="width:300px;">
 
 
 ## Features
