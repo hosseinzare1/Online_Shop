@@ -14,11 +14,10 @@ To run this project, you will need to run its server and add the following envir
 - `BASE_URL`
 
 ## Screenshots
-<img
-  src="https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png"
-  alt="Alt text"
-  title="Optional title"
-  style="display: inline-block; margin: 0 auto; max-width: 100px">
+<img src="https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png" alt="Computer Man" style="width:48px;">
+
+<img src="https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png" alt="Computer Man" style="max-width:96px;">
+
   
 ![Home](https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png) ![Categories](https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/categories.png)
 
