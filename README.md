@@ -15,7 +15,7 @@ To run this project, you will need to run its server and add the following envir
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Home](https://github.com/hosseinzare1/Online_Shop/blob/master/Screenshots/home.png)
 
 
 ## Features
